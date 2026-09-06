@@ -1,0 +1,23 @@
+# 数据与大文件(论文仓库惯例:数据不进 git)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# 实验输出
+results/checkpoints/*
+!results/checkpoints/.gitkeep
+results/logs/*
+!results/logs/.gitkeep
+*.pt
+*.pth
+*.ckpt
+wandb/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# 系统
+.DS_Store

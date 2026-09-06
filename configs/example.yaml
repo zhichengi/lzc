@@ -1,0 +1,17 @@
+# 单组实验 = 一个 yaml;论文中每条实验结果对应这里一个文件
+seed: 42
+dataset:
+  name: cora            # 数据集名称
+  root: data/processed  # 处理后数据存放位置
+model:
+  name: gcn             # 模型名
+  hidden_dim: 256
+  num_layers: 2
+  dropout: 0.5
+train:
+  lr: 0.01
+  weight_decay: 0.0005
+  epochs: 200
+output:
+  log_dir: results/logs
+  ckpt_dir: results/checkpoints

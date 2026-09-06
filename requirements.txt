@@ -1,0 +1,8 @@
+# 按实际依赖补充版本号,保证可复现
+# torch==2.x.x
+# torch_geometric==2.x.x
+# dgl==2.x.x
+# numpy
+# scikit-learn
+# pyyaml
+# tensorboard
