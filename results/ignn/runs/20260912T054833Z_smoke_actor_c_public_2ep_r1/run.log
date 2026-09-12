@@ -1,0 +1,103 @@
+run_dir=/home/lab_user/project/lzc/results/ignn/runs/20260912T054833Z_smoke_actor_c_public_2ep_r1
+started_utc=2026-09-12T05:48:34+00:00
+command=/home/lab_user/tools/miniconda3/envs/ignn/bin/python -u -m main --gpu_id 0 --seed 42 --dataset actor --source pyg --model ignn --n_epochs 2 --agg_type gcn_incep --IN IN-SN --h_feats 128 --lr 0.0005 --l2_coef 0.0005 --n_hops 1 --n_layers 5 --early_stop 200 --RN none --norm_type none --act_type relu --preln False --fast False --pre_dropout 0.5 --hid_dropout 0.0 --clf_dropout 0.1 --eval_interval 1 --eval_start 0 --public True --repeat 1 
+[I 2026-09-12 13:48:36,537 the_utils.setting:78] GPU available. Use cuda:0.
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/new_data/film/out1_node_feature_label.txt
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/new_data/film/out1_graph_edges.txt
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_0.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_1.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_2.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_3.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_4.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_5.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_6.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_7.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_8.npz
+Downloading https://raw.githubusercontent.com/graphdml-uiuc-jlu/geom-gcn/master/splits/film_split_0.6_0.2_9.npz
+Processing...
+Done!
+[I 2026-09-12 13:48:49,853 graph_datasets.utils.common:74] 
++------------+-----------+
+|  Dataset   | pyG actor |
++============+===========+
+|  NumNodes  |     7,600 |
++------------+-----------+
+|  NumEdges  |    30,019 |
++------------+-----------+
+|  NumFeats  |       932 |
++------------+-----------+
+| NumClasses |         5 |
++------------+-----------+
+[I 2026-09-12 13:48:49,924 graph_datasets.utils.common:74] 
++------------+---------------------------------------+
+|  Dataset   |         PYG undirected actor          |
+|            | add_self_loop=True rm_self_loop=False |
++============+=======================================+
+|  NumNodes  |                                 7,600 |
++------------+---------------------------------------+
+|  NumEdges  |                                60,918 |
++------------+---------------------------------------+
+|  NumFeats  |                                   932 |
++------------+---------------------------------------+
+| NumClasses |                                     5 |
++------------+---------------------------------------+
+[I 2026-09-12 13:48:49,926 __main__:137] 
++---------------+--------------------------------------------------------------+
+| IN            | IN-SN                                                        |
++---------------+--------------------------------------------------------------+
+| IN config     | INConf(name='actor_pyg', n_hops=1, add_self_loop=True,       |
+|               | remove_self_loop=False, symm_norm=True,                      |
+|               | row_normalized=False, fast=False,                            |
+|               | save_dir='tmp/ignn/neighborhoods')                           |
++---------------+--------------------------------------------------------------+
+| RN            | none                                                         |
++---------------+--------------------------------------------------------------+
+| act type      | relu                                                         |
++---------------+--------------------------------------------------------------+
+| agg type      | gcn_incep                                                    |
++---------------+--------------------------------------------------------------+
+| att act type  | None                                                         |
++---------------+--------------------------------------------------------------+
+| clf dropout   | 0.10000                                                      |
++---------------+--------------------------------------------------------------+
+| early stop    | 200                                                          |
++---------------+--------------------------------------------------------------+
+| eval interval | 1                                                            |
++---------------+--------------------------------------------------------------+
+| eval start    | 0                                                            |
++---------------+--------------------------------------------------------------+
+| fast          | False                                                        |
++---------------+--------------------------------------------------------------+
+| h feats       | 128                                                          |
++---------------+--------------------------------------------------------------+
+| hid dropout   | 0                                                            |
++---------------+--------------------------------------------------------------+
+| l2 coef       | 0.00050                                                      |
++---------------+--------------------------------------------------------------+
+| loss          | ce                                                           |
++---------------+--------------------------------------------------------------+
+| lr            | 0.00050                                                      |
++---------------+--------------------------------------------------------------+
+| n epochs      | 2                                                            |
++---------------+--------------------------------------------------------------+
+| n hops        | 1                                                            |
++---------------+--------------------------------------------------------------+
+| n layers      | 5                                                            |
++---------------+--------------------------------------------------------------+
+| norm type     | none                                                         |
++---------------+--------------------------------------------------------------+
+| pre dropout   | 0.50000                                                      |
++---------------+--------------------------------------------------------------+
+| pre lin       | False                                                        |
++---------------+--------------------------------------------------------------+
+[I 2026-09-12 13:48:49,933 the_utils.common:35] split num: 10; public split train:val:test = 48.00:32.00:20.00
+[I 2026-09-12 13:48:50,221 ignn.models.IGNN:215] epoch:0/best:0, loss:1.6172, train:0.1521, valid:0.1427/best:0.1427, test:0.1526/best:0.1526
+[I 2026-09-12 13:48:50,247 ignn.models.IGNN:215] epoch:1/best:1, loss:1.6149, train:0.2330, valid:0.2397/best:0.2397, test:0.2513/best:0.2513
+[I 2026-09-12 13:48:50,248 ignn.models.IGNN:234] 10 epoch cost: 2.1320s.
+[I 2026-09-12 13:48:50,262 __main__:210] actor_pyg 0 res: 0.2513157894736842
+
+
+[I 2026-09-12 13:48:50,262 __main__:214] Results: 	Acc:25.13±0.00 	Train cost: 0.34s
+
+finished_utc=2026-09-12T05:48:50+00:00
+exit_code=0

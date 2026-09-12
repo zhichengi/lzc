@@ -1,0 +1,103 @@
+run_dir=/home/lab_user/project/lzc/results/ignn/runs/20260912T055455Z_smoke_pubmed_c_public_2ep_r1
+started_utc=2026-09-12T05:54:56+00:00
+command=/home/lab_user/tools/miniconda3/envs/ignn/bin/python -u -m main --gpu_id 0 --seed 42 --dataset pubmed --source pyg --model ignn --n_epochs 2 --agg_type gcn_incep --IN IN-SN --h_feats 512 --lr 0.001 --l2_coef 0.0 --n_hops 16 --n_layers 1 --early_stop 200 --RN concat --norm_type none --act_type prelu --preln False --fast True --pre_dropout 0.5 --hid_dropout 0.9 --clf_dropout 0.5 --eval_interval 1 --eval_start 0 --public True --repeat 1 
+[I 2026-09-12 13:54:59,006 the_utils.setting:78] GPU available. Use cuda:0.
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.x
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.tx
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.allx
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.y
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.ty
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.ally
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.graph
+Downloading https://github.com/kimiyoung/planetoid/raw/master/data/ind.pubmed.test.index
+Processing...
+Done!
+[I 2026-09-12 13:55:22,267 graph_datasets.utils.common:74] 
++------------+------------+
+|  Dataset   | pyG pubmed |
++============+============+
+|  NumNodes  |     19,717 |
++------------+------------+
+|  NumEdges  |     88,648 |
++------------+------------+
+|  NumFeats  |        500 |
++------------+------------+
+| NumClasses |          3 |
++------------+------------+
+[I 2026-09-12 13:55:22,301 graph_datasets.utils.common:74] 
++------------+---------------------------------------+
+|  Dataset   |         PYG undirected pubmed         |
+|            | add_self_loop=True rm_self_loop=False |
++============+=======================================+
+|  NumNodes  |                                19,717 |
++------------+---------------------------------------+
+|  NumEdges  |                               108,365 |
++------------+---------------------------------------+
+|  NumFeats  |                                   500 |
++------------+---------------------------------------+
+| NumClasses |                                     3 |
++------------+---------------------------------------+
+[I 2026-09-12 13:55:22,303 __main__:137] 
++---------------+--------------------------------------------------------------+
+| IN            | IN-SN                                                        |
++---------------+--------------------------------------------------------------+
+| IN config     | INConf(name='pubmed_pyg', n_hops=16, add_self_loop=True,     |
+|               | remove_self_loop=False, symm_norm=True,                      |
+|               | row_normalized=False, fast=True,                             |
+|               | save_dir='tmp/ignn/neighborhoods')                           |
++---------------+--------------------------------------------------------------+
+| RN            | concat                                                       |
++---------------+--------------------------------------------------------------+
+| act type      | prelu                                                        |
++---------------+--------------------------------------------------------------+
+| agg type      | gcn_incep                                                    |
++---------------+--------------------------------------------------------------+
+| att act type  | None                                                         |
++---------------+--------------------------------------------------------------+
+| clf dropout   | 0.50000                                                      |
++---------------+--------------------------------------------------------------+
+| early stop    | 200                                                          |
++---------------+--------------------------------------------------------------+
+| eval interval | 1                                                            |
++---------------+--------------------------------------------------------------+
+| eval start    | 0                                                            |
++---------------+--------------------------------------------------------------+
+| fast          | True                                                         |
++---------------+--------------------------------------------------------------+
+| h feats       | 512                                                          |
++---------------+--------------------------------------------------------------+
+| hid dropout   | 0.90000                                                      |
++---------------+--------------------------------------------------------------+
+| l2 coef       | 0                                                            |
++---------------+--------------------------------------------------------------+
+| loss          | ce                                                           |
++---------------+--------------------------------------------------------------+
+| lr            | 0.00100                                                      |
++---------------+--------------------------------------------------------------+
+| n epochs      | 2                                                            |
++---------------+--------------------------------------------------------------+
+| n hops        | 16                                                           |
++---------------+--------------------------------------------------------------+
+| n layers      | 1                                                            |
++---------------+--------------------------------------------------------------+
+| norm type     | none                                                         |
++---------------+--------------------------------------------------------------+
+| pre dropout   | 0.50000                                                      |
++---------------+--------------------------------------------------------------+
+| pre lin       | False                                                        |
++---------------+--------------------------------------------------------------+
+[I 2026-09-12 13:55:22,370 the_utils.common:35] split num: 1; public split train:val:test = 0.30:2.54:5.07
+[I 2026-09-12 13:55:22,499 ignn.modules.IGNNConv:402] running fast c-IGNN with caching
+/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/site-packages/torch_sparse/tensor.py:574: UserWarning: Sparse CSR tensor support is in beta state. If you miss a functionality in the sparse tensor support, please submit a feature request to https://github.com/pytorch/pytorch/issues. (Triggered internally at ../aten/src/ATen/SparseCsrTensorImpl.cpp:53.)
+  return torch.sparse_csr_tensor(rowptr, col, value, self.sizes())
+[I 2026-09-12 13:55:23,234 ignn.modules.IGNNConv:429] Load aggregated feats from tmp/ignn/neighborhoods/pubmed_pyg/nnorm/diag/sym
+[I 2026-09-12 13:55:23,615 ignn.models.IGNN:215] epoch:0/best:0, loss:1.0988, train:0.3667, valid:0.2520/best:0.2520, test:0.2270/best:0.2270
+[I 2026-09-12 13:55:23,703 ignn.models.IGNN:215] epoch:1/best:1, loss:1.0993, train:0.6000, valid:0.5260/best:0.5260, test:0.5170/best:0.5170
+[I 2026-09-12 13:55:23,704 ignn.models.IGNN:234] 10 epoch cost: 12.2924s.
+[I 2026-09-12 13:55:23,734 __main__:210] pubmed_pyg 0 res: 0.517
+
+
+[I 2026-09-12 13:55:23,734 __main__:214] Results: 	Acc:51.70±0.00 	Train cost: 1.43s
+
+finished_utc=2026-09-12T05:55:24+00:00
+exit_code=0

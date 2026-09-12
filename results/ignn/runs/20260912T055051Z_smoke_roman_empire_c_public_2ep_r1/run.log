@@ -1,0 +1,84 @@
+run_dir=/home/lab_user/project/lzc/results/ignn/runs/20260912T055051Z_smoke_roman_empire_c_public_2ep_r1
+started_utc=2026-09-12T05:50:52+00:00
+command=/home/lab_user/tools/miniconda3/envs/ignn/bin/python -u -m main --gpu_id 0 --seed 42 --dataset roman-empire --source critical --model ignn --n_epochs 2 --agg_type gcn_incep --IN IN-SN --h_feats 512 --lr 0.0005 --l2_coef 0.0005 --n_hops 1 --n_layers 3 --early_stop 200 --RN none --norm_type ln --act_type prelu --preln True --fast False --pre_dropout 0.7 --hid_dropout 0.5 --clf_dropout 0.0 --eval_interval 1 --eval_start 0 --public True --repeat 1 
+[I 2026-09-12 13:50:54,614 the_utils.setting:78] GPU available. Use cuda:0.
+[I 2026-09-12 13:50:54,620 graph_datasets.utils.common:74] 
++--------------+---------------------------------------------------------------+
+| Download URL | https://github.com/yandex-research/heterophilous-             |
+|              | graphs/blob/a431395/data/roman_empire.npz?raw=true            |
++--------------+---------------------------------------------------------------+
+| File         | roman_empire.npz                                              |
++--------------+---------------------------------------------------------------+
+| Save Path    | data/roman_empire.npz                                         |
++--------------+---------------------------------------------------------------+
+| Tip          | If the download fails, use the 'Download URL' to download     |
+|              | manually and move the file to the 'Save Path'.                |
++--------------+---------------------------------------------------------------+
+Traceback (most recent call last):
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 1354, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/http/client.py", line 1418, in connect
+    super().connect()
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/http/client.py", line 922, in connect
+    self.sock = self._create_connection(
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/socket.py", line 808, in create_connection
+    raise err
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/socket.py", line 796, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/lab_user/project/lzc/repro/ignn/main.py", line 234, in <module>
+    main(
+  File "/home/lab_user/project/lzc/repro/ignn/main.py", line 84, in main
+    data = load_data(
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/site-packages/graph_datasets/load_data.py", line 149, in load_data
+    graph, label, n_clusters = load_critical_dataset(
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/site-packages/graph_datasets/datasets/critical.py", line 50, in load_critical_dataset
+    wget.download(url, out=data_file, bar=bar_progress)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/site-packages/wget.py", line 526, in download
+    (tmpfile, headers) = ulib.urlretrieve(binurl, tmpfile, callback)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 247, in urlretrieve
+    with contextlib.closing(urlopen(url, data)) as fp:
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 222, in urlopen
+    return opener.open(url, data, timeout)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 531, in open
+    response = meth(req, response)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 640, in http_response
+    response = self.parent.error(
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 563, in error
+    result = self._call_chain(*args)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 502, in _call_chain
+    result = func(*args)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 755, in http_error_302
+    return self.parent.open(new, timeout=req.timeout)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 525, in open
+    response = self._open(req, data)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 542, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 502, in _call_chain
+    result = func(*args)
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 1397, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+  File "/home/lab_user/tools/miniconda3/envs/ignn/lib/python3.8/urllib/request.py", line 1357, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error [Errno 110] Connection timed out>
+
+finished_utc=2026-09-12T05:53:10+00:00
+exit_code=1
