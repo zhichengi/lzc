@@ -39,12 +39,12 @@
 
 ### 3.1 进行中
 
-| 编号 | 论文 | 状态（2026-09-12） | 下一步 |
+| 编号 | 论文 | 状态（2026-09-13） | 下一步 |
 |------|------|--------------------|--------|
-| 29 | SGPC（AAAI 2026） | 步骤 1–6 完成：8/9 数据集官方原样单次已跑，Pubmed 未跑 | **当前主线**：步骤 7 划分遍历、val 选模、Pubmed。入口 [`repro/SGPC_README.md`](repro/SGPC_README.md) |
+| 29 | SGPC（AAAI 2026） | **已冻结**：6 异配集 ×10 划分 + 3 同配 public 全部跑完；val 选模系统性偏低 | 冻结；见 [`repro/SGPC_REPRO_LOG.md`](repro/SGPC_REPRO_LOG.md) |
 | 11 | IGNN（NeurIPS 2025） | public split 已冻结；custom 48/32/20 只完成准备 | GPU 空闲后按 [`repro/IGNN_CUSTOM_SPLIT.md`](repro/IGNN_CUSTOM_SPLIT.md) 跑；不改已冻结 public 表 |
-| 43 | ScaDyG（TNNLS 2026） | 官方协议 0.922 ± 0.014 vs 0.931 ± 0.009；严格协议 0.204 | 三个消融；BitcoinAlpha；写 `repro/SCADYG_REPORT.md`；冻结 |
-| 40 | GCTD（WSDM 2026） | Cora 10-run 66.0 ± 9.4 vs 81.4 ± 1.6 | Citeseer / Pubmed；GCond 对照；向作者提 issue；冻结，**不再扫参** |
+| 43 | ScaDyG（TNNLS 2026） | 官方协议 0.922 ± 0.014 vs 0.931 ± 0.009；严格协议 0.204；**组件消融已完成**（`topo` 塌成随机） | BitcoinAlpha；报告定稿；补完整工作树 patch；冻结 |
+| 40 | GCTD（WSDM 2026） | **已冻结**：Table 2 三格全跑（Cora 66.0 / Citeseer 64.9 / Pubmed 77.9 vs 81.4 / 76.8 / 79.9）；GCond 对照已证评测链路无误 | 冻结，**不再扫参**；见 [`results/gctd/table2_summary.csv`](results/gctd/table2_summary.csv) |
 
 收尾任务编号见 [`repro/CLOSEOUT_PLAN.md`](repro/CLOSEOUT_PLAN.md)。GPU 只有一张：**不要并行开第五篇**；SGPC 等待时间里穿插三条线的收尾。
 

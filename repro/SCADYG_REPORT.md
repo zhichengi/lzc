@@ -3,9 +3,9 @@
 论文：*ScaDyG: A New Paradigm for Large-Scale Dynamic Graph Learning*（IEEE TNNLS 2026）。  
 官方仓库：https://github.com/BITNEO/ScaDyG ，固定提交 `28ca94a06771c46073b650de3daa95e0939342ba`。  
 过程日志：[SCADYG_REPRO_LOG.md](SCADYG_REPRO_LOG.md)。入口：[SCADYG_README.md](SCADYG_README.md)。  
-本报告只覆盖 **MOOC 动态链接预测**。三个组件消融与 BitcoinAlpha 尚未做，不写入结论。
+本报告覆盖 **MOOC 动态链接预测**与**四个组件的消融**（第 9 节）。BitcoinAlpha 尚未做，不写入结论。
 
-日期：2026-09-12。硬件：单张 RTX 3090 24 GB，与论文实验卡型号一致。
+日期：2026-09-12（第 9 节组件消融于 2026-09-13 补入）。硬件：单张 RTX 3090 24 GB，与论文实验卡型号一致。
 
 ---
 
@@ -165,12 +165,49 @@ seeds 0–4、评测仍用双协议：
 
 ---
 
-## 9. 未解决与未做
+## 9. 组件消融
+
+CLI 开关 `--ablate {none,time,topo,hyper}` 已做成（`repro/scadyg-ablation.patch`），
+默认 `none` 即官方路径；加上开关后 1 epoch 回归逐位一致（official MRR 0.6247271678）。
+seeds 0–4，每格独立进程，选模口径固定 `--selection_metric mrr`（论文主指标），
+同时输出 official 与 filtered 两个协议。入口 `repro/run_scadyg_ablation.sh`，
+运行 2026-09-13 19:03→21:18，20/20 退出 0。
+
+| 组件 | n | official MRR | filtered MRR | Δ vs 论文 0.931 |
+|------|---|--------------|--------------|------------------|
+| `none`（完整） | 5 | **0.922485 ± 0.014178** | 0.203631 ± 0.004180 | **−0.0085** |
+| `hyper` | 5 | 0.803234 ± 0.041231 | 0.035989 ± 0.011210 | −0.1278 |
+| `time` | 5 | 0.827678 ± 0.077334 | 0.072184 ± 0.073315 | −0.1033 |
+| `topo` | 5 | **0.009901 ± 0.000000** | 0.012163 ± 0.000058 | **−0.9211** |
+
+三点结论：
+
+1. **快照内边→节点拓扑聚合（`topo`）是模型能工作的前提**，不是可选增强项。去掉后
+   official MRR = 0.009901、AP = 0.500000，即**随机水平**；5 个 seed 的数值**完全
+   一致**（std = 0.000000），属确定性结构性失效，而非训练波动。这与第 5 节
+   checkpoint 缺失时的 0.025 是两类不同的失效，不要混为一谈。
+2. **Hypernetwork 自适应聚合与指数时间编码各贡献约 0.10–0.13**（去掉后 0.8032 /
+   0.8277），两者量级接近，都是「去掉后仍能跑、但明显变差」。
+3. **完整模型与论文差 0.0085 < 论文 σ = 0.009**，这是本线第一次在消融维度上确认
+   完整模型与论文统计一致。
+
+另一个一致的信号：四个组件在 official 与 filtered 协议下的排序完全相同
+（`none` > `time` ≈ `hyper` > `topo`），说明组件的贡献与评测协议的选择无关。
+`none` 的 filtered 数字 0.203631 与第 7/8 节的 0.2036 ± 0.0042 逐位一致，
+也说明加消融开关没有破坏原有路径。
+
+汇总 `results/scadyg/ablation_summary.csv`，逐 run `results/scadyg/ablation_runs.csv`。
+
+---
+
+## 10. 未解决与未做
 
 - 论文用于 0.931 ± 0.009 的 **seed 列表未公开**；官方 `--repeat` 也不能当多种子。
 - 评测负样本未持久化，早停长度会改变 official 测试负样本。
 - 节点随机特征在 `torch.manual_seed(args.seed)` **之前**生成，CLI seed 管不到这一块。
-- 三个方法组件（时间感知拓扑、指数时间编码、Hypernetwork）的消融开关尚未做成 CLI；`--fusion v2t` 引用仓库里不存在的文件。
+- `--fusion v2t` 引用仓库里不存在的文件（未使用）。
+- 三个组件的消融开关已做成（第 9 节），但**双协议扩展尚未固化成补丁**：现有
+  `scadyg-paper-protocol.patch` 是 2026-09-12 12:46 的早期快照，不含双协议与训练负采样那批改动。
 - BitcoinAlpha / UCI 未跑。
 - 未用 TGB 的 `Evaluator` 重评已保存的 `best_*.pt`。
 
@@ -178,7 +215,7 @@ seeds 0–4、评测仍用双协议：
 
 ---
 
-## 10. 分层结论
+## 11. 分层结论
 
 | 说法 | 是否成立 |
 |------|----------|
@@ -188,10 +225,12 @@ seeds 0–4、评测仍用双协议：
 | 发布代码默认就能打到 0.93 | 否；缺 Transformer checkpoint 时是 0.025 |
 | 0.93 表示模型能在 97 个课程里给正 item 排到前面 | **否**；同一 checkpoint 的合法 item filtered MRR 约 0.20 |
 | 把训练负采样改成合法 item 就能抬高 0.20 | 否 |
+| 去掉快照内拓扑聚合后模型仍能工作 | **否**；MRR 0.0099 = 随机（第 9 节） |
+| Hypernetwork / 时间编码各贡献约 0.10 | 是（第 9 节，各约 0.10–0.13） |
 
 建议引用时分开写两行：
 
 1. **发布协议**（修 checkpoint + 可选 MRR 选模）：MOOC MRR **0.922 ± 0.014**（论文 0.931 ± 0.009）。  
 2. **严格 item 协议**（逐正边、97 item、过滤同快照正目标）：**0.204 ± 0.004**。
 
-结构化数字：`results/scadyg/multiseed_summary.csv`、`full_item_multiseed_summary.csv`、`bipartite_train_multiseed_summary.csv`。
+结构化数字：`results/scadyg/multiseed_summary.csv`、`full_item_multiseed_summary.csv`、`bipartite_train_multiseed_summary.csv`、`ablation_summary.csv`。

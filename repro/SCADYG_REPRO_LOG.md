@@ -1,6 +1,6 @@
 # ScaDyG 复现日志
 
-> 当前：官方协议 MRR 选模 0.922 ± 0.014 vs 论文 0.931 ± 0.009；严格 item 排名 0.204 ± 0.004。报告初稿：[SCADYG_REPORT.md](SCADYG_REPORT.md)。消融与 BitcoinAlpha 未做。入口：[SCADYG_README.md](SCADYG_README.md)。
+> 当前：官方协议 MRR 选模 0.922 ± 0.014 vs 论文 0.931 ± 0.009；严格 item 排名 0.204 ± 0.004。组件消融已完成（R-SCADYG-2，2026-09-13）：`none` 0.9225±0.0142（1σ 内）> `hyper` 0.8032±0.0412 ≈ `time` 0.8277±0.0773 ≫ `topo` 0.0099（塌成随机）。报告初稿：[SCADYG_REPORT.md](SCADYG_REPORT.md)。BitcoinAlpha 未做。入口：[SCADYG_README.md](SCADYG_README.md)。
 
 论文：*ScaDyG: A New Paradigm for Large-Scale Dynamic Graph Learning*，IEEE TNNLS 2026。  
 官方代码：https://github.com/BITNEO/ScaDyG  
@@ -573,5 +573,73 @@ AP 0.9857572059、AUC 0.9906082116、accuracy 0.9830360181 也逐位一致。该
 
 处理：本次不重写旧补丁（避免与已有 SHA 记录冲突），改为在 R-SCADYG-2 完成后生成一份
 覆盖当前完整工作树的补丁。届时旧的 `scadyg-paper-protocol.patch` 应标注为已过时。
+
+---
+
+## 2026-09-13 R-SCADYG-2：三个组件消融 × seeds 0–4（MOOC）
+
+入口 `repro/run_scadyg_ablation.sh`（4 组件 × 5 seed，每格独立进程）。每格：
+
+```bash
+bash repro/run_scadyg.sh mooc --seed <0-4> --selection_metric mrr \
+  --eval_protocol both --ablate {none,time,topo,hyper}
+```
+
+- 批次日志：`results/scadyg/runs/20260913_190322_ablation_multiseed.batch.log`
+- 运行区间：2026-09-13 19:03:22 → 21:18:26（约 2h15m，20/20 退出 0，无 traceback）
+- 选模口径固定 `mrr`（与论文主指标一致）；`--ablate none` 即完整模型。
+
+### 结果（official MRR，对照论文 0.931 ± 0.009）
+
+| 组件 | n | official MRR | filtered MRR | Δ vs 论文 | 结论 |
+|------|---|--------------|--------------|-----------|------|
+| `none`（完整） | 5 | **0.922485 ± 0.014178** | 0.203631 ± 0.004180 | **−0.0085** | 落在论文 1σ 内，复现成立 |
+| `hyper` | 5 | 0.803234 ± 0.041231 | 0.035989 ± 0.011210 | −0.1278 | 掉幅最大 |
+| `time` | 5 | 0.827678 ± 0.077334 | 0.072184 ± 0.073315 | −0.1033 | 次之 |
+| `topo` | 5 | **0.009901 ± 0.000000** | 0.012163 ± 0.000058 | **−0.9211** | **塌成随机** |
+
+逐 run 明细：`results/scadyg/ablation_runs.csv`；分组汇总：
+`results/scadyg/ablation_summary.csv`。
+
+### 读法
+
+- **`topo`（快照内边→节点拓扑聚合）是模型能工作的前提**，不是可选增强项：去掉后
+  official MRR = 0.009901、AP = 0.500000，即**随机水平**；5 个 seed **完全一致**
+  （std = 0.000000），说明这是确定性的结构性失效，而非训练波动。这与 R-SCADYG-1 的
+  1-epoch 冒烟（0.00990 / 0.50000）逐位一致。
+- **`hyper`（Hypernetwork 自适应聚合）掉 0.1278**，**`time`（指数时间编码）掉
+  0.1033**，两者量级接近，都是"去掉后仍能跑、但明显变差"。
+- **`none` 与论文差 0.0085 < 论文 σ = 0.009**，这是本线第一次在消融维度上确认完整
+  模型与论文统计一致。
+- 方差：`time` 的 std 最大（0.0773，seed 2 只有 0.7017），`hyper` 0.0412，`none`
+  0.0142。**消融后的方差都大于完整模型**，与"组件被移除后优化更不稳定"一致。
+- 也看 filtered 协议：`none` 0.203631 与 2026-09-12 的 0.203631 ± 0.004180 逐位
+  一致（回归未破），`time` 0.0722、`topo` 0.0122、`hyper` 0.0360——四个组件的
+  official 与 filtered 排序**一致**（none > time ≈ hyper > topo）。
+
+### ⚠ 汇总陷阱（复现时必须避开）
+
+用宽通配符 `results/scadyg/runs/2026*_mooc_pid*.log` 汇总会**混入 R-SCADYG-1 的
+1-epoch 冒烟日志（`--seed 2023`，official MRR 0.650017）**，把 `hyper` 污染成
+`0.739000 ± 0.125842`。正确的 `hyper` 是 **0.803234 ± 0.041231**（n=5）。
+
+做法：从批次日志里取绝对路径列表，而不要用通配符：
+
+```bash
+LOGS=$(grep -oE "/home/[^ ]*/results/scadyg/runs/2026[0-9_]+_mooc_pid[0-9]+\.log" \
+  results/scadyg/runs/20260913_190322_ablation_multiseed.batch.log | sort -u)
+python scripts/summarize_scadyg_ablation.py $LOGS --csv results/scadyg/ablation_summary.csv
+```
+
+### 分层判定
+
+- L1 管线闭环：是（20/20 退出 0，脚本可重跑）。
+- L2 数值量级：`none` 与论文差 0.0085，在论文 σ 内；三个消融组按预期下降。
+- L3 统计一致：否（消融组与论文无对应表可对照；`none` 只做到 1σ 内）。
+
+### 仍未做
+
+- 覆盖当前完整工作树的补丁（见上节追溯缺口）。R-SCADYG-2 已完成，可生成。
+- BitcoinAlpha 第二数据集（R-SCADYG-3）。
 
 

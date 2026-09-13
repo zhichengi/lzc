@@ -7,6 +7,8 @@
 - 固定提交：`28ca94a06771c46073b650de3daa95e0939342ba`
 - 过程日志：[SCADYG_REPRO_LOG.md](SCADYG_REPRO_LOG.md)
 - 复现报告（初稿）：[SCADYG_REPORT.md](SCADYG_REPORT.md)
+- 组件消融汇总：[`results/scadyg/ablation_summary.csv`](../results/scadyg/ablation_summary.csv)（逐 run：[`ablation_runs.csv`](../results/scadyg/ablation_runs.csv)）
+- 消融入口：`bash repro/run_scadyg_ablation.sh`（4 组件 × seeds 0–4）
 - checkpoint issue 草稿（未发出）：[scadyg_issue_draft.md](scadyg_issue_draft.md)
 - 实验日志：`results/scadyg/runs/`
 - 读书笔记：`paper/notes/43_scadyg.md`
@@ -64,4 +66,13 @@ bash repro/run_scadyg_multiseed.sh mrr
 | 同一 checkpoint，严格 item 排名 | **0.204 ± 0.004** |
 | 合法二部图训练负采样 + 严格评测 | 0.203 ± 0.004（无改进） |
 
-默认 1 epoch 回归：official MRR 0.6247271678，与最初基线逐位一致。消融与 BitcoinAlpha 尚未做。报告初稿见 [SCADYG_REPORT.md](SCADYG_REPORT.md)。结构化数字：`results/scadyg/multiseed_summary.csv`。
+组件消融（R-SCADYG-2，seeds 0–4，`--ablate none` 即完整模型）：
+
+| 组件 | official MRR | Δ vs 论文 |
+|------|--------------|-----------|
+| `none`（完整） | **0.9225 ± 0.0142** | −0.0085（1σ 内）|
+| `hyper` | 0.8032 ± 0.0412 | −0.1278 |
+| `time` | 0.8277 ± 0.0773 | −0.1033 |
+| `topo` | **0.0099 ± 0.0000** | −0.9211（塌成随机）|
+
+默认 1 epoch 回归：official MRR 0.6247271678，与最初基线逐位一致。**BitcoinAlpha 尚未做**，消融已完成（见 `results/scadyg/ablation_summary.csv`）。报告初稿见 [SCADYG_REPORT.md](SCADYG_REPORT.md)。结构化数字：`results/scadyg/multiseed_summary.csv`。
