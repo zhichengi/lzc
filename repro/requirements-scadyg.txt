@@ -1,0 +1,7 @@
+# ScaDyG 入口相对 dtgb 环境缺少的最小依赖。
+# 官方 requirements.txt 是完整环境导出，包含互相不兼容的 torch/PyG/DGL 钉扎，
+# 因此不直接整体安装。
+deepsnap==0.2.1
+py-tgb==0.9.2
+torchmetrics==1.2.1
+yacs==0.1.6

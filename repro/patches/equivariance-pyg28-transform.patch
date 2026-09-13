@@ -1,0 +1,77 @@
+diff --git a/models/triton_nn/gat.py b/models/triton_nn/gat.py
+index 8ba3d31..721c722 100644
+--- a/models/triton_nn/gat.py
++++ b/models/triton_nn/gat.py
+@@ -43,7 +43,7 @@ class TritonGAT(MessagePassing):
+         # size = self._check_input(edge_index, size)
+         coll_dict = self._collect(self._fused_user_args, edge_index, size, kwargs)
+         # use from packaging.version import parse as parse_version as by default 2.4 > 2.14 which is wrong
+-        pyg_version = [int(i) for i in torch_geometric.__version__.split(".")]
++        pyg_version = [int(i) for i in torch_geometric.__version__.split(".") if i.isdigit()]
+         col_fn = self.inspector.distribute if pyg_version[1] <= 4 else self.inspector.collect_param_data
+         msg_aggr_kwargs = col_fn("message_and_aggregate", coll_dict)
+         for hook in self._message_and_aggregate_forward_pre_hooks.values():
+diff --git a/models/triton_nn/mean_gnn.py b/models/triton_nn/mean_gnn.py
+index 147c5e6..a20d9e5 100644
+--- a/models/triton_nn/mean_gnn.py
++++ b/models/triton_nn/mean_gnn.py
+@@ -43,7 +43,7 @@ class TritonMeanGNN(MessagePassing):
+         # size = self._check_input(edge_index, size)
+         coll_dict = self._collect(self._fused_user_args, edge_index, size, kwargs)
+         # use from packaging.version import parse as parse_version as by default 2.4 > 2.14 which is wrong
+-        pyg_version = [int(i) for i in torch_geometric.__version__.split(".")]
++        pyg_version = [int(i) for i in torch_geometric.__version__.split(".") if i.isdigit()]
+         col_fn = self.inspector.distribute if pyg_version[1] <= 4 else self.inspector.collect_param_data
+         msg_aggr_kwargs = col_fn("message_and_aggregate", coll_dict)
+         for hook in self._message_and_aggregate_forward_pre_hooks.values():
+diff --git a/transforms/least_squares.py b/transforms/least_squares.py
+index 3c3b4e4..0c073d4 100644
+--- a/transforms/least_squares.py
++++ b/transforms/least_squares.py
+@@ -95,7 +95,7 @@ class LeastSquaresTransform(BaseTransform):
+ 
+         return xy_conversions
+ 
+-    def __call__(self, data):
++    def forward(self, data):
+         xy_conversions = self._load_cache()
+         xy_keys = list(xy_conversions.keys())
+ 
+diff --git a/transforms/normalize.py b/transforms/normalize.py
+index 6cb2f9d..44ef74a 100644
+--- a/transforms/normalize.py
++++ b/transforms/normalize.py
+@@ -18,6 +18,6 @@ class NormalizeTransform(BaseTransform):
+     def __init__(self):
+         super().__init__()
+ 
+-    def __call__(self, data: Data) -> Data:
++    def forward(self, data: Data) -> Data:
+         data.x = normalize(x=data.x)
+         return data
+diff --git a/transforms/pca.py b/transforms/pca.py
+index e6f254d..08443fa 100644
+--- a/transforms/pca.py
++++ b/transforms/pca.py
+@@ -12,7 +12,7 @@ class PCATransform(BaseTransform):
+         self.n_components = n_components
+         self.pca = PCA(n_components=n_components)
+ 
+-    def __call__(self, data: Data) -> Data:
++    def forward(self, data: Data) -> Data:
+         if data.x.shape[1] > self.n_components:
+             data.x = standardize(x=data.x)
+             x = data.x.numpy()
+diff --git a/transforms/remove_self_loops.py b/transforms/remove_self_loops.py
+index fcfd328..763adb7 100644
+--- a/transforms/remove_self_loops.py
++++ b/transforms/remove_self_loops.py
+@@ -3,7 +3,7 @@ from torch_geometric.data import Data
+ 
+ 
+ class RemoveSelfLoops(T.BaseTransform):
+-    def __call__(self, data: Data) -> Data:
++    def forward(self, data: Data) -> Data:
+         edge_index = data.edge_index
+         mask = edge_index[0] != edge_index[1]  # Keep only edges where src != dst
+         data.edge_index = edge_index[:, mask]

@@ -1,0 +1,173 @@
+[repro] started_at=2026-09-10T21:34:15+08:00
+[repro] repo_commit=28ca94a06771c46073b650de3daa95e0939342ba
+[repro] dataset=mooc gpu=0 env=scadyg
+[repro] command=python scalable_tgn_main_link_prediction.py --dataset mooc --cuda_device 0 --epochs 1 --seed 2023
+[repro] torch=2.2.1+cu121 pyg=2.8.0.post1 dgl=2.2.1+cu121
+[repro] cuda=True gpu_count=1
+[repro] gpu_name=NVIDIA GeForce RTX 3090
+0it [00:00, ?it/s]93it [00:00, 926.23it/s]100it [00:00, 925.17it/s]
+0it [00:00, ?it/s]7it [00:00, 62.22it/s]14it [00:00, 44.76it/s]21it [00:00, 51.29it/s]27it [00:00, 43.90it/s]34it [00:00, 49.41it/s]40it [00:00, 43.31it/s]47it [00:00, 48.24it/s]53it [00:01, 43.15it/s]60it [00:01, 47.98it/s]66it [00:01, 43.21it/s]73it [00:01, 47.58it/s]79it [00:01, 43.06it/s]86it [00:01, 47.68it/s]93it [00:02, 43.43it/s]100it [00:02, 47.81it/s]100it [00:02, 46.43it/s]
+[Thu Sep 10 21:34:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.44153,mrr:0.66548,  acc: 0.99356, ap: 0.99102, f1: 0.99356, macro_auc: 0.99547, micro_auc: 0.99547
+[Thu Sep 10 21:34:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.50158,mrr:0.63227,  acc: 0.99320, ap: 0.99003, f1: 0.99320, macro_auc: 0.99497, micro_auc: 0.99497
+[Thu Sep 10 21:34:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.57363,mrr:0.63152,  acc: 0.99065, ap: 0.98676, f1: 0.99065, macro_auc: 0.99163, micro_auc: 0.99163
+[Thu Sep 10 21:34:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.51755,mrr:0.64145,  acc: 0.98944, ap: 0.98961, f1: 0.98944, macro_auc: 0.99428, micro_auc: 0.99428
+[Thu Sep 10 21:34:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.41532,mrr:0.65081,  acc: 0.99344, ap: 0.99197, f1: 0.99344, macro_auc: 0.99595, micro_auc: 0.99595
+[Thu Sep 10 21:34:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.62165,mrr:0.64174,  acc: 0.99211, ap: 0.98778, f1: 0.99211, macro_auc: 0.99381, micro_auc: 0.99381
+[Thu Sep 10 21:34:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.70953,mrr:0.62702,  acc: 0.99089, ap: 0.98616, f1: 0.99089, macro_auc: 0.99298, micro_auc: 0.99298
+[Thu Sep 10 21:34:46 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.57743,mrr:0.62623,  acc: 0.99186, ap: 0.98879, f1: 0.99186, macro_auc: 0.99433, micro_auc: 0.99433
+[Thu Sep 10 21:34:46 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.53071,mrr:0.61094,  acc: 0.99162, ap: 0.98982, f1: 0.99162, macro_auc: 0.99486, micro_auc: 0.99486
+[Thu Sep 10 21:34:46 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.41457,mrr:0.62947,  acc: 0.99296, ap: 0.99196, f1: 0.99296, macro_auc: 0.99595, micro_auc: 0.99595
+[Thu Sep 10 21:34:46 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.45578,mrr:0.65967,  acc: 0.99284, ap: 0.99034, f1: 0.99284, macro_auc: 0.99450, micro_auc: 0.99450
+[Thu Sep 10 21:34:46 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.42847,mrr:0.60905,  acc: 0.99320, ap: 0.99164, f1: 0.99320, macro_auc: 0.99563, micro_auc: 0.99563
+[Thu Sep 10 21:34:46 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.57280,mrr:0.63510,  acc: 0.99211, ap: 0.98883, f1: 0.99211, macro_auc: 0.99435, micro_auc: 0.99435
+[Thu Sep 10 21:34:46 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.48829,mrr:0.62813,  acc: 0.99308, ap: 0.99056, f1: 0.99308, macro_auc: 0.99524, micro_auc: 0.99524
+[Thu Sep 10 21:34:47 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.59841,mrr:0.65265,  acc: 0.99211, ap: 0.98780, f1: 0.99211, macro_auc: 0.99305, micro_auc: 0.99305
+[Thu Sep 10 21:34:47 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.57544,mrr:0.65364, acc: 0.99259, ap: 0.98874, f1: 0.99259, macro_auc: 0.99414, micro_auc: 0.99414
+[Thu Sep 10 21:34:47 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.45294,mrr:0.62767, acc: 0.99356, ap: 0.99126, f1: 0.99356, macro_auc: 0.99559, micro_auc: 0.99559
+[Thu Sep 10 21:34:47 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.45146,mrr:0.63735, acc: 0.99393, ap: 0.99130, f1: 0.99393, macro_auc: 0.99561, micro_auc: 0.99561
+[Thu Sep 10 21:34:47 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.53555,mrr:0.63716, acc: 0.99332, ap: 0.98960, f1: 0.99332, macro_auc: 0.99474, micro_auc: 0.99474
+[Thu Sep 10 21:34:47 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.49235,mrr:0.63563, acc: 0.99296, ap: 0.99052, f1: 0.99296, macro_auc: 0.99522, micro_auc: 0.99522
+[Thu Sep 10 21:34:48 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.48940,mrr:0.65811, acc: 0.99332, ap: 0.99059, f1: 0.99332, macro_auc: 0.99525, micro_auc: 0.99525
+[Thu Sep 10 21:34:48 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.63450,mrr:0.64598, acc: 0.99235, ap: 0.98766, f1: 0.99235, macro_auc: 0.99375, micro_auc: 0.99375
+[Thu Sep 10 21:34:48 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.50444,mrr:0.65149, acc: 0.99271, ap: 0.99029, f1: 0.99271, macro_auc: 0.99510, micro_auc: 0.99510
+[Thu Sep 10 21:34:48 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.63604,mrr:0.62267, acc: 0.99138, ap: 0.98771, f1: 0.99138, macro_auc: 0.99378, micro_auc: 0.99378
+[Thu Sep 10 21:34:48 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.76684,mrr:0.59456, acc: 0.94512, ap: 0.95979, f1: 0.94503, macro_auc: 0.95278, micro_auc: 0.95278
+[Thu Sep 10 21:34:48 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.88219,mrr:0.62714, acc: 0.89959, ap: 0.97382, f1: 0.89890, macro_auc: 0.98105, micro_auc: 0.98105
+[Thu Sep 10 21:34:48 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.55364,mrr:0.59874, acc: 0.99271, ap: 0.98773, f1: 0.99271, macro_auc: 0.99378, micro_auc: 0.99378
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.76924,mrr:0.63194, acc: 0.99041, ap: 0.98448, f1: 0.99041, macro_auc: 0.99212, micro_auc: 0.99212
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.67611,mrr:0.56753, acc: 0.99029, ap: 0.98670, f1: 0.99029, macro_auc: 0.99326, micro_auc: 0.99326
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] test epoch:0, loss: 0.70505,mrr:0.58073, acc: 0.99139, ap: 0.98615, f1: 0.99139, macro_auc: 0.99298, micro_auc: 0.99298
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] {'avg_mrr': 0.624727167800074}
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] {'avg_acc': 0.9830360180819521}
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] {'avg_auc': 0.9906082115675947}
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] {'avg_rcall10': 0.9996353039083807}
+[Thu Sep 10 21:34:49 2026|scalable_tgn_link_prediction.py|INFO] {'avg_ap': 0.9857572059009174}
+[Thu Sep 10 21:34:49 2026|scalable_tgn_main_link_prediction.py|INFO] All accuracy: 0.9830360180819521
+[Thu Sep 10 21:34:49 2026|scalable_tgn_main_link_prediction.py|INFO] All AUC: 0.9906082115675947
+[Thu Sep 10 21:34:49 2026|scalable_tgn_main_link_prediction.py|INFO] All AP: 0.624727167800074
+[Thu Sep 10 21:34:49 2026|scalable_tgn_main_link_prediction.py|INFO] All time: 27.588686227798462
+Total number of transformer parameters is: 55364
+Total number of predit_layer parameters is: 641
+56005
+train steps: 70, val steps 15, test steps 15 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+elapsed time:7.671283960342407s
+13.291484355926514
+2.107205629348755
+15
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+25.20021152496338
+[repro] finished_at=2026-09-10T21:34:49+08:00

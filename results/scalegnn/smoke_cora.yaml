@@ -1,0 +1,78 @@
+seed: 42
+device: cuda
+dataset: Cora
+data_root: ./data
+to_undirected: true
+model:
+  in_dim: null
+  out_dim: null
+  hidden_dim: 64
+  num_layers: 3
+  max_k: 4
+  dropout: 0.5
+  input_dropout: 0.0
+  edge_dropout: 0.15
+  lcs_dim: 64
+  mask_temperature: 0.5
+  hard_mask: true
+  use_lcs_weight: false
+  self_residual: false
+  low_hop: 2
+  beta_init: 0.5
+  precomputed_self_weight: 0.1
+  precomputed_classifier_layers: 2
+  precomputed_shared_hop_projection: true
+  precomputed_feature_norm: none
+  use_batch_norm: false
+  local_gcn: true
+  local_gcn_weight: 1.0
+  scale_logits_weight: 0.05
+  scale_confidence_gate: true
+  scale_confidence_power: 1.0
+  add_self_loops: true
+  normalize: sym
+  ablation:
+    only_high_order: false
+    no_lcs: false
+    no_fusion: false
+    fix_alpha: false
+    fix_mk: false
+    fix_beta: false
+train:
+  lr: 0.01
+  weight_decay: 0.0005
+  epochs: 2
+  batch_size: 1024
+  eval_batch_size: 4096
+  fanout: [20, 20, 20]
+  num_workers: 0
+  persistent_workers: false
+  pin_memory: true
+  grad_clip: 5.0
+  scheduler: cosine
+  eval_interval: 1
+  log_interval: 1
+  progress: false
+  precompute_structure: true
+  use_precomputed_features: false
+  train_on_val: true
+  selection_metric: val
+  scale_warmup_epochs: 0
+  scale_warmup_start: 0.0
+  scale_warmup_target: 0.05
+  save_path: /home/lab_user/project/lzc/results/scalegnn/smoke_save
+loss:
+  label_smoothing: 0.05
+  lambda_lcs: 0.0
+  lambda_sc: 0.0
+  lambda_mk: 0.0
+  lambda_scale_ce: 0.1
+  lambda_alpha_entropy: 0.0
+  lambda_alpha_prior: 0.01
+  alpha_prior: [0.6, 0.3, 0.1]
+early_stopping: 2
+eval_metric: acc
+postprocess:
+  enabled: false
+  num_layers: 5
+  alpha: 0.1

@@ -1,0 +1,20 @@
+[repro] paper=stable_chebnet
+[repro] started_at=2026-09-12T19:45:21+08:00
+[repro] run_id=20260912_194521_smoke_peptides_dummy_2ep_gpu_pid133488
+[repro] repo_commit=7d7a7e2696119891d277fd3fa2b32fdda454b814
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/stable_chebnet
+[repro] command=bash -c cd Peptides/Stable && python ChebStable_peptide.py --epochs 2
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p133552-i2423.scope; invocation ID: f3d34a1f632344a8947a5333c33362e8
+/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+Number of trainable parameters: 659069
+12.1
+Epoch: 000, Loss: 11.8020,Train Acc: 0.6070, Val_Loss: 14.2132,Val Acc: 0.5356
+12.1
+Epoch: 001, Loss: 11.1762,Train Acc: 0.7768, Val_Loss: 14.1189,Val Acc: 0.5049
+[repro] exit_code=0
+[repro] runtime_seconds=8
+[repro] finished_at=2026-09-12T19:45:30+08:00

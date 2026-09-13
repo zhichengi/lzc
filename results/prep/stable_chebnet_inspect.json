@@ -1,0 +1,43 @@
+{
+  "name": "stable_chebnet",
+  "path": "/home/lab_user/project/lzc/repro/stable_chebnet",
+  "git": {
+    "head": "7d7a7e2696119891d277fd3fa2b32fdda454b814",
+    "branch": "main",
+    "n_commits_shallow": "1",
+    "subject": "Update README.md",
+    "date": "2025-10-22 17:08:56 +0200"
+  },
+  "top": [
+    "Barbell/",
+    "GraphProp/",
+    "OGB/",
+    "Peptides/",
+    "README.md",
+    "assets/",
+    "jacobian_cheb.py"
+  ],
+  "key_files": [
+    "README.md"
+  ],
+  "readme_head": "## Code of *Return of ChebNet — Understanding and Improving an Overlooked GNN on Long-Range Tasks* [📄 [Paper]](https://arxiv.org/abs/2506.07624) \n## *⭐ NeurIPS 2025 Spotlight*\n\n![Alt text](assets/overview.png)\n---\n\n## Dependencies\n\n- [PyTorch Geometric](https://github.com/pyg-team/pytorch_geometric)\n- [OGB](https://github.com/snap-stanford/ogb)\n\n## Usage\n\n\n### OGB Benchmarks\n\nNavigate into the `OGB` folder for dataset scripts:\n\n- **arXiv citation network**:\n  ```bash\n  python ogb_datasets.py\n  ```\n\n- **Protein–protein interaction (OGB-Proteins)**:\n  ```bash\n  python ogbproteins.py\n  ```\n\n- **OGB-Proteins with Stable-ChebNet**:\n  ```bash\n  python ogbproteins_euler.py     --model_name eulerchebnet     --hidden_channels #insert_dim     --num_layers #insert_layers     --K #insert_Khops     --lr #insert_lr\n  ```\n\n### Peptides dataset\n\nTwo pipelines are provided under `Peptides/Stable/`:\n\n- **Function Prediction**:\n  ```bash\n  cd Peptides/Stable\n  python ChebStable_peptide.py\n  ```\n\n- **Structure Prediction**:\n  ```bash\n  cd Peptides/Stable\n  python ChebStable_Struc.py\n  ```\n\nAdjust hyperparameters in the scripts or configuration files as needed.\n\n\n### Graph Property Prediction (GraphProp)\n\n1. Edit your conda environment in `GraphProp/graph_prop_pred/run_models.sh` (see line 13).\n2. Run the shell script to launch experiments:\n\n   ```bash\n   cd GraphProp/graph_prop_pred\n   bash run_models.sh\n   ```\n\n3. Or invoke `main.py` directly:\n\n   ```bash\n   python -u main.py      --data_name GraphProp      --task ecc      --model_name Euler_GraphProp\n   ```\n\nSupported `--model_name` values:\n\n- `Euler_GraphProp` (Stable-ChebNet)\n- `Cheb_GraphProp` (ChebNet)\n- `GCN_GraphProp` (Graph Convolutional Network)\n- `GAT_GraphProp` (Graph Attention Network)\n  \n### Barbell Graphs task\n\nLaunch the Barbell experiments via Slurm:\n\n```bash\ncd Barbell\nsbatch run_barb.sh\n```\n\nSpecify clique sizes and other parameters in the `configs/*.yaml` files.\n\n\n## 📖 Citation\n\nIf you use this code or build upon this work, please cite:\n\n```bibtex\n@article{hariri2025return,\n  title={Return of ChebNet: Understanding and Improving an Overlooked GNN on Long Range Tasks},\n  author={Hariri, Ali and Arroyo, {\\'A}lvaro and Gravina, Alessio and Eliasof, Moshe and Sch{\\\"o}nlieb, Carola-Bibiane and Bacciu, Davide and Azizzadenesheli, Kamyar and Dong, Xiaowen and Vandergheynst, Pierre},\n  journal={arXiv preprint arXiv:2506.07624},\n  year={2025}\n}\n\n",
+  "deps_text": {},
+  "entry_candidates": [
+    "Barbell/run.py",
+    "Barbell/run_multiple.py",
+    "Barbell/utils/train.py",
+    "GraphProp/graph_prop_pred/main.py",
+    "GraphProp/graph_prop_pred/train_GraphProp.py",
+    "Peptides/Stable/run_euler_once.py",
+    "Peptides/Stable/run_iters_euler.py"
+  ],
+  "sh_scripts": [
+    "Barbell/run_barb.sh",
+    "GraphProp/graph_prop_pred/run_models.sh",
+    "GraphProp/graph_prop_pred/run_all.sh",
+    "Barbell/configs/backup_submit.sh",
+    "Barbell/configs/gpt_submit.sh"
+  ],
+  "yml": [],
+  "n_py": 69
+}

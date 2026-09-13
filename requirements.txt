@@ -1,8 +1,21 @@
-# 按实际依赖补充版本号,保证可复现
-# torch==2.x.x
-# torch_geometric==2.x.x
-# dgl==2.x.x
-# numpy
-# scikit-learn
-# pyyaml
-# tensorboard
+# Python 3.10, CUDA 12.1, 本机 RTX 3090 / conda env dtgb
+# 不要直接 pip install -r requirements.txt：torch / PyG 扩展 / DGL 需要额外 index。
+# 请用: conda activate dtgb && bash scripts/setup_env.sh
+
+# 先装 CUDA 版 PyTorch（已存在于 dtgb 则可跳过）
+# pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cu121
+
+numpy==1.26.4
+scikit-learn==1.4.1.post1
+PyYAML==6.0.1
+tensorboard==2.21.0
+torch==2.2.1
+torchdata==0.7.1
+pydantic==2.13.5
+torch_geometric==2.8.0.post1
+
+# PyG CUDA 扩展（torch 2.2 + cu121）
+# pip install pyg_lib==0.4.0+pt22cu121 torch_scatter==2.1.2+pt22cu121 torch_sparse==0.6.18+pt22cu121 torch_cluster==1.6.3+pt22cu121 torch_spline_conv==1.2.2+pt22cu121 -f https://data.pyg.org/whl/torch-2.2.0+cu121.html
+
+# DGL CUDA 12.1（需 torchdata==0.7.1，不能用 0.11）
+# pip install dgl==2.2.1+cu121 -f https://data.dgl.ai/wheels/torch-2.2/cu121/repo.html

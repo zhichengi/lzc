@@ -1,0 +1,34 @@
+function = "bin.critical.main"
+n_seeds = 1
+
+[base_config]
+n_steps = 2
+patience = 2
+save_checkpoint = false
+
+[base_config.optimizer]
+type = "AdamW"
+lr = 8.975578455841288e-05
+weight_decay = 0.003882157311984778
+
+[base_config.data]
+path = "data/tolokers-2"
+setting = "transductive"
+internal_split_name = "RL"
+
+[base_config.transform]
+seed = 0
+labels = false
+
+[base_config.transform.features]
+num_policy = "quantile-normal"
+cat_policy = "one-hot"
+impute_first = true
+
+[base_config.model.backbone]
+conv = "gcn"
+n_blocks = 2
+d_hidden = 32
+dropout = 0.15
+log2_hidden_dim_multiplier = 1
+normalization = "LayerNorm"

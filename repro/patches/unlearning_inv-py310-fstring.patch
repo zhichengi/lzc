@@ -1,0 +1,13 @@
+diff --git a/exp/exp_GIF.py b/exp/exp_GIF.py
+index ebd4d39..d0bfbe2 100644
+--- a/exp/exp_GIF.py
++++ b/exp/exp_GIF.py
+@@ -142,7 +142,7 @@ class ExpGraphInfluenceFunction(Exp):
+             self.data.edge_index_unlearn = self.update_edge_index_unlearn(unique_nodes, remove_indices)
+             self.data.removed_edges = remove_edges
+             
+-            torch.save(self.data, f'data_{self.args['unlearn_ratio']}_{self.args['dataset_name']}.pth')
++            torch.save(self.data, f"data_{self.args['unlearn_ratio']}_{self.args['dataset_name']}.pth")
+ 
+         if self.args["unlearn_task"] == 'feature':
+             unique_nodes = np.random.choice(len(self.train_indices),

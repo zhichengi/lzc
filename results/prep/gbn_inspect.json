@@ -1,0 +1,40 @@
+{
+  "name": "gbn",
+  "path": "/home/lab_user/project/lzc/repro/gbn",
+  "git": {
+    "head": "72ad3692916ecc60f2c78d5bd01a55d7c6297a4f",
+    "branch": "main",
+    "n_commits_shallow": "1",
+    "subject": "Update README",
+    "date": "2025-10-04 13:23:26 +0800"
+  },
+  "top": [
+    ".gitignore",
+    "README.md",
+    "case_study.ipynb",
+    "configs/",
+    "graph_transfer.py",
+    "logger.py",
+    "main.py",
+    "modules/",
+    "node_classification.py",
+    "pics/",
+    "requirements.txt",
+    "utils/"
+  ],
+  "key_files": [
+    "README.md",
+    "requirements.txt"
+  ],
+  "readme_head": "# GBN: Graph Boundary conditioned message passing Neural network\n\n## Get start\n\n\nRun the command\n```shell\npython main.py --task \"${TASK}\" --dataset \"${DATA_NAME}\"\n```\nPlease replace ```${TASK}``` by ```NC``` or ```Transfer```, \nreplace ```${DATA_NAME}``` by dataset name, e.g., ```CS```.\n\n## Model Illustration\n\n<div align=center>\n<img src=\"./pics/illus.png\" width=100% >\n</div>\n<div align=center>\nFigure 1. An Illustration of GBN\n</div>\n\n## Experimental Results\n<div align=center>\n<img src=\"./pics/results.png\" width=100% >\n</div>\n<div align=center>\nFigure 2. Node Classification Results\n</div>\n\n<div align=center>\n<img src=\"./pics/dirichlet.png\" width=80% >\n</div>\n<div align=center>\nFigure 3. Dirichlet energy curve\n</div>\n\n<div align=center>\n<img src=\"./pics/smooth.png\" width=80% >\n</div>\n<div align=center>\nFigure 4. Node classification accuracy with\nrespect to the number of network layers on\nCora dataset\n</div>\n\n<div align=center>\n<img src=\"./pics/transfer.png\" width=100% >\n</div>\n<div align=center>\nFigure 5. Results of graph transfer task in terms of Mean Squared Error (%)\n</div>\n\n## Case Study\n<div align=center>\n<img src=\"./pics/case.png\" width=100% >\n</div>\n<div align=center>\nFigure 6. Case Study\n</div>\n\n## Citation\n```text\n@inproceedings{\nsun2025deeper,\ntitle={Deeper and Better: Mitigating Oversmoothing and Oversquashing in {MPNN}s via Local Riemannian Geometry},\nauthor={Li Sun, Zhenhao Huang, Ming Zhang, Philip S. Yu},\nbooktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},\nyear={2025},\nurl={https://openreview.net/forum?id=yNej0aGtAZ}\n}\n```",
+  "deps_text": {
+    "requirements.txt": "matplotlib==3.7.1\nnetworkx==3.0\nnumpy==1.24.2\nscikit_learn==1.3.2\ntorch==2.0.0+cu118\ntorch_geometric==2.6.1\ntorch_scatter==2.1.2+pt20cu118\ntqdm==4.61.2\n"
+  },
+  "entry_candidates": [
+    "main.py",
+    "utils/train_utils.py"
+  ],
+  "sh_scripts": [],
+  "yml": [],
+  "n_py": 12
+}

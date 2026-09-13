@@ -1,0 +1,37 @@
+{
+  "name": "puma",
+  "path": "/home/lab_user/project/lzc/repro/puma",
+  "git": {
+    "head": "9e4e87f53db0da6aacad4a0a9d08f1c2970413d0",
+    "branch": "master",
+    "n_commits_shallow": "1",
+    "subject": "Fix the CLI syntax.",
+    "date": "2024-02-07 22:15:59 +1000"
+  },
+  "top": [
+    "README.md",
+    "backbones/",
+    "data/",
+    "data_stream.py",
+    "figs/",
+    "methods/",
+    "results/",
+    "scripts/",
+    "train.py",
+    "utilities.py"
+  ],
+  "key_files": [
+    "README.md"
+  ],
+  "readme_head": "# PUMA (Continual Graph Learning)\nThis is the official repository for the paper [PUMA: Efficient Continual Graph Learning with Graph Condensation](https://arxiv.org/abs/2312.14439) which is an extension of [CaT: Balanced Continual Graph Learning with Graph Condensation](https://arxiv.org/abs/2309.09455) ([code](https://github.com/superallen13/CaT-CGL)).\n\nThe following figure shows the PUMA framework in details.\n![CaT Framework](./figs/puma.png)\n\n# Main experiment results.\n![class-IL results](./figs/table2.png)\n\n# Experiment environment\nOur experiments are run on the enviroment based on `Python 3.8` with the following packages:\n\n```\npytorch==1.13.0\ntorch-geometric==2.2.0  # for deploying GNNs.\nogb==1.3.6  # for obtaining arxiv and prodcuts datasets.\nprogressbar2==4.2.0  # for visulasing the process of the condensation.\n```\n\n# Usage\nTo reproduce the results of Table 2 (classIL setting), please run the `table2.sh` in the `srcripts` folder:\n```\nbash ./scripts/table2.sh\n```\n\n# Cite\nIf you find this repo useful, please cite\n\n```\n@inproceedings{CaT,\n  author    = {Yilun Liu and\n               Ruihong Qiu and\n               Yanran Tang and\n               Hongzhi Yin and\n               Zi Huang},\n  title     = {PUMA: Efficient Continual Graph Learning with Graph Condensation},\n  journal   = {CoRR},\n  volume    = {abs/2312.14439},\n  year      = {2023}\n}\n```\n\n# Credit\nThis repository was developed based on the [CGLB](https://github.com/QueuQ/CGLB) and [CaT](https://github.com/superallen13/CaT-CGL).",
+  "deps_text": {},
+  "entry_candidates": [
+    "scripts/table2.sh",
+    "train.py"
+  ],
+  "sh_scripts": [
+    "scripts/table2.sh"
+  ],
+  "yml": [],
+  "n_py": 21
+}

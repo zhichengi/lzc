@@ -1,0 +1,34 @@
+{
+  "protocol": "mooc_full_item_filtered_v1",
+  "dataset": "mooc",
+  "snapshot_count": 100,
+  "split": {
+    "train": [
+      0,
+      69
+    ],
+    "validation": [
+      70,
+      84
+    ],
+    "test": [
+      85,
+      99
+    ]
+  },
+  "source_node_count": 7047,
+  "source_node_range": [
+    0,
+    7046
+  ],
+  "destination_node_count": 97,
+  "destination_node_range": [
+    7047,
+    7143
+  ],
+  "positive_edge_count": 411749,
+  "edge_index_sha256": "e8b017550b97172caa9334cc6a5cba18bbd052f30ef93ecd2cdb17c4ff24e33c",
+  "filter": "other positive destinations for the same source in the snapshot",
+  "ranking_unit": "one rank per positive edge",
+  "candidate_policy": "all valid destination nodes; no random sampling"
+}

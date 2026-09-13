@@ -1,0 +1,20 @@
+[repro] started_at=2026-09-12T16:32:16+08:00
+[repro] run_id=20260912_163216_pubmed_lobpcg_smoke_Pubmed_pid43517
+[repro] repo_commit=114b585d0d0e32afbf1d7232dd04c013fa8453e2
+[repro] tracked_patch_sha256=72952adeb096a5ca61e6e115a0a29e0e484ca577aba23f57b5c11dea083afee7
+[repro] main_py_sha256=dc67561acc2c8d0860a4b53c2cdbd729ddaff59fd5b61d50dd1e3a513a6e06ac
+[repro] dataset=Pubmed data_id=2 env=dtgb cuda_visible_devices=0
+[repro] data_link=/tmp/Pubmed -> /home/lab_user/project/lzc/repro/sgpc/data/Pubmed
+[repro] command=python main.py 2 --spec lobpcg --pacbayes_epoch 1 --max_epochs 3
+[repro] resource_cap_ratio=85 threads=17 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85
+[repro] python=3.10.20 torch=2.2.1+cu121 pyg=2.8.0.post1 torch_sparse=0.6.18+pt22cu121
+[repro] cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p43668-i71567.scope; invocation ID: 5e3a6fec86db4f68b260543ef9fc638b
+[sgpc] config data_id=2 split=0 n_splits=1 seed=None spec=lobpcg max_epochs=3 pacbayes_epoch=1
+Epoch 0001 | Loss: 1.7322 | Val: 0.3880 | Test: 0.4150 | Best Test: 0.4150
+Epoch 0002 | Loss: 1.4449 | Val: 0.4480 | Test: 0.4490 | Best Test: 0.4490
+[sgpc] summary data_id=2 split=0 seed=None spec=lobpcg best_val=0.4480 val_selected_test=0.4490 val_selected_epoch=2 oracle_best_test=0.4490 last_epoch=3
+[repro] exit_code=0
+[repro] runtime_seconds=4
+[repro] finished_at=2026-09-12T16:32:23+08:00

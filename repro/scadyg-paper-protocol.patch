@@ -1,0 +1,110 @@
+diff --git a/scalable_tgn_link_prediction.py b/scalable_tgn_link_prediction.py
+index 9ce258e..138e05c 100644
+--- a/scalable_tgn_link_prediction.py
++++ b/scalable_tgn_link_prediction.py
+@@ -644,7 +644,11 @@ def weight_expand(weight,coarsening_num,node_num):
+ 
+ 
+ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logger, train_n,val_n,test_n,args):
+-    best_param = {'best_acc': 0, 'best_state': None, 'best_s_dw': None}
++    best_param = {
++        'best_score': float('-inf'),
++        'best_state': None,
++        'best_transformer_state': None,
++    }
+     graph_train = graph_l[:train_n]
+     graph_val = graph_l[train_n:val_n]
+     graph_test = graph_l[val_n:]
+@@ -836,6 +840,7 @@ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logg
+         val_acc = 0
+         count = 0
+         val_ap =0
++        val_mrr = 0
+         with torch.no_grad():
+             st_time = time.time()
+             for idx in range(len(graph_val)):
+@@ -916,14 +921,27 @@ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logg
+                 model = model.to(device)
+                 val_acc += acc
+                 val_ap += ap
++                val_mrr += mrr
+                 count +=1
+             ed_time = time.time()
+             print(ed_time-st_time)
+         print(count)
+         val_acc = val_acc / count
+         val_ap = val_ap / count
+-        if val_ap > best_param['best_acc']:
+-            best_param = {'best_acc': val_ap, 'best_state': deepcopy(model.state_dict())}
++        val_mrr = val_mrr / count
++        selection_score = val_mrr if args.selection_metric == 'mrr' else val_ap
++        logger.info(
++            'validation summary epoch:{}, avg_mrr:{:.5f}, avg_ap:{:.5f}, '
++            'selection_metric:{}, selection_score:{:.5f}'.format(
++                epoch, val_mrr, val_ap, args.selection_metric, selection_score
++            )
++        )
++        if selection_score > best_param['best_score']:
++            best_param = {
++                'best_score': selection_score,
++                'best_state': deepcopy(model.state_dict()),
++                'best_transformer_state': deepcopy(model_transformer.state_dict()),
++            }
+             earl_stop_c = 0
+         else:
+             earl_stop_c += 1
+@@ -932,7 +950,9 @@ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logg
+     # testing
+ 
+     model.load_state_dict(best_param['best_state'])
++    model_transformer.load_state_dict(best_param['best_transformer_state'])
+     model.eval()
++    model_transformer.eval()
+     avg_mrr = 0.0
+     avg_acc = 0.0
+     avg_auc = 0.0
+diff --git a/scalable_tgn_main_link_prediction.py b/scalable_tgn_main_link_prediction.py
+index ae2cf0f..d77afb7 100644
+--- a/scalable_tgn_main_link_prediction.py
++++ b/scalable_tgn_main_link_prediction.py
+@@ -89,6 +89,9 @@ if __name__ == '__main__':
+ 
+     parser.add_argument('--seed', type=int, default=2023, help='split seed')
+ 
++    parser.add_argument('--selection_metric', choices=['ap', 'mrr'], default='ap',
++                        help='validation metric used for checkpointing and early stopping')
++
+     parser.add_argument('--repeat', type=int, default=1, help='number of repeat model')
+ 
+     parser.add_argument('--epochs', type=int, default=100,
+@@ -199,7 +202,6 @@ if __name__ == '__main__':
+     best_mrr = 0.0
+     best_model = 0
+     all_acc = 0
+-    all_ap = 0
+     all_auc = 0
+     all_start_time = time.time()
+     for rep in range(args.repeat):
+@@ -301,18 +303,18 @@ if __name__ == '__main__':
+         optimizer = create_optimizer(args.optimizer, parameters, args.lr, args.weight_decay)
+         start_time = time.time()
+         
+-        avg_ap,auc,acc = train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logger,train_n,val_n,test_n,args)
++        avg_mrr,auc,acc = train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logger,train_n,val_n,test_n,args)
+         #model.load_state_dict(best_param['best_state'])
+         end_time = time.time()
+         print(end_time-start_time)
+-        all_ap += avg_ap
++        all_mrr_avg += avg_mrr
+         all_acc += acc
+         all_auc += auc
+     all_acc = all_acc/ args.repeat
+     all_auc = all_auc/ args.repeat
+-    all_ap = all_ap/ args.repeat
++    all_mrr_avg = all_mrr_avg / args.repeat
+     all_end_time = (time.time()-all_start_time)/args.repeat
+     logger.info(f"All accuracy: {all_acc}")
+     logger.info(f"All AUC: {all_auc}")
+-    logger.info(f"All AP: {all_ap}")
++    logger.info(f"All MRR: {all_mrr_avg}")
+     logger.info(f"All time: {all_end_time}")

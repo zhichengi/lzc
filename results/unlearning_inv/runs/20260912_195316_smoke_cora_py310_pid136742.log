@@ -1,0 +1,297 @@
+[repro] paper=unlearning_inv
+[repro] started_at=2026-09-12T19:53:16+08:00
+[repro] run_id=20260912_195316_smoke_cora_py310_pid136742
+[repro] repo_commit=3bfc1f17e82a3a9fad9b1cc3ef28281a1323ea16
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/unlearning_inv
+[repro] command=python main.py --dataset_name cora --target_model GCN --exp Inversion --method GIF --unlearn_ratio 0.05 --attack_method trend_steal --num_runs 1 --num_epochs 2 --cuda 0 --is_gen_unlearn_request True --is_gen_unlearned_probs True
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p136810-i126313.scope; invocation ID: 17485c03c7314226a0292ce161ffcb39
+set pytorch seed
+INFO:2026-09-12 19:53:21,687: - root - : cora_0.1_GCN_edge_0.05
+INFO:2026-09-12 19:53:21,733: - data_store - : checking directory temp_data/processed_data/cora
+INFO:2026-09-12 19:53:21,734: - data_store - : new directory temp_data/processed_data/cora created
+INFO:2026-09-12 19:53:21,734: - data_store - : checking directory temp_data/models/cora
+INFO:2026-09-12 19:53:21,734: - data_store - : new directory temp_data/models/cora created
+INFO:2026-09-12 19:53:21,734: - data_store - : checking directory temp_data/analysis_data/optimal/cora
+INFO:2026-09-12 19:53:21,734: - data_store - : new directory temp_data/analysis_data/optimal/cora created
+INFO:2026-09-12 19:53:21,734: - data_store - : checking directory temp_data/analysis_data/posteriors/cora
+INFO:2026-09-12 19:53:21,734: - data_store - : new directory temp_data/analysis_data/posteriors/cora created
+INFO:2026-09-12 19:53:21,734: - data_store - : loading raw data
+Processing...
+DEBUG:2026-09-12 19:53:21,735: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.x
+DEBUG:2026-09-12 19:53:21,736: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.tx
+DEBUG:2026-09-12 19:53:21,738: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.allx
+DEBUG:2026-09-12 19:53:21,743: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.y
+DEBUG:2026-09-12 19:53:21,743: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.ty
+DEBUG:2026-09-12 19:53:21,743: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.ally
+DEBUG:2026-09-12 19:53:21,743: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.graph
+DEBUG:2026-09-12 19:53:21,745: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/raw/ind.cora.test.index
+DEBUG:2026-09-12 19:53:21,771: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/processed/data.pt
+DEBUG:2026-09-12 19:53:21,776: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/processed/pre_transform.pt
+DEBUG:2026-09-12 19:53:21,776: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/processed/pre_filter.pt
+Done!
+DEBUG:2026-09-12 19:53:21,776: - fsspec.local - : open file: /home/lab_user/project/lzc/repro/unlearning_inv/temp_data/raw_data/cora/processed/data.pt
+/home/lab_user/project/lzc/repro/unlearning_inv/lib_dataset/data_store.py:97: UserWarning: It is not recommended to directly access the internal storage format `data` of an 'InMemoryDataset'. If you are absolutely certain what you are doing, access the internal storage via `InMemoryDataset._data` instead to suppress this warning. Alternatively, you can access stacked individual attributes of every graph via `dataset.{attr_name}`.
+  labels = np.unique(dataset.data.y.numpy())
+INFO:2026-09-12 19:53:21,806: - data_store - : saving shadow attack split data
+INFO:2026-09-12 19:53:21,806: - ExpUnlearningInversion - : splitting train/test data
+INFO:2026-09-12 19:53:21,807: - data_store - : saving train test split data
+DEBUG:2026-09-12 19:53:21,808: - ExpUnlearningInversion - : Data used for unlearning request generation #.Nodes: 1385.000000, #.Edges: 5554.000000
+INFO:2026-09-12 19:53:21,812: - data_store - : saving unlearning requests to temp_data/processed_data/cora/unlearn_request_edge_0.05run0_shadow
+DEBUG:2026-09-12 19:53:21,813: - ExpUnlearningInversion - : Data used for unlearning request generation #.Nodes: 1323.000000, #.Edges: 4584.000000
+INFO:2026-09-12 19:53:21,817: - data_store - : saving unlearning requests to temp_data/processed_data/cora/unlearn_request_edge_0.05run0_attack
+INFO:2026-09-12 19:53:21,817: - ExpUnlearningInversion - : target model: GCN
+INFO:2026-09-12 19:53:21,817: - node_classifier - : target model: GCN
+INFO:2026-09-12 19:53:21,852: - node_classifier - : target model: GCN
+INFO:2026-09-12 19:53:21,854: - node_classifier - : target model: GCN
+INFO:2026-09-12 19:53:21,855: - node_classifier - : target model: GCN
+INFO:2026-09-12 19:53:21,856: - ExpUnlearningInversion - : training target models, run 0
+INFO:2026-09-12 19:53:21,856: - node_classifier - : training model
+INFO:2026-09-12 19:53:21,858: - node_classifier - : generate train loader
+INFO:2026-09-12 19:53:21,940: - node_classifier - : generate train loader finish
+INFO:2026-09-12 19:53:21,940: - node_classifier - : epoch 0
+INFO:2026-09-12 19:53:22,069: - node_classifier - : Train: 0.4065, Test: 0.0000
+INFO:2026-09-12 19:53:22,069: - node_classifier - : epoch 1
+INFO:2026-09-12 19:53:22,109: - node_classifier - : Train: 0.4007, Test: 0.0000
+INFO:2026-09-12 19:53:22,141: - ExpUnlearningInversion - : Model training time: 0.2850782871246338
+INFO:2026-09-12 19:53:22,292: - ExpUnlearningInversion - : Training shadow reference model for StealLink attack
+INFO:2026-09-12 19:53:22,292: - ExpUnlearningInversion - : training target models, run 0
+INFO:2026-09-12 19:53:22,292: - node_classifier - : training model
+INFO:2026-09-12 19:53:22,293: - node_classifier - : generate train loader
+INFO:2026-09-12 19:53:22,294: - node_classifier - : generate train loader finish
+INFO:2026-09-12 19:53:22,295: - node_classifier - : epoch 0
+INFO:2026-09-12 19:53:22,326: - node_classifier - : Train: 0.2245, Test: 0.0000
+INFO:2026-09-12 19:53:22,326: - node_classifier - : epoch 1
+INFO:2026-09-12 19:53:22,356: - node_classifier - : Train: 0.2245, Test: 0.0000
+INFO:2026-09-12 19:53:22,358: - ExpUnlearningInversion - : Model training time: 0.06616997718811035
+INFO:2026-09-12 19:53:22,681: - ExpUnlearningInversion - : training target models, run 0
+INFO:2026-09-12 19:53:22,681: - node_classifier - : training model
+INFO:2026-09-12 19:53:22,683: - node_classifier - : generate train loader
+INFO:2026-09-12 19:53:22,685: - node_classifier - : generate train loader finish
+INFO:2026-09-12 19:53:22,685: - node_classifier - : epoch 0
+INFO:2026-09-12 19:53:22,720: - node_classifier - : Train: 0.3513, Test: 0.3008
+INFO:2026-09-12 19:53:22,720: - node_classifier - : epoch 1
+INFO:2026-09-12 19:53:22,755: - node_classifier - : Train: 0.3748, Test: 0.3083
+INFO:2026-09-12 19:53:22,758: - ExpUnlearningInversion - : Model training time: 0.07693815231323242
+INFO:2026-09-12 19:53:22,758: - ExpUnlearningInversion - : model evaluation
+DEBUG:2026-09-12 19:53:22,758: - node_classifier - : generating posteriors
+INFO:2026-09-12 19:53:22,786: - ExpUnlearningInversion - : Evaluation cost 0.02746105194091797 seconds.
+INFO:2026-09-12 19:53:22,786: - ExpUnlearningInversion - : Final Test F1: 0.3082706766917293
+INFO:2026-09-12 19:53:22,924: - ExpUnlearningInversion - : shadow victim model: training 0.2850782871246338 seconds, unlearning 0.1510167121887207 seconds
+INFO:2026-09-12 19:53:22,924: - ExpUnlearningInversion - : shadow reference model: training 0.06616997718811035 seconds, unlearning 0.32278943061828613 seconds
+INFO:2026-09-12 19:53:22,924: - ExpUnlearningInversion - : attack victim model: training 0.07693815231323242 seconds, unlearning 0.13785028457641602 seconds
+INFO:2026-09-12 19:53:22,924: - ExpUnlearningInversion - : attack victim model: original F1 0.3082706766917293, unlearned F1 0.3157894736842105
+INFO:2026-09-12 19:53:22,925: - data_store - : saving probs from unlearned models
+INFO:2026-09-12 19:53:22,926: - data_store - : saving probs from unlearned models
+INFO:2026-09-12 19:53:22,988: - link_stealer - : shadow link stealer training
+INFO:2026-09-12 19:53:22,988: - link_stealer - : epoch 0
+/home/lab_user/project/lzc/repro/unlearning_inv/lib_gnn_model/link_stealer.py:221: UserWarning: torch.searchsorted(): input value tensor is non-contiguous, this will lower the performance due to extra data copy when converting non-contiguous tensor to contiguous, please use contiguous input value tensor if possible. This message will only appear once per program. (Triggered internally at ../aten/src/ATen/native/BucketizationUtils.h:32.)
+  pos_edges_mapped = torch.searchsorted(target_nodes, pos_edges)
+INFO:2026-09-12 19:53:23,073: - link_stealer - : Train Loss: 2.0530
+INFO:2026-09-12 19:53:23,073: - link_stealer - : epoch 1
+INFO:2026-09-12 19:53:23,091: - link_stealer - : Train Loss: 1.7825
+INFO:2026-09-12 19:53:23,091: - link_stealer - : epoch 2
+INFO:2026-09-12 19:53:23,108: - link_stealer - : Train Loss: 1.7274
+INFO:2026-09-12 19:53:23,109: - link_stealer - : epoch 3
+INFO:2026-09-12 19:53:23,126: - link_stealer - : Train Loss: 1.6364
+INFO:2026-09-12 19:53:23,126: - link_stealer - : epoch 4
+INFO:2026-09-12 19:53:23,144: - link_stealer - : Train Loss: 1.6177
+INFO:2026-09-12 19:53:23,144: - link_stealer - : epoch 5
+INFO:2026-09-12 19:53:23,161: - link_stealer - : Train Loss: 1.4946
+INFO:2026-09-12 19:53:23,162: - link_stealer - : epoch 6
+INFO:2026-09-12 19:53:23,179: - link_stealer - : Train Loss: 1.4627
+INFO:2026-09-12 19:53:23,179: - link_stealer - : epoch 7
+INFO:2026-09-12 19:53:23,197: - link_stealer - : Train Loss: 1.4752
+INFO:2026-09-12 19:53:23,197: - link_stealer - : epoch 8
+INFO:2026-09-12 19:53:23,214: - link_stealer - : Train Loss: 1.4484
+INFO:2026-09-12 19:53:23,214: - link_stealer - : epoch 9
+INFO:2026-09-12 19:53:23,232: - link_stealer - : Train Loss: 1.4147
+INFO:2026-09-12 19:53:23,232: - link_stealer - : epoch 10
+INFO:2026-09-12 19:53:23,249: - link_stealer - : Train Loss: 1.4166
+INFO:2026-09-12 19:53:23,249: - link_stealer - : epoch 11
+INFO:2026-09-12 19:53:23,267: - link_stealer - : Train Loss: 1.3916
+INFO:2026-09-12 19:53:23,267: - link_stealer - : epoch 12
+INFO:2026-09-12 19:53:23,284: - link_stealer - : Train Loss: 1.3815
+INFO:2026-09-12 19:53:23,284: - link_stealer - : epoch 13
+INFO:2026-09-12 19:53:23,302: - link_stealer - : Train Loss: 1.3606
+INFO:2026-09-12 19:53:23,302: - link_stealer - : epoch 14
+INFO:2026-09-12 19:53:23,320: - link_stealer - : Train Loss: 1.3736
+INFO:2026-09-12 19:53:23,320: - link_stealer - : epoch 15
+INFO:2026-09-12 19:53:23,337: - link_stealer - : Train Loss: 1.3617
+INFO:2026-09-12 19:53:23,337: - link_stealer - : epoch 16
+INFO:2026-09-12 19:53:23,355: - link_stealer - : Train Loss: 1.3558
+INFO:2026-09-12 19:53:23,355: - link_stealer - : epoch 17
+INFO:2026-09-12 19:53:23,372: - link_stealer - : Train Loss: 1.3505
+INFO:2026-09-12 19:53:23,372: - link_stealer - : epoch 18
+INFO:2026-09-12 19:53:23,390: - link_stealer - : Train Loss: 1.3468
+INFO:2026-09-12 19:53:23,390: - link_stealer - : epoch 19
+INFO:2026-09-12 19:53:23,567: - link_stealer - : Train Loss: 1.3210
+INFO:2026-09-12 19:53:23,567: - link_stealer - : epoch 20
+INFO:2026-09-12 19:53:23,585: - link_stealer - : Train Loss: 1.3287
+INFO:2026-09-12 19:53:23,585: - link_stealer - : epoch 21
+INFO:2026-09-12 19:53:23,602: - link_stealer - : Train Loss: 1.3147
+INFO:2026-09-12 19:53:23,602: - link_stealer - : epoch 22
+INFO:2026-09-12 19:53:23,620: - link_stealer - : Train Loss: 1.3135
+INFO:2026-09-12 19:53:23,620: - link_stealer - : epoch 23
+INFO:2026-09-12 19:53:23,638: - link_stealer - : Train Loss: 1.2914
+INFO:2026-09-12 19:53:23,638: - link_stealer - : epoch 24
+INFO:2026-09-12 19:53:23,656: - link_stealer - : Train Loss: 1.2868
+INFO:2026-09-12 19:53:23,656: - link_stealer - : epoch 25
+INFO:2026-09-12 19:53:23,674: - link_stealer - : Train Loss: 1.2918
+INFO:2026-09-12 19:53:23,674: - link_stealer - : epoch 26
+INFO:2026-09-12 19:53:23,691: - link_stealer - : Train Loss: 1.2774
+INFO:2026-09-12 19:53:23,691: - link_stealer - : epoch 27
+INFO:2026-09-12 19:53:23,709: - link_stealer - : Train Loss: 1.2867
+INFO:2026-09-12 19:53:23,709: - link_stealer - : epoch 28
+INFO:2026-09-12 19:53:23,726: - link_stealer - : Train Loss: 1.2975
+INFO:2026-09-12 19:53:23,726: - link_stealer - : epoch 29
+INFO:2026-09-12 19:53:23,744: - link_stealer - : Train Loss: 1.2781
+INFO:2026-09-12 19:53:23,744: - link_stealer - : epoch 30
+INFO:2026-09-12 19:53:23,761: - link_stealer - : Train Loss: 1.2686
+INFO:2026-09-12 19:53:23,761: - link_stealer - : epoch 31
+INFO:2026-09-12 19:53:23,779: - link_stealer - : Train Loss: 1.2527
+INFO:2026-09-12 19:53:23,779: - link_stealer - : epoch 32
+INFO:2026-09-12 19:53:23,796: - link_stealer - : Train Loss: 1.2493
+INFO:2026-09-12 19:53:23,796: - link_stealer - : epoch 33
+INFO:2026-09-12 19:53:23,814: - link_stealer - : Train Loss: 1.2359
+INFO:2026-09-12 19:53:23,814: - link_stealer - : epoch 34
+INFO:2026-09-12 19:53:23,832: - link_stealer - : Train Loss: 1.2279
+INFO:2026-09-12 19:53:23,832: - link_stealer - : epoch 35
+INFO:2026-09-12 19:53:23,849: - link_stealer - : Train Loss: 1.2260
+INFO:2026-09-12 19:53:23,849: - link_stealer - : epoch 36
+INFO:2026-09-12 19:53:23,867: - link_stealer - : Train Loss: 1.2216
+INFO:2026-09-12 19:53:23,867: - link_stealer - : epoch 37
+INFO:2026-09-12 19:53:23,884: - link_stealer - : Train Loss: 1.2114
+INFO:2026-09-12 19:53:23,884: - link_stealer - : epoch 38
+INFO:2026-09-12 19:53:23,902: - link_stealer - : Train Loss: 1.2096
+INFO:2026-09-12 19:53:23,902: - link_stealer - : epoch 39
+INFO:2026-09-12 19:53:23,920: - link_stealer - : Train Loss: 1.1906
+INFO:2026-09-12 19:53:23,920: - link_stealer - : epoch 40
+INFO:2026-09-12 19:53:23,937: - link_stealer - : Train Loss: 1.2280
+INFO:2026-09-12 19:53:23,937: - link_stealer - : epoch 41
+INFO:2026-09-12 19:53:23,955: - link_stealer - : Train Loss: 1.2078
+INFO:2026-09-12 19:53:23,955: - link_stealer - : epoch 42
+INFO:2026-09-12 19:53:23,973: - link_stealer - : Train Loss: 1.2284
+INFO:2026-09-12 19:53:23,973: - link_stealer - : epoch 43
+INFO:2026-09-12 19:53:23,990: - link_stealer - : Train Loss: 1.2029
+INFO:2026-09-12 19:53:23,990: - link_stealer - : epoch 44
+INFO:2026-09-12 19:53:24,008: - link_stealer - : Train Loss: 1.1894
+INFO:2026-09-12 19:53:24,008: - link_stealer - : epoch 45
+INFO:2026-09-12 19:53:24,026: - link_stealer - : Train Loss: 1.1790
+INFO:2026-09-12 19:53:24,026: - link_stealer - : epoch 46
+INFO:2026-09-12 19:53:24,043: - link_stealer - : Train Loss: 1.1851
+INFO:2026-09-12 19:53:24,043: - link_stealer - : epoch 47
+INFO:2026-09-12 19:53:24,061: - link_stealer - : Train Loss: 1.1746
+INFO:2026-09-12 19:53:24,061: - link_stealer - : epoch 48
+INFO:2026-09-12 19:53:24,078: - link_stealer - : Train Loss: 1.1831
+INFO:2026-09-12 19:53:24,078: - link_stealer - : epoch 49
+INFO:2026-09-12 19:53:24,096: - link_stealer - : Train Loss: 1.1763
+INFO:2026-09-12 19:53:24,096: - link_stealer - : epoch 50
+INFO:2026-09-12 19:53:24,113: - link_stealer - : Train Loss: 1.1686
+INFO:2026-09-12 19:53:24,113: - link_stealer - : epoch 51
+INFO:2026-09-12 19:53:24,131: - link_stealer - : Train Loss: 1.1857
+INFO:2026-09-12 19:53:24,131: - link_stealer - : epoch 52
+INFO:2026-09-12 19:53:24,148: - link_stealer - : Train Loss: 1.1634
+INFO:2026-09-12 19:53:24,148: - link_stealer - : epoch 53
+INFO:2026-09-12 19:53:24,166: - link_stealer - : Train Loss: 1.1556
+INFO:2026-09-12 19:53:24,166: - link_stealer - : epoch 54
+INFO:2026-09-12 19:53:24,183: - link_stealer - : Train Loss: 1.1370
+INFO:2026-09-12 19:53:24,184: - link_stealer - : epoch 55
+INFO:2026-09-12 19:53:24,201: - link_stealer - : Train Loss: 1.1449
+INFO:2026-09-12 19:53:24,201: - link_stealer - : epoch 56
+INFO:2026-09-12 19:53:24,218: - link_stealer - : Train Loss: 1.1446
+INFO:2026-09-12 19:53:24,219: - link_stealer - : epoch 57
+INFO:2026-09-12 19:53:24,236: - link_stealer - : Train Loss: 1.1388
+INFO:2026-09-12 19:53:24,236: - link_stealer - : epoch 58
+INFO:2026-09-12 19:53:24,253: - link_stealer - : Train Loss: 1.1288
+INFO:2026-09-12 19:53:24,253: - link_stealer - : epoch 59
+INFO:2026-09-12 19:53:24,271: - link_stealer - : Train Loss: 1.1368
+INFO:2026-09-12 19:53:24,271: - link_stealer - : epoch 60
+INFO:2026-09-12 19:53:24,289: - link_stealer - : Train Loss: 1.1545
+INFO:2026-09-12 19:53:24,289: - link_stealer - : epoch 61
+INFO:2026-09-12 19:53:24,306: - link_stealer - : Train Loss: 1.1246
+INFO:2026-09-12 19:53:24,306: - link_stealer - : epoch 62
+INFO:2026-09-12 19:53:24,324: - link_stealer - : Train Loss: 1.1078
+INFO:2026-09-12 19:53:24,324: - link_stealer - : epoch 63
+INFO:2026-09-12 19:53:24,341: - link_stealer - : Train Loss: 1.0940
+INFO:2026-09-12 19:53:24,341: - link_stealer - : epoch 64
+INFO:2026-09-12 19:53:24,359: - link_stealer - : Train Loss: 1.1090
+INFO:2026-09-12 19:53:24,359: - link_stealer - : epoch 65
+INFO:2026-09-12 19:53:24,535: - link_stealer - : Train Loss: 1.1186
+INFO:2026-09-12 19:53:24,535: - link_stealer - : epoch 66
+INFO:2026-09-12 19:53:24,554: - link_stealer - : Train Loss: 1.1134
+INFO:2026-09-12 19:53:24,554: - link_stealer - : epoch 67
+INFO:2026-09-12 19:53:24,572: - link_stealer - : Train Loss: 1.1102
+INFO:2026-09-12 19:53:24,572: - link_stealer - : epoch 68
+INFO:2026-09-12 19:53:24,589: - link_stealer - : Train Loss: 1.1059
+INFO:2026-09-12 19:53:24,589: - link_stealer - : epoch 69
+INFO:2026-09-12 19:53:24,607: - link_stealer - : Train Loss: 1.1142
+INFO:2026-09-12 19:53:24,607: - link_stealer - : epoch 70
+INFO:2026-09-12 19:53:24,624: - link_stealer - : Train Loss: 1.1044
+INFO:2026-09-12 19:53:24,624: - link_stealer - : epoch 71
+INFO:2026-09-12 19:53:24,642: - link_stealer - : Train Loss: 1.1169
+INFO:2026-09-12 19:53:24,642: - link_stealer - : epoch 72
+INFO:2026-09-12 19:53:24,659: - link_stealer - : Train Loss: 1.1110
+INFO:2026-09-12 19:53:24,660: - link_stealer - : epoch 73
+INFO:2026-09-12 19:53:24,677: - link_stealer - : Train Loss: 1.0936
+INFO:2026-09-12 19:53:24,677: - link_stealer - : epoch 74
+INFO:2026-09-12 19:53:24,695: - link_stealer - : Train Loss: 1.0788
+INFO:2026-09-12 19:53:24,695: - link_stealer - : epoch 75
+INFO:2026-09-12 19:53:24,712: - link_stealer - : Train Loss: 1.1084
+INFO:2026-09-12 19:53:24,712: - link_stealer - : epoch 76
+INFO:2026-09-12 19:53:24,730: - link_stealer - : Train Loss: 1.1197
+INFO:2026-09-12 19:53:24,730: - link_stealer - : epoch 77
+INFO:2026-09-12 19:53:24,747: - link_stealer - : Train Loss: 1.1055
+INFO:2026-09-12 19:53:24,748: - link_stealer - : epoch 78
+INFO:2026-09-12 19:53:24,766: - link_stealer - : Train Loss: 1.0801
+INFO:2026-09-12 19:53:24,766: - link_stealer - : epoch 79
+INFO:2026-09-12 19:53:24,784: - link_stealer - : Train Loss: 1.0713
+INFO:2026-09-12 19:53:24,784: - link_stealer - : epoch 80
+INFO:2026-09-12 19:53:24,801: - link_stealer - : Train Loss: 1.1023
+INFO:2026-09-12 19:53:24,801: - link_stealer - : epoch 81
+INFO:2026-09-12 19:53:24,819: - link_stealer - : Train Loss: 1.0733
+INFO:2026-09-12 19:53:24,819: - link_stealer - : epoch 82
+INFO:2026-09-12 19:53:24,836: - link_stealer - : Train Loss: 1.1067
+INFO:2026-09-12 19:53:24,836: - link_stealer - : epoch 83
+INFO:2026-09-12 19:53:24,854: - link_stealer - : Train Loss: 1.1018
+INFO:2026-09-12 19:53:24,854: - link_stealer - : epoch 84
+INFO:2026-09-12 19:53:24,871: - link_stealer - : Train Loss: 1.1078
+INFO:2026-09-12 19:53:24,871: - link_stealer - : epoch 85
+INFO:2026-09-12 19:53:24,889: - link_stealer - : Train Loss: 1.1244
+INFO:2026-09-12 19:53:24,889: - link_stealer - : epoch 86
+INFO:2026-09-12 19:53:24,906: - link_stealer - : Train Loss: 1.1013
+INFO:2026-09-12 19:53:24,906: - link_stealer - : epoch 87
+INFO:2026-09-12 19:53:24,924: - link_stealer - : Train Loss: 1.1141
+INFO:2026-09-12 19:53:24,924: - link_stealer - : epoch 88
+INFO:2026-09-12 19:53:24,941: - link_stealer - : Train Loss: 1.1490
+INFO:2026-09-12 19:53:24,942: - link_stealer - : epoch 89
+INFO:2026-09-12 19:53:24,959: - link_stealer - : Train Loss: 1.0964
+INFO:2026-09-12 19:53:24,959: - link_stealer - : epoch 90
+INFO:2026-09-12 19:53:24,977: - link_stealer - : Train Loss: 1.0848
+INFO:2026-09-12 19:53:24,977: - link_stealer - : epoch 91
+INFO:2026-09-12 19:53:24,994: - link_stealer - : Train Loss: 1.0696
+INFO:2026-09-12 19:53:24,994: - link_stealer - : epoch 92
+INFO:2026-09-12 19:53:25,012: - link_stealer - : Train Loss: 1.1082
+INFO:2026-09-12 19:53:25,012: - link_stealer - : epoch 93
+INFO:2026-09-12 19:53:25,029: - link_stealer - : Train Loss: 1.1023
+INFO:2026-09-12 19:53:25,029: - link_stealer - : epoch 94
+INFO:2026-09-12 19:53:25,047: - link_stealer - : Train Loss: 1.0971
+INFO:2026-09-12 19:53:25,047: - link_stealer - : epoch 95
+INFO:2026-09-12 19:53:25,065: - link_stealer - : Train Loss: 1.1004
+INFO:2026-09-12 19:53:25,065: - link_stealer - : epoch 96
+INFO:2026-09-12 19:53:25,083: - link_stealer - : Train Loss: 1.0781
+INFO:2026-09-12 19:53:25,083: - link_stealer - : epoch 97
+INFO:2026-09-12 19:53:25,100: - link_stealer - : Train Loss: 1.1003
+INFO:2026-09-12 19:53:25,100: - link_stealer - : epoch 98
+INFO:2026-09-12 19:53:25,118: - link_stealer - : Train Loss: 1.0753
+INFO:2026-09-12 19:53:25,118: - link_stealer - : epoch 99
+INFO:2026-09-12 19:53:25,136: - link_stealer - : Train Loss: 1.0730
+INFO:2026-09-12 19:53:25,169: - ExpUnlearningInversion - : Attack model evaluation:
+INFO:2026-09-12 19:53:25,169: - ExpUnlearningInversion - :   Group1 (unlearned) → AUC: 0.7167 ± 0.0000, Prec: 0.5032 ± 0.0000, Rec: 0.6930 ± 0.0000, F1: 0.5830 ± 0.0000
+INFO:2026-09-12 19:53:25,169: - ExpUnlearningInversion - :   Group2 (normal)    → AUC: 0.7571 ± 0.0000, Prec: 0.5094 ± 0.0000, Rec: 0.7105 ± 0.0000, F1: 0.5934 ± 0.0000
+INFO:2026-09-12 19:53:25,169: - ExpUnlearningInversion - :   Combined           → AUC: 0.7369 ± 0.0000, Prec: 0.6723 ± 0.0000, Rec: 0.7018 ± 0.0000, F1: 0.6867 ± 0.0000
+[repro] exit_code=0
+[repro] runtime_seconds=8
+[repro] finished_at=2026-09-12T19:53:25+08:00

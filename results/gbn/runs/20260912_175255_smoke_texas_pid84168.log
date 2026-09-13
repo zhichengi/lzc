@@ -1,0 +1,22 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-12T17:52:55+08:00
+[repro] run_id=20260912_175255_smoke_texas_pid84168
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Texas --epochs_nc 2 --exp_iters 1 --patience_nc 1 --hid_dim 64 --embed_dim 64
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p84309-i114880.scope; invocation ID: 52ff25defe65460e96afba2cc2651ba9
+Saving config file: ./configs/NC/Texas.json
+Log path: ./logs//NC_Texas_NL3_HD64_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/12/26 17:53:04 - 0:00:00 - Namespace(task='NC', dataset='Texas', root_path='./datasets', val_every=5, exp_iters=1, log_dir='./logs/', result_dir='./results/', task_model_path='NC_Texas_model.pt', checkpoints='./checkpoints/', add_self_loop=False, n_layers=3, hid_dim=64, embed_dim=64, dropout=0.2, act='gelu', input_act='gelu', norm='ln', bias=True, tau=1.0, lr_nc=3e-05, weight_decay_nc=0.0005, epochs_nc=2, patience_nc=1, additional_layers=0, distance_list=[50, 10, 5, 3], lr_trans=0.001, weight_decay_trans=0, epochs_trans=2000, patience_trans=10, use_gpu=True, gpu=0, devices='0,1', log_path='./logs//NC_Texas_NL3_HD64_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', result_path='./results//NC_Texas.txt')
+INFO - 09/12/26 17:53:04 - 0:00:00 - --------------------------Training Start-------------------------
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/gbn/main.py", line 97, in <module>
+    exp.train()
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 52, in train
+    nc_model = self.load_model(dataset)
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 31, in load_model
+    tau=self.configs.tau, layer_wise=self.configs.layer_wise).to(self.device)
+AttributeError: 'Namespace' object has no attribute 'layer_wise'

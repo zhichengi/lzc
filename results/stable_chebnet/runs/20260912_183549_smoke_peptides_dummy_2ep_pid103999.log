@@ -1,0 +1,35 @@
+[repro] paper=stable_chebnet
+[repro] started_at=2026-09-12T18:35:49+08:00
+[repro] run_id=20260912_183549_smoke_peptides_dummy_2ep_pid103999
+[repro] repo_commit=7d7a7e2696119891d277fd3fa2b32fdda454b814
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/stable_chebnet
+[repro] command=bash -c cd Peptides/Stable && python ChebStable_peptide.py --epochs 2
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=False gpu=cpu
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p104082-i11751.scope; invocation ID: 4f0c6c5fc7b7428eb319c789f7dde67c
+/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+Number of trainable parameters: 659069
+12.1
+Epoch: 000, Loss: 11.8063,Train Acc: 0.6212, Val_Loss: 13.7706,Val Acc: 0.5220
+12.1
+Epoch: 001, Loss: 11.1208,Train Acc: 0.8038, Val_Loss: 13.7861,Val Acc: 0.4951
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/stable_chebnet/Peptides/Stable/ChebStable_peptide.py", line 215, in <module>
+    model=model.to(device)
+  File "/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1152, in to
+    return self._apply(convert)
+  File "/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  File "/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/nn/modules/module.py", line 825, in _apply
+    param_applied = fn(param)
+  File "/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1150, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+  File "/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/cuda/__init__.py", line 302, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: No CUDA GPUs are available
+[1;34mwandb[0m: 
+[1;34mwandb[0m: You can sync this run to the cloud by running:
+[1;34mwandb[0m: [1mwandb sync /home/lab_user/project/lzc/repro/stable_chebnet/Peptides/Stable/wandb/offline-run-20260912_183559-2nf6e3uz[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/offline-run-20260912_183559-2nf6e3uz/logs[0m

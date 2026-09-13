@@ -1,0 +1,156 @@
+diff --git a/main.py b/main.py
+index 0a2e83a..01b4a2c 100644
+--- a/main.py
++++ b/main.py
+@@ -1,4 +1,5 @@
+ import argparse
++import random
+ import torch
+ import torch.nn as nn
+ import torch.nn.functional as F
+@@ -7,8 +8,17 @@ from torch_geometric.nn import GATConv
+ from torch_geometric.datasets import Planetoid, WikipediaNetwork, Actor, WebKB
+ 
+ # dataset selection
++# Extra flags default to the published script: split 0, no seed, dense eigvalsh, 2000 epochs.
+ parser = argparse.ArgumentParser(description='Dataset')
+ parser.add_argument('data', type=int, help='data selector')
++parser.add_argument('--seed', type=int, default=None)
++parser.add_argument('--split', type=int, default=0,
++                    help='column of geom-gcn 10-split masks; ignored on 1D Planetoid masks')
++parser.add_argument('--spec', choices=['dense', 'lobpcg', 'off'], default='dense',
++                    help='spectral-gap backend; dense is the published eigvalsh path')
++parser.add_argument('--max_epochs', type=int, default=2000)
++parser.add_argument('--pacbayes_epoch', type=int, default=None,
++                    help='override PAC start epoch; default follows the published set_1/set_2 table')
+ args = parser.parse_args()
+ data_id = args.data
+ 
+@@ -35,10 +45,18 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+ data = dataset[0].to(device)
+ num_class = dataset.num_classes
+ 
++n_splits = 1
++split_used = 0
+ if data.train_mask.dim() == 2:
+-    data.train_mask = data.train_mask[:, 0]
+-    data.val_mask = data.val_mask[:, 0]
+-    data.test_mask = data.test_mask[:, 0]
++    n_splits = int(data.train_mask.size(1))
++    split_used = args.split
++    if split_used < 0 or split_used >= n_splits:
++        raise SystemExit(f"--split {split_used} out of range [0, {n_splits})")
++    data.train_mask = data.train_mask[:, split_used]
++    data.val_mask = data.val_mask[:, split_used]
++    data.test_mask = data.test_mask[:, split_used]
++elif args.split != 0:
++    print(f"[sgpc] warn: 1D mask, ignoring --split {args.split}")
+ 
+ # adaptive config
+ set_1 = {0, 1, 2}
+@@ -63,9 +81,27 @@ else:
+     lambda_spec = 1e-3
+     use_gat = False
+ 
++if args.pacbayes_epoch is not None:
++    pacbayes_epoch = args.pacbayes_epoch
++
+ lr = 1e-3
+ patience = 1000
+ 
++if args.seed is not None:
++    random.seed(args.seed)
++    torch.manual_seed(args.seed)
++    if torch.cuda.is_available():
++        torch.cuda.manual_seed_all(args.seed)
++
++if data_id == 2 and args.spec == "dense":
++    print("[sgpc] warn: Pubmed + spec=dense uses dense eigvalsh on N≈19717; prefer --spec lobpcg or --spec off")
++
++print(
++    f"[sgpc] config data_id={data_id} split={split_used} n_splits={n_splits} "
++    f"seed={args.seed} spec={args.spec} max_epochs={args.max_epochs} "
++    f"pacbayes_epoch={pacbayes_epoch}"
++)
++
+ # sheaf / OT utilities
+ def sinkhorn_simple(C, epsilon, n_iters=1):
+     P0 = torch.exp(-C / epsilon)
+@@ -174,10 +210,32 @@ def estimate_edge_posterior(probs, edge_index, a0=1.0, b0=1.0):
+     kl = beta_kl(a_post, b_post, a0, b0)
+     return kappa, kl
+ 
+-def spectral_gap_from_sparse(L: SparseTensor):
+-    L_dense = L.to_torch_sparse_coo_tensor().to_dense()
++def spectral_gap_from_sparse(L: SparseTensor, mode: str = "dense"):
++    if mode == "off":
++        return torch.tensor(1.0, device=device, dtype=torch.float32)
++
++    L_coo = L.to_torch_sparse_coo_tensor()
++    if mode == "lobpcg":
++        L_sym = (0.5 * (L_coo + L_coo.transpose(0, 1))).coalesce()
++        n = L_sym.size(0)
++        k = 2 if n >= 2 else 1
++        try:
++            evals, _ = torch.lobpcg(L_sym, k=k, largest=False, niter=40)
++            evals, _ = torch.sort(evals)
++            if evals.numel() < 2:
++                return torch.tensor(0.0, device=L_sym.device, dtype=L_sym.dtype)
++            return torch.clamp(evals[1], min=1e-3)
++        except Exception as exc:
++            print(f"[sgpc] warn: lobpcg failed ({type(exc).__name__}: {exc}); spec=off this epoch")
++            return torch.tensor(1.0, device=device, dtype=torch.float32)
++
++    L_dense = L_coo.to_dense()
+     L_sym = 0.5 * (L_dense + L_dense.t())
+-    evals = torch.linalg.eigvalsh(L_sym)
++    try:
++        evals = torch.linalg.eigvalsh(L_sym)
++    except Exception as exc:
++        print(f"[sgpc] warn: eigvalsh failed ({type(exc).__name__}: {exc}); spec=off this epoch")
++        return torch.tensor(1.0, device=device, dtype=torch.float32)
+     evals, _ = torch.sort(evals)
+     if evals.numel() < 2:
+         return torch.tensor(0.0, device=L_dense.device, dtype=L_dense.dtype)
+@@ -325,10 +383,12 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+ )
+ 
+ best_val, best_test = 0.0, 0.0
++best_val_test = 0.0
++best_val_epoch = 0
+ patience_ctr = 0
+ 
+ # training loop
+-for epoch in range(1, 2001):
++for epoch in range(1, args.max_epochs + 1):
+     model.train()
+     optimizer.zero_grad()
+ 
+@@ -353,7 +413,7 @@ for epoch in range(1, 2001):
+         pac_raw = torch.clamp(pac_raw, min=0.0)
+         loss_KL = torch.sqrt(pac_raw + 1e-16)
+ 
+-        lambda2 = spectral_gap_from_sparse(L_sheaf).detach()
++        lambda2 = spectral_gap_from_sparse(L_sheaf, mode=args.spec).detach()
+         lambda2 = torch.clamp(lambda2, min=1.0)
+         c_het = heterophily_penalty(kappa_ij, data.edge_index, data.y, num_class)
+         loss_spec = c_het / (lambda2 + 1e-6)
+@@ -378,6 +438,8 @@ for epoch in range(1, 2001):
+ 
+     if val_acc > best_val:
+         best_val = val_acc
++        best_val_test = test_acc
++        best_val_epoch = epoch
+         patience_ctr = 0
+     else:
+         patience_ctr += 1
+@@ -387,3 +449,9 @@ for epoch in range(1, 2001):
+ 
+     if epoch % 50 == 0 or val_acc == best_val:
+         print(f"Epoch {epoch:04d} | Loss: {loss.item():.4f} | Val: {val_acc:.4f} | Test: {test_acc:.4f} | Best Test: {best_test:.4f}")
++
++print(
++    f"[sgpc] summary data_id={data_id} split={split_used} seed={args.seed} spec={args.spec} "
++    f"best_val={best_val:.4f} val_selected_test={best_val_test:.4f} val_selected_epoch={best_val_epoch} "
++    f"oracle_best_test={best_test:.4f} last_epoch={epoch}"
++)

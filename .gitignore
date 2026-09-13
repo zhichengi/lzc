@@ -9,10 +9,37 @@ results/checkpoints/*
 !results/checkpoints/.gitkeep
 results/logs/*
 !results/logs/.gitkeep
+results/gctd/runs/*
+!results/gctd/runs/.gitkeep
+results/gctd/wandb/
 *.pt
 *.pth
 *.ckpt
 wandb/
+
+# GCTD 复现：数据与缓存不进仓库
+repro/gctd/data/
+repro/gctd/saved_ours/
+
+# 官方克隆各自带独立 .git，不要作为嵌套仓库加入根仓库。
+# 补丁、包装脚本和日志放在 repro/ 根目录后单独跟踪。
+repro/gctd/
+repro/scadyg/
+repro/ignn/
+repro/sgpc/
+repro/gbn/
+repro/stable_chebnet/
+repro/puma/
+repro/scalegnn/
+repro/labeling_trick/
+repro/mavn/
+repro/fair_eval_gfm/
+repro/equivariance/
+repro/mf_gia/
+repro/graphrp/
+repro/unlearning_inv/
+repro/stem_gnn/
+repro/core_graphrag/
 
 # Python
 __pycache__/
@@ -21,3 +48,12 @@ __pycache__/
 
 # 系统
 .DS_Store
+
+# 拷到其他磁盘用的打包，以及论文 PDF（约 117 MB；索引 md/csv/bib 入库）
+papers-to-DIG.zip
+papers/**/*.pdf
+
+# ScaDyG 权重与二进制评测清单（文本日志可入库）
+results/scadyg/checkpoints/
+results/scadyg/protocols/*.npz
+

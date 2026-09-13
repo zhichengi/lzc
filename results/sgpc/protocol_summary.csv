@@ -1,0 +1,8 @@
+dataset,protocol,n,val_mean,val_std,oracle_mean,oracle_std,paper,val_minus_paper,oracle_minus_paper
+Cora,"public split, seed 0-4, spec=dense",5,82.06,1.23,82.58,1.13,83.0 ± 0.55,-0.94,-0.42
+Citeseer,"public split, seed 0-4, spec=dense (s3 eigvalsh fallback retry)",5,71.16,1.26,72.02,0.79,72.6 ± 0.21,-1.44,-0.58
+Pubmed,"public split, seed 0, spec=lobpcg",1,78.10,—,78.70,—,79.9 ± 0.06,-1.80,-1.20
+Chameleon,"geom-gcn 10 splits, seed 0, spec=dense",10,51.91,2.04,52.83,2.02,53.3 ± 1.29,-1.39,-0.47
+Cornell,"geom-gcn 10 splits, seed 0, spec=dense",10,77.57,4.42,80.54,3.99,81.0 ± 2.33,-3.43,-0.46
+Texas,"geom-gcn 10 splits, seed 0, spec=dense",10,80.27,6.25,85.41,4.63,83.2 ± 1.82,-2.93,+2.21
+Wisconsin,"geom-gcn 10 splits, seed 0, spec=dense",10,83.53,4.91,87.45,2.81,81.1 ± 2.60,+2.43,+6.35

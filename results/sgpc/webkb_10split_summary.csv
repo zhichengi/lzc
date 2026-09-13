@@ -1,0 +1,4 @@
+dataset,n,val_mean,val_std,oracle_mean,oracle_std
+Cornell,10,77.57,4.42,80.54,3.99
+Texas,10,80.27,6.25,85.41,4.63
+Wisconsin,10,83.53,4.91,87.45,2.81

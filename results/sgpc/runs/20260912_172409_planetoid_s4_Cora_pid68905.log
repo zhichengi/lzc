@@ -1,0 +1,72 @@
+[repro] started_at=2026-09-12T17:24:09+08:00
+[repro] run_id=20260912_172409_planetoid_s4_Cora_pid68905
+[repro] repo_commit=114b585d0d0e32afbf1d7232dd04c013fa8453e2
+[repro] tracked_patch_sha256=72952adeb096a5ca61e6e115a0a29e0e484ca577aba23f57b5c11dea083afee7
+[repro] main_py_sha256=dc67561acc2c8d0860a4b53c2cdbd729ddaff59fd5b61d50dd1e3a513a6e06ac
+[repro] dataset=Cora data_id=0 env=dtgb cuda_visible_devices=0
+[repro] data_link=/tmp/Cora -> /home/lab_user/project/lzc/repro/sgpc/data/Cora
+[repro] command=python main.py 0 --seed 4
+[repro] resource_cap_ratio=85 threads=17 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85
+[repro] python=3.10.20 torch=2.2.1+cu121 pyg=2.8.0.post1 torch_sparse=0.6.18+pt22cu121
+[repro] cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p68984-i48718.scope; invocation ID: 8aba903a1e954f999fdb08bcab6f68aa
+[sgpc] config data_id=0 split=0 n_splits=1 seed=4 spec=dense max_epochs=2000 pacbayes_epoch=300
+Epoch 0001 | Loss: 2.7770 | Val: 0.1620 | Test: 0.1490 | Best Test: 0.1490
+Epoch 0002 | Loss: 2.4239 | Val: 0.1620 | Test: 0.1490 | Best Test: 0.1490
+Epoch 0003 | Loss: 2.3156 | Val: 0.1620 | Test: 0.1490 | Best Test: 0.1490
+Epoch 0004 | Loss: 2.3493 | Val: 0.1620 | Test: 0.1490 | Best Test: 0.1490
+Epoch 0005 | Loss: 2.2626 | Val: 0.1620 | Test: 0.1490 | Best Test: 0.1490
+Epoch 0006 | Loss: 2.2381 | Val: 0.1660 | Test: 0.1530 | Best Test: 0.1530
+Epoch 0007 | Loss: 2.1015 | Val: 0.2460 | Test: 0.2820 | Best Test: 0.2820
+Epoch 0008 | Loss: 2.0972 | Val: 0.3520 | Test: 0.3550 | Best Test: 0.3550
+Epoch 0017 | Loss: 2.1072 | Val: 0.3620 | Test: 0.3680 | Best Test: 0.3680
+Epoch 0018 | Loss: 2.0845 | Val: 0.3860 | Test: 0.4290 | Best Test: 0.4290
+Epoch 0037 | Loss: 1.8541 | Val: 0.3920 | Test: 0.4490 | Best Test: 0.4490
+Epoch 0038 | Loss: 1.9101 | Val: 0.4000 | Test: 0.4540 | Best Test: 0.4540
+Epoch 0039 | Loss: 1.9139 | Val: 0.4340 | Test: 0.4860 | Best Test: 0.4860
+Epoch 0040 | Loss: 1.9560 | Val: 0.5120 | Test: 0.5690 | Best Test: 0.5690
+Epoch 0041 | Loss: 1.8400 | Val: 0.5540 | Test: 0.6120 | Best Test: 0.6120
+Epoch 0042 | Loss: 1.8477 | Val: 0.5540 | Test: 0.6000 | Best Test: 0.6120
+Epoch 0050 | Loss: 1.6685 | Val: 0.5240 | Test: 0.5890 | Best Test: 0.6120
+Epoch 0054 | Loss: 1.4930 | Val: 0.6240 | Test: 0.6430 | Best Test: 0.6430
+Epoch 0055 | Loss: 1.4449 | Val: 0.7120 | Test: 0.7490 | Best Test: 0.7490
+Epoch 0056 | Loss: 1.4837 | Val: 0.7620 | Test: 0.7890 | Best Test: 0.7890
+Epoch 0069 | Loss: 1.0926 | Val: 0.7700 | Test: 0.7840 | Best Test: 0.7900
+Epoch 0070 | Loss: 1.0398 | Val: 0.7760 | Test: 0.7840 | Best Test: 0.7900
+Epoch 0080 | Loss: 0.9213 | Val: 0.8040 | Test: 0.8290 | Best Test: 0.8290
+Epoch 0097 | Loss: 0.8074 | Val: 0.8080 | Test: 0.8150 | Best Test: 0.8290
+Epoch 0100 | Loss: 0.7924 | Val: 0.7680 | Test: 0.7950 | Best Test: 0.8290
+Epoch 0115 | Loss: 0.5841 | Val: 0.8120 | Test: 0.8280 | Best Test: 0.8290
+Epoch 0150 | Loss: 0.4264 | Val: 0.8120 | Test: 0.8280 | Best Test: 0.8350
+Epoch 0167 | Loss: 0.4596 | Val: 0.8140 | Test: 0.8290 | Best Test: 0.8360
+Epoch 0168 | Loss: 0.3969 | Val: 0.8180 | Test: 0.8310 | Best Test: 0.8360
+Epoch 0169 | Loss: 0.4600 | Val: 0.8180 | Test: 0.8280 | Best Test: 0.8360
+Epoch 0200 | Loss: 0.3879 | Val: 0.8060 | Test: 0.8260 | Best Test: 0.8360
+Epoch 0250 | Loss: 0.3378 | Val: 0.7840 | Test: 0.8220 | Best Test: 0.8360
+Epoch 0256 | Loss: 0.3063 | Val: 0.8180 | Test: 0.8280 | Best Test: 0.8360
+Epoch 0272 | Loss: 0.3515 | Val: 0.8180 | Test: 0.8310 | Best Test: 0.8360
+Epoch 0273 | Loss: 0.3370 | Val: 0.8180 | Test: 0.8310 | Best Test: 0.8360
+Epoch 0300 | Loss: 0.3298 | Val: 0.8100 | Test: 0.8270 | Best Test: 0.8360
+Epoch 0350 | Loss: 0.3929 | Val: 0.7940 | Test: 0.8170 | Best Test: 0.8360
+Epoch 0400 | Loss: 0.2708 | Val: 0.7860 | Test: 0.8160 | Best Test: 0.8360
+Epoch 0450 | Loss: 0.3812 | Val: 0.8020 | Test: 0.8180 | Best Test: 0.8360
+Epoch 0500 | Loss: 0.4331 | Val: 0.7900 | Test: 0.8150 | Best Test: 0.8360
+Epoch 0550 | Loss: 0.4375 | Val: 0.7980 | Test: 0.8170 | Best Test: 0.8360
+Epoch 0600 | Loss: 0.3484 | Val: 0.7980 | Test: 0.8160 | Best Test: 0.8360
+Epoch 0650 | Loss: 0.3716 | Val: 0.7940 | Test: 0.8170 | Best Test: 0.8360
+Epoch 0700 | Loss: 0.2538 | Val: 0.7960 | Test: 0.8170 | Best Test: 0.8360
+Epoch 0750 | Loss: 0.3876 | Val: 0.7980 | Test: 0.8190 | Best Test: 0.8360
+Epoch 0800 | Loss: 0.2967 | Val: 0.7920 | Test: 0.8180 | Best Test: 0.8360
+Epoch 0850 | Loss: 0.4029 | Val: 0.8000 | Test: 0.8170 | Best Test: 0.8360
+Epoch 0900 | Loss: 0.4227 | Val: 0.7960 | Test: 0.8160 | Best Test: 0.8360
+Epoch 0950 | Loss: 0.4059 | Val: 0.7980 | Test: 0.8190 | Best Test: 0.8360
+Epoch 1000 | Loss: 0.2612 | Val: 0.8000 | Test: 0.8160 | Best Test: 0.8360
+Epoch 1050 | Loss: 0.3957 | Val: 0.8020 | Test: 0.8150 | Best Test: 0.8360
+Epoch 1100 | Loss: 0.3510 | Val: 0.7980 | Test: 0.8150 | Best Test: 0.8360
+Epoch 1150 | Loss: 0.3180 | Val: 0.8000 | Test: 0.8180 | Best Test: 0.8360
+Early stopping at epoch 1169
+[sgpc] summary data_id=0 split=0 seed=4 spec=dense best_val=0.8180 val_selected_test=0.8310 val_selected_epoch=168 oracle_best_test=0.8360 last_epoch=1169
+[repro] exit_code=0
+[repro] runtime_seconds=164
+[repro] finished_at=2026-09-12T17:26:56+08:00

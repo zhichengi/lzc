@@ -1,0 +1,555 @@
+[repro] started_at=2026-09-10T21:43:35+08:00
+[repro] repo_commit=28ca94a06771c46073b650de3daa95e0939342ba
+[repro] tracked_patch_sha256=5ce31e5275df2683438b11432c07f103169577b1061425c30312c265d9c6a0fc
+[repro] patch_stat= scalable_tgn_link_prediction.py      | 14 ++++++++++++--
+[repro] patch_stat= scalable_tgn_main_link_prediction.py |  9 ++++-----
+[repro] patch_stat= 2 files changed, 16 insertions(+), 7 deletions(-)
+[repro] dataset=mooc gpu=0 env=scadyg
+[repro] command=python scalable_tgn_main_link_prediction.py --dataset mooc --cuda_device 0 --seed 2023
+[repro] torch=2.2.1+cu121 pyg=2.8.0.post1 dgl=2.2.1+cu121
+[repro] cuda=True gpu_count=1
+[repro] gpu_name=NVIDIA GeForce RTX 3090
+0it [00:00, ?it/s]92it [00:00, 910.08it/s]100it [00:00, 909.03it/s]
+0it [00:00, ?it/s]7it [00:00, 60.83it/s]14it [00:00, 44.11it/s]21it [00:00, 50.62it/s]27it [00:00, 43.34it/s]34it [00:00, 48.60it/s]40it [00:00, 43.11it/s]46it [00:00, 47.19it/s]52it [00:01, 42.28it/s]59it [00:01, 47.16it/s]66it [00:01, 43.20it/s]73it [00:01, 47.60it/s]79it [00:01, 43.03it/s]86it [00:01, 47.44it/s]92it [00:01, 50.33it/s]98it [00:02, 43.65it/s]100it [00:02, 45.84it/s]
+[Thu Sep 10 21:44:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.44153,mrr:0.66548,  acc: 0.99356, ap: 0.99102, f1: 0.99356, macro_auc: 0.99547, micro_auc: 0.99547
+[Thu Sep 10 21:44:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.50158,mrr:0.63227,  acc: 0.99320, ap: 0.99003, f1: 0.99320, macro_auc: 0.99497, micro_auc: 0.99497
+[Thu Sep 10 21:44:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.57363,mrr:0.63152,  acc: 0.99065, ap: 0.98676, f1: 0.99065, macro_auc: 0.99163, micro_auc: 0.99163
+[Thu Sep 10 21:44:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.51755,mrr:0.64145,  acc: 0.98944, ap: 0.98961, f1: 0.98944, macro_auc: 0.99428, micro_auc: 0.99428
+[Thu Sep 10 21:44:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.41532,mrr:0.65081,  acc: 0.99344, ap: 0.99197, f1: 0.99344, macro_auc: 0.99595, micro_auc: 0.99595
+[Thu Sep 10 21:44:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.62165,mrr:0.64174,  acc: 0.99211, ap: 0.98778, f1: 0.99211, macro_auc: 0.99381, micro_auc: 0.99381
+[Thu Sep 10 21:44:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.70953,mrr:0.62702,  acc: 0.99089, ap: 0.98616, f1: 0.99089, macro_auc: 0.99298, micro_auc: 0.99298
+[Thu Sep 10 21:44:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.57743,mrr:0.62623,  acc: 0.99186, ap: 0.98879, f1: 0.99186, macro_auc: 0.99433, micro_auc: 0.99433
+[Thu Sep 10 21:44:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.53071,mrr:0.61094,  acc: 0.99162, ap: 0.98982, f1: 0.99162, macro_auc: 0.99486, micro_auc: 0.99486
+[Thu Sep 10 21:44:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.41457,mrr:0.62947,  acc: 0.99296, ap: 0.99196, f1: 0.99296, macro_auc: 0.99595, micro_auc: 0.99595
+[Thu Sep 10 21:44:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.45578,mrr:0.65967,  acc: 0.99284, ap: 0.99034, f1: 0.99284, macro_auc: 0.99450, micro_auc: 0.99450
+[Thu Sep 10 21:44:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.42847,mrr:0.60905,  acc: 0.99320, ap: 0.99164, f1: 0.99320, macro_auc: 0.99563, micro_auc: 0.99563
+[Thu Sep 10 21:44:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.57280,mrr:0.63510,  acc: 0.99211, ap: 0.98883, f1: 0.99211, macro_auc: 0.99435, micro_auc: 0.99435
+[Thu Sep 10 21:44:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.48829,mrr:0.62813,  acc: 0.99308, ap: 0.99056, f1: 0.99308, macro_auc: 0.99524, micro_auc: 0.99524
+[Thu Sep 10 21:44:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss: 0.59841,mrr:0.65265,  acc: 0.99211, ap: 0.98780, f1: 0.99211, macro_auc: 0.99305, micro_auc: 0.99305
+[Thu Sep 10 21:44:18 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.22751,mrr:0.79383,  acc: 0.99441, ap: 0.98990, f1: 0.99441, macro_auc: 0.99511, micro_auc: 0.99511
+[Thu Sep 10 21:44:18 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.33624,mrr:0.76914,  acc: 0.99259, ap: 0.98677, f1: 0.99259, macro_auc: 0.99382, micro_auc: 0.99382
+[Thu Sep 10 21:44:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.32166,mrr:0.77098,  acc: 0.98992, ap: 0.98411, f1: 0.98992, macro_auc: 0.99066, micro_auc: 0.99066
+[Thu Sep 10 21:44:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.23179,mrr:0.77653,  acc: 0.98919, ap: 0.98927, f1: 0.98919, macro_auc: 0.99453, micro_auc: 0.99453
+[Thu Sep 10 21:44:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.20908,mrr:0.80413,  acc: 0.99271, ap: 0.99020, f1: 0.99271, macro_auc: 0.99517, micro_auc: 0.99517
+[Thu Sep 10 21:44:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.35921,mrr:0.77948,  acc: 0.99114, ap: 0.98405, f1: 0.99114, macro_auc: 0.99248, micro_auc: 0.99248
+[Thu Sep 10 21:44:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.41319,mrr:0.76300,  acc: 0.98980, ap: 0.97997, f1: 0.98980, macro_auc: 0.99078, micro_auc: 0.99078
+[Thu Sep 10 21:44:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.26759,mrr:0.78292,  acc: 0.99235, ap: 0.98694, f1: 0.99235, macro_auc: 0.99360, micro_auc: 0.99360
+[Thu Sep 10 21:44:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.28553,mrr:0.78598,  acc: 0.99138, ap: 0.98649, f1: 0.99138, macro_auc: 0.99368, micro_auc: 0.99368
+[Thu Sep 10 21:44:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.24191,mrr:0.74313,  acc: 0.99211, ap: 0.98949, f1: 0.99211, macro_auc: 0.99513, micro_auc: 0.99513
+[Thu Sep 10 21:44:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.24965,mrr:0.75157,  acc: 0.99199, ap: 0.98701, f1: 0.99199, macro_auc: 0.99331, micro_auc: 0.99331
+[Thu Sep 10 21:44:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.24569,mrr:0.76891,  acc: 0.99102, ap: 0.98946, f1: 0.99101, macro_auc: 0.99492, micro_auc: 0.99492
+[Thu Sep 10 21:44:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.29377,mrr:0.77828,  acc: 0.99089, ap: 0.98659, f1: 0.99089, macro_auc: 0.99357, micro_auc: 0.99357
+[Thu Sep 10 21:44:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.31375,mrr:0.75946,  acc: 0.99296, ap: 0.98692, f1: 0.99296, macro_auc: 0.99410, micro_auc: 0.99410
+[Thu Sep 10 21:44:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss: 0.34014,mrr:0.76716,  acc: 0.99053, ap: 0.98375, f1: 0.99053, macro_auc: 0.99161, micro_auc: 0.99161
+[Thu Sep 10 21:44:33 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.40514,mrr:0.71821,  acc: 0.99429, ap: 0.98971, f1: 0.99429, macro_auc: 0.99494, micro_auc: 0.99494
+[Thu Sep 10 21:44:33 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.43655,mrr:0.70543,  acc: 0.99284, ap: 0.98916, f1: 0.99284, macro_auc: 0.99456, micro_auc: 0.99456
+[Thu Sep 10 21:44:33 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.45455,mrr:0.71604,  acc: 0.99004, ap: 0.98612, f1: 0.99004, macro_auc: 0.99118, micro_auc: 0.99118
+[Thu Sep 10 21:44:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.39935,mrr:0.68589,  acc: 0.98944, ap: 0.99061, f1: 0.98944, macro_auc: 0.99516, micro_auc: 0.99516
+[Thu Sep 10 21:44:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.34037,mrr:0.69674,  acc: 0.99356, ap: 0.99225, f1: 0.99356, macro_auc: 0.99608, micro_auc: 0.99608
+[Thu Sep 10 21:44:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.44122,mrr:0.71680,  acc: 0.99186, ap: 0.98927, f1: 0.99186, macro_auc: 0.99446, micro_auc: 0.99446
+[Thu Sep 10 21:44:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.51470,mrr:0.72423,  acc: 0.99138, ap: 0.98727, f1: 0.99138, macro_auc: 0.99350, micro_auc: 0.99350
+[Thu Sep 10 21:44:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.47670,mrr:0.71196,  acc: 0.99186, ap: 0.98909, f1: 0.99186, macro_auc: 0.99448, micro_auc: 0.99448
+[Thu Sep 10 21:44:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.41874,mrr:0.69740,  acc: 0.99259, ap: 0.99048, f1: 0.99259, macro_auc: 0.99515, micro_auc: 0.99515
+[Thu Sep 10 21:44:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.30687,mrr:0.69151,  acc: 0.99344, ap: 0.99274, f1: 0.99344, macro_auc: 0.99631, micro_auc: 0.99631
+[Thu Sep 10 21:44:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.34650,mrr:0.73627,  acc: 0.99259, ap: 0.99087, f1: 0.99259, macro_auc: 0.99478, micro_auc: 0.99478
+[Thu Sep 10 21:44:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.32050,mrr:0.69988,  acc: 0.99296, ap: 0.99255, f1: 0.99296, macro_auc: 0.99618, micro_auc: 0.99618
+[Thu Sep 10 21:44:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.43081,mrr:0.71275,  acc: 0.99162, ap: 0.98989, f1: 0.99162, macro_auc: 0.99490, micro_auc: 0.99490
+[Thu Sep 10 21:44:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.42140,mrr:0.72816,  acc: 0.99235, ap: 0.99012, f1: 0.99235, macro_auc: 0.99507, micro_auc: 0.99507
+[Thu Sep 10 21:44:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss: 0.45591,mrr:0.69297,  acc: 0.99247, ap: 0.98883, f1: 0.99247, macro_auc: 0.99412, micro_auc: 0.99412
+[Thu Sep 10 21:44:48 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.20963,mrr:0.81044,  acc: 0.99429, ap: 0.98986, f1: 0.99429, macro_auc: 0.99520, micro_auc: 0.99520
+[Thu Sep 10 21:44:48 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.29709,mrr:0.77132,  acc: 0.99199, ap: 0.98718, f1: 0.99199, macro_auc: 0.99419, micro_auc: 0.99419
+[Thu Sep 10 21:44:48 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.29082,mrr:0.78032,  acc: 0.98907, ap: 0.98442, f1: 0.98907, macro_auc: 0.99079, micro_auc: 0.99079
+[Thu Sep 10 21:44:48 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.21809,mrr:0.77173,  acc: 0.98871, ap: 0.98965, f1: 0.98871, macro_auc: 0.99504, micro_auc: 0.99504
+[Thu Sep 10 21:44:48 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.20391,mrr:0.79691,  acc: 0.99308, ap: 0.98953, f1: 0.99308, macro_auc: 0.99468, micro_auc: 0.99468
+[Thu Sep 10 21:44:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.34861,mrr:0.77989,  acc: 0.99150, ap: 0.98421, f1: 0.99150, macro_auc: 0.99264, micro_auc: 0.99264
+[Thu Sep 10 21:44:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.40326,mrr:0.76207,  acc: 0.99053, ap: 0.97984, f1: 0.99053, macro_auc: 0.99083, micro_auc: 0.99083
+[Thu Sep 10 21:44:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.25918,mrr:0.74399,  acc: 0.99138, ap: 0.98707, f1: 0.99138, macro_auc: 0.99366, micro_auc: 0.99366
+[Thu Sep 10 21:44:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.27552,mrr:0.74323,  acc: 0.99223, ap: 0.98750, f1: 0.99223, macro_auc: 0.99420, micro_auc: 0.99420
+[Thu Sep 10 21:44:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.23302,mrr:0.75775,  acc: 0.99296, ap: 0.98988, f1: 0.99296, macro_auc: 0.99533, micro_auc: 0.99533
+[Thu Sep 10 21:44:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.23285,mrr:0.75593,  acc: 0.99150, ap: 0.98709, f1: 0.99150, macro_auc: 0.99325, micro_auc: 0.99325
+[Thu Sep 10 21:44:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.23741,mrr:0.77282,  acc: 0.99211, ap: 0.98962, f1: 0.99211, macro_auc: 0.99499, micro_auc: 0.99499
+[Thu Sep 10 21:44:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.29299,mrr:0.78009,  acc: 0.99162, ap: 0.98640, f1: 0.99162, macro_auc: 0.99339, micro_auc: 0.99339
+[Thu Sep 10 21:44:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.30754,mrr:0.76326,  acc: 0.99259, ap: 0.98691, f1: 0.99259, macro_auc: 0.99395, micro_auc: 0.99395
+[Thu Sep 10 21:44:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss: 0.33615,mrr:0.76008,  acc: 0.99174, ap: 0.98499, f1: 0.99174, macro_auc: 0.99284, micro_auc: 0.99284
+[Thu Sep 10 21:45:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.33596,mrr:0.76451,  acc: 0.99490, ap: 0.99190, f1: 0.99490, macro_auc: 0.99589, micro_auc: 0.99589
+[Thu Sep 10 21:45:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.38688,mrr:0.69729,  acc: 0.99369, ap: 0.99057, f1: 0.99369, macro_auc: 0.99522, micro_auc: 0.99522
+[Thu Sep 10 21:45:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.49978,mrr:0.68105,  acc: 0.99102, ap: 0.98713, f1: 0.99101, macro_auc: 0.99192, micro_auc: 0.99192
+[Thu Sep 10 21:45:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.46774,mrr:0.69542,  acc: 0.99017, ap: 0.98929, f1: 0.99017, macro_auc: 0.99459, micro_auc: 0.99459
+[Thu Sep 10 21:45:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.38014,mrr:0.69034,  acc: 0.99381, ap: 0.99175, f1: 0.99381, macro_auc: 0.99581, micro_auc: 0.99581
+[Thu Sep 10 21:45:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.51470,mrr:0.70907,  acc: 0.99235, ap: 0.98866, f1: 0.99235, macro_auc: 0.99423, micro_auc: 0.99423
+[Thu Sep 10 21:45:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.64494,mrr:0.68839,  acc: 0.99211, ap: 0.98617, f1: 0.99211, macro_auc: 0.99299, micro_auc: 0.99299
+[Thu Sep 10 21:45:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.53766,mrr:0.68203,  acc: 0.99271, ap: 0.98832, f1: 0.99271, macro_auc: 0.99406, micro_auc: 0.99406
+[Thu Sep 10 21:45:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.46678,mrr:0.66776,  acc: 0.99284, ap: 0.98998, f1: 0.99284, macro_auc: 0.99491, micro_auc: 0.99491
+[Thu Sep 10 21:45:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.37901,mrr:0.68208,  acc: 0.99381, ap: 0.99183, f1: 0.99381, macro_auc: 0.99587, micro_auc: 0.99587
+[Thu Sep 10 21:45:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.41855,mrr:0.66063,  acc: 0.99271, ap: 0.99032, f1: 0.99271, macro_auc: 0.99450, micro_auc: 0.99450
+[Thu Sep 10 21:45:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.39289,mrr:0.71399,  acc: 0.99284, ap: 0.99149, f1: 0.99284, macro_auc: 0.99567, micro_auc: 0.99567
+[Thu Sep 10 21:45:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.50370,mrr:0.69112,  acc: 0.99186, ap: 0.98908, f1: 0.99186, macro_auc: 0.99444, micro_auc: 0.99444
+[Thu Sep 10 21:45:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.39280,mrr:0.68022,  acc: 0.99332, ap: 0.99146, f1: 0.99332, macro_auc: 0.99567, micro_auc: 0.99567
+[Thu Sep 10 21:45:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss: 0.49165,mrr:0.68925,  acc: 0.99211, ap: 0.98942, f1: 0.99211, macro_auc: 0.99451, micro_auc: 0.99451
+[Thu Sep 10 21:45:18 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.34456,mrr:0.75129,  acc: 0.99381, ap: 0.99128, f1: 0.99381, macro_auc: 0.99559, micro_auc: 0.99559
+[Thu Sep 10 21:45:18 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.28860,mrr:0.73193,  acc: 0.99369, ap: 0.99327, f1: 0.99369, macro_auc: 0.99650, micro_auc: 0.99650
+[Thu Sep 10 21:45:18 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.37700,mrr:0.73323,  acc: 0.99126, ap: 0.98890, f1: 0.99126, macro_auc: 0.99207, micro_auc: 0.99207
+[Thu Sep 10 21:45:18 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.38813,mrr:0.71236,  acc: 0.99004, ap: 0.99125, f1: 0.99004, macro_auc: 0.99547, micro_auc: 0.99547
+[Thu Sep 10 21:45:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.31906,mrr:0.72177,  acc: 0.99429, ap: 0.99256, f1: 0.99429, macro_auc: 0.99620, micro_auc: 0.99620
+[Thu Sep 10 21:45:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.43370,mrr:0.73121,  acc: 0.99235, ap: 0.98984, f1: 0.99235, macro_auc: 0.99476, micro_auc: 0.99476
+[Thu Sep 10 21:45:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.48422,mrr:0.71625,  acc: 0.99138, ap: 0.98871, f1: 0.99138, macro_auc: 0.99415, micro_auc: 0.99415
+[Thu Sep 10 21:45:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.49418,mrr:0.74420,  acc: 0.99211, ap: 0.98875, f1: 0.99211, macro_auc: 0.99423, micro_auc: 0.99423
+[Thu Sep 10 21:45:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.39600,mrr:0.74039,  acc: 0.99271, ap: 0.99099, f1: 0.99271, macro_auc: 0.99537, micro_auc: 0.99537
+[Thu Sep 10 21:45:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.24875,mrr:0.73199,  acc: 0.99344, ap: 0.99425, f1: 0.99344, macro_auc: 0.99702, micro_auc: 0.99702
+[Thu Sep 10 21:45:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.34695,mrr:0.72118,  acc: 0.99320, ap: 0.99138, f1: 0.99320, macro_auc: 0.99493, micro_auc: 0.99493
+[Thu Sep 10 21:45:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.27446,mrr:0.71665,  acc: 0.99441, ap: 0.99362, f1: 0.99441, macro_auc: 0.99664, micro_auc: 0.99664
+[Thu Sep 10 21:45:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.41996,mrr:0.74146,  acc: 0.99247, ap: 0.99015, f1: 0.99247, macro_auc: 0.99493, micro_auc: 0.99493
+[Thu Sep 10 21:45:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.35627,mrr:0.71927,  acc: 0.99356, ap: 0.99179, f1: 0.99356, macro_auc: 0.99579, micro_auc: 0.99579
+[Thu Sep 10 21:45:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss: 0.41972,mrr:0.71478,  acc: 0.99223, ap: 0.99016, f1: 0.99223, macro_auc: 0.99486, micro_auc: 0.99486
+[Thu Sep 10 21:45:33 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.06353,mrr:0.93519,  acc: 0.99502, ap: 0.99133, f1: 0.99502, macro_auc: 0.99547, micro_auc: 0.99547
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.04815,mrr:0.91400,  acc: 0.99393, ap: 0.99509, f1: 0.99393, macro_auc: 0.99691, micro_auc: 0.99691
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.08238,mrr:0.91433,  acc: 0.99114, ap: 0.98973, f1: 0.99114, macro_auc: 0.99215, micro_auc: 0.99215
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.06197,mrr:0.91705,  acc: 0.99017, ap: 0.99127, f1: 0.99017, macro_auc: 0.99531, micro_auc: 0.99531
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.06082,mrr:0.92780,  acc: 0.99429, ap: 0.99417, f1: 0.99429, macro_auc: 0.99660, micro_auc: 0.99660
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.06557,mrr:0.92958,  acc: 0.99271, ap: 0.99244, f1: 0.99271, macro_auc: 0.99524, micro_auc: 0.99524
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.06801,mrr:0.91783,  acc: 0.99211, ap: 0.99255, f1: 0.99211, macro_auc: 0.99514, micro_auc: 0.99514
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.09079,mrr:0.94357,  acc: 0.99296, ap: 0.99147, f1: 0.99296, macro_auc: 0.99485, micro_auc: 0.99485
+[Thu Sep 10 21:45:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.08173,mrr:0.92670,  acc: 0.99332, ap: 0.99326, f1: 0.99332, macro_auc: 0.99596, micro_auc: 0.99596
+[Thu Sep 10 21:45:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.05522,mrr:0.91667,  acc: 0.99417, ap: 0.99529, f1: 0.99417, macro_auc: 0.99715, micro_auc: 0.99715
+[Thu Sep 10 21:45:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.07466,mrr:0.91698,  acc: 0.99381, ap: 0.99408, f1: 0.99381, macro_auc: 0.99568, micro_auc: 0.99568
+[Thu Sep 10 21:45:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.04666,mrr:0.94300,  acc: 0.99478, ap: 0.99579, f1: 0.99478, macro_auc: 0.99711, micro_auc: 0.99711
+[Thu Sep 10 21:45:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.08239,mrr:0.92424,  acc: 0.99308, ap: 0.99336, f1: 0.99308, macro_auc: 0.99583, micro_auc: 0.99583
+[Thu Sep 10 21:45:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.06184,mrr:0.92498,  acc: 0.99429, ap: 0.99465, f1: 0.99429, macro_auc: 0.99663, micro_auc: 0.99663
+[Thu Sep 10 21:45:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss: 0.09452,mrr:0.91905,  acc: 0.99296, ap: 0.99211, f1: 0.99296, macro_auc: 0.99541, micro_auc: 0.99541
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.13779,mrr:0.80530,  acc: 0.99320, ap: 0.99166, f1: 0.99320, macro_auc: 0.99554, micro_auc: 0.99554
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.23368,mrr:0.80688,  acc: 0.99247, ap: 0.98856, f1: 0.99247, macro_auc: 0.99428, micro_auc: 0.99428
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.25661,mrr:0.82580,  acc: 0.99029, ap: 0.98492, f1: 0.99029, macro_auc: 0.99056, micro_auc: 0.99056
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.19914,mrr:0.78540,  acc: 0.98932, ap: 0.98920, f1: 0.98932, macro_auc: 0.99461, micro_auc: 0.99461
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.17222,mrr:0.79099,  acc: 0.99271, ap: 0.98989, f1: 0.99271, macro_auc: 0.99505, micro_auc: 0.99505
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.25300,mrr:0.79306,  acc: 0.99211, ap: 0.98500, f1: 0.99211, macro_auc: 0.99260, micro_auc: 0.99260
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.36134,mrr:0.80023,  acc: 0.99114, ap: 0.97910, f1: 0.99114, macro_auc: 0.99053, micro_auc: 0.99053
+[Thu Sep 10 21:45:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.18582,mrr:0.79363,  acc: 0.99211, ap: 0.98744, f1: 0.99211, macro_auc: 0.99348, micro_auc: 0.99348
+[Thu Sep 10 21:45:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.22491,mrr:0.82008,  acc: 0.99247, ap: 0.98698, f1: 0.99247, macro_auc: 0.99382, micro_auc: 0.99382
+[Thu Sep 10 21:45:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.20191,mrr:0.80476,  acc: 0.99405, ap: 0.98927, f1: 0.99405, macro_auc: 0.99509, micro_auc: 0.99509
+[Thu Sep 10 21:45:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.18869,mrr:0.82367,  acc: 0.99284, ap: 0.98694, f1: 0.99284, macro_auc: 0.99304, micro_auc: 0.99304
+[Thu Sep 10 21:45:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.20585,mrr:0.80111,  acc: 0.99332, ap: 0.98861, f1: 0.99332, macro_auc: 0.99490, micro_auc: 0.99490
+[Thu Sep 10 21:45:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.20512,mrr:0.79503,  acc: 0.99308, ap: 0.98646, f1: 0.99308, macro_auc: 0.99342, micro_auc: 0.99342
+[Thu Sep 10 21:45:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.23172,mrr:0.79996,  acc: 0.99308, ap: 0.98689, f1: 0.99308, macro_auc: 0.99410, micro_auc: 0.99410
+[Thu Sep 10 21:45:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss: 0.26604,mrr:0.80830,  acc: 0.99211, ap: 0.98383, f1: 0.99211, macro_auc: 0.99232, micro_auc: 0.99232
+[Thu Sep 10 21:46:03 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.09243,mrr:0.86507,  acc: 0.99466, ap: 0.99188, f1: 0.99466, macro_auc: 0.99584, micro_auc: 0.99584
+[Thu Sep 10 21:46:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.05905,mrr:0.88881,  acc: 0.99405, ap: 0.99458, f1: 0.99405, macro_auc: 0.99662, micro_auc: 0.99662
+[Thu Sep 10 21:46:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.09856,mrr:0.86018,  acc: 0.99126, ap: 0.98880, f1: 0.99126, macro_auc: 0.99193, micro_auc: 0.99193
+[Thu Sep 10 21:46:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.07880,mrr:0.85632,  acc: 0.99029, ap: 0.99250, f1: 0.99029, macro_auc: 0.99549, micro_auc: 0.99549
+[Thu Sep 10 21:46:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.08104,mrr:0.86998,  acc: 0.99454, ap: 0.99194, f1: 0.99454, macro_auc: 0.99589, micro_auc: 0.99589
+[Thu Sep 10 21:46:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.12877,mrr:0.85106,  acc: 0.99296, ap: 0.98762, f1: 0.99296, macro_auc: 0.99370, micro_auc: 0.99370
+[Thu Sep 10 21:46:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.15429,mrr:0.85121,  acc: 0.99211, ap: 0.98506, f1: 0.99211, macro_auc: 0.99278, micro_auc: 0.99278
+[Thu Sep 10 21:46:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.14853,mrr:0.85502,  acc: 0.99259, ap: 0.98821, f1: 0.99259, macro_auc: 0.99414, micro_auc: 0.99414
+[Thu Sep 10 21:46:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.12326,mrr:0.84100,  acc: 0.99344, ap: 0.98948, f1: 0.99344, macro_auc: 0.99468, micro_auc: 0.99468
+[Thu Sep 10 21:46:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.06514,mrr:0.86478,  acc: 0.99478, ap: 0.99447, f1: 0.99478, macro_auc: 0.99699, micro_auc: 0.99699
+[Thu Sep 10 21:46:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.10425,mrr:0.85526,  acc: 0.99369, ap: 0.99154, f1: 0.99369, macro_auc: 0.99516, micro_auc: 0.99516
+[Thu Sep 10 21:46:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.07714,mrr:0.86879,  acc: 0.99454, ap: 0.99457, f1: 0.99454, macro_auc: 0.99687, micro_auc: 0.99687
+[Thu Sep 10 21:46:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.12199,mrr:0.83460,  acc: 0.99320, ap: 0.99062, f1: 0.99320, macro_auc: 0.99515, micro_auc: 0.99515
+[Thu Sep 10 21:46:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.15120,mrr:0.84058,  acc: 0.99417, ap: 0.99009, f1: 0.99417, macro_auc: 0.99537, micro_auc: 0.99537
+[Thu Sep 10 21:46:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss: 0.15890,mrr:0.85596,  acc: 0.99284, ap: 0.98827, f1: 0.99284, macro_auc: 0.99422, micro_auc: 0.99422
+[Thu Sep 10 21:46:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.09056,mrr:0.87088,  acc: 0.99502, ap: 0.99211, f1: 0.99502, macro_auc: 0.99611, micro_auc: 0.99611
+[Thu Sep 10 21:46:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.17677,mrr:0.87912,  acc: 0.99369, ap: 0.98670, f1: 0.99369, macro_auc: 0.99455, micro_auc: 0.99455
+[Thu Sep 10 21:46:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.18408,mrr:0.87175,  acc: 0.99162, ap: 0.98393, f1: 0.99162, macro_auc: 0.99059, micro_auc: 0.99059
+[Thu Sep 10 21:46:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.13904,mrr:0.85839,  acc: 0.99041, ap: 0.98820, f1: 0.99041, macro_auc: 0.99448, micro_auc: 0.99448
+[Thu Sep 10 21:46:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.12784,mrr:0.87242,  acc: 0.99417, ap: 0.99048, f1: 0.99417, macro_auc: 0.99553, micro_auc: 0.99553
+[Thu Sep 10 21:46:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.18090,mrr:0.85157,  acc: 0.99296, ap: 0.98658, f1: 0.99296, macro_auc: 0.99399, micro_auc: 0.99399
+[Thu Sep 10 21:46:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.25584,mrr:0.84016,  acc: 0.99223, ap: 0.98211, f1: 0.99223, macro_auc: 0.99231, micro_auc: 0.99231
+[Thu Sep 10 21:46:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.13538,mrr:0.83751,  acc: 0.99271, ap: 0.98813, f1: 0.99271, macro_auc: 0.99418, micro_auc: 0.99418
+[Thu Sep 10 21:46:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.16686,mrr:0.82528,  acc: 0.99320, ap: 0.98775, f1: 0.99320, macro_auc: 0.99446, micro_auc: 0.99446
+[Thu Sep 10 21:46:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.16210,mrr:0.85063,  acc: 0.99405, ap: 0.98842, f1: 0.99405, macro_auc: 0.99513, micro_auc: 0.99513
+[Thu Sep 10 21:46:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.08969,mrr:0.82962,  acc: 0.99332, ap: 0.99004, f1: 0.99332, macro_auc: 0.99448, micro_auc: 0.99448
+[Thu Sep 10 21:46:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.14112,mrr:0.87810,  acc: 0.99441, ap: 0.98924, f1: 0.99441, macro_auc: 0.99534, micro_auc: 0.99534
+[Thu Sep 10 21:46:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.14527,mrr:0.86090,  acc: 0.99308, ap: 0.98889, f1: 0.99308, macro_auc: 0.99489, micro_auc: 0.99489
+[Thu Sep 10 21:46:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.14105,mrr:0.86850,  acc: 0.99381, ap: 0.98915, f1: 0.99381, macro_auc: 0.99531, micro_auc: 0.99531
+[Thu Sep 10 21:46:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss: 0.18350,mrr:0.85189,  acc: 0.99284, ap: 0.98560, f1: 0.99284, macro_auc: 0.99347, micro_auc: 0.99347
+[Thu Sep 10 21:46:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.03416,mrr:0.92644,  acc: 0.99466, ap: 0.99399, f1: 0.99466, macro_auc: 0.99641, micro_auc: 0.99641
+[Thu Sep 10 21:46:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.03624,mrr:0.92708,  acc: 0.99332, ap: 0.99448, f1: 0.99332, macro_auc: 0.99713, micro_auc: 0.99713
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.05956,mrr:0.92575,  acc: 0.99029, ap: 0.98958, f1: 0.99029, macro_auc: 0.99230, micro_auc: 0.99230
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.04850,mrr:0.89651,  acc: 0.98834, ap: 0.99069, f1: 0.98834, macro_auc: 0.99503, micro_auc: 0.99503
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.03881,mrr:0.89359,  acc: 0.99308, ap: 0.99139, f1: 0.99308, macro_auc: 0.99579, micro_auc: 0.99579
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.04666,mrr:0.91895,  acc: 0.99162, ap: 0.98797, f1: 0.99162, macro_auc: 0.99415, micro_auc: 0.99415
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.05205,mrr:0.89673,  acc: 0.99065, ap: 0.98639, f1: 0.99065, macro_auc: 0.99336, micro_auc: 0.99336
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.04807,mrr:0.88610,  acc: 0.99150, ap: 0.98676, f1: 0.99150, macro_auc: 0.99353, micro_auc: 0.99353
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.04448,mrr:0.89418,  acc: 0.99162, ap: 0.98840, f1: 0.99162, macro_auc: 0.99480, micro_auc: 0.99480
+[Thu Sep 10 21:46:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.03737,mrr:0.88971,  acc: 0.99381, ap: 0.99075, f1: 0.99381, macro_auc: 0.99640, micro_auc: 0.99640
+[Thu Sep 10 21:46:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.04422,mrr:0.90568,  acc: 0.99199, ap: 0.99135, f1: 0.99199, macro_auc: 0.99493, micro_auc: 0.99493
+[Thu Sep 10 21:46:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.03911,mrr:0.91645,  acc: 0.99332, ap: 0.99085, f1: 0.99332, macro_auc: 0.99578, micro_auc: 0.99578
+[Thu Sep 10 21:46:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.04362,mrr:0.88645,  acc: 0.99296, ap: 0.98803, f1: 0.99296, macro_auc: 0.99459, micro_auc: 0.99459
+[Thu Sep 10 21:46:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.03830,mrr:0.90494,  acc: 0.99332, ap: 0.99261, f1: 0.99332, macro_auc: 0.99619, micro_auc: 0.99619
+[Thu Sep 10 21:46:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss: 0.04623,mrr:0.89873,  acc: 0.99223, ap: 0.98824, f1: 0.99223, macro_auc: 0.99394, micro_auc: 0.99394
+[Thu Sep 10 21:46:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03628,mrr:0.94650,  acc: 0.99441, ap: 0.99256, f1: 0.99441, macro_auc: 0.99600, micro_auc: 0.99600
+[Thu Sep 10 21:46:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03257,mrr:0.94307,  acc: 0.99332, ap: 0.99658, f1: 0.99332, macro_auc: 0.99754, micro_auc: 0.99754
+[Thu Sep 10 21:46:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.05603,mrr:0.93769,  acc: 0.99053, ap: 0.98986, f1: 0.99053, macro_auc: 0.99251, micro_auc: 0.99251
+[Thu Sep 10 21:46:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03886,mrr:0.94172,  acc: 0.98932, ap: 0.99326, f1: 0.98932, macro_auc: 0.99586, micro_auc: 0.99586
+[Thu Sep 10 21:46:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03236,mrr:0.94191,  acc: 0.99454, ap: 0.99349, f1: 0.99454, macro_auc: 0.99660, micro_auc: 0.99660
+[Thu Sep 10 21:46:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03831,mrr:0.95339,  acc: 0.99211, ap: 0.99424, f1: 0.99211, macro_auc: 0.99622, micro_auc: 0.99622
+[Thu Sep 10 21:46:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.04295,mrr:0.92084,  acc: 0.99114, ap: 0.99370, f1: 0.99114, macro_auc: 0.99557, micro_auc: 0.99557
+[Thu Sep 10 21:46:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.04230,mrr:0.94331,  acc: 0.99223, ap: 0.99195, f1: 0.99223, macro_auc: 0.99538, micro_auc: 0.99538
+[Thu Sep 10 21:46:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03760,mrr:0.93679,  acc: 0.99199, ap: 0.99489, f1: 0.99199, macro_auc: 0.99670, micro_auc: 0.99670
+[Thu Sep 10 21:46:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03107,mrr:0.92745,  acc: 0.99332, ap: 0.99613, f1: 0.99332, macro_auc: 0.99763, micro_auc: 0.99763
+[Thu Sep 10 21:46:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03962,mrr:0.93872,  acc: 0.99186, ap: 0.99390, f1: 0.99186, macro_auc: 0.99611, micro_auc: 0.99611
+[Thu Sep 10 21:46:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03229,mrr:0.92555,  acc: 0.99308, ap: 0.99607, f1: 0.99308, macro_auc: 0.99731, micro_auc: 0.99731
+[Thu Sep 10 21:46:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03642,mrr:0.92559,  acc: 0.99271, ap: 0.99473, f1: 0.99271, macro_auc: 0.99647, micro_auc: 0.99647
+[Thu Sep 10 21:46:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.03434,mrr:0.92818,  acc: 0.99356, ap: 0.99476, f1: 0.99356, macro_auc: 0.99682, micro_auc: 0.99682
+[Thu Sep 10 21:46:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss: 0.04337,mrr:0.90497,  acc: 0.99259, ap: 0.99160, f1: 0.99259, macro_auc: 0.99489, micro_auc: 0.99489
+[Thu Sep 10 21:47:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.35538,mrr:0.72094,  acc: 0.99441, ap: 0.99100, f1: 0.99441, macro_auc: 0.99545, micro_auc: 0.99545
+[Thu Sep 10 21:47:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.26892,mrr:0.75349,  acc: 0.99308, ap: 0.99384, f1: 0.99308, macro_auc: 0.99671, micro_auc: 0.99671
+[Thu Sep 10 21:47:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.37615,mrr:0.73593,  acc: 0.99029, ap: 0.98899, f1: 0.99029, macro_auc: 0.99239, micro_auc: 0.99239
+[Thu Sep 10 21:47:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.37665,mrr:0.72625,  acc: 0.98883, ap: 0.99153, f1: 0.98883, macro_auc: 0.99562, micro_auc: 0.99562
+[Thu Sep 10 21:47:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.32254,mrr:0.72801,  acc: 0.99356, ap: 0.99253, f1: 0.99356, macro_auc: 0.99616, micro_auc: 0.99616
+[Thu Sep 10 21:47:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.47871,mrr:0.67558,  acc: 0.99174, ap: 0.98893, f1: 0.99174, macro_auc: 0.99436, micro_auc: 0.99436
+[Thu Sep 10 21:47:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.51585,mrr:0.70204,  acc: 0.99102, ap: 0.98815, f1: 0.99101, macro_auc: 0.99392, micro_auc: 0.99392
+[Thu Sep 10 21:47:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.53666,mrr:0.69462,  acc: 0.99150, ap: 0.98798, f1: 0.99150, macro_auc: 0.99391, micro_auc: 0.99391
+[Thu Sep 10 21:47:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.41921,mrr:0.70687,  acc: 0.99223, ap: 0.99051, f1: 0.99223, macro_auc: 0.99514, micro_auc: 0.99514
+[Thu Sep 10 21:47:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.24969,mrr:0.70189,  acc: 0.99344, ap: 0.99425, f1: 0.99344, macro_auc: 0.99700, micro_auc: 0.99700
+[Thu Sep 10 21:47:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.33798,mrr:0.71403,  acc: 0.99186, ap: 0.99175, f1: 0.99186, macro_auc: 0.99509, micro_auc: 0.99509
+[Thu Sep 10 21:47:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.28644,mrr:0.67486,  acc: 0.99332, ap: 0.99337, f1: 0.99332, macro_auc: 0.99651, micro_auc: 0.99651
+[Thu Sep 10 21:47:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.42995,mrr:0.69144,  acc: 0.99223, ap: 0.99009, f1: 0.99223, macro_auc: 0.99494, micro_auc: 0.99494
+[Thu Sep 10 21:47:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.35648,mrr:0.69143,  acc: 0.99308, ap: 0.99181, f1: 0.99308, macro_auc: 0.99580, micro_auc: 0.99580
+[Thu Sep 10 21:47:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss: 0.42003,mrr:0.73938,  acc: 0.99235, ap: 0.99016, f1: 0.99235, macro_auc: 0.99486, micro_auc: 0.99486
+[Thu Sep 10 21:47:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.35702,mrr:0.74995,  acc: 0.99441, ap: 0.99118, f1: 0.99441, macro_auc: 0.99553, micro_auc: 0.99553
+[Thu Sep 10 21:47:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.28968,mrr:0.72427,  acc: 0.99296, ap: 0.99341, f1: 0.99296, macro_auc: 0.99655, micro_auc: 0.99655
+[Thu Sep 10 21:47:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.40806,mrr:0.73894,  acc: 0.99004, ap: 0.98847, f1: 0.99004, macro_auc: 0.99227, micro_auc: 0.99227
+[Thu Sep 10 21:47:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.38610,mrr:0.67751,  acc: 0.98883, ap: 0.99136, f1: 0.98883, macro_auc: 0.99556, micro_auc: 0.99556
+[Thu Sep 10 21:47:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.32239,mrr:0.73757,  acc: 0.99320, ap: 0.99258, f1: 0.99320, macro_auc: 0.99620, micro_auc: 0.99620
+[Thu Sep 10 21:47:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.48092,mrr:0.73288,  acc: 0.99150, ap: 0.98892, f1: 0.99150, macro_auc: 0.99435, micro_auc: 0.99435
+[Thu Sep 10 21:47:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.51780,mrr:0.71825,  acc: 0.99065, ap: 0.98813, f1: 0.99065, macro_auc: 0.99391, micro_auc: 0.99391
+[Thu Sep 10 21:47:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.52797,mrr:0.71502,  acc: 0.99138, ap: 0.98817, f1: 0.99138, macro_auc: 0.99397, micro_auc: 0.99397
+[Thu Sep 10 21:47:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.41059,mrr:0.72964,  acc: 0.99186, ap: 0.99073, f1: 0.99186, macro_auc: 0.99524, micro_auc: 0.99524
+[Thu Sep 10 21:47:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.25190,mrr:0.72731,  acc: 0.99308, ap: 0.99423, f1: 0.99308, macro_auc: 0.99699, micro_auc: 0.99699
+[Thu Sep 10 21:47:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.33865,mrr:0.71682,  acc: 0.99114, ap: 0.99176, f1: 0.99114, macro_auc: 0.99513, micro_auc: 0.99513
+[Thu Sep 10 21:47:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.29162,mrr:0.72978,  acc: 0.99150, ap: 0.99328, f1: 0.99150, macro_auc: 0.99642, micro_auc: 0.99642
+[Thu Sep 10 21:47:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.43567,mrr:0.67298,  acc: 0.99089, ap: 0.98986, f1: 0.99089, macro_auc: 0.99472, micro_auc: 0.99472
+[Thu Sep 10 21:47:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.35942,mrr:0.71773,  acc: 0.99223, ap: 0.99174, f1: 0.99223, macro_auc: 0.99573, micro_auc: 0.99573
+[Thu Sep 10 21:47:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss: 0.42230,mrr:0.69727,  acc: 0.99186, ap: 0.99011, f1: 0.99186, macro_auc: 0.99480, micro_auc: 0.99480
+[Thu Sep 10 21:47:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.42205,mrr:0.69110,  acc: 0.99490, ap: 0.99110, f1: 0.99490, macro_auc: 0.99551, micro_auc: 0.99551
+[Thu Sep 10 21:47:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.46142,mrr:0.63450,  acc: 0.99417, ap: 0.99074, f1: 0.99417, macro_auc: 0.99532, micro_auc: 0.99532
+[Thu Sep 10 21:47:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.56656,mrr:0.64740,  acc: 0.99150, ap: 0.98677, f1: 0.99150, macro_auc: 0.99115, micro_auc: 0.99115
+[Thu Sep 10 21:47:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.51135,mrr:0.65414,  acc: 0.99041, ap: 0.99001, f1: 0.99041, macro_auc: 0.99493, micro_auc: 0.99493
+[Thu Sep 10 21:47:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.40761,mrr:0.65532,  acc: 0.99466, ap: 0.99200, f1: 0.99466, macro_auc: 0.99597, micro_auc: 0.99597
+[Thu Sep 10 21:47:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.63644,mrr:0.64549,  acc: 0.99296, ap: 0.98741, f1: 0.99296, macro_auc: 0.99363, micro_auc: 0.99363
+[Thu Sep 10 21:47:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.73236,mrr:0.61307,  acc: 0.99223, ap: 0.98555, f1: 0.99223, macro_auc: 0.99267, micro_auc: 0.99267
+[Thu Sep 10 21:47:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.61303,mrr:0.63098,  acc: 0.99284, ap: 0.98797, f1: 0.99284, macro_auc: 0.99391, micro_auc: 0.99391
+[Thu Sep 10 21:47:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.53252,mrr:0.64858,  acc: 0.99356, ap: 0.98963, f1: 0.99356, macro_auc: 0.99476, micro_auc: 0.99476
+[Thu Sep 10 21:47:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.40694,mrr:0.65144,  acc: 0.99429, ap: 0.99196, f1: 0.99429, macro_auc: 0.99595, micro_auc: 0.99595
+[Thu Sep 10 21:47:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.44711,mrr:0.62214,  acc: 0.99417, ap: 0.99039, f1: 0.99417, macro_auc: 0.99437, micro_auc: 0.99437
+[Thu Sep 10 21:47:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.43124,mrr:0.64526,  acc: 0.99490, ap: 0.99151, f1: 0.99490, macro_auc: 0.99567, micro_auc: 0.99567
+[Thu Sep 10 21:47:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.57642,mrr:0.61229,  acc: 0.99344, ap: 0.98872, f1: 0.99344, macro_auc: 0.99429, micro_auc: 0.99429
+[Thu Sep 10 21:47:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.47845,mrr:0.61432,  acc: 0.99466, ap: 0.99062, f1: 0.99466, macro_auc: 0.99526, micro_auc: 0.99526
+[Thu Sep 10 21:47:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss: 0.57774,mrr:0.60618,  acc: 0.99332, ap: 0.98841, f1: 0.99332, macro_auc: 0.99389, micro_auc: 0.99389
+[Thu Sep 10 21:47:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.44458,mrr:0.66415,  acc: 0.99478, ap: 0.99059, f1: 0.99478, macro_auc: 0.99526, micro_auc: 0.99526
+[Thu Sep 10 21:47:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.49398,mrr:0.64438,  acc: 0.99417, ap: 0.99026, f1: 0.99417, macro_auc: 0.99508, micro_auc: 0.99508
+[Thu Sep 10 21:47:49 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.56705,mrr:0.65145,  acc: 0.99138, ap: 0.98691, f1: 0.99138, macro_auc: 0.99174, micro_auc: 0.99174
+[Thu Sep 10 21:47:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.51163,mrr:0.65321,  acc: 0.99041, ap: 0.99000, f1: 0.99041, macro_auc: 0.99492, micro_auc: 0.99492
+[Thu Sep 10 21:47:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.41027,mrr:0.62492,  acc: 0.99429, ap: 0.99200, f1: 0.99429, macro_auc: 0.99597, micro_auc: 0.99597
+[Thu Sep 10 21:47:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.62841,mrr:0.63303,  acc: 0.99235, ap: 0.98761, f1: 0.99235, macro_auc: 0.99373, micro_auc: 0.99373
+[Thu Sep 10 21:47:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.70358,mrr:0.63796,  acc: 0.99211, ap: 0.98629, f1: 0.99211, macro_auc: 0.99305, micro_auc: 0.99305
+[Thu Sep 10 21:47:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.62600,mrr:0.62304,  acc: 0.99247, ap: 0.98777, f1: 0.99247, macro_auc: 0.99381, micro_auc: 0.99381
+[Thu Sep 10 21:47:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.55542,mrr:0.63991,  acc: 0.99320, ap: 0.98919, f1: 0.99320, macro_auc: 0.99454, micro_auc: 0.99454
+[Thu Sep 10 21:47:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.40947,mrr:0.63338,  acc: 0.99393, ap: 0.99201, f1: 0.99393, macro_auc: 0.99597, micro_auc: 0.99597
+[Thu Sep 10 21:47:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.44893,mrr:0.62079,  acc: 0.99405, ap: 0.99043, f1: 0.99405, macro_auc: 0.99450, micro_auc: 0.99450
+[Thu Sep 10 21:47:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.43405,mrr:0.64182,  acc: 0.99441, ap: 0.99146, f1: 0.99441, macro_auc: 0.99553, micro_auc: 0.99553
+[Thu Sep 10 21:47:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.57908,mrr:0.61742,  acc: 0.99296, ap: 0.98872, f1: 0.99296, macro_auc: 0.99429, micro_auc: 0.99429
+[Thu Sep 10 21:47:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.48100,mrr:0.62246,  acc: 0.99369, ap: 0.99062, f1: 0.99369, macro_auc: 0.99526, micro_auc: 0.99526
+[Thu Sep 10 21:47:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss: 0.57997,mrr:0.62755,  acc: 0.99296, ap: 0.98819, f1: 0.99296, macro_auc: 0.99330, micro_auc: 0.99330
+[Thu Sep 10 21:48:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.44390,mrr:0.66065,  acc: 0.99490, ap: 0.99069, f1: 0.99490, macro_auc: 0.99531, micro_auc: 0.99531
+[Thu Sep 10 21:48:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.48304,mrr:0.64845,  acc: 0.99429, ap: 0.99037, f1: 0.99429, macro_auc: 0.99514, micro_auc: 0.99514
+[Thu Sep 10 21:48:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.56695,mrr:0.66340,  acc: 0.99138, ap: 0.98699, f1: 0.99138, macro_auc: 0.99181, micro_auc: 0.99181
+[Thu Sep 10 21:48:04 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.51187,mrr:0.63589,  acc: 0.99029, ap: 0.98998, f1: 0.99029, macro_auc: 0.99490, micro_auc: 0.99490
+[Thu Sep 10 21:48:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.40942,mrr:0.62161,  acc: 0.99417, ap: 0.99200, f1: 0.99417, macro_auc: 0.99597, micro_auc: 0.99597
+[Thu Sep 10 21:48:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.63782,mrr:0.65171,  acc: 0.99247, ap: 0.98742, f1: 0.99247, macro_auc: 0.99363, micro_auc: 0.99363
+[Thu Sep 10 21:48:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.73336,mrr:0.64201,  acc: 0.99211, ap: 0.98556, f1: 0.99211, macro_auc: 0.99267, micro_auc: 0.99267
+[Thu Sep 10 21:48:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.61484,mrr:0.63665,  acc: 0.99259, ap: 0.98797, f1: 0.99259, macro_auc: 0.99391, micro_auc: 0.99391
+[Thu Sep 10 21:48:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.55441,mrr:0.65341,  acc: 0.99308, ap: 0.98919, f1: 0.99308, macro_auc: 0.99453, micro_auc: 0.99453
+[Thu Sep 10 21:48:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.40878,mrr:0.63529,  acc: 0.99393, ap: 0.99200, f1: 0.99393, macro_auc: 0.99597, micro_auc: 0.99597
+[Thu Sep 10 21:48:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.44885,mrr:0.64899,  acc: 0.99381, ap: 0.99045, f1: 0.99381, macro_auc: 0.99457, micro_auc: 0.99457
+[Thu Sep 10 21:48:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.43472,mrr:0.61832,  acc: 0.99393, ap: 0.99146, f1: 0.99393, macro_auc: 0.99554, micro_auc: 0.99554
+[Thu Sep 10 21:48:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.57903,mrr:0.66296,  acc: 0.99259, ap: 0.98872, f1: 0.99259, macro_auc: 0.99429, micro_auc: 0.99429
+[Thu Sep 10 21:48:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.48065,mrr:0.60541,  acc: 0.99356, ap: 0.99062, f1: 0.99356, macro_auc: 0.99526, micro_auc: 0.99526
+[Thu Sep 10 21:48:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss: 0.58147,mrr:0.62606,  acc: 0.99235, ap: 0.98814, f1: 0.99235, macro_auc: 0.99319, micro_auc: 0.99319
+[Thu Sep 10 21:48:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.41417,mrr:0.70983,  acc: 0.99502, ap: 0.99098, f1: 0.99502, macro_auc: 0.99546, micro_auc: 0.99546
+[Thu Sep 10 21:48:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.45527,mrr:0.66420,  acc: 0.99296, ap: 0.99095, f1: 0.99296, macro_auc: 0.99543, micro_auc: 0.99543
+[Thu Sep 10 21:48:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.53969,mrr:0.64860,  acc: 0.99004, ap: 0.98735, f1: 0.99004, macro_auc: 0.99199, micro_auc: 0.99199
+[Thu Sep 10 21:48:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.50304,mrr:0.64104,  acc: 0.99029, ap: 0.99013, f1: 0.99029, macro_auc: 0.99494, micro_auc: 0.99494
+[Thu Sep 10 21:48:19 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.41488,mrr:0.66737,  acc: 0.99393, ap: 0.99194, f1: 0.99393, macro_auc: 0.99594, micro_auc: 0.99594
+[Thu Sep 10 21:48:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.61091,mrr:0.63191,  acc: 0.99186, ap: 0.98804, f1: 0.99186, macro_auc: 0.99394, micro_auc: 0.99394
+[Thu Sep 10 21:48:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.72787,mrr:0.65204,  acc: 0.99102, ap: 0.98579, f1: 0.99101, macro_auc: 0.99279, micro_auc: 0.99279
+[Thu Sep 10 21:48:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.61975,mrr:0.64843,  acc: 0.99223, ap: 0.98796, f1: 0.99223, macro_auc: 0.99390, micro_auc: 0.99390
+[Thu Sep 10 21:48:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.55964,mrr:0.63563,  acc: 0.99223, ap: 0.98914, f1: 0.99223, macro_auc: 0.99451, micro_auc: 0.99451
+[Thu Sep 10 21:48:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.38317,mrr:0.63594,  acc: 0.99296, ap: 0.99261, f1: 0.99296, macro_auc: 0.99628, micro_auc: 0.99628
+[Thu Sep 10 21:48:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.41370,mrr:0.63241,  acc: 0.99174, ap: 0.99130, f1: 0.99174, macro_auc: 0.99498, micro_auc: 0.99498
+[Thu Sep 10 21:48:20 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.39980,mrr:0.65775,  acc: 0.99199, ap: 0.99223, f1: 0.99199, macro_auc: 0.99593, micro_auc: 0.99593
+[Thu Sep 10 21:48:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.54359,mrr:0.62525,  acc: 0.99102, ap: 0.98943, f1: 0.99101, macro_auc: 0.99466, micro_auc: 0.99466
+[Thu Sep 10 21:48:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.48554,mrr:0.63150,  acc: 0.99296, ap: 0.99042, f1: 0.99296, macro_auc: 0.99516, micro_auc: 0.99516
+[Thu Sep 10 21:48:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss: 0.56511,mrr:0.67312,  acc: 0.99199, ap: 0.98831, f1: 0.99199, macro_auc: 0.99328, micro_auc: 0.99328
+[Thu Sep 10 21:48:34 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.36595,mrr:0.72047,  acc: 0.99429, ap: 0.99128, f1: 0.99429, macro_auc: 0.99553, micro_auc: 0.99553
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.30834,mrr:0.72355,  acc: 0.99320, ap: 0.99303, f1: 0.99320, macro_auc: 0.99631, micro_auc: 0.99631
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.40633,mrr:0.71854,  acc: 0.98968, ap: 0.98880, f1: 0.98968, macro_auc: 0.99276, micro_auc: 0.99276
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.39208,mrr:0.73094,  acc: 0.98944, ap: 0.99134, f1: 0.98944, macro_auc: 0.99554, micro_auc: 0.99554
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.34264,mrr:0.73610,  acc: 0.99369, ap: 0.99215, f1: 0.99369, macro_auc: 0.99592, micro_auc: 0.99592
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.46762,mrr:0.70669,  acc: 0.99186, ap: 0.98924, f1: 0.99186, macro_auc: 0.99440, micro_auc: 0.99440
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.52731,mrr:0.69341,  acc: 0.99114, ap: 0.98753, f1: 0.99114, macro_auc: 0.99271, micro_auc: 0.99271
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.54521,mrr:0.71782,  acc: 0.99174, ap: 0.98784, f1: 0.99174, macro_auc: 0.99377, micro_auc: 0.99377
+[Thu Sep 10 21:48:35 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.43812,mrr:0.69725,  acc: 0.99223, ap: 0.99014, f1: 0.99223, macro_auc: 0.99491, micro_auc: 0.99491
+[Thu Sep 10 21:48:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.26340,mrr:0.70162,  acc: 0.99284, ap: 0.99393, f1: 0.99284, macro_auc: 0.99669, micro_auc: 0.99669
+[Thu Sep 10 21:48:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.34535,mrr:0.69849,  acc: 0.99235, ap: 0.99159, f1: 0.99235, macro_auc: 0.99490, micro_auc: 0.99490
+[Thu Sep 10 21:48:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.30194,mrr:0.70279,  acc: 0.99138, ap: 0.99306, f1: 0.99138, macro_auc: 0.99622, micro_auc: 0.99622
+[Thu Sep 10 21:48:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.44443,mrr:0.71671,  acc: 0.99065, ap: 0.98972, f1: 0.99065, macro_auc: 0.99458, micro_auc: 0.99458
+[Thu Sep 10 21:48:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.36848,mrr:0.69173,  acc: 0.99284, ap: 0.99157, f1: 0.99284, macro_auc: 0.99557, micro_auc: 0.99557
+[Thu Sep 10 21:48:36 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss: 0.43271,mrr:0.70731,  acc: 0.99174, ap: 0.98984, f1: 0.99174, macro_auc: 0.99456, micro_auc: 0.99456
+[Thu Sep 10 21:48:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.40154,mrr:0.71353,  acc: 0.99478, ap: 0.99150, f1: 0.99478, macro_auc: 0.99570, micro_auc: 0.99570
+[Thu Sep 10 21:48:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.44326,mrr:0.67287,  acc: 0.99320, ap: 0.99120, f1: 0.99320, macro_auc: 0.99555, micro_auc: 0.99555
+[Thu Sep 10 21:48:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.57880,mrr:0.64320,  acc: 0.99029, ap: 0.98682, f1: 0.99029, macro_auc: 0.99174, micro_auc: 0.99174
+[Thu Sep 10 21:48:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.51182,mrr:0.64259,  acc: 0.98907, ap: 0.98998, f1: 0.98907, macro_auc: 0.99490, micro_auc: 0.99490
+[Thu Sep 10 21:48:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.41101,mrr:0.63925,  acc: 0.99320, ap: 0.99200, f1: 0.99320, macro_auc: 0.99597, micro_auc: 0.99597
+[Thu Sep 10 21:48:50 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.61822,mrr:0.61444,  acc: 0.99174, ap: 0.98780, f1: 0.99174, macro_auc: 0.99382, micro_auc: 0.99382
+[Thu Sep 10 21:48:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.70393,mrr:0.64485,  acc: 0.99114, ap: 0.98616, f1: 0.99114, macro_auc: 0.99299, micro_auc: 0.99299
+[Thu Sep 10 21:48:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.59665,mrr:0.64708,  acc: 0.99199, ap: 0.98839, f1: 0.99199, macro_auc: 0.99412, micro_auc: 0.99412
+[Thu Sep 10 21:48:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.53536,mrr:0.63106,  acc: 0.99259, ap: 0.98960, f1: 0.99259, macro_auc: 0.99475, micro_auc: 0.99475
+[Thu Sep 10 21:48:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.39917,mrr:0.62107,  acc: 0.99356, ap: 0.99211, f1: 0.99356, macro_auc: 0.99602, micro_auc: 0.99602
+[Thu Sep 10 21:48:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.43083,mrr:0.60377,  acc: 0.99235, ap: 0.99081, f1: 0.99235, macro_auc: 0.99469, micro_auc: 0.99469
+[Thu Sep 10 21:48:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.42607,mrr:0.62801,  acc: 0.99344, ap: 0.99175, f1: 0.99344, macro_auc: 0.99582, micro_auc: 0.99582
+[Thu Sep 10 21:48:51 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.56790,mrr:0.59605,  acc: 0.99235, ap: 0.98895, f1: 0.99235, macro_auc: 0.99441, micro_auc: 0.99441
+[Thu Sep 10 21:48:52 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.48192,mrr:0.63374,  acc: 0.99308, ap: 0.99060, f1: 0.99308, macro_auc: 0.99525, micro_auc: 0.99525
+[Thu Sep 10 21:48:52 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss: 0.59336,mrr:0.64432,  acc: 0.99259, ap: 0.98828, f1: 0.99259, macro_auc: 0.99394, micro_auc: 0.99394
+[Thu Sep 10 21:49:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.35871,mrr:0.72891,  acc: 0.99393, ap: 0.99108, f1: 0.99393, macro_auc: 0.99546, micro_auc: 0.99546
+[Thu Sep 10 21:49:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.30758,mrr:0.72573,  acc: 0.98701, ap: 0.99314, f1: 0.98701, macro_auc: 0.99638, micro_auc: 0.99638
+[Thu Sep 10 21:49:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.42428,mrr:0.69678,  acc: 0.98288, ap: 0.98846, f1: 0.98288, macro_auc: 0.99243, micro_auc: 0.99243
+[Thu Sep 10 21:49:05 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.40029,mrr:0.70735,  acc: 0.98349, ap: 0.99127, f1: 0.98349, macro_auc: 0.99547, micro_auc: 0.99547
+[Thu Sep 10 21:49:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.35012,mrr:0.72948,  acc: 0.98470, ap: 0.99210, f1: 0.98470, macro_auc: 0.99586, micro_auc: 0.99586
+[Thu Sep 10 21:49:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.49335,mrr:0.71570,  acc: 0.99041, ap: 0.98879, f1: 0.99041, macro_auc: 0.99422, micro_auc: 0.99422
+[Thu Sep 10 21:49:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.52643,mrr:0.68565,  acc: 0.98992, ap: 0.98808, f1: 0.98992, macro_auc: 0.99385, micro_auc: 0.99385
+[Thu Sep 10 21:49:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.54778,mrr:0.74801,  acc: 0.98895, ap: 0.98785, f1: 0.98895, macro_auc: 0.99378, micro_auc: 0.99378
+[Thu Sep 10 21:49:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.42907,mrr:0.72888,  acc: 0.98713, ap: 0.99044, f1: 0.98713, macro_auc: 0.99507, micro_auc: 0.99507
+[Thu Sep 10 21:49:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.26632,mrr:0.70040,  acc: 0.98507, ap: 0.99403, f1: 0.98507, macro_auc: 0.99677, micro_auc: 0.99677
+[Thu Sep 10 21:49:06 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.34826,mrr:0.69487,  acc: 0.98264, ap: 0.99160, f1: 0.98264, macro_auc: 0.99504, micro_auc: 0.99504
+[Thu Sep 10 21:49:07 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.29662,mrr:0.70353,  acc: 0.99271, ap: 0.99325, f1: 0.99271, macro_auc: 0.99640, micro_auc: 0.99640
+[Thu Sep 10 21:49:07 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.44429,mrr:0.72828,  acc: 0.98409, ap: 0.98981, f1: 0.98409, macro_auc: 0.99466, micro_auc: 0.99466
+[Thu Sep 10 21:49:07 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.36884,mrr:0.71743,  acc: 0.98409, ap: 0.99171, f1: 0.98409, macro_auc: 0.99569, micro_auc: 0.99569
+[Thu Sep 10 21:49:07 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss: 0.43608,mrr:0.74492,  acc: 0.98470, ap: 0.98968, f1: 0.98470, macro_auc: 0.99403, micro_auc: 0.99403
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.43768,mrr:0.65638,  acc: 0.99417, ap: 0.99072, f1: 0.99417, macro_auc: 0.99533, micro_auc: 0.99533
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.48738,mrr:0.65887,  acc: 0.99320, ap: 0.99025, f1: 0.99320, macro_auc: 0.99508, micro_auc: 0.99508
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.54911,mrr:0.63842,  acc: 0.99077, ap: 0.98723, f1: 0.99077, macro_auc: 0.99187, micro_auc: 0.99187
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.51493,mrr:0.64428,  acc: 0.99017, ap: 0.98995, f1: 0.99017, macro_auc: 0.99489, micro_auc: 0.99489
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.41403,mrr:0.63382,  acc: 0.99369, ap: 0.99197, f1: 0.99369, macro_auc: 0.99595, micro_auc: 0.99595
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.61062,mrr:0.64645,  acc: 0.99235, ap: 0.98802, f1: 0.99235, macro_auc: 0.99393, micro_auc: 0.99393
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.69654,mrr:0.65255,  acc: 0.99138, ap: 0.98640, f1: 0.99138, macro_auc: 0.99310, micro_auc: 0.99310
+[Thu Sep 10 21:49:21 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.58830,mrr:0.62126,  acc: 0.99186, ap: 0.98855, f1: 0.99186, macro_auc: 0.99421, micro_auc: 0.99421
+[Thu Sep 10 21:49:22 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.53698,mrr:0.62557,  acc: 0.99308, ap: 0.98962, f1: 0.99308, macro_auc: 0.99476, micro_auc: 0.99476
+[Thu Sep 10 21:49:22 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.41282,mrr:0.63947,  acc: 0.99369, ap: 0.99196, f1: 0.99369, macro_auc: 0.99595, micro_auc: 0.99595
+[Thu Sep 10 21:49:22 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.45324,mrr:0.61212,  acc: 0.99259, ap: 0.99032, f1: 0.99259, macro_auc: 0.99445, micro_auc: 0.99445
+[Thu Sep 10 21:49:22 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.42921,mrr:0.64566,  acc: 0.99308, ap: 0.99170, f1: 0.99308, macro_auc: 0.99577, micro_auc: 0.99577
+[Thu Sep 10 21:49:22 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.57419,mrr:0.63039,  acc: 0.99162, ap: 0.98883, f1: 0.99162, macro_auc: 0.99435, micro_auc: 0.99435
+[Thu Sep 10 21:49:22 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.48606,mrr:0.61176,  acc: 0.99296, ap: 0.99056, f1: 0.99296, macro_auc: 0.99524, micro_auc: 0.99524
+[Thu Sep 10 21:49:23 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:21, loss: 0.58595,mrr:0.62907,  acc: 0.99138, ap: 0.98809, f1: 0.99138, macro_auc: 0.99328, micro_auc: 0.99328
+[Thu Sep 10 21:49:23 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03655,mrr:0.94208, acc: 0.99271, ap: 0.99598, f1: 0.99271, macro_auc: 0.99691, micro_auc: 0.99691
+[Thu Sep 10 21:49:23 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03411,mrr:0.92256, acc: 0.99369, ap: 0.99539, f1: 0.99369, macro_auc: 0.99716, micro_auc: 0.99716
+[Thu Sep 10 21:49:23 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03132,mrr:0.92701, acc: 0.99417, ap: 0.99530, f1: 0.99417, macro_auc: 0.99706, micro_auc: 0.99706
+[Thu Sep 10 21:49:23 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03711,mrr:0.93966, acc: 0.99223, ap: 0.99474, f1: 0.99223, macro_auc: 0.99676, micro_auc: 0.99676
+[Thu Sep 10 21:49:23 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03365,mrr:0.91607, acc: 0.99259, ap: 0.99587, f1: 0.99259, macro_auc: 0.99735, micro_auc: 0.99735
+[Thu Sep 10 21:49:23 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03525,mrr:0.94266, acc: 0.99284, ap: 0.99437, f1: 0.99284, macro_auc: 0.99671, micro_auc: 0.99671
+[Thu Sep 10 21:49:24 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03984,mrr:0.94015, acc: 0.99102, ap: 0.99431, f1: 0.99101, macro_auc: 0.99639, micro_auc: 0.99639
+[Thu Sep 10 21:49:24 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03383,mrr:0.92957, acc: 0.99308, ap: 0.99532, f1: 0.99308, macro_auc: 0.99698, micro_auc: 0.99698
+[Thu Sep 10 21:49:24 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.03815,mrr:0.95973, acc: 0.99114, ap: 0.99607, f1: 0.99114, macro_auc: 0.99701, micro_auc: 0.99701
+[Thu Sep 10 21:49:24 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.36144,mrr:0.93753, acc: 0.94330, ap: 0.96194, f1: 0.94322, macro_auc: 0.94685, micro_auc: 0.94685
+[Thu Sep 10 21:49:24 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.20802,mrr:0.91262, acc: 0.92654, ap: 0.98541, f1: 0.92631, macro_auc: 0.98890, micro_auc: 0.98890
+[Thu Sep 10 21:49:24 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.04447,mrr:0.88947, acc: 0.99186, ap: 0.99159, f1: 0.99186, macro_auc: 0.99539, micro_auc: 0.99539
+[Thu Sep 10 21:49:24 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.04910,mrr:0.91255, acc: 0.98980, ap: 0.99139, f1: 0.98980, macro_auc: 0.99431, micro_auc: 0.99431
+[Thu Sep 10 21:49:25 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.04501,mrr:0.93043, acc: 0.98907, ap: 0.99450, f1: 0.98907, macro_auc: 0.99644, micro_auc: 0.99644
+[Thu Sep 10 21:49:25 2026|scalable_tgn_link_prediction.py|INFO] test epoch:21, loss: 0.05508,mrr:0.91491, acc: 0.99041, ap: 0.99422, f1: 0.99041, macro_auc: 0.99615, micro_auc: 0.99615
+[Thu Sep 10 21:49:25 2026|scalable_tgn_link_prediction.py|INFO] {'avg_mrr': 0.9278109832277726}
+[Thu Sep 10 21:49:25 2026|scalable_tgn_link_prediction.py|INFO] {'avg_acc': 0.9842917091981399}
+[Thu Sep 10 21:49:25 2026|scalable_tgn_link_prediction.py|INFO] {'avg_auc': 0.9926879478734363}
+[Thu Sep 10 21:49:25 2026|scalable_tgn_link_prediction.py|INFO] {'avg_rcall10': 0.9996353039083807}
+[Thu Sep 10 21:49:25 2026|scalable_tgn_link_prediction.py|INFO] {'avg_ap': 0.9917586456078167}
+[Thu Sep 10 21:49:25 2026|scalable_tgn_main_link_prediction.py|INFO] All accuracy: 0.9842917091981399
+[Thu Sep 10 21:49:25 2026|scalable_tgn_main_link_prediction.py|INFO] All AUC: 0.9926879478734363
+[Thu Sep 10 21:49:25 2026|scalable_tgn_main_link_prediction.py|INFO] All MRR: 0.9278109832277726
+[Thu Sep 10 21:49:25 2026|scalable_tgn_main_link_prediction.py|INFO] All time: 344.3845953941345
+Total number of transformer parameters is: 55364
+Total number of predit_layer parameters is: 641
+56005
+train steps: 70, val steps 15, test steps 15 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+elapsed time:7.350674152374268s
+13.016154527664185
+2.125103712081909
+15
+13.027855396270752
+2.101271629333496
+15
+12.661144971847534
+2.123152017593384
+15
+12.673089981079102
+2.088346481323242
+15
+12.895365953445435
+2.125372886657715
+15
+13.006997346878052
+2.111515522003174
+15
+13.284915447235107
+2.0855586528778076
+15
+13.042674779891968
+2.0940048694610596
+15
+12.833971738815308
+2.101656198501587
+15
+13.299895524978638
+2.1090497970581055
+15
+13.251408815383911
+2.0605697631835938
+15
+12.727539539337158
+2.116853713989258
+15
+12.811940908432007
+2.0952556133270264
+15
+12.782386064529419
+2.0968215465545654
+15
+13.08588171005249
+2.0821142196655273
+15
+13.027019023895264
+2.092366933822632
+15
+12.836539030075073
+2.066486358642578
+15
+12.77439284324646
+2.0880556106567383
+15
+13.358286142349243
+2.1406588554382324
+15
+13.213452577590942
+2.105685234069824
+15
+13.247426986694336
+2.1010749340057373
+15
+13.323348999023438
+2.1551055908203125
+15
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+341.97466230392456
+[repro] finished_at=2026-09-10T21:49:25+08:00

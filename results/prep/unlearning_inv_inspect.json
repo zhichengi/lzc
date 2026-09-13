@@ -1,0 +1,36 @@
+{
+  "name": "unlearning_inv",
+  "path": "/home/lab_user/project/lzc/repro/unlearning_inv",
+  "git": {
+    "head": "3bfc1f17e82a3a9fad9b1cc3ef28281a1323ea16",
+    "branch": "main",
+    "n_commits_shallow": "1",
+    "subject": "Update README with latest paper reference",
+    "date": "2026-03-11 19:41:05 -0400"
+  },
+  "top": [
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "config.py",
+    "exp/",
+    "lib_dataset/",
+    "lib_gnn_model/",
+    "lib_unlearn/",
+    "lib_utils/",
+    "main.py",
+    "parameter_parser.py"
+  ],
+  "key_files": [
+    "README.md",
+    "LICENSE"
+  ],
+  "readme_head": "## Graph-Unlearning-Inversion\n\nThis is the PyTorch implementation for our WSDM'26 paper \"**Unlearning Inversion Attack for Graph Neural Networks**\" (https://dl.acm.org/doi/abs/10.1145/3773966.3777929). Please find the full version of our paper on arXiv (https://arxiv.org/abs/2506.00808).\n\nThis codebase was adapted from [GIF-torch](https://github.com/wujcan/GIF-torch/). \n\n\n\n## Environment Requirement\nThe code runs well under python 3.6.10. The required packages are as follows:\n\n- pytorch == 1.9.0+cu111\n- torch-geometric == 2.0.3\n\n## Quick Start\n\n```bash\npython main.py --dataset_name cora --target_model=GCN --exp Inversion --method GIF --unlearn_ratio 0.05 --attack_method=trend_steal --num_runs=5 --is_gen_unlearn_request=True --is_gen_unlearned_probs=True\n```\n\n```bash\npython main.py --dataset_name cora --target_model=GCN --exp Inversion --method GIF --unlearn_ratio 0.05 --attack_method=trend_mia --num_runs=5 --is_gen_unlearn_request=True --is_gen_unlearned_probs=True\n```\n\n## BibTeX\nIf you find our work useful in your research, please cite the following in your manuscript:\n\n\n```\n@inproceedings{zhang2026unlearning,\n  title={Unlearning inversion attacks for graph neural networks},\n  author={Zhang, Jiahao and Wang, Yilong and Zhang, Zhiwei and Liu, Xiaorui and Wang, Suhang},\n  booktitle={Proceedings of the Nineteenth ACM International Conference on Web Search and Data Mining},\n  pages={934--945},\n  year={2026}\n}\n```\n",
+  "deps_text": {},
+  "entry_candidates": [
+    "main.py"
+  ],
+  "sh_scripts": [],
+  "yml": [],
+  "n_py": 28
+}

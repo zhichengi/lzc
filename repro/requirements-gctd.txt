@@ -1,0 +1,9 @@
+# 仅列出 dtgb 中缺失、且复现 GCTD 必需的包。
+# 不钉扎 scikit-learn / scipy / torch / pyg，避免覆盖工作区已验证环境。
+# 官方完整钉扎见官方 README；差异记入 REPRO_LOG.md。
+dotmap==1.3.30
+gdown==5.2.0
+ogb==1.3.6
+tensorly==0.9.0
+wandb==0.19.6
+faiss-cpu==1.9.0

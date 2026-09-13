@@ -1,0 +1,10 @@
+[repro] paper=equivariance
+[repro] started_at=2026-09-12T19:46:08+08:00
+[repro] run_id=20260912_194608_smoke_gat_cora_2ep_pid134203
+[repro] repo_commit=1dfe3870fd8a0de7e15db6958289661b2cabdc37
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/equivariance
+[repro] command=python -u main.py --project offline/smoke --is_train --gnn_type GAT --lr 0.001 --lp_ratio 0.3 --max_epochs 2
+[repro] resource_cap_ratio=85 threads=17
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'torch'

@@ -1,0 +1,53 @@
+{
+  "name": "scalegnn",
+  "path": "/home/lab_user/project/lzc/repro/scalegnn",
+  "git": {
+    "head": "4825c7ed2ccb8a7a4c47edce4afefb1e771389aa",
+    "branch": "main",
+    "n_commits_shallow": "1",
+    "subject": "Update README",
+    "date": "2026-06-12 00:11:30 +0800"
+  },
+  "top": [
+    ".gitignore",
+    "README.md",
+    "config_arxiv.yaml",
+    "config_citeseer.yaml",
+    "config_cora.yaml",
+    "config_papers100m_raw_lowpass.yaml",
+    "config_papers100m_selective_high.yaml",
+    "config_products.yaml",
+    "config_products_selective_high.yaml",
+    "config_pubmed.yaml",
+    "dataloader.py",
+    "logger.py",
+    "main.py",
+    "model.py",
+    "ogb_precompute_train.py",
+    "papers100m_memmap_train.py",
+    "papers100m_prepare_hops.py",
+    "postprocess.py",
+    "precompute.py",
+    "precomputed_model.py",
+    "requirements.txt",
+    "run_paper_experiments.py",
+    "train.py",
+    "utils.py"
+  ],
+  "key_files": [
+    "README.md",
+    "requirements.txt"
+  ],
+  "readme_head": "# ScaleGNN\n\nImplementation for **ScaleGNN: Towards Scalable Graph Neural Networks via Adaptive High-order Neighboring Feature Fusion**.\n\nThis code keeps the paper's core idea while using scalable engineering paths:\n\n- differentiable soft-to-hard high-order masking for sampled/local ScaleGNN;\n- static pure-hop propagation features for fixed graphs;\n- learnable hop fusion `alpha` and low/high fusion `beta`;\n- mini-batch training on precomputed OGB features;\n- memmap training for papers100M target nodes.\n\n## Environment\n\nThe large-graph runs were verified on:\n\n- Python 3.12.13\n- PyTorch 2.11.0 + CUDA 12.8\n- PyG 2.7.0\n- NVIDIA GeForce RTX 5060 Ti 16GB\n\nInstall with:\n\n```bash\npip install -r requirements.txt\n```\n\n`torch-spline-conv` is not required by the current implementation.\n\n## Run\n\nSmall citation datasets:\n\n```bash\npython main.py --config config_cora.yaml\npython main.py --config config_citeseer.yaml\npython main.py --config config_pubmed.yaml\n```\n\nLarge OGB datasets:\n\n```bash\npython ogb_precompute_train.py --config config_arxiv.yaml\npython ogb_precompute_train.py --config config_products.yaml\npython papers100m_memmap_train.py --config config_papers100m_raw_lowpass.yaml\n```\n\nThe public configs use portable default data roots:\n\n```text\nconfig_arxiv.yaml / config_products.yaml: ./data\nconfig_papers100m_raw_lowpass.yaml: ./data/papers100m_memmap\n```\n\nFor local machines with existing datasets, edit `data_root` or `data.root` in the YAML config.\n\n\n## Notes\n\n- Datasets, generated OGB/PyG artifacts, checkpoints, generated sweep configs, and Python caches are excluded through `.gitignore`.\n- `ogb_precompute_train.py` avoids per-batch `A^K` construction by precomputing pure hop features once on CPU, then training the fusion model in GPU mini-batches.\n- `model.max_hop` / `candidate_hops` treat K as a maximum candidate range; learned hop weights can suppress ineffective distant hops.\n- `loss.target_high_hop_mass` can keep a small controlled amount of high-order information for over-smoothing studies without forcing all distant hops to dominate.\n- Large-graph smoothing is edge-chunked, so products can use label smoothing on a 16GB GPU without expanding all edge-class messages at once.\n- `papers100m_memmap_train.py` only reads the local target subset and batch-indexed raw features, so it can run on a 16GB GPU without loading the full papers100M feature matrix into memory.\n- For arxiv, optional label smoothing over logits is enabled in the recommended config and printed as `Postprocessed Test Acc`.\n",
+  "deps_text": {
+    "requirements.txt": "# Verified environment:\n#   Python 3.12.13\n#   CUDA 12.8\n#   PyTorch 2.11.0\n#   GPU tested: NVIDIA GeForce RTX 5060 Ti 16GB\n#\n# Install PyTorch first from the official CUDA 12.8 wheel index, then PyG wheels.\n\n--extra-index-url https://download.pytorch.org/whl/cu128\n-f https://data.pyg.org/whl/torch-2.11.0+cu128.html\n\ntorch==2.11.0+cu128\ntorch-geometric==2.7.0\npyg-lib==0.7.0+pt211cu128\ntorch-scatter==2.1.2+pt211cu128\ntorch-sparse==0.6.18+pt211cu128\ntorch-cluster==1.6.3+pt211cu128\n\nogb==1.3.6\nPyYAML==6.0.3\ntqdm==4.67.3\nnumpy==2.4.4\nscipy==1.17.1\npandas==3.0.3\nscikit-learn==1.9.0\n"
+  },
+  "entry_candidates": [
+    "main.py",
+    "run_paper_experiments.py",
+    "train.py"
+  ],
+  "sh_scripts": [],
+  "yml": [],
+  "n_py": 13
+}

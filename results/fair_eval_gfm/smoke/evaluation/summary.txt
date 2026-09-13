@@ -1,0 +1,8 @@
+function: bin.evaluate.main
+time: 0:00:01
+average_time: '0:00:00.934158'
+n_reports: 1
+scores:
+    train: 0.2904476036034678
+    val: 0.3063972427632128
+    test: 0.2904250540495653

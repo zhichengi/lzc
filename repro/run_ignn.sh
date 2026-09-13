@@ -26,6 +26,8 @@ LOG_FILE="${RUN_DIR}/run.log"
 META_FILE="${RUN_DIR}/metadata.txt"
 COMMAND_FILE="${RUN_DIR}/command.txt"
 
+# shellcheck disable=SC1091
+source "${ROOT}/scripts/capped_env.sh"
 export LD_LIBRARY_PATH="${ENV_DIR}/lib:${ENV_DIR}/lib/python3.8/site-packages/torch/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 export PYTHONUNBUFFERED=1
 
@@ -73,6 +75,11 @@ PY
     echo "source_status_end"
     echo -n "command="
     cat "${COMMAND_FILE}"
+    echo "resource_cap_ratio=${REPRO_CAP_RATIO:-}"
+    echo "resource_cap_threads=${REPRO_CAP_THREADS:-}"
+    echo "resource_cap_cpu_quota=${REPRO_CAP_CPU_QUOTA:-}"
+    echo "resource_cap_memory_max=${REPRO_CAP_MEMORY_MAX:-}"
+    echo "resource_cap_cuda_fraction=${REPRO_CAP_CUDA_FRACTION:-}"
 } >"${META_FILE}"
 
 on_exit() {
@@ -93,4 +100,4 @@ trap on_exit EXIT
 } | tee -a "${LOG_FILE}"
 
 cd "${REPO}"
-"${PYTHON}" -u -m main "$@" 2>&1 | tee -a "${LOG_FILE}"
+bash "${ROOT}/scripts/run_capped.sh" "${PYTHON}" -u -m main "$@" 2>&1 | tee -a "${LOG_FILE}"

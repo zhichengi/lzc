@@ -1,0 +1,14 @@
+[repro] paper=labeling_trick
+[repro] started_at=2026-09-12T17:53:50+08:00
+[repro] run_id=20260912_175350_smoke_import_pid84939
+[repro] repo_commit=17b71959c854c5379e1b042100321661c7d1d55e
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/labeling_trick/LinkPred
+[repro] command=python -c from Dataset import load_dataset; d=load_dataset('Cora'); print('nodes', d.num_nodes, 'edges', d.edge_index.size(1))
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p85086-i100428.scope; invocation ID: eab84b6f372a479aa7543ba9c1a57dea
+nodes 2708 edges 10556
+[repro] exit_code=0
+[repro] runtime_seconds=8
+[repro] finished_at=2026-09-12T17:54:02+08:00

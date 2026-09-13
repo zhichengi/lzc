@@ -1,0 +1,30 @@
+[repro] paper=stable_chebnet
+[repro] started_at=2026-09-12T18:33:16+08:00
+[repro] run_id=20260912_183316_smoke_barbell2ep_pid101912
+[repro] repo_commit=7d7a7e2696119891d277fd3fa2b32fdda454b814
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/stable_chebnet
+[repro] command=bash -c cd Barbell && python run_multiple.py --yaml_name /home/lab_user/project/lzc/results/stable_chebnet/smoke_barbell.yml
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=False gpu=cpu
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p102161-i84094.scope; invocation ID: 3234d498c69145b4b0be563441d00efe
+{'exp': {'exp_name': ['barbell_smoke'], 'wandb': [False], 'num_seeds': [1], 'start_seed': [0], 'device': [0], 'seed': [58]}, 'data': {'dataset': ['barbell'], 'samples': [16], 'task_type': ['mse_regression'], 'eval_metric': ['mse'], 'minimize': [True], 'num_nodes': [20]}, 'model': {'model_name': ['modelnode'], 'layer_type': ['Cheb'], 'input_dim': [1], 'hidden_dim': [32], 'out_dim': [1], 'num_layers': [2], 'act': ['relu'], 'k': [4], 'step': [0.2]}, 'optim': {'lr': [0.001], 'lr_scheduler': ['ReduceLROnPlateau'], 'early_stop': [False], 'epochs': [2], 'batch_size': [8]}}
+==========================================================
+Using device cpu
+Seed: 0
+======================== Args ===========================
+===================================================
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/stable_chebnet/Barbell/run_multiple.py", line 139, in <module>
+    exp_main(config)
+  File "/home/lab_user/project/lzc/repro/stable_chebnet/Barbell/run_multiple.py", line 20, in exp_main
+    curves = main(config)
+  File "/home/lab_user/project/lzc/repro/stable_chebnet/Barbell/run.py", line 67, in main
+    model = model_lookup(config)
+  File "/home/lab_user/project/lzc/repro/stable_chebnet/Barbell/nn/utils/model_lookup.py", line 4, in model_lookup
+    model = ModelNode(
+  File "/home/lab_user/project/lzc/repro/stable_chebnet/Barbell/nn/model.py", line 69, in __init__
+    conv = module(hidden_dim, hidden_dim, normalize=self.normalize, bias=bias, eps=eps,
+  File "/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch_geometric/nn/conv/cheb_conv.py", line 83, in __init__
+    super().__init__(**kwargs)
+TypeError: MessagePassing.__init__() got an unexpected keyword argument 'normalize'

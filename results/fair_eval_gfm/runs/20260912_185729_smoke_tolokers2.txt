@@ -1,0 +1,7 @@
+2026-09-12T18:57:50+08:00
+env=uv .venv python3.12.9 torch=2.4.0 dgl=2.4.0+cu124
+device=cpu (CUDA_VISIBLE_DEVICES empty; SGPC held GPU)
+config=results/fair_eval_gfm/smoke/evaluation.toml n_steps=2 n_seeds=1 ensemble=0
+exit=0
+scores train=0.290 val=0.306 test=0.290 (not paper)
+command: uv run --offline bin/go.py results/fair_eval_gfm/smoke/evaluation.toml --n_seeds 1 --ensemble_size 0 --force

@@ -1,0 +1,38 @@
+id,kind,setting,env,seeds,n,mean_test,std_test,best_test,best_seed,notes,source
+A,single,official default (lr_rec=0.001, thresh=0.05),dtgb,42,1,30.20,,30.20,42,complete graph 1225 edges; train acc stuck 33.3%; majority-class level,results/gctd/runs/20260910_102048_cora.log
+B,single,A + weighted=0 atol=1e-6,dtgb,42,1,30.40,,30.40,42,same cache/collapse as A,results/gctd/runs/20260910_102156_cora.log
+C,single,edge_thresh=0.5 default lr_rec,dtgb,42,1,41.60,,41.60,42,221 edges density 0.18; train acc can reach 100%,results/gctd/runs/20260910_103126_cora.log
+D,fail,edge_thresh=0.5 lr_rec=0.01,dtgb,42,0,,,,"0 edges (adj max=0.456)",results/gctd/runs/20260910_103155_cora.log
+E,single,official thresh=0.05 lr_rec=0.1,dtgb,42,1,74.50,,74.50,42,12 edges; first setting clearly above majority class,results/gctd/runs/20260910_103210_cora.log
+F,single,official thresh=0.05 lr_rec=0.01,dtgb,42,1,18.20,,18.20,42,1224/1225 edges almost complete,results/gctd/runs/20260910_103426_cora.log
+G,single,E + weighted=0 atol=1e-6,dtgb,42,1,69.40,,69.40,42,same 12 edges as E,results/gctd/runs/20260910_103446_cora.log
+H,single,E + lr_gnn=0.01,dtgb,42,1,70.70,,70.70,42,,results/gctd/runs/20260910_103500_cora.log
+I,single,F + weighted=0 atol=1e-6,dtgb,42,1,18.50,,18.50,42,near-complete graph,results/gctd/runs/20260910_103520_cora.log
+J,fail,thresh=0.05 lr_rec=0.05,dtgb,42,0,,,,"0 edges (adj max=0.040)",results/gctd/runs/20260910_103714_cora.log
+K,single,thresh=0.02 lr_rec=0.1,dtgb,42,1,72.50,,72.50,42,824 edges density 0.67,results/gctd/runs/20260910_103729_cora.log
+E0,fail,E setting,dtgb,0,0,,,,"0 edges (adj max=0)",results/gctd/runs/20260910_103749_cora.log
+E1,single,E setting,dtgb,1,1,31.70,,31.70,1,12 edges but only 4 train supernodes,results/gctd/runs/20260910_103805_cora.log
+E7,fail,E setting,dtgb,7,0,,,,"0 edges (adj max=0.017)",results/gctd/runs/20260910_103818_cora.log
+L,single,feat_from_cluster=all-in-cluster + E,dtgb,42,1,31.90,,31.90,42,35 unique features; worse than class+split prototypes,results/gctd/runs/20260910_104740_cora.log
+M,single,feat_from_cluster=all-in-cluster + thresh=0.5,dtgb,42,1,31.00,,31.00,42,vs C 41.60,results/gctd/runs/20260910_104836_cora.log
+L2,single,feat_from_cluster=same-class-split-in-cluster + E,dtgb,42,1,37.60,,37.60,42,still far below E 74.50,results/gctd/runs/20260910_104959_cora.log
+M2,single,feat_from_cluster=same-class-split-in-cluster + thresh=0.5,dtgb,42,1,35.90,,35.90,42,vs C 41.60,results/gctd/runs/20260910_105018_cora.log
+N,single,lr_rec=0.1 edge_quantile=0.99,dtgb,42,1,74.80,,74.80,42,26 edges,results/gctd/runs/20260910_105649_cora.log
+O,single,lr_rec=0.1 edge_quantile=0.95,dtgb,42,1,73.70,,73.70,42,118 edges,results/gctd/runs/20260910_105708_cora.log
+P,single,lr_rec=0.1 edge_rel=0.5,dtgb,42,1,73.70,,73.70,42,275 edges,results/gctd/runs/20260910_105728_cora.log
+Qk,single,lr_rec=0.1 edge_topk=12,dtgb,42,1,75.00,,75.00,42,24 edges; best single before quota,results/gctd/runs/20260910_105748_cora.log
+R,single,lr_rec=0.001 edge_quantile=0.99,dtgb,42,1,53.20,,53.20,42,default lr still weak even if sparse,results/gctd/runs/20260910_105807_cora.log
+Qk10,10-run,lr_rec=0.1 edge_topk=12,dtgb,0-9,10,47.1,15.7,74.10,4,"per-seed 32.0 28.0 50.7 63.4 74.1 64.8 41.7 42.4 41.7 31.9; collapse + tiny train split",repro/REPRO_LOG.md 10-run topk
+Qretry,10-run,lr_rec=0.1 edge_topk=12 rec_retries+train-quota (retry to 0.01),dtgb,0-9,10,65.96,9.43,75.20,2,best 10-run we keep; seed42 same recipe 73.30,repro/REPRO_LOG.md quota+retry
+Qretry42,single,same recipe as Qretry,dtgb,42,1,73.30,,73.30,42,,repro/REPRO_LOG.md quota+retry
+direct01,single,lr_rec=0.01 edge_topk=12 (no 0.1-then-retry),dtgb,42,1,70.60,,70.60,42,same magnitude as retried 0.01,repro/REPRO_LOG.md quota+retry
+leak,single,train_all_synth=1 (val/test prototypes in train),dtgb,42,1,88.00,,88.00,42,LABEL LEAK; not a valid repro,repro/REPRO_LOG.md quota+retry
+grid42,single,lr_rec=0.01 topk=12 R=5 add_ratio=0.2 lr_gnn=0.01,dtgb,42,1,76.30,,76.30,42,best single overall; val 76.4; do NOT promote to default,results/gctd/runs/sweep_R_add_lrgnn.csv
+grid10,10-run,same as grid42,dtgb,0-9,10,52.7,21.3,73.20,3,"per-seed 26.5 68.9 54.5 73.2 71.8 18.6 38.7 33.9 70.7 69.7; lr_gnn=0.01 unstable",repro/REPRO_LOG.md grid
+env01_42,single,lr_rec=0.01 edge_topk=12,gctd,42,1,69.20,,69.20,42,Python 3.11 torch 2.1.2 pyg 2.6.1,results/gctd/runs/env_gctd_lr01_seeds.csv
+env01_10,10-run,lr_rec=0.01 edge_topk=12,gctd,0-9,10,61.0,13.1,73.60,8,"67.3 61.0 64.4 69.7 69.4 71.9 39.2 36.8 73.6 57.1; pinned env does not hit 81.4",results/gctd/runs/env_gctd_lr01_seeds.csv
+env10_42,single,lr_rec=0.1 edge_topk=12,gctd,42,1,44.90,,44.90,42,core not collapsed but soft (max 0.089),repro/REPRO_LOG.md env gctd
+gcond_relu,single,gcond_protocol=1 relu_sym no topk,gctd,42,1,23.30,,23.30,42,1225 edges again; ReLU did not sparsify,repro/REPRO_LOG.md GCond
+gcond_topk42,single,gcond_protocol=1 edge_topk=12,gctd,42,1,53.10,,53.10,42,,repro/REPRO_LOG.md GCond
+gcond_topk10,10-run,gcond_protocol=1 edge_topk=12,gctd,0-9,10,58.1,9.6,70.30,0,full 35-node supervision slightly worse than class prototypes,results/gctd/runs/gcond_protocol_topk12_seeds.csv
+paper,reference,Table 2 GCTD Cora 1.3%,official,unspecified,10,81.40,1.60,,"",hyperparams not in README; wandb Bayesian search,paper Table 2

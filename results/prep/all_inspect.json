@@ -1,0 +1,486 @@
+[
+  {
+    "name": "gbn",
+    "path": "/home/lab_user/project/lzc/repro/gbn",
+    "git": {
+      "head": "72ad3692916ecc60f2c78d5bd01a55d7c6297a4f",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Update README",
+      "date": "2025-10-04 13:23:26 +0800"
+    },
+    "top": [
+      ".gitignore",
+      "README.md",
+      "case_study.ipynb",
+      "configs/",
+      "graph_transfer.py",
+      "logger.py",
+      "main.py",
+      "modules/",
+      "node_classification.py",
+      "pics/",
+      "requirements.txt",
+      "utils/"
+    ],
+    "key_files": [
+      "README.md",
+      "requirements.txt"
+    ],
+    "readme_head": "# GBN: Graph Boundary conditioned message passing Neural network\n\n## Get start\n\n\nRun the command\n```shell\npython main.py --task \"${TASK}\" --dataset \"${DATA_NAME}\"\n```\nPlease replace ```${TASK}``` by ```NC``` or ```Transfer```, \nreplace ```${DATA_NAME}``` by dataset name, e.g., ```CS```.\n\n## Model Illustration\n\n<div align=center>\n<img src=\"./pics/illus.png\" width=100% >\n</div>\n<div align=center>\nFigure 1. An Illustration of GBN\n</div>\n\n## Experimental Results\n<div align=center>\n<img src=\"./pics/results.png\" width=100% >\n</div>\n<div align=center>\nFigure 2. Node Classification Results\n</div>\n\n<div align=center>\n<img src=\"./pics/dirichlet.png\" width=80% >\n</div>\n<div align=center>\nFigure 3. Dirichlet energy curve\n</div>\n\n<div align=center>\n<img src=\"./pics/smooth.png\" width=80% >\n</div>\n<div align=center>\nFigure 4. Node classification accuracy with\nrespect to the number of network layers on\nCora dataset\n</div>\n\n<div align=center>\n<img src=\"./pics/transfer.png\" width=100% >\n</div>\n<div align=center>\nFigure 5. Results of graph transfer task in terms of Mean Squared Error (%)\n</div>\n\n## Case Study\n<div align=center>\n<img src=\"./pics/case.png\" width=100% >\n</div>\n<div align=center>\nFigure 6. Case Study\n</div>\n\n## Citation\n```text\n@inproceedings{\nsun2025deeper,\ntitle={Deeper and Better: Mitigating Oversmoothing and Oversquashing in {MPNN}s via Local Riemannian Geometry},\nauthor={Li Sun, Zhenhao Huang, Ming Zhang, Philip S. Yu},\nbooktitle={The Thirty-ninth Annual Conference on Neural Information Processing Systems},\nyear={2025},\nurl={https://openreview.net/forum?id=yNej0aGtAZ}\n}\n```",
+    "deps_text": {
+      "requirements.txt": "matplotlib==3.7.1\nnetworkx==3.0\nnumpy==1.24.2\nscikit_learn==1.3.2\ntorch==2.0.0+cu118\ntorch_geometric==2.6.1\ntorch_scatter==2.1.2+pt20cu118\ntqdm==4.61.2\n"
+    },
+    "entry_candidates": [
+      "main.py",
+      "utils/train_utils.py"
+    ],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 12
+  },
+  {
+    "name": "stable_chebnet",
+    "path": "/home/lab_user/project/lzc/repro/stable_chebnet",
+    "git": {
+      "head": "7d7a7e2696119891d277fd3fa2b32fdda454b814",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Update README.md",
+      "date": "2025-10-22 17:08:56 +0200"
+    },
+    "top": [
+      "Barbell/",
+      "GraphProp/",
+      "OGB/",
+      "Peptides/",
+      "README.md",
+      "assets/",
+      "jacobian_cheb.py"
+    ],
+    "key_files": [
+      "README.md"
+    ],
+    "readme_head": "## Code of *Return of ChebNet — Understanding and Improving an Overlooked GNN on Long-Range Tasks* [📄 [Paper]](https://arxiv.org/abs/2506.07624) \n## *⭐ NeurIPS 2025 Spotlight*\n\n![Alt text](assets/overview.png)\n---\n\n## Dependencies\n\n- [PyTorch Geometric](https://github.com/pyg-team/pytorch_geometric)\n- [OGB](https://github.com/snap-stanford/ogb)\n\n## Usage\n\n\n### OGB Benchmarks\n\nNavigate into the `OGB` folder for dataset scripts:\n\n- **arXiv citation network**:\n  ```bash\n  python ogb_datasets.py\n  ```\n\n- **Protein–protein interaction (OGB-Proteins)**:\n  ```bash\n  python ogbproteins.py\n  ```\n\n- **OGB-Proteins with Stable-ChebNet**:\n  ```bash\n  python ogbproteins_euler.py     --model_name eulerchebnet     --hidden_channels #insert_dim     --num_layers #insert_layers     --K #insert_Khops     --lr #insert_lr\n  ```\n\n### Peptides dataset\n\nTwo pipelines are provided under `Peptides/Stable/`:\n\n- **Function Prediction**:\n  ```bash\n  cd Peptides/Stable\n  python ChebStable_peptide.py\n  ```\n\n- **Structure Prediction**:\n  ```bash\n  cd Peptides/Stable\n  python ChebStable_Struc.py\n  ```\n\nAdjust hyperparameters in the scripts or configuration files as needed.\n\n\n### Graph Property Prediction (GraphProp)\n\n1. Edit your conda environment in `GraphProp/graph_prop_pred/run_models.sh` (see line 13).\n2. Run the shell script to launch experiments:\n\n   ```bash\n   cd GraphProp/graph_prop_pred\n   bash run_models.sh\n   ```\n\n3. Or invoke `main.py` directly:\n\n   ```bash\n   python -u main.py      --data_name GraphProp      --task ecc      --model_name Euler_GraphProp\n   ```\n\nSupported `--model_name` values:\n\n- `Euler_GraphProp` (Stable-ChebNet)\n- `Cheb_GraphProp` (ChebNet)\n- `GCN_GraphProp` (Graph Convolutional Network)\n- `GAT_GraphProp` (Graph Attention Network)\n  \n### Barbell Graphs task\n\nLaunch the Barbell experiments via Slurm:\n\n```bash\ncd Barbell\nsbatch run_barb.sh\n```\n\nSpecify clique sizes and other parameters in the `configs/*.yaml` files.\n\n\n## 📖 Citation\n\nIf you use this code or build upon this work, please cite:\n\n```bibtex\n@article{hariri2025return,\n  title={Return of ChebNet: Understanding and Improving an Overlooked GNN on Long Range Tasks},\n  author={Hariri, Ali and Arroyo, {\\'A}lvaro and Gravina, Alessio and Eliasof, Moshe and Sch{\\\"o}nlieb, Carola-Bibiane and Bacciu, Davide and Azizzadenesheli, Kamyar and Dong, Xiaowen and Vandergheynst, Pierre},\n  journal={arXiv preprint arXiv:2506.07624},\n  year={2025}\n}\n\n",
+    "deps_text": {},
+    "entry_candidates": [
+      "Barbell/run.py",
+      "Barbell/run_multiple.py",
+      "Barbell/utils/train.py",
+      "GraphProp/graph_prop_pred/main.py",
+      "GraphProp/graph_prop_pred/train_GraphProp.py",
+      "Peptides/Stable/run_euler_once.py",
+      "Peptides/Stable/run_iters_euler.py"
+    ],
+    "sh_scripts": [
+      "Barbell/run_barb.sh",
+      "GraphProp/graph_prop_pred/run_models.sh",
+      "GraphProp/graph_prop_pred/run_all.sh",
+      "Barbell/configs/backup_submit.sh",
+      "Barbell/configs/gpt_submit.sh"
+    ],
+    "yml": [],
+    "n_py": 69
+  },
+  {
+    "name": "puma",
+    "path": "/home/lab_user/project/lzc/repro/puma",
+    "git": {
+      "head": "9e4e87f53db0da6aacad4a0a9d08f1c2970413d0",
+      "branch": "master",
+      "n_commits_shallow": "1",
+      "subject": "Fix the CLI syntax.",
+      "date": "2024-02-07 22:15:59 +1000"
+    },
+    "top": [
+      "README.md",
+      "backbones/",
+      "data/",
+      "data_stream.py",
+      "figs/",
+      "methods/",
+      "results/",
+      "scripts/",
+      "train.py",
+      "utilities.py"
+    ],
+    "key_files": [
+      "README.md"
+    ],
+    "readme_head": "# PUMA (Continual Graph Learning)\nThis is the official repository for the paper [PUMA: Efficient Continual Graph Learning with Graph Condensation](https://arxiv.org/abs/2312.14439) which is an extension of [CaT: Balanced Continual Graph Learning with Graph Condensation](https://arxiv.org/abs/2309.09455) ([code](https://github.com/superallen13/CaT-CGL)).\n\nThe following figure shows the PUMA framework in details.\n![CaT Framework](./figs/puma.png)\n\n# Main experiment results.\n![class-IL results](./figs/table2.png)\n\n# Experiment environment\nOur experiments are run on the enviroment based on `Python 3.8` with the following packages:\n\n```\npytorch==1.13.0\ntorch-geometric==2.2.0  # for deploying GNNs.\nogb==1.3.6  # for obtaining arxiv and prodcuts datasets.\nprogressbar2==4.2.0  # for visulasing the process of the condensation.\n```\n\n# Usage\nTo reproduce the results of Table 2 (classIL setting), please run the `table2.sh` in the `srcripts` folder:\n```\nbash ./scripts/table2.sh\n```\n\n# Cite\nIf you find this repo useful, please cite\n\n```\n@inproceedings{CaT,\n  author    = {Yilun Liu and\n               Ruihong Qiu and\n               Yanran Tang and\n               Hongzhi Yin and\n               Zi Huang},\n  title     = {PUMA: Efficient Continual Graph Learning with Graph Condensation},\n  journal   = {CoRR},\n  volume    = {abs/2312.14439},\n  year      = {2023}\n}\n```\n\n# Credit\nThis repository was developed based on the [CGLB](https://github.com/QueuQ/CGLB) and [CaT](https://github.com/superallen13/CaT-CGL).",
+    "deps_text": {},
+    "entry_candidates": [
+      "scripts/table2.sh",
+      "train.py"
+    ],
+    "sh_scripts": [
+      "scripts/table2.sh"
+    ],
+    "yml": [],
+    "n_py": 21
+  },
+  {
+    "name": "scalegnn",
+    "path": "/home/lab_user/project/lzc/repro/scalegnn",
+    "git": {
+      "head": "4825c7ed2ccb8a7a4c47edce4afefb1e771389aa",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Update README",
+      "date": "2026-06-12 00:11:30 +0800"
+    },
+    "top": [
+      ".gitignore",
+      "README.md",
+      "config_arxiv.yaml",
+      "config_citeseer.yaml",
+      "config_cora.yaml",
+      "config_papers100m_raw_lowpass.yaml",
+      "config_papers100m_selective_high.yaml",
+      "config_products.yaml",
+      "config_products_selective_high.yaml",
+      "config_pubmed.yaml",
+      "dataloader.py",
+      "logger.py",
+      "main.py",
+      "model.py",
+      "ogb_precompute_train.py",
+      "papers100m_memmap_train.py",
+      "papers100m_prepare_hops.py",
+      "postprocess.py",
+      "precompute.py",
+      "precomputed_model.py",
+      "requirements.txt",
+      "run_paper_experiments.py",
+      "train.py",
+      "utils.py"
+    ],
+    "key_files": [
+      "README.md",
+      "requirements.txt"
+    ],
+    "readme_head": "# ScaleGNN\n\nImplementation for **ScaleGNN: Towards Scalable Graph Neural Networks via Adaptive High-order Neighboring Feature Fusion**.\n\nThis code keeps the paper's core idea while using scalable engineering paths:\n\n- differentiable soft-to-hard high-order masking for sampled/local ScaleGNN;\n- static pure-hop propagation features for fixed graphs;\n- learnable hop fusion `alpha` and low/high fusion `beta`;\n- mini-batch training on precomputed OGB features;\n- memmap training for papers100M target nodes.\n\n## Environment\n\nThe large-graph runs were verified on:\n\n- Python 3.12.13\n- PyTorch 2.11.0 + CUDA 12.8\n- PyG 2.7.0\n- NVIDIA GeForce RTX 5060 Ti 16GB\n\nInstall with:\n\n```bash\npip install -r requirements.txt\n```\n\n`torch-spline-conv` is not required by the current implementation.\n\n## Run\n\nSmall citation datasets:\n\n```bash\npython main.py --config config_cora.yaml\npython main.py --config config_citeseer.yaml\npython main.py --config config_pubmed.yaml\n```\n\nLarge OGB datasets:\n\n```bash\npython ogb_precompute_train.py --config config_arxiv.yaml\npython ogb_precompute_train.py --config config_products.yaml\npython papers100m_memmap_train.py --config config_papers100m_raw_lowpass.yaml\n```\n\nThe public configs use portable default data roots:\n\n```text\nconfig_arxiv.yaml / config_products.yaml: ./data\nconfig_papers100m_raw_lowpass.yaml: ./data/papers100m_memmap\n```\n\nFor local machines with existing datasets, edit `data_root` or `data.root` in the YAML config.\n\n\n## Notes\n\n- Datasets, generated OGB/PyG artifacts, checkpoints, generated sweep configs, and Python caches are excluded through `.gitignore`.\n- `ogb_precompute_train.py` avoids per-batch `A^K` construction by precomputing pure hop features once on CPU, then training the fusion model in GPU mini-batches.\n- `model.max_hop` / `candidate_hops` treat K as a maximum candidate range; learned hop weights can suppress ineffective distant hops.\n- `loss.target_high_hop_mass` can keep a small controlled amount of high-order information for over-smoothing studies without forcing all distant hops to dominate.\n- Large-graph smoothing is edge-chunked, so products can use label smoothing on a 16GB GPU without expanding all edge-class messages at once.\n- `papers100m_memmap_train.py` only reads the local target subset and batch-indexed raw features, so it can run on a 16GB GPU without loading the full papers100M feature matrix into memory.\n- For arxiv, optional label smoothing over logits is enabled in the recommended config and printed as `Postprocessed Test Acc`.\n",
+    "deps_text": {
+      "requirements.txt": "# Verified environment:\n#   Python 3.12.13\n#   CUDA 12.8\n#   PyTorch 2.11.0\n#   GPU tested: NVIDIA GeForce RTX 5060 Ti 16GB\n#\n# Install PyTorch first from the official CUDA 12.8 wheel index, then PyG wheels.\n\n--extra-index-url https://download.pytorch.org/whl/cu128\n-f https://data.pyg.org/whl/torch-2.11.0+cu128.html\n\ntorch==2.11.0+cu128\ntorch-geometric==2.7.0\npyg-lib==0.7.0+pt211cu128\ntorch-scatter==2.1.2+pt211cu128\ntorch-sparse==0.6.18+pt211cu128\ntorch-cluster==1.6.3+pt211cu128\n\nogb==1.3.6\nPyYAML==6.0.3\ntqdm==4.67.3\nnumpy==2.4.4\nscipy==1.17.1\npandas==3.0.3\nscikit-learn==1.9.0\n"
+    },
+    "entry_candidates": [
+      "main.py",
+      "run_paper_experiments.py",
+      "train.py"
+    ],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 13
+  },
+  {
+    "name": "labeling_trick",
+    "path": "/home/lab_user/project/lzc/repro/labeling_trick",
+    "git": {
+      "head": "17b71959c854c5379e1b042100321661c7d1d55e",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Update README.md",
+      "date": "2025-01-18 12:28:36 +0800"
+    },
+    "top": [
+      "DirLinkPred/",
+      "Hyper/",
+      "LinkPred/",
+      "README.md",
+      "Subg/"
+    ],
+    "key_files": [
+      "README.md"
+    ],
+    "readme_head": "This repository contains the official code for the paper Improving Graph Neural Networks on Multi-node Tasks with Labeling Trick.\n**Environment**\n\nTested Combination:\ntorch 1.13.0 + pyg 2.2.0 + ogb 1.3.5\n\n**Experiments**\n\nEach directory contain a different code for experiments.\n\n| name        | experiments                 | \n|-------------|-----------------------------|\n| DirLinkPred | Directed Link Prediction    |\n| Hyper       | Hyper Link Prediction       |\n| LinkPred    | Undirected link prediction  |\n| SubG        | SubGraph Prediction         |\n",
+    "deps_text": {},
+    "entry_candidates": [
+      "Hyper/main.py",
+      "LinkPred/main.py",
+      "Subg/impl/train.py"
+    ],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 46
+  },
+  {
+    "name": "mavn",
+    "path": "/home/lab_user/project/lzc/repro/mavn",
+    "git": {
+      "head": "3773c40a753a08528aa73c641c4f991ba4cfd4e5",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Fix license name formatting in README.md",
+      "date": "2026-05-29 23:34:57 +0900"
+    },
+    "top": [
+      "LICENSE.txt",
+      "README.md",
+      "Setup_MAVN_KDD2026.pdf",
+      "code/",
+      "requirements.txt"
+    ],
+    "key_files": [
+      "README.md",
+      "requirements.txt"
+    ],
+    "readme_head": "# Learn When and Where to Connect: Adaptive Virtual Nodes for Dynamic Message Passing on Graphs\n\nThis is the official code of \"Learn When and Where to Connect: Adaptive Virtual Nodes for Dynamic Message Passing on Graphs\"\\\n**Published in the 32nd SIGKDD Conference on Knowledge Discovery and Data Mining V.2 (KDD 2026 Research Track).**\n\nAll codes are written by [Jaejun Lee](https://jaejunlee714.github.io/) (jjlee98@kaist.ac.kr).\\\nIf you use this code, please cite our paper.\n\n```bibtex\n@inproceedings{mavn,\n\tauthor={Jaejun Lee and Joyce Jiyoung Whang},\n\ttitle={{Learn When and Where to Connect}: Adaptive Virtual Nodes for Dynamic Message Passing on Graphs},\n\tbooktitle={Proceedings of the 32nd SIGKDD Conference on Knowledge Discovery and Data Mining V.2},\n\tyear={2026},\n\tpages={}\n}\n```\n<!--\n```bibtex\n@inproceedings{mavn,\n  author={Jaejun Lee and Joyce Jiyoung Whang},\n  title={{Learn When and Where to Connect}: Adaptive Virtual Nodes for Dynamic Message Passing on Graphs},\n  year={2026},\n\tjournal={},\n\tdoi={},\n}\n```\n-->\n\n## Requirements\n\nWe used python 3.9.19 and PyTorch 2.0.1 with cudatoolkit 11.7.\n\nYou can install all requirements (except python) with:\n\n```setup\npip install -r requirements.txt\n```\n\n## Downloading Datasets\n\nYou can download the datasets from the following links:\n\nPeptides-func: [Link](https://www.dropbox.com/s/ycsq37q8sxs1ou8/peptidesfunc.zip?dl=1)\\\nPascalVOC-SP: [Link](https://www.dropbox.com/s/8x722ai272wqwl4/pascalvocsp.zip?dl=1)\\\nminesweeper: [Link](https://github.com/yandex-research/heterophilous-graphs/raw/refs/heads/main/data/minesweeper.npz)\\\ntolokers: [Link](https://github.com/yandex-research/heterophilous-graphs/raw/refs/heads/main/data/tolokers.npz)\n\nThe links for Peptides-func and PascalVOC-SP are sourced from [Torch-Geometric](https://pytorch-geometric.readthedocs.io/en/latest/_modules/torch_geometric/datasets/lrgb.html#LRGBDataset), while the minesweeper and tolokers links come from their original [GitHub repository](https://github.com/yandex-research/heterophilous-graphs).\n\n### Dataset Setup Instructions\n\nFirst, create the main dataset directory, `./datasets/`.\n\nThen follow the steps below for each dataset:\n\n- Peptides-func\n1. Unzip the downloaded file\n2. Rename `val.pt` to `valid.pt`\n3. Create `./datasets/Peptides-func/` and move `train.pt`, `valid.pt`, and `test.pt`.\n\n- PascalVOC-SP\n1. Unzip the downloaded file\n2. Rename val.pickle to valid.pickle\n3. Create `./datasets/PascalVOC-SP/` and move `train.pickle`, `valid.pickle`, and `test.pickle`.\n\n- minesweeper\n  - Create `./datasets/minesweeper/` and move `minesweeper.npz`.\n\n- tolokers\n  - Create  `./datasets/tolokers/` and move `tolokers.npz`.\n\n## Training\nWe used NVIDIA RTX 2080 Ti, NVIDIA RTX 3090 and NVIDIA RTX A6000, depending on the dataset being used.\\\nTwo different implementations were used to train models on heterophilic graph datasets, as detailed in Appendix B.\n\nImplementation from [1]:train.py\\\nImplementation from [2]:train_v2.py\n\n[1] Luo et al., \"Classic GNNs are Strong Baselines: Reassessing GNNs for Node Classification\", NeurIPS 2024 Track on Datasets and Benchmarks.\\\n[2] Platanov et al., \"A critical look at the evaluation of GNNs under heterophily: Are we really making progress?\", ICLR 2023.\n\n### Peptides-func\n\nThis dataset was trained on NVIDIA RTX 3090.\n\nTo reproduce the results of MAVN reported in our paper, use the following command from the `./code/` directory:\n\n```python\npython train.py --exp 'KDD2026' --log_name 'MAVN' --seed 0 --dataset_name 'Peptides-func' --task 'Graph Classification' --eval_metric 'AP' --model_name 'MAVN' --base_model 'GCN-LRGB' --dim_pe '8+28' --dim 245 --dim_dot 16 --num_VN 12 --num_head 4 --act 'GELU' --normalize 'BatchNorm' --num_layer 6 --num_mlp_layer 1 --num_pred_mlp_layer 2 --norm_N 'GraphNorm' --norm_VN 'LayerNorm' --aggr_VN 'normalized_sigmoid' --log_w 1.0 --pe 'LapPE+RWSE' --pe_norm 'None+Batch' --num_pe '150+20' --loss_function 'BCE' --optimizer 'AdamW' --lr_max 2e-3 --grad_clip 1.0 --warmup_epoch 15 --restart_epoch 735 --dropout 0.2 --num_epoch 750 --batch_size 200 --tau_end 0.1 --tau_epoch 300 --multi_label --normalize_before_pred \n```\n\n**Note**: We used four random seeds for evaluation: 0, 1, 2, and 3.\n\n### PascalVOC-SP\n\nThis dataset was trained on NVIDIA RTX A6000.\n\nTo reproduce the results of MAVN reported in our paper, use the following command from the `./code/` directory:\n\n```python\npython train.py --exp 'KDD2026' --log_name 'MAVN' --seed 0 --dataset_name 'PascalVOC-SP' --task 'Node Classification' --eval_metric 'Macro_F1' --model_name 'MAVN' --base_model 'GatedGCN-LRGB' --dim_pe '0' --dim 90 --dim_dot 32 --num_VN 24 --num_head 1 --act 'GELU' --normalize 'BatchNorm' --num_layer 10 --num_mlp_layer 1 --num_pred_mlp_layer 2 --norm_N 'GraphNorm' --norm_VN 'None' --aggr_VN 'normalized_sigmoid' --log_w 1.0 --pe 'None' --pe_norm 'None' --num_pe '0' --loss_function 'CE' --optimizer 'AdamW' --lr_max 3e-3 --grad_clip 0.0 --warmup_epoch 10 --restart_epoch 190 --dropout 0.1 --num_epoch 200 --batch_size 50 --tau_end 1.0 --tau_epoch 100 --weighted_loss --normalize_before_pred \n```\n\n**Note**: We used four random seeds for evaluation: 0, 1, 2, and 3.\n\n### minesweeper\n\nThis dataset was trained on NVIDIA RTX 2080 Ti.\n\nTo reproduce the results of MAVN reported in our paper, use the following command from the `./code/` directory:\n\n```python\npython train.py --exp 'KDD2026' --log_name 'MAVN' --seed 0 --dataset_name 'minesweeper' --split 0 --task 'Node Classification' --eval_metric 'AUCROC' --model_name 'MAVN' --base_model 'GraphSAGE-TunedGNN' --dim_pe '0' --dim 64 --dim_dot 64 --num_VN 80 --num_head 1 --act 'ReLU' --normalize 'BatchNorm' --num_layer 15 --num_mlp_layer 1 --num_pred_mlp_layer 1 --norm_N 'GraphNorm' --norm_VN 'None' --aggr_VN 'normalized_sigmoid' --log_w 0.2 --pe 'None' --pe_norm 'None' --num_pe '0' --loss_function 'CE' --optimizer 'Adam' --lr_max 5e-2 --grad_clip 0.0 --warmup_epoch 300 --restart_epoch 2700 --dropout 0.2 --num_epoch 3000 --batch_size -1 --tau",
+    "deps_text": {
+      "requirements.txt": "numpy==1.25.2\ntqdm==4.65.0\ntorch==2.0.1\nscikit-learn==1.3.0"
+    },
+    "entry_candidates": [
+      "code/train.py",
+      "code/train_v2.py"
+    ],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 12
+  },
+  {
+    "name": "fair_eval_gfm",
+    "path": "/home/lab_user/project/lzc/repro/fair_eval_gfm",
+    "git": {
+      "head": "0a388f087773258e8f2559d801129dfe87adb3bc",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "initial commit",
+      "date": "2026-07-11 13:23:36 +0300"
+    },
+    "top": [
+      ".gitignore",
+      "LICENSE",
+      "README.md",
+      "bin/",
+      "exp/",
+      "lib/",
+      "pyproject.toml",
+      "uv.lock"
+    ],
+    "key_files": [
+      "README.md",
+      "pyproject.toml",
+      "LICENSE"
+    ],
+    "readme_head": "# A Fair Evaluation of Graph Foundation Models for Node Property Prediction\n\nThis is the official repository for the paper [A Fair Evaluation of Graph Foundation Models for Node Property Prediction](https://arxiv.org/abs/2606.24509), which has been accepted to [The Workshop on Graph Foundation Models at ICML 2026](https://openreview.net/group?id=ICML.cc/2026/Workshop/GFM).\n\n> [!IMPORTANT]\n> This repository provides only the code for reproducing the experimental results of GNNs. See [this section](#code-for-graph-foundation-models) for the links to the repositories used to obtain the results of GFMs (which are the official repositories of the corresponding models).\n\n## Installation\n\nThis project uses [uv](https://docs.astral.sh/uv/) for dependency management.\n\n1. Install `uv` if you don't have it:\n```bash\ncurl -LsSf https://astral.sh/uv/install.sh | sh\n```\n\n2. Sync the environment:\n```bash\nuv sync --managed-python\n```\n\nThis will create a virtual environment and install all required dependencies specified in `pyproject.toml`.\n\n## Data\n\nWe use [GraphLand datasets](https://zenodo.org/records/16895532). After downloading, extract the data and create a symlink to the `data` directory:\n```bash\nln -s /path/to/downloaded/data data\n```\n\n## Running Experiments\n\nThe `bin/go.py` script runs the full experimental pipeline:\n1. Hyperparameter tuning (if `tuning.toml` is provided)\n2. Generating `evaluation.toml` with the best configuration\n3. Evaluating the best configuration across multiple seeds\n4. Ensembling predictions from the best models\n\nThe script accepts either `tuning.toml` (to run the full pipeline) or `evaluation.toml` (to skip tuning and run evaluation directly).\n\n```bash\nuv run bin/go.py exp/<experiment>/<model>/<dataset>/tuning.toml\n```\n\n### Command Line Arguments\n\n| Argument | Default | Description |\n|----------|---------|-------------|\n| `config` | (required) | Path to a `tuning.toml` or `evaluation.toml` config file |\n| `--n_seeds` | 5 | Number of seeds for evaluation |\n| `--ensemble_size` | 5 | Size of ensemble (set to 0 to skip ensembling) |\n| `--continue` | False | Continue an unfinished experiment |\n| `--force` | False | Force overwrite existing results |\n\n### Example\n\n```bash\nuv run bin/go.py exp/cgasb/gcn/tolokers-2/tuning.toml --force\n```\n\n> [!NOTE]\n> Since all experiment reports are included in this repository, you must pass `--force` to re-run experiments and overwrite existing results if want to reproduce them.\n\n## Experiment Directories\n\n| Directory | Description |\n|:----------|:------------|\n| `exp/cgasb` | GNN baselines from [Classic GNNs are Strong Baselines](https://arxiv.org/abs/2406.08993) |\n| `exp/critical` | GNN baselines from [A Critical Look at the Evaluation of GNNs under Heterophily](https://arxiv.org/abs/2302.11640) |\n\n## Code for Graph Foundation Models\n\nTo reproduce the experimental results of GFMs, use their official repositories:\n\n| Method | GitHub Repository |\n|:-------|:-----------|\n| AnyGraph | [HKUDS/AnyGraph](https://github.com/HKUDS/AnyGraph) |\n| OpenGraph | [HKUDS/OpenGraph](https://github.com/HKUDS/OpenGraph) |\n| GCOPE | [cshhzhao/gcope](https://github.com/cshhzhao/gcope) |\n| TS-GNN | [benfinkelshtein/EquivarianceEverywhere](https://github.com/benfinkelshtein/EquivarianceEverywhere) |\n| MDGFM | [wbkzwqtzw/MDGFM](https://github.com/wbkzwqtzw/MDGFM) |\n| SAMGPT | [blue-soda/SAMGPT](https://github.com/blue-soda/SAMGPT) |\n| TAG | [ahayler/tag](https://github.com/ahayler/tag) |\n| G2T | [yandex-research/G2T-FM](https://github.com/yandex-research/G2T-FM) |\n| GraphPFN | [yandex-research/graphpfn](https://github.com/yandex-research/graphpfn) |\n\n## Project Structure\n\n```\n.\n├── bin/                 # Executable scripts\n├── lib/                 # Core library code\n├── exp/                 # Experiment configurations and results\n├── data/                # Symlink to datasets\n└── pyproject.toml       # Project configuration and dependencies\n```\n",
+    "deps_text": {
+      "pyproject.toml": "[build-system]\nrequires = [\"setuptools >= 61.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"pitfalls\"\nversion = \"0.0.1\"\ndescription = \"pitfalls\"\nrequires-python = \"==3.12.9\"\ndependencies = [\n    # ==================================================================\n    # Template\n    # ==================================================================\n    \"delu==0.0.26\",\n    \"loguru==0.7.3\",\n    \"numpy==2.2.4\",\n    \"optuna==4.2.1\",\n    \"PyYAML==6.0.2\",\n    \"rtdl-num-embeddings==0.0.11\",\n    \"rtdl-revisiting-models==0.0.2\",\n    \"scikit-learn==1.6.1\",\n    \"scipy==1.15.2\",\n    \"tensorboard==2.19.0\",\n    \"tomli-w==1.2.0\",\n    \"torch==2.4.0\",\n    \"tqdm==4.67.1\",\n    # ==================================================================\n    # Project\n    # ==================================================================\n    \"torch-geometric==2.6.1\",\n    \"dgl==2.4.0\",\n    \"ogb==1.3.6\",\n    \"lightgbm==4.3.0\",\n]\n\n[dependency-groups]\ndev = [\n    \"nvitop>=1.5.1\",\n    \"bokeh>=3.7.3,<4\",\n    \"holoviews>=1.20.2,<2\",\n    \"hvplot>=0.11.3,<1\",\n    \"ipdb>=0.13.13,<1\",\n    \"ipython>=9.3.0,<10\",\n    \"ipywidgets>=8.1.7,<9\",\n    \"jupyterlab>=4.4.3,<5\",\n    \"matplotlib>=3.10.3,<4\",\n    \"mypy>=1.16.1,<2\",\n    \"nbclassic>=1.3.1,<2\",\n    \"notebook>=7.4.3,<8\",\n    \"pandas>=2.3.0,<3\",\n    \"panel>=1.7.1,<2\",\n    \"plotnine>=0.14.5,<1\",\n    \"polars>=1.30.0,<2\",\n    \"pudb>=2025.1\",\n    \"pytest>=8.4.0,<9\",\n    \"ruff>=0.12.0,<1\",\n    \"seaborn>=0.13.2,<1\",\n    \"setuptools>=80.9.0\",\n    \"tabulate>=0.9.0\",\n]\n\n[tool.mypy]\ncheck_untyped_defs = true\nignore_missing_imports = true\nexclude = [\"^local/*\"]\n\n[tool.pyright]\nexclude = [\n    # Default rules\n    '**/node_modules',\n    '**/__pycache__',\n    '**/.*',\n    # Custom rules\n    \"cache\",\n    \"data\",\n    \"exp\",\n    \"local\",\n]\n# venv = \".venv\"\nvenvPath = \".\"\n\n[tool.ruff]\nline-length = 88\nextend-exclude = [\"vendor/**/*.py\"]\n\n[tool.ruff.lint]\nextend-select = [\"RUF\", \"UP\", \"E501\", \"E731\"]\n\n[tool.ruff.format]\nquote-style = \"single\"\n\n[tool.setuptools]\npackages = [\"lib\", \"bin\"]\n\n[tool.uv]\ndefault-groups = [\"dev\"]\npackage = true\n\n[[tool.uv.index]]\nname = \"dgl-index\"\nurl = \"https://data.dgl.ai/wheels/torch-2.4/cu124/repo.html\"\nformat = \"flat\"\nexplicit = true\n\n[tool.uv.sources]\ndgl = { index = \"dgl-index\" }\n"
+    },
+    "entry_candidates": [],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 21
+  },
+  {
+    "name": "equivariance",
+    "path": "/home/lab_user/project/lzc/repro/equivariance",
+    "git": {
+      "head": "1dfe3870fd8a0de7e15db6958289661b2cabdc37",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Update README.md",
+      "date": "2025-06-18 14:03:53 +0100"
+    },
+    "top": [
+      ".gitattributes",
+      ".gitignore",
+      "LICENSE",
+      "README.md",
+      "experiment.py",
+      "helpers/",
+      "main.py",
+      "models/",
+      "transforms/",
+      "triton_tests/"
+    ],
+    "key_files": [
+      "README.md",
+      "LICENSE"
+    ],
+    "readme_head": "# Equivariance Everywhere All At Once: A Recipe for Graph Foundation Models\n\nThis repository contains the official code base of the paper **[Equivariance Everywhere All At Once: A Recipe for Graph Foundation Models](https://arxiv.org/abs/2506.14291)**\n\n## Installation ##\nTo reproduce the results please use Python 3.10, PyTorch version 2.3.0, Cuda 11.8, PyG version 2.5.3.\n\n```bash\npip3 install torch==2.3.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118\npip3 install torch_scatter torch_sparse torch_cluster torch_spline_conv -f https://data.pyg.org/whl/torch-2.3.0+cu118.html\npip3 install torch-geometric==2.5.3\npip3 install neptune\npip3 install triton\n```\n\n## hyper-parameters\n\nThe script we use to run our frameworks is ``./main.py``.\nNote that the script should be run with ``.`` as the main directory or source root.\n\nThe parameters of the script are:\n- ``--project``: name of your neptune project.\n- ``--is_train``: whether to train a new model or test an existing one.\n- ``--train_test_setup``: If 'trainset1' -- training on cora and testing on the remaining graphs. If 'inc_trainset' -- training on a trainset of size 'train_size' and testing on a heldout set of 20 graphs.\n- ``--train_size``: Only effective when train_test_setup is 'inc_trainset' and equals the size of the trainset.\n- ``--gnn_type``: the type of the GNN used for the GFM.\n- ``--hidden_dim``: the hidden dimension.\n- ``--num_layers``: the number of layers.\n- ``--ls_num_layers``: the number of least square powers to consider.\n- ``--lp_ratio``: the ratio of labels in the trainset that are propagated (the rest are used as part of the loss). Note that in test-time, the whole train-set is used for propagation.\n- ``--max_epochs``: the number of epochs used.\n- ``--checkpoints``: additional epochs to save the model in.\n- ``--lr``: the learn rate.\n\n## An example\n\nTo perform training for a 2 layered GAT-based architecture with a lr of 0.001, while propagating 30% in train time: \n```bash\npython -u main.py --is_train --gnn_type GAT --lr 0.001 --lp_ratio 0.3\n```\n\n## best configs\n```bash\npython -u main.py --is_train --train_test_setup trainset1 --gnn_type MEAN_GNN --hidden_dim 16 --num_layers 2\n--lp_ratio 0.4 --max_epochs 2000 --lr 0.01 \npython -u main.py --is_train --train_test_setup trainset1 --gnn_type GAT --hidden_dim 16 --num_layers 2\n--lp_ratio 0.25 --max_epochs 2000 --lr 0.03 \n\npython -u main.py --is_train --train_test_setup inc_trainset --train_size 5 --gnn_type MEAN_GNN --hidden_dim 16 --num_layers 2\n--lp_ratio 0.6 --max_epochs 300 --lr 0.003 \npython -u main.py --is_train --train_test_setup inc_trainset --train_size 7 --gnn_type MEAN_GNN --hidden_dim 16 --num_layers 2\n--lp_ratio 0.6 --max_epochs 500 --lr 0.003 \npython -u main.py --is_train --train_test_setup inc_trainset --train_size 9 --gnn_type MEAN_GNN --hidden_dim 16 --num_layers 2\n--lp_ratio 0.7 --max_epochs 100 --lr 0.005 \n```\n\nNote that to test this models you run the same command, this time without the is_train flag.\n\n## Cite\n\nIf you make use of this code, or its accompanying [paper](https://arxiv.org/abs/2506.14291), please cite this work as follows:\n```bibtex\n@misc{finkelshtein2025equivarianceeverywhere,\n      title={Equivariance Everywhere All At Once: A Recipe for Graph Foundation Models}, \n      author={Ben Finkelshtein and İsmail İlkan Ceylan and Michael Bronstein and Ron Levie},\n      year={2025},\n      archivePrefix={arXiv},\n}\n```\n",
+    "deps_text": {},
+    "entry_candidates": [
+      "helpers/train_test_setup.py",
+      "main.py"
+    ],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 26
+  },
+  {
+    "name": "mf_gia",
+    "path": "/home/lab_user/project/lzc/repro/mf_gia",
+    "git": {
+      "head": "9b2946d13af0372323b5e3f3105d822757a87cd9",
+      "branch": "master",
+      "n_commits_shallow": "1",
+      "subject": "upd",
+      "date": "2026-02-16 21:18:43 +0800"
+    },
+    "top": [
+      ".gitignore",
+      "README.md",
+      "configs/",
+      "curves/",
+      "data_process/",
+      "evaluate.py",
+      "generated_files/",
+      "icl/",
+      "model/",
+      "pretrain.py",
+      "requirements.txt",
+      "run_ICL_link.py",
+      "run_ICL_node.py",
+      "utils/"
+    ],
+    "key_files": [
+      "README.md",
+      "requirements.txt"
+    ],
+    "readme_head": "<div align=center>\n\n# *Modality-Free Graph In-Context Alignment* (ICLR 2026)\n\n</div>\n\n## Environment Preparation ##\n\n```\nconda create -n MF-GIA python=3.12.2\nconda activate MF-GIA\n\npip install -r requirements.txt\n```\n\n## Data Preparation ##\n\nWe use the arxiv, wikiCS, PubMed and Amazon-ratings to pretrain the model. For arxiv dataset, users should copy the raw data ``arxiv_CS_categories.txt``, ``labelidx2arxivcategeory.csv.gz`` and ``nodeidx2paperid.csv.gz`` into the directory ``datasets/ofa/SingleTextGraph.arxiv``. For WikiCS, the raw data ``metadata.json`` should be stored in ``datasets/pyg/SingleTextGraph.WikiCS``. All raw data are provided by [OFA](https://github.com/LechengKong/OneForAll/tree/main/data). Please download them and organize the ``datasets/`` directory as follows:\n\n```\ndatasets/\n├── ofa\n│   ├── SingleTextGraph.arxiv\n│   │   ├── arxiv_CS_categories.txt\n│   │   ├── labelidx2arxivcategeory.csv.gz\n│   │   ├── nodeidx2paperid.csv.gz\n│   │   ├── ogbn_arxiv\n│   │   │   ├── mapping\n│   │   │   │   ├── labelidx2arxivcategeory.csv.gz\n│   │   │   │   ├── nodeidx2paperid.csv.gz\n│   │   │   │   └── README.md\n│   │   │   ├── processed\n│   │   │   │   ├── geometric_data_processed.pt\n│   │   │   │   ├── pre_filter.pt\n│   │   │   │   └── pre_transform.pt\n│   │   │   ├── raw\n│   │   │   │   ├── edge.csv.gz\n│   │   │   │   ├── node-feat.csv.gz\n│   │   │   │   ├── node-label.csv.gz\n│   │   │   │   ├── node_year.csv.gz\n│   │   │   │   ├── num-edge-list.csv.gz\n│   │   │   │   └── num-node-list.csv.gz\n│   │   │   ├── RELEASE_v1.txt\n│   │   │   └── split\n│   │   │       └── time\n│   │   │           ├── test.csv.gz\n│   │   │           ├── train.csv.gz\n│   │   │           └── valid.csv.gz\n│   │   ├── processed\n│   │   │   ├── data.pt\n│   │   │   ├── geometric_data_processed.pt\n│   │   │   ├── pca_64.pt\n│   │   │   ├── pre_filter.pt\n│   │   │   ├── pre_transform.pt\n│   │   │   └── texts.pkl\n│   │   └── raw\n│   └── SingleTextGraph.WikiCS\n│       ├── metadata.json\n│       ├── processed\n│       │   ├── data.pt\n│       │   ├── data_undirected.pt\n│       │   ├── geometric_data_processed.pt\n│       │   ├── pca_64.pt\n│       │   ├── pre_filter.pt\n│       │   ├── pre_transform.pt\n│       │   └── texts.pkl\n│       └── raw\n│           └── data.json\n└── pyg\n    └── Planetoid.PubMed\n        ├── processed\n        │   ├── data.pt\n        │   ├── pca_64.pt\n        │   ├── pre_filter.pt\n        │   └── pre_transform.pt\n        ├── PubMed\n        │   ├── processed\n        │   │   ├── data.pt\n        │   │   ├── pre_filter.pt\n        │   │   └── pre_transform.pt\n        │   └── raw\n        │       ├── ind.pubmed.allx\n        │       ├── ind.pubmed.ally\n        │       ├── ind.pubmed.graph\n        │       ├── ind.pubmed.test.index\n        │       ├── ind.pubmed.tx\n        │       ├── ind.pubmed.ty\n        │       ├── ind.pubmed.x\n        │       └── ind.pubmed.y\n        └── raw\n```\n\n## Pre-training ##\n\nTo execute the pretraining process, you can directly run:\n\n```bash\npython pretrain.py\n```\n\nTo configure your environment, you can modify the configuration files under ``configs/``. For example, you may change the GPU id by ``gpu: 0 ``. Note that some configuration items were not used in the project.\n\n```yaml\npretrain:\n  seed: 42\n  gpu: 1\n  pretrain_datasets: ['pubmed', 'arxiv', 'wikics', 'amazon-ratings']\n  train_tasks: ['pubmed','arxiv','wikics', 'amazon-ratings']\n  use_original_mask: false\n  pretrain_epochs: 8000\n```\n\n**Additional Remarks**\n\nIf your OS/session limit for open files is low, the following error may occurs: ``untimeError: unable to open shared memory object in read-write mode: Too many open files``. Under the circumstances, you can directly decrease the ``num_workers`` to 0 in ``pt_model.py`` as:\n\n```\ndef train_dataloader(self):\n    return DataLoader(self.train_ds, batch_size=self.batch_size, shuffle=False, \n                        num_workers=0, pin_memory=True, collate_fn= lambda x: x)\n\ndef val_dataloader(self):\n    return DataLoader(self.val_ds, batch_size=self.batch_size, shuffle=False,\n                        num_workers=0, pin_memory=True, collate_fn= lambda x: x)\n\ndef test_dataloader(self):\n    return DataLoader(self.test_ds, batch_size=self.batch_size, shuffle=False,\n                        num_workers=0, pin_memory=True, collate_fn= lambda x: x)\n```\n\nWe pre-trained our model on both Tesla V100 and RTX A5000 GPUs. The optimal learning rate and weight decay vary slightly by hardware. You can set these values in ``configs/model.yaml``:\n\n**Tesla V100**\n\n```yaml\nPTModel:\n  lr: 0.01   \n  weight_decay: 0.00005\n```\n\n**RTX A5000**\n\n```yaml\nPTModel:\n  lr: 5e-3  \n  weight_decay: 0.0005  \n```\n\n> Notes: These values worked best for our setups. If you change batch size or optimizer settings, you may need to retune (e.g., scale the learning rate roughly with the effective batch size).\n\nThe training curve of the model monitored by wandb is as follows under A5000 GPU:\n\n| ![Training Acc](curves/training_acc_step.png) | ![Training Loss](curves/tranin_loss_step.png) | ![Val Acc](curves/val_acc.png) |\n| :-----------------------------------------: | :-----------------------------------------: | :--------------------------: |\n\n## Evaluation ##\n\n### Checkpoints ###\n\nWe provide both the pre-trained checkpoints in the ``generated_files/checkpoints/``, and you can specify one of them to evaluate the downstream datasets:\n\n```bash\npython run_ICL_node.py --dataset ${dataset_name} --k_shot ${k_shot} --model_path generated_files/output/G-Align/Aug13-0:14-97cc0c8c/final_gfm_model.pt\n```\n\nor\n\n```bash\npython run_ICL_node.py --dataset ${dataset_name} --k_shot ${k_shot} --model_path generated_files/output/G-Align/Aug26-22:08-711a96fc/final_gfm_model.pt\n```\n\n### In-Context node classification ###\n\nTo reproduce the reported results, run:\n\n**Cora**\n\n```bash\n# k_shot = {1,3,5}\npython run_ICL_node.py --dataset cora --k_shot ${k_shot}\n```\n\n**Computers**\n\n```bash\n# k_shot = {1,3}\npython run_ICL_node.py --dataset computers --k_shot ${k_sh",
+    "deps_text": {
+      "requirements.txt": "codetiming==1.4.0\nhumanfriendly==10.0\nmatplotlib==3.10.6\nnumpy==2.3.2\nogb==1.3.6\nomegaconf==2.3.0\npandas==2.3.2\npytorch_lightning==2.5.1.post0\nPyYAML==6.0.1\nPyYAML==6.0.2\nrich==14.1.0\nrootutils==1.0.7\nscikit_learn==1.7.1\nscipy==1.16.1\nseaborn==0.13.2\nsentence_transformers==2.2.2\ntorch==2.6.0+cu124\ntorch_geometric==2.6.1\ntqdm==4.66.5\ntransformers==4.36.2\n"
+    },
+    "entry_candidates": [
+      "evaluate.py",
+      "run_ICL_link.py",
+      "run_ICL_node.py"
+    ],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 17
+  },
+  {
+    "name": "graphrp",
+    "path": "/home/lab_user/project/lzc/repro/graphrp",
+    "git": {
+      "head": "38b00ecd2cc404461cec176051fd62efd01acd9c",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Add README.md",
+      "date": "2026-05-31 13:55:06 -0400"
+    },
+    "top": [
+      "README.md"
+    ],
+    "key_files": [
+      "README.md"
+    ],
+    "readme_head": "# GraphRP: Defending against Model Extraction for GNNs with Model Reprogramming\n\n[![KDD 2026](https://img.shields.io/badge/KDD-2026-blue)](https://kdd2026.kdd.org/)\n[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)\n[![Paper](https://img.shields.io/badge/Paper-ACM%20DL-red)](https://doi.org/10.1145/3770855.3817983)\n\nOfficial implementation of **GraphRP**, accepted at **KDD 2026** (Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining, August 9–13, 2026, Jeju Island, Republic of Korea).\n\n> **Defending against Model Extraction for GNNs with Model Reprogramming**  \n> Yan Wen, Zhenyi Wang, Heng Huang  \n> *KDD 2026* · [ACM Digital Library](https://doi.org/10.1145/3770855.3817983)\n\n---\n\n## Overview\n\n**GraphRP** is a proactive defense framework that protects Graph Neural Networks (GNNs) deployed as black-box APIs from Model Extraction (ME) attacks. Instead of applying static noise, GraphRP leverages *Model Reprogramming* to introduce a **Structure-Aware Gating Mechanism** that:\n\n- **Preserves utility** for benign queries that reside on the training manifold (gating factor α ≈ 0)\n- **Poisons labels** for adversarial/OOD queries by maximizing Fisher Information distance (gating factor α ≈ 1)\n- **Requires no model retraining** — only a small set of learnable reprogramming parameters Θ_rep are optimized\n\n![GraphRP Overview](assets/overview.png)\n\n---\n\n## Key Results\n\nGraphRP consistently reduces clone model accuracy by up to **17%** compared to state-of-the-art baselines while maintaining high benign utility across diverse graph benchmarks (MUTAG, ENZYMES, NCI1, PROTEINS, OGB-MolHIV, COLLAB).\n\n| Defense        | MUTAG Clone Acc ↓ | ENZYMES Clone Acc ↓ | Benign Acc ↑ |\n|----------------|:-----------------:|:-------------------:|:------------:|\n| Undefended     | 0.765             | 0.561               | 0.945        |\n| MeCo (best baseline) | 0.712       | 0.482               | 0.930        |\n| **GraphRP (Ours)** | **0.603**     | **0.364**           | **0.932**    |\n\n---\n\n## Requirements\n\n```bash\nPython >= 3.8\nPyTorch >= 1.12\nPyTorch Geometric >= 2.1\ntorch-scatter, torch-sparse\nscikit-learn\nnumpy\n```\n\nInstall dependencies:\n\n```bash\npip install -r requirements.txt\n```\n\n---\n\n## Repository Structure\n\n```\nGraphRP-KDD2026/\n├── README.md\n├── requirements.txt\n├── data/                   # Dataset loading utilities\n├── models/\n│   ├── victim/             # Victim GNN architectures (GCN, GraphSAGE, GIN)\n│   └── clone/              # Clone model architectures\n├── defense/\n│   ├── graphrp.py          # Core GraphRP defense module\n│   ├── gating.py           # Structure-Aware Prototype Gating\n│   └── losses.py           # Utility / Defense / Structural loss functions\n├── attack/\n│   ├── knockoff.py         # KnockoffNet attack implementation\n│   └── adaptive.py         # Gray-box adaptive attacker (GraphGAN-based)\n├── train_defense.py        # Main training script for GraphRP\n├── evaluate.py             # Evaluation script (clone accuracy + utility)\n└── configs/                # Hyperparameter configs per dataset\n```\n\n---\n\n## Quick Start\n\n**Step 1: Train the victim model**\n```bash\npython train_victim.py --dataset MUTAG --model GIN --epochs 200\n```\n\n**Step 2: Apply GraphRP defense**\n```bash\npython train_defense.py --dataset MUTAG --beta1 1.0 --beta2 0.5 --K 5\n```\n\n**Step 3: Simulate model extraction attack**\n```bash\npython attack/knockoff.py --dataset MUTAG --label_type soft --budget 10x\n```\n\n**Step 4: Evaluate clone accuracy**\n```bash\npython evaluate.py --dataset MUTAG --defense graphrp\n```\n\n---\n\n## Citation\n\nIf you find this work useful, please cite:\n\n```bibtex\n@inproceedings{wen2026graphrp,\n  title     = {Defending against Model Extraction for GNNs with Model Reprogramming},\n  author    = {Wen, Yan and Wang, Zhenyi and Huang, Heng},\n  booktitle = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining},\n  series    = {KDD '26},\n  year      = {2026},\n  month     = {August},\n  address   = {Jeju Island, Republic of Korea},\n  publisher = {ACM},\n  doi       = {10.1145/3770855.3817983},\n  url       = {https://doi.org/10.1145/3770855.3817983}\n}\n```\n\n---\n\n## License\n\nThis project is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).\n\n---\n\n## Contact\n\nFor questions about the paper or code, please open an issue or contact:  \n**Yan Wen** — ywen1@umd.edu  \nUniversity of Maryland, College Park\n",
+    "deps_text": {},
+    "entry_candidates": [],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 0
+  },
+  {
+    "name": "unlearning_inv",
+    "path": "/home/lab_user/project/lzc/repro/unlearning_inv",
+    "git": {
+      "head": "3bfc1f17e82a3a9fad9b1cc3ef28281a1323ea16",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "Update README with latest paper reference",
+      "date": "2026-03-11 19:41:05 -0400"
+    },
+    "top": [
+      ".gitignore",
+      "LICENSE",
+      "README.md",
+      "config.py",
+      "exp/",
+      "lib_dataset/",
+      "lib_gnn_model/",
+      "lib_unlearn/",
+      "lib_utils/",
+      "main.py",
+      "parameter_parser.py"
+    ],
+    "key_files": [
+      "README.md",
+      "LICENSE"
+    ],
+    "readme_head": "## Graph-Unlearning-Inversion\n\nThis is the PyTorch implementation for our WSDM'26 paper \"**Unlearning Inversion Attack for Graph Neural Networks**\" (https://dl.acm.org/doi/abs/10.1145/3773966.3777929). Please find the full version of our paper on arXiv (https://arxiv.org/abs/2506.00808).\n\nThis codebase was adapted from [GIF-torch](https://github.com/wujcan/GIF-torch/). \n\n\n\n## Environment Requirement\nThe code runs well under python 3.6.10. The required packages are as follows:\n\n- pytorch == 1.9.0+cu111\n- torch-geometric == 2.0.3\n\n## Quick Start\n\n```bash\npython main.py --dataset_name cora --target_model=GCN --exp Inversion --method GIF --unlearn_ratio 0.05 --attack_method=trend_steal --num_runs=5 --is_gen_unlearn_request=True --is_gen_unlearned_probs=True\n```\n\n```bash\npython main.py --dataset_name cora --target_model=GCN --exp Inversion --method GIF --unlearn_ratio 0.05 --attack_method=trend_mia --num_runs=5 --is_gen_unlearn_request=True --is_gen_unlearned_probs=True\n```\n\n## BibTeX\nIf you find our work useful in your research, please cite the following in your manuscript:\n\n\n```\n@inproceedings{zhang2026unlearning,\n  title={Unlearning inversion attacks for graph neural networks},\n  author={Zhang, Jiahao and Wang, Yilong and Zhang, Zhiwei and Liu, Xiaorui and Wang, Suhang},\n  booktitle={Proceedings of the Nineteenth ACM International Conference on Web Search and Data Mining},\n  pages={934--945},\n  year={2026}\n}\n```\n",
+    "deps_text": {},
+    "entry_candidates": [
+      "main.py"
+    ],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 28
+  },
+  {
+    "name": "stem_gnn",
+    "path": "/home/lab_user/project/lzc/repro/stem_gnn",
+    "git": {
+      "head": "8995878ca0df9f1fcaedca49d3a45a44ec8403c2",
+      "branch": "main",
+      "n_commits_shallow": "1",
+      "subject": "init",
+      "date": "2026-02-09 20:34:14 -0500"
+    },
+    "top": [
+      "README.md",
+      "STEM-GNN/",
+      "config/",
+      "environment.yml"
+    ],
+    "key_files": [
+      "README.md",
+      "environment.yml"
+    ],
+    "readme_head": "# STEM-GNN\n\nThis repository contains pretraining and finetuning scripts for STEM-GNN, plus multiple evaluation scripts.\n\n**Quick Start**\n1. Go to the repo root (`STEM-GNN`).\n2. Create and activate the environment.\n\n```bash\nconda env create -f environment.yml\nconda activate STEM-GNN\n```\n\n**Project Layout**\n- `STEM-GNN/pretrain.py`: pretrain entry\n- `STEM-GNN/finetune.py`: generic finetune entry\n- `STEM-GNN/scripts/`: evaluation/variant scripts\n- `STEM-GNN/data/`: datasets (organized per script expectations)\n- `STEM-GNN/ckpts/`: checkpoints output\n- `config/`: config templates (`pretrain.yaml`, `finetune.yaml`)\n\n**Pretrain**\nRun from the repo root:\n\n```bash\npython STEM-GNN/pretrain.py --use_params\n```\n\nCommon example:\n```bash\npython STEM-GNN/pretrain.py \\\n  --use_params \\\n  --gpu 0 \\\n  --pretrain_dataset all \\\n  --pretrain_epochs 50\n```\n\nOutput path:\n- Pretrained checkpoints are saved to `STEM-GNN/ckpts/pretrain_model/`\n\n**Finetune**\nGeneric finetune (node task):\n\n```bash\npython STEM-GNN/finetune.py --use_params --finetune_dataset cora --gpu 0\n```\n\nIf you need to load a specific pretrained checkpoint:\n```bash\npython STEM-GNN/finetune.py \\\n  --use_params \\\n  --finetune_dataset cora \\\n  --pretrain_model_epoch 25\n```\n\nOr point directly to the checkpoint folder:\n```bash\npython STEM-GNN/finetune.py \\\n  --use_params \\\n  --finetune_dataset cora \\\n  --pretrain_path STEM-GNN/ckpts/pretrain_model/your_run\n```\n\n**Scripts (in `STEM-GNN/scripts/`)**\nAll scripts below support **node** tasks only:\n\n```bash\n# Degree Shift OOD\npython STEM-GNN/scripts/degree_shift_ood.py --use_params --finetune_dataset cora\n\n# Homophily Shift OOD\npython STEM-GNN/scripts/homophily_shift_ood.py --use_params --finetune_dataset cora\n\n# Missing Feature\npython STEM-GNN/scripts/missing_feature.py --use_params --finetune_dataset cora\n\n# Random Edge Drop\npython STEM-GNN/scripts/random_edge_drop.py --use_params --finetune_dataset cora\n\n# Tri-objective finetune\npython STEM-GNN/scripts/tri_objective.py --use_params --finetune_dataset cora\n```\n\n**Notes**\n- `--use_params` loads defaults from `config/finetune.yaml` or `config/pretrain.yaml`.\n- Put data under `STEM-GNN/data`, and checkpoints under `STEM-GNN/ckpts`.\n",
+    "deps_text": {
+      "environment.yml": "name: STEM-GNN\nchannels:\n  - pytorch\n  - pyg\n  - huggingface\n  - dglteam/label/cu116\n  - nvidia\n  - anaconda\n  - conda-forge\n  - defaults\ndependencies:\n  - _libgcc_mutex=0.1=conda_forge\n  - _openmp_mutex=4.5=2_kmp_llvm\n  - abseil-cpp=20211102.0=h27087fc_1\n  - aiohttp=3.8.5=py39hd1e30aa_0\n  - aiosignal=1.3.1=pyhd8ed1ab_0\n  - alabaster=0.7.12=pyhd3eb1b0_0\n  - anyio=3.7.1=pyhd8ed1ab_0\n  - appdirs=1.4.4=pyhd3eb1b0_0\n  - arpack=3.7.0=hdefa2d7_2\n  - arrow=1.2.3=pyhd8ed1ab_0\n  - arrow-cpp=11.0.0=hda39474_2\n  - async-timeout=4.0.3=pyhd8ed1ab_0\n  - at-spi2-atk=2.38.0=h0630a04_3\n  - at-spi2-core=2.40.3=h0630a04_0\n  - atk-1.0=2.38.0=hd4edc92_1\n  - attrs=23.1.0=pyh71513ae_1\n  - aws-c-common=0.4.57=he6710b0_1\n  - aws-c-event-stream=0.1.6=h2531618_5\n  - aws-checksums=0.1.9=he6710b0_0\n  - aws-sdk-cpp=1.8.185=hce553d0_0\n  - babel=2.11.0=py39h06a4308_0\n  - backoff=2.2.1=pyhd8ed1ab_0\n  - backports=1.0=pyhd8ed1ab_3\n  - backports.functools_lru_cache=1.6.5=pyhd8ed1ab_0\n  - beautifulsoup4=4.12.2=pyha770c72_0\n  - black=22.6.0=py39h06a4308_0\n  - blas=1.0=mkl\n  - blessed=1.19.1=pyhe4f9e05_2\n  - boost=1.78.0=py39h7c9e3ff_4\n  - boost-cpp=1.78.0=h75c5d50_1\n  - bottleneck=1.3.5=py39h7deecbd_0\n  - brotli=1.0.9=h5eee18b_7\n  - brotli-bin=1.0.9=h5eee18b_7\n  - brotlipy=0.7.0=py39h27cfd23_1003\n  - bzip2=1.0.8=h7b6447c_0\n  - c-ares=1.19.1=hd590300_0\n  - ca-certificates=2023.7.22=hbcca054_0\n  - cachecontrol=0.12.11=py39h06a4308_1\n  - cairo=1.16.0=ha61ee94_1014\n  - cairomm-1.0=1.14.4=h09cb3b9_0\n  - catalogue=2.0.7=py39h06a4308_0\n  - certifi=2023.7.22=pyhd8ed1ab_0\n  - cffi=1.15.1=py39h5eee18b_3\n  - charset-normalizer=2.0.4=pyhd3eb1b0_0\n  - cleo=2.0.1=pyhd8ed1ab_0\n  - click=8.0.4=py39h06a4308_0\n  - colorama=0.4.6=py39h06a4308_0\n  - confection=0.0.4=py39hb070fc8_0\n  - contourpy=1.0.5=py39hdb19cb5_0\n  - crashtest=0.4.1=pyhd8ed1ab_0\n  - croniter=1.4.1=pyhd8ed1ab_0\n  - cryptography=39.0.1=py39h9ce1e76_0\n  - cuda=11.6.1=0\n  - cuda-cccl=11.6.55=hf6102b2_0\n  - cuda-command-line-tools=11.6.2=0\n  - cuda-compiler=11.6.2=0\n  - cuda-cudart=11.6.55=he381448_0\n  - cuda-cudart-dev=11.6.55=h42ad0f4_0\n  - cuda-cuobjdump=11.6.124=h2eeebcb_0\n  - cuda-cupti=11.6.124=h86345e5_0\n  - cuda-cuxxfilt=11.6.124=hecbf4f6_0\n  - cuda-driver-dev=11.6.55=0\n  - cuda-gdb=12.0.140=0\n  - cuda-libraries=11.6.1=0\n  - cuda-libraries-dev=11.6.1=0\n  - cuda-memcheck=11.8.86=0\n  - cuda-nsight=12.0.140=0\n  - cuda-nsight-compute=12.0.1=0\n  - cuda-nvcc=11.6.124=hbba6d2d_0\n  - cuda-nvdisasm=12.0.140=0\n  - cuda-nvml-dev=11.6.55=haa9ef22_0\n  - cuda-nvprof=12.0.146=0\n  - cuda-nvprune=11.6.124=he22ec0a_0\n  - cuda-nvrtc=11.6.124=h020bade_0\n  - cuda-nvrtc-dev=11.6.124=h249d397_0\n  - cuda-nvtx=11.6.124=h0630a44_0\n  - cuda-nvvp=12.0.146=0\n  - cuda-runtime=11.6.1=0\n  - cuda-samples=11.6.101=h8efea70_0\n  - cuda-sanitizer-api=12.0.140=0\n  - cuda-toolkit=11.6.1=0\n  - cuda-tools=11.6.1=0\n  - cuda-visual-tools=11.6.1=0\n  - cycler=0.11.0=pyhd3eb1b0_0\n  - cymem=2.0.6=py39h295c915_0\n  - cython-blis=0.7.9=py39h7deecbd_0\n  - dataclasses=0.8=pyh6d0b6a4"
+    },
+    "entry_candidates": [],
+    "sh_scripts": [],
+    "yml": [],
+    "n_py": 73
+  },
+  {
+    "name": "core_graphrag",
+    "path": "/home/lab_user/project/lzc/repro/core_graphrag",
+    "git": {
+      "head": "37a81bc38b0c5b5836c51d73d1f795a5b438407e",
+      "branch": "master",
+      "n_commits_shallow": "1",
+      "subject": "Update README with repository link formatting",
+      "date": "2026-06-01 20:12:37 -0400"
+    },
+    "top": [
+      "README.md",
+      "dictionary.txt",
+      "docs/",
+      "examples_notebooks/",
+      "graphrag/",
+      "mkdocs.yaml",
+      "pyproject.toml",
+      "scripts/",
+      "tests/",
+      "unified-search-app/",
+      "uv.lock"
+    ],
+    "key_files": [
+      "README.md",
+      "pyproject.toml"
+    ],
+    "readme_head": "# Core-based Hierarchies for Efficient GraphRAG\n\nThis repository contains the code accompanying the paper  \n**“Core-based Hierarchies for Efficient GraphRAG.”**\n\nOur implementation builds directly on the official GraphRAG benchmarking framework released by Microsoft. We introduce k-core–based hierarchical community construction algorithms as drop-in replacements for Leiden-based community detection. The overall pipeline, datasets, and evaluation procedures remain unchanged.\n\n## Code Base and Attribution\n\nThe code follows the same setup and execution procedure as the original GraphRAG benchmarking repository [based on GraphRAG release v2.7.0.]:\n\nhttps://github.com/microsoft/graphrag-benchmarking-datasets \n\nWe retain:\n- The same dataset format  \n- The same indexing and query-time execution flow  \n- The same evaluation and head-to-head comparison framework  \n\nOur contributions are limited to modifications in the community construction and hierarchy generation components.\n\n## Running the Code\n\nThe code is executed using the standard GraphRAG commands. No additional steps are required beyond those described in the original GraphRAG repository.\n\n### Installing Necessary Packages\n\nRun the following from the root directory:\n\n```bash\npip install -e ./graphrag\n````\n\n### Prepare Your Workspace\n\nCreate a new directory to hold your input files (e.g., for the Kevin Scott podcast benchmark):\n\n```bash\nmkdir -p ./kevin_scott_podcasts/input\n```\n\nPlace the unzipped input files into the `input` folder.\n\n### Initialize the GraphRAG Workspace\n\n```bash\npython graphrag/cli/main.py init  --root kevin_scott_podcasts/\n```\n\nThis command creates two files inside `./kevin_scott_podcasts/`:\n\n* `.env`: contains the `GRAPHRAG_API_KEY` environment variable. Set it to your OpenAI or Azure OpenAI API key.\n* `settings.yaml`: configures the GraphRAG pipeline. You may edit this file to customize pipeline behavior.\n\n### Indexing\n\nIndexing constructs the knowledge graph and hierarchical communities:\n\n```bash\npython graphrag/cli/main.py index --root ./kevin_scott_podcasts --community RkH\n```\n\nHere, `RkH` specifies the community construction algorithm. The default is the original GraphRAG Leiden algorithm. You may alternatively select one of our proposed heuristics:\n\n* `RkH`\n* `M2hC`\n* `MRC`\n\nIndexing time varies depending on dataset size and may take several minutes to several hours.\n\n### Query\n\nYou can now run queries against your indexed dataset. For example, to perform global search on leaf-level (`LF`) communities:\n\n```bash\npython graphrag/cli/main.py query \\\n  --root ./kevin_scott_podcasts \\\n  --method global \\\n  --community-level LF \\\n  --query \"What recurring topics do tech leaders emphasize in their discussions?\"\n```\n",
+    "deps_text": {
+      "pyproject.toml": "[project]\nname = \"graphrag\"\n# Maintainers: do not change the version here manually, use ./scripts/release.sh\nversion = \"2.7.0\"\ndescription = \"GraphRAG: A graph-based retrieval-augmented generation (RAG) system.\"\nauthors = [\n    {name = \"Alonso Guevara Fernández\", email = \"alonsog@microsoft.com\"},\n    {name = \"Andrés Morales Esquivel\", email = \"andresmor@microsoft.com\"},\n    {name = \"Chris Trevino\", email = \"chtrevin@microsoft.com\"},\n    {name = \"David Tittsworth\", email = \"datittsw@microsoft.com\"},\n    {name = \"Dayenne de Souza\", email = \"ddesouza@microsoft.com\"},\n    {name = \"Derek Worthen\", email = \"deworthe@microsoft.com\"},\n    {name = \"Gaudy Blanco Meneses\", email = \"gaudyb@microsoft.com\"},\n    {name = \"Ha Trinh\", email = \"trinhha@microsoft.com\"},\n    {name = \"Jonathan Larson\", email = \"jolarso@microsoft.com\"},\n    {name = \"Josh Bradley\", email = \"joshbradley@microsoft.com\"},\n    {name = \"Kate Lytvynets\", email = \"kalytv@microsoft.com\"},\n    {name = \"Kenny Zhang\", email = \"zhangken@microsoft.com\"},\n    {name = \"Mónica Carvajal\"},\n    {name = \"Nathan Evans\", email = \"naevans@microsoft.com\"},\n    {name = \"Rodrigo Racanicci\", email = \"rracanicci@microsoft.com\"},\n    {name = \"Sarah Smith\", email = \"smithsarah@microsoft.com\"},\n]\nlicense = \"MIT\"\nreadme = \"README.md\"\nrequires-python = \">=3.10,<3.13\"\nclassifiers = [\n    \"Programming Language :: Python :: 3\",\n    \"Programming Language :: Python :: 3.10\",\n    \"Programming Language :: Python :: 3.11\",\n    \"Programming Language :: Python :: 3.12\",\n]\n\ndependencies = [\n    \"environs>=11.0.0\",\n    # Vector Stores\n    \"azure-search-documents>=11.5.2\",\n    \"lancedb>=0.17.0\",\n    # Async IO\n    \"aiofiles>=24.1.0\",\n    # LLM\n    \"fnllm[azure,openai]>=0.4.1\",\n    \"json-repair>=0.30.3\",\n    \"openai>=1.68.0\",\n    \"nltk==3.9.1\",\n    \"tiktoken>=0.11.0\",\n    # Data-Science\n    \"numpy>=1.25.2\",\n    \"graspologic>=3.4.1\",\n    \"networkx>=3.4.2\",\n    \"pandas>=2.2.3\",\n    \"pyarrow>=17.0.0\",\n    \"umap-learn>=0.5.6\",\n    # Configuration\n    \"pyyaml>=6.0.2\",\n    \"python-dotenv>=1.0.1\",\n    \"pydantic>=2.10.3\",\n    \"devtools>=0.12.2\",\n    \"typing-extensions>=4.12.2\",\n    # Azure\n    \"azure-cosmos>=4.9.0\",\n    \"azure-identity>=1.19.0\",\n    \"azure-storage-blob>=12.24.0\",\n    \"future>=1.0.0\", # Needed until graspologic fixes their dependency\n    \"typer>=0.16.0\",\n    \"tqdm>=4.67.1\",\n    \"textblob>=0.18.0.post0\",\n    \"spacy>=3.8.4\",\n    \"litellm>=1.77.1\",\n]\n\n[dependency-groups]\ndev = [\n    \"coverage>=7.6.9\",\n    \"ipykernel>=6.29.5\",\n    \"jupyter>=1.1.1\",\n    \"nbconvert>=7.16.4\",\n    \"poethepoet>=0.31.1\",\n    \"pandas-stubs>=2.3.0.250703\",\n    \"pyright>=1.1.390\",\n    \"pytest>=8.3.4\",\n    \"pytest-asyncio>=0.24.0\",\n    \"pytest-timeout>=2.3.1\",\n    \"ruff>=0.8.2\",\n    \"semversioner>=2.0.5\",\n    \"update-toml>=0.2.1\",\n    \"deptry>=0.21.1\",\n    \"mkdocs-material>=9.5.48\",\n    \"mkdocs-jupyter>=0.25.1\",\n    \"mkdocs-exclude-search>=0.6.6\",\n    \"pytest-dotenv>=0.5.2\",\n    \"mkdocs-typer>=0.0.3\",\n]\n\n[project.scripts]\ngraphrag = \"graphrag.cli.main:a"
+    },
+    "entry_candidates": [
+      "graphrag/cli/main.py",
+      "graphrag/index/run/run_pipeline.py",
+      "scripts/semver-check.sh",
+      "scripts/spellcheck.sh",
+      "scripts/start-azurite.sh"
+    ],
+    "sh_scripts": [
+      "scripts/start-azurite.sh",
+      "scripts/spellcheck.sh",
+      "scripts/semver-check.sh"
+    ],
+    "yml": [],
+    "n_py": 473
+  }
+]

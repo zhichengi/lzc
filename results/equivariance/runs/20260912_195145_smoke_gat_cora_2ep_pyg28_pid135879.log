@@ -1,0 +1,34 @@
+[repro] paper=equivariance
+[repro] started_at=2026-09-12T19:51:45+08:00
+[repro] run_id=20260912_195145_smoke_gat_cora_2ep_pyg28_pid135879
+[repro] repo_commit=1dfe3870fd8a0de7e15db6958289661b2cabdc37
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/equivariance
+[repro] command=python -u main.py --project offline/smoke --is_train --gnn_type GAT --lr 0.001 --lp_ratio 0.3 --max_epochs 2
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p135945-i133359.scope; invocation ID: 161000adfd4c4d86b7fa3a8bbb0dc293
+[neptune] [info   ] Neptune initialized. Open in the app: offline/294afcf8-9947-4b26-9cb1-3bdcee3d5d29
+project: offline/smoke
+is_train: True
+train_test_setup: TrainTestSetup.trainset1
+train_size: 1
+gnn_type: GNNType.GAT
+hid_channel: 16
+num_layers: 2
+ls_num_layers: -1
+lp_ratio: 0.3
+max_epochs: 2
+checkpoints: [100, 300, 500, 1000, 2000]
+lr: 0.001
+gpu: None
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/equivariance/main.py", line 8, in <module>
+    Experiment(args=args).run_multiple_data(is_train=True, dataset_list=dataset_list)
+  File "/home/lab_user/project/lzc/repro/equivariance/experiment.py", line 83, in run_multiple_data
+    data = dataset.load()
+  File "/home/lab_user/project/lzc/repro/equivariance/helpers/datasets.py", line 229, in load
+    NormalizeTransform()])
+TypeError: Can't instantiate abstract class NormalizeTransform with abstract method forward
+[neptune] [info   ] Shutting down background jobs, please wait a moment...
+[neptune] [info   ] Done!

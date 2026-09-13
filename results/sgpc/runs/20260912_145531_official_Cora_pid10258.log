@@ -1,0 +1,10 @@
+[repro] started_at=2026-09-12T14:55:31+08:00
+[repro] run_id=20260912_145531_official_Cora_pid10258
+[repro] repo_commit=114b585d0d0e32afbf1d7232dd04c013fa8453e2
+[repro] tracked_patch=none
+[repro] main_py_sha256=9f852918f355839c1b26a966d88eb5beb9c0d7479cc2f7483f4fc67253a637c3
+[repro] dataset=Cora data_id=0 env=dtgb cuda_visible_devices=0
+[repro] data_link=/tmp/Cora -> /home/lab_user/project/lzc/repro/sgpc/data/Cora
+[repro] command=python main.py 0 
+[repro] python=3.10.20 torch=2.2.1+cu121 pyg=2.8.0.post1 torch_sparse=0.6.18+pt22cu121
+[repro] cuda=True gpu=NVIDIA GeForce RTX 3090

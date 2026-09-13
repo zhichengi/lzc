@@ -1,0 +1,900 @@
+[repro] started_at=2026-09-11T19:11:42+08:00
+[repro] run_id=20260911_191142_mooc_pid768674
+[repro] repo_commit=28ca94a06771c46073b650de3daa95e0939342ba
+[repro] tracked_patch_sha256=ac6fff66d39df29e96404ec537be87e914d81752500c384bfdcee383a0f21c79
+[repro] patch_stat= scalable_tgn_link_prediction.py      | 272 ++++++++++++++++++++++++++++++++---
+[repro] patch_stat= scalable_tgn_main_link_prediction.py | 188 +++++++++++++++++++++++-
+[repro] patch_stat= 2 files changed, 432 insertions(+), 28 deletions(-)
+[repro] dataset=mooc gpu=0 env=scadyg
+[repro] eval_manifest=/home/lab_user/project/lzc/results/scadyg/protocols/mooc_full_item_v1.npz
+[repro] eval_manifest_sha256=f314bf0ef2afecc8c127d89f32620f47075f438ebe21ee960b146d69cafe8da1
+[repro] checkpoint_dir=/home/lab_user/project/lzc/results/scadyg/checkpoints/20260911_191142_mooc_pid768674
+[repro] command=python scalable_tgn_main_link_prediction.py --dataset mooc --cuda_device 0 --eval_manifest /home/lab_user/project/lzc/results/scadyg/protocols/mooc_full_item_v1.npz --checkpoint_dir /home/lab_user/project/lzc/results/scadyg/checkpoints/20260911_191142_mooc_pid768674 --repo_commit 28ca94a06771c46073b650de3daa95e0939342ba --seed 2 --eval_protocol both --selection_metric filtered_mrr --train_negative_protocol mooc_bipartite
+[repro] torch=2.2.1+cu121 pyg=2.8.0.post1 dgl=2.2.1+cu121
+[repro] cuda=True gpu_count=1
+[repro] gpu_name=NVIDIA GeForce RTX 3090
+[Fri Sep 11 19:11:48 2026|scalable_tgn_main_link_prediction.py|INFO] evaluation protocol:both, manifest_sha256:f314bf0ef2afecc8c127d89f32620f47075f438ebe21ee960b146d69cafe8da1, edge_index_sha256:e8b017550b97172caa9334cc6a5cba18bbd052f30ef93ecd2cdb17c4ff24e33c, valid_destination_count:97
+0it [00:00, ?it/s]90it [00:00, 898.84it/s]100it [00:00, 896.72it/s]
+0it [00:00, ?it/s]4it [00:00, 34.61it/s]8it [00:00, 24.30it/s]12it [00:00, 27.79it/s]16it [00:00, 23.85it/s]19it [00:00, 24.66it/s]22it [00:00, 25.33it/s]26it [00:01, 23.47it/s]30it [00:01, 26.28it/s]34it [00:01, 27.95it/s]37it [00:01, 24.43it/s]41it [00:01, 26.48it/s]45it [00:01, 24.35it/s]49it [00:01, 27.33it/s]53it [00:01, 29.70it/s]57it [00:02, 26.44it/s]61it [00:02, 28.46it/s]65it [00:02, 25.50it/s]69it [00:02, 27.72it/s]73it [00:02, 25.65it/s]77it [00:02, 28.47it/s]81it [00:03, 26.07it/s]85it [00:03, 28.50it/s]89it [00:03, 30.45it/s]93it [00:03, 27.24it/s]97it [00:03, 29.64it/s]100it [00:03, 26.70it/s]
+[Fri Sep 11 19:11:52 2026|scalable_tgn_main_link_prediction.py|INFO] training negatives protocol:mooc_bipartite, count:411749, fixed_source_fraction:1.000000, legal_destination_fraction:1.000000, positive_collisions:0, unique_pair_fraction:0.992845, sha256:bd7deccb0bbd1642a6cc56d50b32899f7763df5afef4396d0eef8415625f8df5
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59583, official_mrr:0.94342, filtered_mrr:0.16165, acc:0.66319, ap:0.70513, f1:0.65195, macro_auc:0.72952, micro_auc:0.72952
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.57849, official_mrr:0.93629, filtered_mrr:0.19790, acc:0.66489, ap:0.74465, f1:0.64919, macro_auc:0.75546, micro_auc:0.75546
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.60174, official_mrr:0.93847, filtered_mrr:0.12688, acc:0.65966, ap:0.66740, f1:0.65087, macro_auc:0.71706, micro_auc:0.71706
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.60599, official_mrr:0.95643, filtered_mrr:0.11901, acc:0.65529, ap:0.67684, f1:0.64602, macro_auc:0.72828, micro_auc:0.72828
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59979, official_mrr:0.93051, filtered_mrr:0.14321, acc:0.65347, ap:0.69299, f1:0.64909, macro_auc:0.72926, micro_auc:0.72926
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.60062, official_mrr:0.94377, filtered_mrr:0.15024, acc:0.65032, ap:0.69802, f1:0.64491, macro_auc:0.72293, micro_auc:0.72293
+[Fri Sep 11 19:12:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59227, official_mrr:0.91574, filtered_mrr:0.17164, acc:0.66100, ap:0.72204, f1:0.65660, macro_auc:0.74009, micro_auc:0.74009
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59122, official_mrr:0.95428, filtered_mrr:0.20040, acc:0.65991, ap:0.73396, f1:0.65289, macro_auc:0.74633, micro_auc:0.74633
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59173, official_mrr:0.93584, filtered_mrr:0.19814, acc:0.66209, ap:0.73360, f1:0.65470, macro_auc:0.74590, micro_auc:0.74590
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59217, official_mrr:0.92992, filtered_mrr:0.19039, acc:0.65954, ap:0.72073, f1:0.64881, macro_auc:0.73515, micro_auc:0.73515
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.58717, official_mrr:0.93810, filtered_mrr:0.19844, acc:0.66914, ap:0.73636, f1:0.66001, macro_auc:0.75396, micro_auc:0.75396
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59202, official_mrr:0.92210, filtered_mrr:0.19515, acc:0.64704, ap:0.73042, f1:0.63655, macro_auc:0.74270, micro_auc:0.74270
+[Fri Sep 11 19:12:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:12:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59566, official_mrr:0.93064, filtered_mrr:0.18601, acc:0.63526, ap:0.72739, f1:0.62359, macro_auc:0.73586, micro_auc:0.73586
+[Fri Sep 11 19:12:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:12:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59908, official_mrr:0.93528, filtered_mrr:0.17796, acc:0.64473, ap:0.71670, f1:0.63477, macro_auc:0.73231, micro_auc:0.73231
+[Fri Sep 11 19:12:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:12:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:0, loss:0.59584, official_mrr:0.93192, filtered_mrr:0.19424, acc:0.65068, ap:0.71984, f1:0.64134, macro_auc:0.73942, micro_auc:0.73942
+[Fri Sep 11 19:12:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:0, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:12:15 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:0, avg_official_mrr:0.93618, global_filtered_mrr:0.17408, avg_ap:0.71507, selection_metric:filtered_mrr, selection_score:0.17408
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.57792, official_mrr:0.87455, filtered_mrr:0.15719, acc:0.66112, ap:0.70813, f1:0.65907, macro_auc:0.73355, micro_auc:0.73355
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.56336, official_mrr:0.86499, filtered_mrr:0.18154, acc:0.67557, ap:0.73119, f1:0.67370, macro_auc:0.74910, micro_auc:0.74910
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58724, official_mrr:0.82453, filtered_mrr:0.13997, acc:0.66209, ap:0.67433, f1:0.66152, macro_auc:0.71633, micro_auc:0.71633
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.59231, official_mrr:0.81648, filtered_mrr:0.13977, acc:0.66428, ap:0.67341, f1:0.66277, macro_auc:0.71094, micro_auc:0.71094
+[Fri Sep 11 19:12:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.59175, official_mrr:0.86236, filtered_mrr:0.13397, acc:0.65299, ap:0.67014, f1:0.65175, macro_auc:0.70625, micro_auc:0.70625
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.59210, official_mrr:0.85484, filtered_mrr:0.14179, acc:0.65202, ap:0.67894, f1:0.65039, macro_auc:0.70492, micro_auc:0.70492
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58040, official_mrr:0.80519, filtered_mrr:0.16247, acc:0.66598, ap:0.70664, f1:0.66440, macro_auc:0.72906, micro_auc:0.72906
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58183, official_mrr:0.84756, filtered_mrr:0.18254, acc:0.66197, ap:0.71076, f1:0.66030, macro_auc:0.72718, micro_auc:0.72718
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58325, official_mrr:0.84140, filtered_mrr:0.17787, acc:0.65481, ap:0.71062, f1:0.65372, macro_auc:0.72951, micro_auc:0.72951
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58860, official_mrr:0.80954, filtered_mrr:0.17130, acc:0.64376, ap:0.69085, f1:0.64254, macro_auc:0.70953, micro_auc:0.70953
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.57675, official_mrr:0.80189, filtered_mrr:0.18158, acc:0.67387, ap:0.71802, f1:0.67238, macro_auc:0.73757, micro_auc:0.73757
+[Fri Sep 11 19:12:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58483, official_mrr:0.85358, filtered_mrr:0.16955, acc:0.65784, ap:0.70056, f1:0.65657, macro_auc:0.71591, micro_auc:0.71591
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58541, official_mrr:0.77846, filtered_mrr:0.16669, acc:0.64461, ap:0.70692, f1:0.64329, macro_auc:0.71961, micro_auc:0.71961
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.59305, official_mrr:0.84293, filtered_mrr:0.16173, acc:0.64194, ap:0.68944, f1:0.64067, macro_auc:0.70552, micro_auc:0.70552
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:1, loss:0.58292, official_mrr:0.81951, filtered_mrr:0.17859, acc:0.66064, ap:0.70204, f1:0.65915, macro_auc:0.72739, micro_auc:0.72739
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:1, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:12:30 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:1, avg_official_mrr:0.83319, global_filtered_mrr:0.16310, avg_ap:0.69813, selection_metric:filtered_mrr, selection_score:0.16310
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.57989, official_mrr:0.91231, filtered_mrr:0.15912, acc:0.65930, ap:0.70663, f1:0.65668, macro_auc:0.73405, micro_auc:0.73405
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.56731, official_mrr:0.91467, filtered_mrr:0.19519, acc:0.67666, ap:0.73910, f1:0.67483, macro_auc:0.75276, micro_auc:0.75276
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.58967, official_mrr:0.88728, filtered_mrr:0.13424, acc:0.66489, ap:0.66978, f1:0.66424, macro_auc:0.71618, micro_auc:0.71618
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.59075, official_mrr:0.86468, filtered_mrr:0.13750, acc:0.66088, ap:0.67611, f1:0.65993, macro_auc:0.72070, micro_auc:0.72070
+[Fri Sep 11 19:12:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.58884, official_mrr:0.88531, filtered_mrr:0.12848, acc:0.64898, ap:0.66976, f1:0.64819, macro_auc:0.71749, micro_auc:0.71749
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.59096, official_mrr:0.87483, filtered_mrr:0.14150, acc:0.65226, ap:0.68125, f1:0.65068, macro_auc:0.71355, micro_auc:0.71355
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.58216, official_mrr:0.85174, filtered_mrr:0.16342, acc:0.66938, ap:0.70489, f1:0.66763, macro_auc:0.73674, micro_auc:0.73674
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.57883, official_mrr:0.87543, filtered_mrr:0.19625, acc:0.66270, ap:0.72636, f1:0.66036, macro_auc:0.74672, micro_auc:0.74672
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.58031, official_mrr:0.86691, filtered_mrr:0.19107, acc:0.66136, ap:0.72037, f1:0.65922, macro_auc:0.74559, micro_auc:0.74559
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.58496, official_mrr:0.82824, filtered_mrr:0.18136, acc:0.64825, ap:0.69834, f1:0.64674, macro_auc:0.72088, micro_auc:0.72088
+[Fri Sep 11 19:12:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.57731, official_mrr:0.83880, filtered_mrr:0.19062, acc:0.68079, ap:0.73053, f1:0.67894, macro_auc:0.75429, micro_auc:0.75429
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.57724, official_mrr:0.84960, filtered_mrr:0.19809, acc:0.65784, ap:0.72695, f1:0.65654, macro_auc:0.74308, micro_auc:0.74308
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.57980, official_mrr:0.81304, filtered_mrr:0.18432, acc:0.65238, ap:0.72065, f1:0.65093, macro_auc:0.73922, micro_auc:0.73922
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.58642, official_mrr:0.86228, filtered_mrr:0.17578, acc:0.64837, ap:0.70570, f1:0.64707, macro_auc:0.72690, micro_auc:0.72690
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:2, loss:0.57988, official_mrr:0.85858, filtered_mrr:0.19127, acc:0.66610, ap:0.71530, f1:0.66477, macro_auc:0.74506, micro_auc:0.74506
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:2, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:12:45 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:2, avg_official_mrr:0.86558, global_filtered_mrr:0.17121, avg_ap:0.70612, selection_metric:filtered_mrr, selection_score:0.17121
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58394, official_mrr:0.80124, filtered_mrr:0.15809, acc:0.65627, ap:0.70029, f1:0.64844, macro_auc:0.72317, micro_auc:0.72317
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.56962, official_mrr:0.79503, filtered_mrr:0.19561, acc:0.67084, ap:0.73746, f1:0.66404, macro_auc:0.75129, micro_auc:0.75129
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.59099, official_mrr:0.72615, filtered_mrr:0.13158, acc:0.65797, ap:0.66404, f1:0.65516, macro_auc:0.70760, micro_auc:0.70760
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.59380, official_mrr:0.70933, filtered_mrr:0.13500, acc:0.66549, ap:0.67377, f1:0.66217, macro_auc:0.71811, micro_auc:0.71811
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.59142, official_mrr:0.69562, filtered_mrr:0.12618, acc:0.65663, ap:0.66418, f1:0.65341, macro_auc:0.71000, micro_auc:0.71000
+[Fri Sep 11 19:12:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.59091, official_mrr:0.72358, filtered_mrr:0.13636, acc:0.66719, ap:0.68313, f1:0.66292, macro_auc:0.71873, micro_auc:0.71873
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58527, official_mrr:0.67758, filtered_mrr:0.14625, acc:0.67290, ap:0.69435, f1:0.66853, macro_auc:0.72834, micro_auc:0.72834
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58300, official_mrr:0.71025, filtered_mrr:0.16209, acc:0.67654, ap:0.71050, f1:0.67109, macro_auc:0.73478, micro_auc:0.73478
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58528, official_mrr:0.70145, filtered_mrr:0.16951, acc:0.67314, ap:0.70753, f1:0.66780, macro_auc:0.73297, micro_auc:0.73297
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58383, official_mrr:0.64394, filtered_mrr:0.17701, acc:0.66234, ap:0.69865, f1:0.65692, macro_auc:0.71999, micro_auc:0.71999
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58196, official_mrr:0.65739, filtered_mrr:0.18296, acc:0.68358, ap:0.72106, f1:0.67854, macro_auc:0.74491, micro_auc:0.74491
+[Fri Sep 11 19:12:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58266, official_mrr:0.69815, filtered_mrr:0.18567, acc:0.65566, ap:0.71667, f1:0.65279, macro_auc:0.73047, micro_auc:0.73047
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58645, official_mrr:0.62689, filtered_mrr:0.17180, acc:0.64607, ap:0.70624, f1:0.64308, macro_auc:0.72204, micro_auc:0.72204
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58898, official_mrr:0.66756, filtered_mrr:0.17161, acc:0.64849, ap:0.70406, f1:0.64522, macro_auc:0.71961, micro_auc:0.71961
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:3, loss:0.58701, official_mrr:0.64107, filtered_mrr:0.18262, acc:0.66489, ap:0.69988, f1:0.66153, macro_auc:0.72449, micro_auc:0.72449
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:3, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:13:00 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:3, avg_official_mrr:0.69835, global_filtered_mrr:0.16216, avg_ap:0.69879, selection_metric:filtered_mrr, selection_score:0.16216
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57585, official_mrr:0.87113, filtered_mrr:0.16088, acc:0.66391, ap:0.70621, f1:0.65987, macro_auc:0.73538, micro_auc:0.73538
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.56050, official_mrr:0.87721, filtered_mrr:0.19467, acc:0.68577, ap:0.73976, f1:0.68166, macro_auc:0.75905, micro_auc:0.75905
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.59043, official_mrr:0.83372, filtered_mrr:0.13033, acc:0.67181, ap:0.66047, f1:0.66963, macro_auc:0.71253, micro_auc:0.71253
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.58875, official_mrr:0.82843, filtered_mrr:0.13925, acc:0.67047, ap:0.67366, f1:0.66694, macro_auc:0.72278, micro_auc:0.72278
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.58643, official_mrr:0.82539, filtered_mrr:0.11394, acc:0.66100, ap:0.66152, f1:0.65817, macro_auc:0.72240, micro_auc:0.72240
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.58714, official_mrr:0.83254, filtered_mrr:0.11897, acc:0.66306, ap:0.67283, f1:0.65907, macro_auc:0.72474, micro_auc:0.72474
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.58207, official_mrr:0.79755, filtered_mrr:0.12323, acc:0.67630, ap:0.68268, f1:0.67244, macro_auc:0.73304, micro_auc:0.73304
+[Fri Sep 11 19:13:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57729, official_mrr:0.83374, filtered_mrr:0.13849, acc:0.67666, ap:0.69476, f1:0.67110, macro_auc:0.74545, micro_auc:0.74545
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57508, official_mrr:0.81514, filtered_mrr:0.16971, acc:0.67496, ap:0.71511, f1:0.66969, macro_auc:0.74696, micro_auc:0.74696
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57629, official_mrr:0.77226, filtered_mrr:0.17308, acc:0.66561, ap:0.71243, f1:0.66059, macro_auc:0.73703, micro_auc:0.73703
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57458, official_mrr:0.79249, filtered_mrr:0.17582, acc:0.68613, ap:0.72271, f1:0.68158, macro_auc:0.75264, micro_auc:0.75264
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57006, official_mrr:0.84386, filtered_mrr:0.18943, acc:0.66889, ap:0.72990, f1:0.66485, macro_auc:0.74719, micro_auc:0.74719
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57558, official_mrr:0.78513, filtered_mrr:0.16954, acc:0.65748, ap:0.71365, f1:0.65344, macro_auc:0.73619, micro_auc:0.73619
+[Fri Sep 11 19:13:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:13:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57799, official_mrr:0.81648, filtered_mrr:0.16696, acc:0.66306, ap:0.71522, f1:0.65867, macro_auc:0.73786, micro_auc:0.73786
+[Fri Sep 11 19:13:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:13:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:4, loss:0.57686, official_mrr:0.78376, filtered_mrr:0.17334, acc:0.67059, ap:0.71147, f1:0.66653, macro_auc:0.73920, micro_auc:0.73920
+[Fri Sep 11 19:13:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:4, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:13:15 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:4, avg_official_mrr:0.82059, global_filtered_mrr:0.15584, avg_ap:0.70083, selection_metric:filtered_mrr, selection_score:0.15584
+[Fri Sep 11 19:13:27 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57989, official_mrr:0.89702, filtered_mrr:0.15553, acc:0.63635, ap:0.69595, f1:0.63635, macro_auc:0.72352, micro_auc:0.72352
+[Fri Sep 11 19:13:27 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.56766, official_mrr:0.87626, filtered_mrr:0.17922, acc:0.65784, ap:0.72845, f1:0.65773, macro_auc:0.74599, micro_auc:0.74599
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.59175, official_mrr:0.82817, filtered_mrr:0.13903, acc:0.64327, ap:0.67155, f1:0.64287, macro_auc:0.71108, micro_auc:0.71108
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.58783, official_mrr:0.81452, filtered_mrr:0.14907, acc:0.65881, ap:0.68186, f1:0.65874, macro_auc:0.71880, micro_auc:0.71880
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.58314, official_mrr:0.82752, filtered_mrr:0.14242, acc:0.64886, ap:0.68643, f1:0.64821, macro_auc:0.72309, micro_auc:0.72309
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.58692, official_mrr:0.81287, filtered_mrr:0.14845, acc:0.63647, ap:0.69070, f1:0.63579, macro_auc:0.71562, micro_auc:0.71562
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57578, official_mrr:0.78459, filtered_mrr:0.17167, acc:0.65991, ap:0.71859, f1:0.65962, macro_auc:0.74261, micro_auc:0.74261
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57475, official_mrr:0.81109, filtered_mrr:0.18919, acc:0.65942, ap:0.71835, f1:0.65900, macro_auc:0.74254, micro_auc:0.74254
+[Fri Sep 11 19:13:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57395, official_mrr:0.80012, filtered_mrr:0.19144, acc:0.66112, ap:0.72808, f1:0.66030, macro_auc:0.74678, micro_auc:0.74678
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57924, official_mrr:0.76234, filtered_mrr:0.18424, acc:0.64133, ap:0.70880, f1:0.63832, macro_auc:0.72476, micro_auc:0.72476
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57283, official_mrr:0.73559, filtered_mrr:0.19380, acc:0.67120, ap:0.73827, f1:0.66919, macro_auc:0.75883, micro_auc:0.75883
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57030, official_mrr:0.77638, filtered_mrr:0.19846, acc:0.65869, ap:0.73201, f1:0.65680, macro_auc:0.74775, micro_auc:0.74775
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57101, official_mrr:0.72688, filtered_mrr:0.18393, acc:0.65809, ap:0.72725, f1:0.65601, macro_auc:0.74738, micro_auc:0.74738
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57876, official_mrr:0.75891, filtered_mrr:0.17950, acc:0.64862, ap:0.71537, f1:0.64655, macro_auc:0.73469, micro_auc:0.73469
+[Fri Sep 11 19:13:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:13:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:5, loss:0.57405, official_mrr:0.75144, filtered_mrr:0.18901, acc:0.65675, ap:0.72341, f1:0.65515, macro_auc:0.74963, micro_auc:0.74963
+[Fri Sep 11 19:13:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:5, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:13:30 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:5, avg_official_mrr:0.79758, global_filtered_mrr:0.17300, avg_ap:0.71100, selection_metric:filtered_mrr, selection_score:0.17300
+[Fri Sep 11 19:13:42 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57970, official_mrr:0.92721, filtered_mrr:0.15615, acc:0.65809, ap:0.69958, f1:0.65150, macro_auc:0.72258, micro_auc:0.72258
+[Fri Sep 11 19:13:42 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:42 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.56792, official_mrr:0.92449, filtered_mrr:0.17131, acc:0.67278, ap:0.71836, f1:0.66520, macro_auc:0.74010, micro_auc:0.74010
+[Fri Sep 11 19:13:42 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.58683, official_mrr:0.89860, filtered_mrr:0.13812, acc:0.65857, ap:0.67083, f1:0.65477, macro_auc:0.70561, micro_auc:0.70561
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.58364, official_mrr:0.87631, filtered_mrr:0.14618, acc:0.65894, ap:0.68627, f1:0.65397, macro_auc:0.72289, micro_auc:0.72289
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.58203, official_mrr:0.91816, filtered_mrr:0.13850, acc:0.65517, ap:0.68084, f1:0.65050, macro_auc:0.72159, micro_auc:0.72159
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.58303, official_mrr:0.90337, filtered_mrr:0.14568, acc:0.66003, ap:0.68981, f1:0.65521, macro_auc:0.71874, micro_auc:0.71874
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57357, official_mrr:0.85185, filtered_mrr:0.16786, acc:0.67059, ap:0.71435, f1:0.66595, macro_auc:0.73958, micro_auc:0.73958
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57149, official_mrr:0.88493, filtered_mrr:0.19014, acc:0.66914, ap:0.72080, f1:0.66252, macro_auc:0.74139, micro_auc:0.74139
+[Fri Sep 11 19:13:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57119, official_mrr:0.87946, filtered_mrr:0.19479, acc:0.67059, ap:0.72750, f1:0.66415, macro_auc:0.74734, micro_auc:0.74734
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57461, official_mrr:0.85921, filtered_mrr:0.18383, acc:0.66258, ap:0.70689, f1:0.65682, macro_auc:0.72372, micro_auc:0.72372
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.56793, official_mrr:0.82660, filtered_mrr:0.19344, acc:0.68468, ap:0.73505, f1:0.67934, macro_auc:0.75781, micro_auc:0.75781
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.56802, official_mrr:0.86078, filtered_mrr:0.19713, acc:0.66816, ap:0.73336, f1:0.66364, macro_auc:0.74829, micro_auc:0.74829
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57149, official_mrr:0.83026, filtered_mrr:0.18437, acc:0.65554, ap:0.72696, f1:0.65068, macro_auc:0.74304, micro_auc:0.74304
+[Fri Sep 11 19:13:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:13:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57752, official_mrr:0.84550, filtered_mrr:0.17837, acc:0.66039, ap:0.71298, f1:0.65516, macro_auc:0.73146, micro_auc:0.73146
+[Fri Sep 11 19:13:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:13:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:6, loss:0.57573, official_mrr:0.83594, filtered_mrr:0.19251, acc:0.66707, ap:0.71509, f1:0.66209, macro_auc:0.73947, micro_auc:0.73947
+[Fri Sep 11 19:13:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:6, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:13:45 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:6, avg_official_mrr:0.87484, global_filtered_mrr:0.17189, avg_ap:0.70924, selection_metric:filtered_mrr, selection_score:0.17189
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.58128, official_mrr:0.91387, filtered_mrr:0.16026, acc:0.63137, ap:0.69992, f1:0.63101, macro_auc:0.71676, micro_auc:0.71676
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.56161, official_mrr:0.91207, filtered_mrr:0.18791, acc:0.68310, ap:0.74097, f1:0.68234, macro_auc:0.75734, micro_auc:0.75734
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.58763, official_mrr:0.92266, filtered_mrr:0.13653, acc:0.65869, ap:0.67490, f1:0.65864, macro_auc:0.71997, micro_auc:0.71997
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.58334, official_mrr:0.92154, filtered_mrr:0.14345, acc:0.67496, ap:0.69496, f1:0.67458, macro_auc:0.73659, micro_auc:0.73659
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.57833, official_mrr:0.92012, filtered_mrr:0.13661, acc:0.68176, ap:0.69553, f1:0.68119, macro_auc:0.74049, micro_auc:0.74049
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.58043, official_mrr:0.90969, filtered_mrr:0.14240, acc:0.67982, ap:0.70055, f1:0.67889, macro_auc:0.73773, micro_auc:0.73773
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.57266, official_mrr:0.90033, filtered_mrr:0.15190, acc:0.69026, ap:0.71723, f1:0.68890, macro_auc:0.75246, micro_auc:0.75246
+[Fri Sep 11 19:13:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.56717, official_mrr:0.92104, filtered_mrr:0.18493, acc:0.69585, ap:0.74025, f1:0.69401, macro_auc:0.76360, micro_auc:0.76360
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.56858, official_mrr:0.93473, filtered_mrr:0.18707, acc:0.69366, ap:0.73738, f1:0.69189, macro_auc:0.76094, micro_auc:0.76094
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.56925, official_mrr:0.91595, filtered_mrr:0.18988, acc:0.68103, ap:0.73012, f1:0.68003, macro_auc:0.75194, micro_auc:0.75194
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.56855, official_mrr:0.88810, filtered_mrr:0.19637, acc:0.69682, ap:0.74106, f1:0.69542, macro_auc:0.76358, micro_auc:0.76358
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.56914, official_mrr:0.91001, filtered_mrr:0.19281, acc:0.67387, ap:0.73573, f1:0.67352, macro_auc:0.75083, micro_auc:0.75083
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.57098, official_mrr:0.87373, filtered_mrr:0.18355, acc:0.66610, ap:0.73068, f1:0.66574, macro_auc:0.74660, micro_auc:0.74660
+[Fri Sep 11 19:13:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:14:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.57627, official_mrr:0.89551, filtered_mrr:0.17937, acc:0.67593, ap:0.72502, f1:0.67479, macro_auc:0.74290, micro_auc:0.74290
+[Fri Sep 11 19:14:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:14:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:7, loss:0.57632, official_mrr:0.90866, filtered_mrr:0.19106, acc:0.68443, ap:0.71820, f1:0.68409, macro_auc:0.74350, micro_auc:0.74350
+[Fri Sep 11 19:14:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:7, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:14:00 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:7, avg_official_mrr:0.90987, global_filtered_mrr:0.17094, avg_ap:0.71883, selection_metric:filtered_mrr, selection_score:0.17094
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.58115, official_mrr:0.84646, filtered_mrr:0.15857, acc:0.64922, ap:0.69932, f1:0.64810, macro_auc:0.72272, micro_auc:0.72272
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.56658, official_mrr:0.84986, filtered_mrr:0.18727, acc:0.67824, ap:0.73617, f1:0.67536, macro_auc:0.75726, micro_auc:0.75726
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.58720, official_mrr:0.79133, filtered_mrr:0.13664, acc:0.66270, ap:0.67470, f1:0.66097, macro_auc:0.72031, micro_auc:0.72031
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.58632, official_mrr:0.83064, filtered_mrr:0.14211, acc:0.67035, ap:0.68537, f1:0.66591, macro_auc:0.73095, micro_auc:0.73095
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57855, official_mrr:0.78991, filtered_mrr:0.13648, acc:0.66476, ap:0.69494, f1:0.66081, macro_auc:0.73858, micro_auc:0.73858
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.58230, official_mrr:0.78926, filtered_mrr:0.14183, acc:0.66586, ap:0.69726, f1:0.66021, macro_auc:0.73624, micro_auc:0.73624
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57749, official_mrr:0.75265, filtered_mrr:0.16031, acc:0.67460, ap:0.72239, f1:0.66895, macro_auc:0.75381, micro_auc:0.75381
+[Fri Sep 11 19:14:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57182, official_mrr:0.78763, filtered_mrr:0.19526, acc:0.67763, ap:0.73696, f1:0.67058, macro_auc:0.76617, micro_auc:0.76617
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57176, official_mrr:0.77351, filtered_mrr:0.19410, acc:0.67533, ap:0.73976, f1:0.66787, macro_auc:0.76394, micro_auc:0.76394
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57162, official_mrr:0.77608, filtered_mrr:0.18970, acc:0.66270, ap:0.72843, f1:0.65606, macro_auc:0.74954, micro_auc:0.74954
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57325, official_mrr:0.74761, filtered_mrr:0.19967, acc:0.67290, ap:0.74263, f1:0.66576, macro_auc:0.76632, micro_auc:0.76632
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57188, official_mrr:0.77673, filtered_mrr:0.20461, acc:0.66404, ap:0.74234, f1:0.65605, macro_auc:0.75975, micro_auc:0.75975
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57058, official_mrr:0.73030, filtered_mrr:0.19297, acc:0.66306, ap:0.74041, f1:0.65602, macro_auc:0.75983, micro_auc:0.75983
+[Fri Sep 11 19:14:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:14:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57635, official_mrr:0.78971, filtered_mrr:0.18486, acc:0.65930, ap:0.73066, f1:0.65116, macro_auc:0.75264, micro_auc:0.75264
+[Fri Sep 11 19:14:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:14:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:8, loss:0.57642, official_mrr:0.76223, filtered_mrr:0.20028, acc:0.65663, ap:0.72884, f1:0.64877, macro_auc:0.75462, micro_auc:0.75462
+[Fri Sep 11 19:14:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:8, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:14:15 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:8, avg_official_mrr:0.78626, global_filtered_mrr:0.17498, avg_ap:0.72001, selection_metric:filtered_mrr, selection_score:0.17498
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60628, official_mrr:0.71032, filtered_mrr:0.15032, acc:0.59932, ap:0.68817, f1:0.57060, macro_auc:0.71381, micro_auc:0.71381
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60431, official_mrr:0.69409, filtered_mrr:0.15615, acc:0.58766, ap:0.69547, f1:0.55396, macro_auc:0.72336, micro_auc:0.72336
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60902, official_mrr:0.68938, filtered_mrr:0.14502, acc:0.57734, ap:0.67554, f1:0.53234, macro_auc:0.71444, micro_auc:0.71444
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.61279, official_mrr:0.69073, filtered_mrr:0.15556, acc:0.60005, ap:0.69534, f1:0.56232, macro_auc:0.72375, micro_auc:0.72375
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60990, official_mrr:0.67133, filtered_mrr:0.14655, acc:0.62506, ap:0.68891, f1:0.59983, macro_auc:0.72359, micro_auc:0.72359
+[Fri Sep 11 19:14:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.61625, official_mrr:0.64026, filtered_mrr:0.15100, acc:0.61438, ap:0.69140, f1:0.58498, macro_auc:0.70868, micro_auc:0.70868
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60406, official_mrr:0.58563, filtered_mrr:0.17471, acc:0.62882, ap:0.72168, f1:0.59920, macro_auc:0.74840, micro_auc:0.74840
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60927, official_mrr:0.62663, filtered_mrr:0.19374, acc:0.63611, ap:0.72500, f1:0.60947, macro_auc:0.73155, micro_auc:0.73155
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60739, official_mrr:0.62995, filtered_mrr:0.19263, acc:0.64339, ap:0.73057, f1:0.61857, macro_auc:0.73994, micro_auc:0.73994
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.61284, official_mrr:0.60503, filtered_mrr:0.18023, acc:0.61195, ap:0.70553, f1:0.57762, macro_auc:0.70807, micro_auc:0.70807
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60920, official_mrr:0.59784, filtered_mrr:0.18884, acc:0.63817, ap:0.72525, f1:0.61428, macro_auc:0.74302, micro_auc:0.74302
+[Fri Sep 11 19:14:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60980, official_mrr:0.62125, filtered_mrr:0.18856, acc:0.63174, ap:0.71416, f1:0.60673, macro_auc:0.73177, micro_auc:0.73177
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60992, official_mrr:0.59272, filtered_mrr:0.18156, acc:0.64364, ap:0.72673, f1:0.61697, macro_auc:0.73552, micro_auc:0.73552
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.61695, official_mrr:0.61244, filtered_mrr:0.17622, acc:0.62421, ap:0.70725, f1:0.59491, macro_auc:0.71405, micro_auc:0.71405
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:9, loss:0.60663, official_mrr:0.60368, filtered_mrr:0.19319, acc:0.63368, ap:0.72353, f1:0.60495, macro_auc:0.74217, micro_auc:0.74217
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:9, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:14:30 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:9, avg_official_mrr:0.63809, global_filtered_mrr:0.17162, avg_ap:0.70763, selection_metric:filtered_mrr, selection_score:0.17162
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57862, official_mrr:0.86797, filtered_mrr:0.16051, acc:0.65772, ap:0.70921, f1:0.65771, macro_auc:0.73469, micro_auc:0.73469
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.56432, official_mrr:0.83933, filtered_mrr:0.19094, acc:0.68358, ap:0.74009, f1:0.68291, macro_auc:0.75962, micro_auc:0.75962
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.58411, official_mrr:0.82352, filtered_mrr:0.14397, acc:0.67096, ap:0.68473, f1:0.67085, macro_auc:0.72798, micro_auc:0.72798
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.58393, official_mrr:0.85161, filtered_mrr:0.14864, acc:0.67909, ap:0.69727, f1:0.67784, macro_auc:0.73596, micro_auc:0.73596
+[Fri Sep 11 19:14:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57926, official_mrr:0.87089, filtered_mrr:0.14298, acc:0.66999, ap:0.69748, f1:0.66910, macro_auc:0.73925, micro_auc:0.73925
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.58318, official_mrr:0.84361, filtered_mrr:0.15070, acc:0.65772, ap:0.70112, f1:0.65668, macro_auc:0.73104, micro_auc:0.73104
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57302, official_mrr:0.78276, filtered_mrr:0.17170, acc:0.68310, ap:0.72634, f1:0.68201, macro_auc:0.75768, micro_auc:0.75768
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57082, official_mrr:0.83735, filtered_mrr:0.19643, acc:0.67484, ap:0.74071, f1:0.67379, macro_auc:0.76226, micro_auc:0.76226
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57071, official_mrr:0.82270, filtered_mrr:0.19480, acc:0.67703, ap:0.73893, f1:0.67570, macro_auc:0.76844, micro_auc:0.76844
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57462, official_mrr:0.78099, filtered_mrr:0.18651, acc:0.65748, ap:0.71801, f1:0.65639, macro_auc:0.73975, micro_auc:0.73975
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57165, official_mrr:0.76494, filtered_mrr:0.19364, acc:0.68249, ap:0.73970, f1:0.68123, macro_auc:0.76724, micro_auc:0.76724
+[Fri Sep 11 19:14:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.56853, official_mrr:0.81308, filtered_mrr:0.19997, acc:0.67448, ap:0.73997, f1:0.67396, macro_auc:0.76133, micro_auc:0.76133
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57066, official_mrr:0.74149, filtered_mrr:0.19105, acc:0.65748, ap:0.73759, f1:0.65634, macro_auc:0.75741, micro_auc:0.75741
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57700, official_mrr:0.79920, filtered_mrr:0.18114, acc:0.65493, ap:0.72627, f1:0.65377, macro_auc:0.74667, micro_auc:0.74667
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:10, loss:0.57344, official_mrr:0.76524, filtered_mrr:0.19815, acc:0.67727, ap:0.72959, f1:0.67664, macro_auc:0.75944, micro_auc:0.75944
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:10, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:14:45 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:10, avg_official_mrr:0.81365, global_filtered_mrr:0.17674, avg_ap:0.72180, selection_metric:filtered_mrr, selection_score:0.17674
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.58116, official_mrr:0.88334, filtered_mrr:0.15773, acc:0.65602, ap:0.69754, f1:0.65600, macro_auc:0.72331, micro_auc:0.72331
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.56750, official_mrr:0.87295, filtered_mrr:0.17472, acc:0.68504, ap:0.72996, f1:0.68450, macro_auc:0.75540, micro_auc:0.75540
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.58624, official_mrr:0.87194, filtered_mrr:0.14166, acc:0.65784, ap:0.67821, f1:0.65784, macro_auc:0.71996, micro_auc:0.71996
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.58341, official_mrr:0.90240, filtered_mrr:0.15396, acc:0.67788, ap:0.69766, f1:0.67650, macro_auc:0.73883, micro_auc:0.73883
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57963, official_mrr:0.87512, filtered_mrr:0.13663, acc:0.67217, ap:0.69315, f1:0.67071, macro_auc:0.73792, micro_auc:0.73792
+[Fri Sep 11 19:14:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.58193, official_mrr:0.87335, filtered_mrr:0.14127, acc:0.67545, ap:0.69798, f1:0.67280, macro_auc:0.73451, micro_auc:0.73451
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57351, official_mrr:0.83446, filtered_mrr:0.16455, acc:0.68868, ap:0.72154, f1:0.68651, macro_auc:0.75327, micro_auc:0.75327
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.56950, official_mrr:0.87636, filtered_mrr:0.19548, acc:0.69196, ap:0.74137, f1:0.68949, macro_auc:0.76561, micro_auc:0.76561
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57101, official_mrr:0.85651, filtered_mrr:0.19613, acc:0.69257, ap:0.73765, f1:0.69013, macro_auc:0.76588, micro_auc:0.76588
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57243, official_mrr:0.81759, filtered_mrr:0.19008, acc:0.67800, ap:0.72627, f1:0.67591, macro_auc:0.74967, micro_auc:0.74967
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57131, official_mrr:0.79246, filtered_mrr:0.19929, acc:0.69633, ap:0.74161, f1:0.69451, macro_auc:0.76857, micro_auc:0.76857
+[Fri Sep 11 19:14:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.56948, official_mrr:0.85417, filtered_mrr:0.19358, acc:0.68456, ap:0.73799, f1:0.68284, macro_auc:0.75996, micro_auc:0.75996
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57145, official_mrr:0.79476, filtered_mrr:0.18705, acc:0.67217, ap:0.73272, f1:0.67047, macro_auc:0.75632, micro_auc:0.75632
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57638, official_mrr:0.84174, filtered_mrr:0.17881, acc:0.67642, ap:0.72702, f1:0.67413, macro_auc:0.75078, micro_auc:0.75078
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:11, loss:0.57478, official_mrr:0.80364, filtered_mrr:0.19588, acc:0.68881, ap:0.72299, f1:0.68759, macro_auc:0.75340, micro_auc:0.75340
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:11, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:15:00 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:11, avg_official_mrr:0.85005, global_filtered_mrr:0.17379, avg_ap:0.71891, selection_metric:filtered_mrr, selection_score:0.17379
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.58681, official_mrr:0.72668, filtered_mrr:0.16624, acc:0.62093, ap:0.71045, f1:0.55976, macro_auc:0.73574, micro_auc:0.73574
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.57789, official_mrr:0.73641, filtered_mrr:0.19470, acc:0.62555, ap:0.73089, f1:0.56503, macro_auc:0.75200, micro_auc:0.75200
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59312, official_mrr:0.70849, filtered_mrr:0.12986, acc:0.63186, ap:0.65570, f1:0.57700, macro_auc:0.70874, micro_auc:0.70874
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.60048, official_mrr:0.67912, filtered_mrr:0.13008, acc:0.61316, ap:0.65551, f1:0.54776, macro_auc:0.70953, micro_auc:0.70953
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59218, official_mrr:0.68192, filtered_mrr:0.12616, acc:0.62482, ap:0.65396, f1:0.56354, macro_auc:0.70920, micro_auc:0.70920
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59686, official_mrr:0.66666, filtered_mrr:0.13545, acc:0.61632, ap:0.66594, f1:0.55058, macro_auc:0.70821, micro_auc:0.70821
+[Fri Sep 11 19:15:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.58714, official_mrr:0.64535, filtered_mrr:0.15095, acc:0.62494, ap:0.69060, f1:0.56391, macro_auc:0.73182, micro_auc:0.73182
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59233, official_mrr:0.67429, filtered_mrr:0.16074, acc:0.61863, ap:0.68080, f1:0.55458, macro_auc:0.71872, micro_auc:0.71872
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59254, official_mrr:0.65967, filtered_mrr:0.16680, acc:0.61620, ap:0.69369, f1:0.55039, macro_auc:0.72545, micro_auc:0.72545
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59351, official_mrr:0.65226, filtered_mrr:0.16291, acc:0.62142, ap:0.67214, f1:0.55827, macro_auc:0.71028, micro_auc:0.71028
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.58967, official_mrr:0.64208, filtered_mrr:0.16281, acc:0.61790, ap:0.70635, f1:0.55383, macro_auc:0.74037, micro_auc:0.74037
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59217, official_mrr:0.66938, filtered_mrr:0.16009, acc:0.62008, ap:0.68408, f1:0.55628, macro_auc:0.71521, micro_auc:0.71521
+[Fri Sep 11 19:15:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:15:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59380, official_mrr:0.61837, filtered_mrr:0.15275, acc:0.61923, ap:0.67795, f1:0.55486, macro_auc:0.71612, micro_auc:0.71612
+[Fri Sep 11 19:15:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:15:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59954, official_mrr:0.66255, filtered_mrr:0.14954, acc:0.61255, ap:0.67179, f1:0.54472, macro_auc:0.70728, micro_auc:0.70728
+[Fri Sep 11 19:15:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:15:15 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:12, loss:0.59471, official_mrr:0.66960, filtered_mrr:0.16543, acc:0.61705, ap:0.68272, f1:0.55172, macro_auc:0.72108, micro_auc:0.72108
+[Fri Sep 11 19:15:15 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:12, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:15:15 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:12, avg_official_mrr:0.67286, global_filtered_mrr:0.15430, avg_ap:0.68217, selection_metric:filtered_mrr, selection_score:0.15430
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58426, official_mrr:0.90363, filtered_mrr:0.12886, acc:0.65991, ap:0.66247, f1:0.65198, macro_auc:0.70895, micro_auc:0.70895
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.57202, official_mrr:0.93074, filtered_mrr:0.14361, acc:0.67193, ap:0.69393, f1:0.66493, macro_auc:0.73295, micro_auc:0.73295
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58915, official_mrr:0.90685, filtered_mrr:0.13302, acc:0.65189, ap:0.66286, f1:0.64910, macro_auc:0.70383, micro_auc:0.70383
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58893, official_mrr:0.90989, filtered_mrr:0.13745, acc:0.65335, ap:0.66593, f1:0.65017, macro_auc:0.70754, micro_auc:0.70754
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.59032, official_mrr:0.87763, filtered_mrr:0.12349, acc:0.64534, ap:0.64630, f1:0.64217, macro_auc:0.69513, micro_auc:0.69513
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58860, official_mrr:0.88293, filtered_mrr:0.13526, acc:0.64837, ap:0.66509, f1:0.64502, macro_auc:0.70183, micro_auc:0.70183
+[Fri Sep 11 19:15:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58407, official_mrr:0.84039, filtered_mrr:0.14013, acc:0.66088, ap:0.68324, f1:0.65835, macro_auc:0.71885, micro_auc:0.71885
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58343, official_mrr:0.86422, filtered_mrr:0.15418, acc:0.65675, ap:0.68199, f1:0.65252, macro_auc:0.71536, micro_auc:0.71536
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58149, official_mrr:0.85885, filtered_mrr:0.15249, acc:0.66136, ap:0.69340, f1:0.65661, macro_auc:0.72149, micro_auc:0.72149
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58396, official_mrr:0.85207, filtered_mrr:0.15224, acc:0.65566, ap:0.67576, f1:0.65077, macro_auc:0.70753, micro_auc:0.70753
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58242, official_mrr:0.82644, filtered_mrr:0.15547, acc:0.66574, ap:0.70029, f1:0.65915, macro_auc:0.72725, micro_auc:0.72725
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58580, official_mrr:0.85320, filtered_mrr:0.16015, acc:0.64473, ap:0.68902, f1:0.63849, macro_auc:0.70923, micro_auc:0.70923
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58715, official_mrr:0.82417, filtered_mrr:0.14593, acc:0.63247, ap:0.67743, f1:0.62634, macro_auc:0.70086, micro_auc:0.70086
+[Fri Sep 11 19:15:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:15:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.59183, official_mrr:0.84240, filtered_mrr:0.14585, acc:0.64267, ap:0.67139, f1:0.63529, macro_auc:0.69651, micro_auc:0.69651
+[Fri Sep 11 19:15:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:15:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:13, loss:0.58640, official_mrr:0.85573, filtered_mrr:0.16279, acc:0.65675, ap:0.68512, f1:0.64969, macro_auc:0.71394, micro_auc:0.71394
+[Fri Sep 11 19:15:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:13, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:15:30 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:13, avg_official_mrr:0.86861, global_filtered_mrr:0.14473, avg_ap:0.67695, selection_metric:filtered_mrr, selection_score:0.14473
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58170, official_mrr:0.90868, filtered_mrr:0.15048, acc:0.66464, ap:0.68958, f1:0.65618, macro_auc:0.71985, micro_auc:0.71985
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.56992, official_mrr:0.89992, filtered_mrr:0.16288, acc:0.68310, ap:0.71361, f1:0.67734, macro_auc:0.74243, micro_auc:0.74243
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58651, official_mrr:0.87451, filtered_mrr:0.13293, acc:0.66476, ap:0.66817, f1:0.66272, macro_auc:0.70798, micro_auc:0.70798
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58914, official_mrr:0.86349, filtered_mrr:0.14005, acc:0.67011, ap:0.65803, f1:0.66725, macro_auc:0.70422, micro_auc:0.70422
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58831, official_mrr:0.81350, filtered_mrr:0.12418, acc:0.65347, ap:0.64879, f1:0.65139, macro_auc:0.69963, micro_auc:0.69963
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58931, official_mrr:0.83068, filtered_mrr:0.13149, acc:0.65189, ap:0.66516, f1:0.64922, macro_auc:0.70394, micro_auc:0.70394
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58152, official_mrr:0.78286, filtered_mrr:0.14665, acc:0.66853, ap:0.68738, f1:0.66498, macro_auc:0.72001, micro_auc:0.72001
+[Fri Sep 11 19:15:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58419, official_mrr:0.82226, filtered_mrr:0.16202, acc:0.66610, ap:0.68084, f1:0.66142, macro_auc:0.70724, micro_auc:0.70724
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58639, official_mrr:0.81097, filtered_mrr:0.15218, acc:0.66792, ap:0.67714, f1:0.66266, macro_auc:0.70766, micro_auc:0.70766
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58558, official_mrr:0.79504, filtered_mrr:0.15267, acc:0.66173, ap:0.66753, f1:0.65590, macro_auc:0.69846, micro_auc:0.69846
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.58094, official_mrr:0.78001, filtered_mrr:0.15475, acc:0.67958, ap:0.70084, f1:0.67381, macro_auc:0.73117, micro_auc:0.73117
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.61028, official_mrr:0.80808, filtered_mrr:0.15328, acc:0.64752, ap:0.67342, f1:0.64411, macro_auc:0.69771, micro_auc:0.69771
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.61128, official_mrr:0.74429, filtered_mrr:0.14388, acc:0.63672, ap:0.66805, f1:0.63313, macro_auc:0.69116, micro_auc:0.69116
+[Fri Sep 11 19:15:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:15:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.60396, official_mrr:0.78674, filtered_mrr:0.14197, acc:0.64303, ap:0.66072, f1:0.63926, macro_auc:0.68370, micro_auc:0.68370
+[Fri Sep 11 19:15:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:15:45 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:14, loss:0.59071, official_mrr:0.78285, filtered_mrr:0.15127, acc:0.65699, ap:0.67129, f1:0.65357, macro_auc:0.70283, micro_auc:0.70283
+[Fri Sep 11 19:15:45 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:14, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:15:45 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:14, avg_official_mrr:0.82026, global_filtered_mrr:0.14671, avg_ap:0.67537, selection_metric:filtered_mrr, selection_score:0.14671
+[Fri Sep 11 19:15:57 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.58270, official_mrr:0.87156, filtered_mrr:0.15988, acc:0.64133, ap:0.70333, f1:0.63208, macro_auc:0.72475, micro_auc:0.72475
+[Fri Sep 11 19:15:57 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:57 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.56596, official_mrr:0.87515, filtered_mrr:0.18624, acc:0.67448, ap:0.73801, f1:0.66776, macro_auc:0.75493, micro_auc:0.75493
+[Fri Sep 11 19:15:57 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.58637, official_mrr:0.84542, filtered_mrr:0.13689, acc:0.66185, ap:0.67264, f1:0.65753, macro_auc:0.71499, micro_auc:0.71499
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.58704, official_mrr:0.86846, filtered_mrr:0.14226, acc:0.67691, ap:0.68608, f1:0.67015, macro_auc:0.73063, micro_auc:0.73063
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.58490, official_mrr:0.87670, filtered_mrr:0.13504, acc:0.66100, ap:0.68718, f1:0.65500, macro_auc:0.72763, micro_auc:0.72763
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.58574, official_mrr:0.86242, filtered_mrr:0.14058, acc:0.66610, ap:0.69390, f1:0.65972, macro_auc:0.72638, micro_auc:0.72638
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.57873, official_mrr:0.81261, filtered_mrr:0.15813, acc:0.66646, ap:0.71182, f1:0.65953, macro_auc:0.73938, micro_auc:0.73938
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.57630, official_mrr:0.85367, filtered_mrr:0.18814, acc:0.66999, ap:0.72775, f1:0.66076, macro_auc:0.74808, micro_auc:0.74808
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.57733, official_mrr:0.84104, filtered_mrr:0.18939, acc:0.66914, ap:0.73019, f1:0.66004, macro_auc:0.74947, micro_auc:0.74947
+[Fri Sep 11 19:15:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.57877, official_mrr:0.82041, filtered_mrr:0.18888, acc:0.65238, ap:0.71770, f1:0.64354, macro_auc:0.73364, micro_auc:0.73364
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.57416, official_mrr:0.80063, filtered_mrr:0.19794, acc:0.67861, ap:0.73894, f1:0.67004, macro_auc:0.75607, micro_auc:0.75607
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.57412, official_mrr:0.82885, filtered_mrr:0.19556, acc:0.66379, ap:0.73723, f1:0.65492, macro_auc:0.75146, micro_auc:0.75146
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.57817, official_mrr:0.78293, filtered_mrr:0.18567, acc:0.65529, ap:0.72764, f1:0.64642, macro_auc:0.74008, micro_auc:0.74008
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.58235, official_mrr:0.80422, filtered_mrr:0.18123, acc:0.65262, ap:0.72059, f1:0.64269, macro_auc:0.73791, micro_auc:0.73791
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:15, loss:0.58084, official_mrr:0.81265, filtered_mrr:0.19685, acc:0.65881, ap:0.71879, f1:0.65050, macro_auc:0.73875, micro_auc:0.73875
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:15, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:15:59 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:15, avg_official_mrr:0.83711, global_filtered_mrr:0.17218, avg_ap:0.71412, selection_metric:filtered_mrr, selection_score:0.17218
+[Fri Sep 11 19:16:12 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57914, official_mrr:0.89460, filtered_mrr:0.16119, acc:0.63210, ap:0.70221, f1:0.63176, macro_auc:0.72082, micro_auc:0.72082
+[Fri Sep 11 19:16:12 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:12 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.56150, official_mrr:0.86930, filtered_mrr:0.18721, acc:0.68188, ap:0.73767, f1:0.68113, macro_auc:0.75747, micro_auc:0.75747
+[Fri Sep 11 19:16:12 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.58847, official_mrr:0.86003, filtered_mrr:0.13626, acc:0.66513, ap:0.67513, f1:0.66501, macro_auc:0.72028, micro_auc:0.72028
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.58339, official_mrr:0.87816, filtered_mrr:0.14293, acc:0.67521, ap:0.69306, f1:0.67500, macro_auc:0.73654, micro_auc:0.73654
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.58207, official_mrr:0.86872, filtered_mrr:0.13317, acc:0.67169, ap:0.68236, f1:0.67034, macro_auc:0.72923, micro_auc:0.72923
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.58155, official_mrr:0.87899, filtered_mrr:0.14149, acc:0.67654, ap:0.69759, f1:0.67509, macro_auc:0.73403, micro_auc:0.73403
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57581, official_mrr:0.79905, filtered_mrr:0.14947, acc:0.68310, ap:0.70384, f1:0.68180, macro_auc:0.74465, micro_auc:0.74465
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.56955, official_mrr:0.86364, filtered_mrr:0.18329, acc:0.68346, ap:0.73500, f1:0.68124, macro_auc:0.76005, micro_auc:0.76005
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57166, official_mrr:0.84719, filtered_mrr:0.18135, acc:0.67982, ap:0.72899, f1:0.67755, macro_auc:0.75614, micro_auc:0.75614
+[Fri Sep 11 19:16:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57310, official_mrr:0.80810, filtered_mrr:0.18386, acc:0.66780, ap:0.71754, f1:0.66611, macro_auc:0.73971, micro_auc:0.73971
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57342, official_mrr:0.81313, filtered_mrr:0.19280, acc:0.68468, ap:0.72808, f1:0.68266, macro_auc:0.75521, micro_auc:0.75521
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.56961, official_mrr:0.83197, filtered_mrr:0.19001, acc:0.68079, ap:0.73036, f1:0.68032, macro_auc:0.75221, micro_auc:0.75221
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57177, official_mrr:0.78190, filtered_mrr:0.18214, acc:0.67326, ap:0.72740, f1:0.67266, macro_auc:0.74602, micro_auc:0.74602
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57615, official_mrr:0.82153, filtered_mrr:0.17828, acc:0.67302, ap:0.72275, f1:0.67170, macro_auc:0.74267, micro_auc:0.74267
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:16, loss:0.57539, official_mrr:0.81300, filtered_mrr:0.19216, acc:0.68201, ap:0.71773, f1:0.68144, macro_auc:0.74554, micro_auc:0.74554
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:16, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:16:14 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:16, avg_official_mrr:0.84195, global_filtered_mrr:0.16904, avg_ap:0.71331, selection_metric:filtered_mrr, selection_score:0.16904
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.58119, official_mrr:0.88148, filtered_mrr:0.16007, acc:0.63392, ap:0.70120, f1:0.63373, macro_auc:0.72001, micro_auc:0.72001
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.56395, official_mrr:0.85967, filtered_mrr:0.18561, acc:0.66161, ap:0.73488, f1:0.66126, macro_auc:0.75115, micro_auc:0.75115
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.59052, official_mrr:0.79838, filtered_mrr:0.13566, acc:0.63623, ap:0.66830, f1:0.63623, macro_auc:0.71139, micro_auc:0.71139
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.58707, official_mrr:0.78358, filtered_mrr:0.14244, acc:0.66015, ap:0.69229, f1:0.66004, macro_auc:0.73100, micro_auc:0.73100
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.58584, official_mrr:0.80163, filtered_mrr:0.13449, acc:0.65663, ap:0.68698, f1:0.65661, macro_auc:0.72894, micro_auc:0.72894
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.58309, official_mrr:0.79743, filtered_mrr:0.14164, acc:0.67229, ap:0.69952, f1:0.67167, macro_auc:0.73431, micro_auc:0.73431
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57866, official_mrr:0.75089, filtered_mrr:0.14976, acc:0.67290, ap:0.71162, f1:0.67260, macro_auc:0.74314, micro_auc:0.74314
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57229, official_mrr:0.78353, filtered_mrr:0.18779, acc:0.67897, ap:0.73527, f1:0.67821, macro_auc:0.75681, micro_auc:0.75681
+[Fri Sep 11 19:16:28 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57228, official_mrr:0.79720, filtered_mrr:0.18439, acc:0.68298, ap:0.73303, f1:0.68266, macro_auc:0.75896, micro_auc:0.75896
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57513, official_mrr:0.74600, filtered_mrr:0.18533, acc:0.66525, ap:0.72051, f1:0.66505, macro_auc:0.74007, micro_auc:0.74007
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57366, official_mrr:0.76210, filtered_mrr:0.19054, acc:0.67266, ap:0.73449, f1:0.67210, macro_auc:0.75690, micro_auc:0.75690
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57223, official_mrr:0.80061, filtered_mrr:0.19607, acc:0.67557, ap:0.73768, f1:0.67479, macro_auc:0.75364, micro_auc:0.75364
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57434, official_mrr:0.73234, filtered_mrr:0.18191, acc:0.65966, ap:0.72721, f1:0.65920, macro_auc:0.74623, micro_auc:0.74623
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57898, official_mrr:0.76838, filtered_mrr:0.17904, acc:0.66404, ap:0.72326, f1:0.66396, macro_auc:0.74269, micro_auc:0.74269
+[Fri Sep 11 19:16:29 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:16:30 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:17, loss:0.57784, official_mrr:0.73808, filtered_mrr:0.19440, acc:0.66027, ap:0.71769, f1:0.65947, macro_auc:0.74476, micro_auc:0.74476
+[Fri Sep 11 19:16:30 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:17, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:16:30 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:17, avg_official_mrr:0.78675, global_filtered_mrr:0.16994, avg_ap:0.71493, selection_metric:filtered_mrr, selection_score:0.16994
+[Fri Sep 11 19:16:42 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58380, official_mrr:0.90158, filtered_mrr:0.15022, acc:0.65335, ap:0.67652, f1:0.64329, macro_auc:0.71517, micro_auc:0.71517
+[Fri Sep 11 19:16:42 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:42 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.57410, official_mrr:0.88528, filtered_mrr:0.14960, acc:0.66829, ap:0.68651, f1:0.65755, macro_auc:0.73293, micro_auc:0.73293
+[Fri Sep 11 19:16:42 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58196, official_mrr:0.90228, filtered_mrr:0.13912, acc:0.65687, ap:0.67459, f1:0.65163, macro_auc:0.72186, micro_auc:0.72186
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58370, official_mrr:0.93143, filtered_mrr:0.15909, acc:0.65894, ap:0.68756, f1:0.65384, macro_auc:0.72345, micro_auc:0.72345
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58258, official_mrr:0.90572, filtered_mrr:0.14775, acc:0.64485, ap:0.68527, f1:0.64143, macro_auc:0.72110, micro_auc:0.72110
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58810, official_mrr:0.88832, filtered_mrr:0.14779, acc:0.64509, ap:0.68436, f1:0.64143, macro_auc:0.71499, micro_auc:0.71499
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.57879, official_mrr:0.88198, filtered_mrr:0.17535, acc:0.65906, ap:0.69664, f1:0.65490, macro_auc:0.73114, micro_auc:0.73114
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58082, official_mrr:0.90311, filtered_mrr:0.19040, acc:0.65505, ap:0.71142, f1:0.65013, macro_auc:0.73053, micro_auc:0.73053
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58311, official_mrr:0.89295, filtered_mrr:0.19985, acc:0.65177, ap:0.70358, f1:0.64658, macro_auc:0.72676, micro_auc:0.72676
+[Fri Sep 11 19:16:43 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58603, official_mrr:0.89107, filtered_mrr:0.17485, acc:0.64085, ap:0.68469, f1:0.63521, macro_auc:0.70970, micro_auc:0.70970
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.57789, official_mrr:0.87486, filtered_mrr:0.18008, acc:0.66974, ap:0.71701, f1:0.66243, macro_auc:0.74168, micro_auc:0.74168
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58001, official_mrr:0.92238, filtered_mrr:0.18317, acc:0.65311, ap:0.70428, f1:0.64838, macro_auc:0.72560, micro_auc:0.72560
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58404, official_mrr:0.85038, filtered_mrr:0.17312, acc:0.63745, ap:0.70269, f1:0.63081, macro_auc:0.71645, micro_auc:0.71645
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58954, official_mrr:0.88912, filtered_mrr:0.15606, acc:0.64522, ap:0.68671, f1:0.63872, macro_auc:0.70831, micro_auc:0.70831
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:18, loss:0.58215, official_mrr:0.88256, filtered_mrr:0.16969, acc:0.65991, ap:0.69966, f1:0.65404, macro_auc:0.72779, micro_auc:0.72779
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:18, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:16:44 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:18, avg_official_mrr:0.89354, global_filtered_mrr:0.16641, avg_ap:0.69343, selection_metric:filtered_mrr, selection_score:0.16641
+[Fri Sep 11 19:16:57 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57488, official_mrr:0.93509, filtered_mrr:0.15978, acc:0.64000, ap:0.70742, f1:0.63999, macro_auc:0.73167, micro_auc:0.73167
+[Fri Sep 11 19:16:57 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:57 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.56097, official_mrr:0.93028, filtered_mrr:0.18846, acc:0.65529, ap:0.73809, f1:0.65518, macro_auc:0.75119, micro_auc:0.75119
+[Fri Sep 11 19:16:57 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:16:57 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.59073, official_mrr:0.90262, filtered_mrr:0.13664, acc:0.63113, ap:0.67585, f1:0.62889, macro_auc:0.71536, micro_auc:0.71536
+[Fri Sep 11 19:16:57 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.58902, official_mrr:0.88198, filtered_mrr:0.13876, acc:0.64716, ap:0.69087, f1:0.64524, macro_auc:0.72453, micro_auc:0.72453
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.58705, official_mrr:0.91172, filtered_mrr:0.13197, acc:0.64339, ap:0.68011, f1:0.64188, macro_auc:0.71993, micro_auc:0.71993
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.58643, official_mrr:0.88793, filtered_mrr:0.14192, acc:0.63793, ap:0.68874, f1:0.63559, macro_auc:0.72126, micro_auc:0.72126
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57929, official_mrr:0.83307, filtered_mrr:0.16239, acc:0.64971, ap:0.70485, f1:0.64796, macro_auc:0.73200, micro_auc:0.73200
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57247, official_mrr:0.89364, filtered_mrr:0.18582, acc:0.66440, ap:0.72792, f1:0.66329, macro_auc:0.74687, micro_auc:0.74687
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57273, official_mrr:0.88334, filtered_mrr:0.18239, acc:0.67071, ap:0.72651, f1:0.66990, macro_auc:0.75039, micro_auc:0.75039
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57825, official_mrr:0.86326, filtered_mrr:0.17835, acc:0.65092, ap:0.71205, f1:0.64889, macro_auc:0.72742, micro_auc:0.72742
+[Fri Sep 11 19:16:58 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57471, official_mrr:0.84819, filtered_mrr:0.18467, acc:0.66246, ap:0.72219, f1:0.66053, macro_auc:0.74940, micro_auc:0.74940
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57355, official_mrr:0.87454, filtered_mrr:0.18350, acc:0.66452, ap:0.72260, f1:0.66157, macro_auc:0.74426, micro_auc:0.74426
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57422, official_mrr:0.85050, filtered_mrr:0.17834, acc:0.64947, ap:0.72093, f1:0.64543, macro_auc:0.73945, micro_auc:0.73945
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57999, official_mrr:0.88063, filtered_mrr:0.17118, acc:0.64934, ap:0.71080, f1:0.64643, macro_auc:0.73319, micro_auc:0.73319
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:19, loss:0.57686, official_mrr:0.88761, filtered_mrr:0.19119, acc:0.65760, ap:0.71607, f1:0.65526, macro_auc:0.74417, micro_auc:0.74417
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:19, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:16:59 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:19, avg_official_mrr:0.88429, global_filtered_mrr:0.16769, avg_ap:0.70967, selection_metric:filtered_mrr, selection_score:0.16769
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57401, official_mrr:0.84826, filtered_mrr:0.16019, acc:0.66744, ap:0.70818, f1:0.66359, macro_auc:0.73228, micro_auc:0.73228
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:70, positives:4118, sources:324, mean_negatives:83.555, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.55827, official_mrr:0.81680, filtered_mrr:0.18477, acc:0.68431, ap:0.74204, f1:0.67965, macro_auc:0.75588, micro_auc:0.75588
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:71, positives:4118, sources:344, mean_negatives:84.298, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.58255, official_mrr:0.76908, filtered_mrr:0.13704, acc:0.67339, ap:0.68299, f1:0.67118, macro_auc:0.72773, micro_auc:0.72773
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:72, positives:4118, sources:321, mean_negatives:80.469, min_negatives:29, max_negatives:96
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.58288, official_mrr:0.73405, filtered_mrr:0.14092, acc:0.67266, ap:0.68640, f1:0.66896, macro_auc:0.73272, micro_auc:0.73272
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:73, positives:4118, sources:306, mean_negatives:81.326, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.58348, official_mrr:0.78302, filtered_mrr:0.13070, acc:0.65760, ap:0.67664, f1:0.65525, macro_auc:0.72777, micro_auc:0.72777
+[Fri Sep 11 19:17:12 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:74, positives:4118, sources:307, mean_negatives:80.789, min_negatives:45, max_negatives:96
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.58030, official_mrr:0.79178, filtered_mrr:0.14203, acc:0.65784, ap:0.69423, f1:0.65567, macro_auc:0.73007, micro_auc:0.73007
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:75, positives:4118, sources:329, mean_negatives:84.600, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57650, official_mrr:0.73280, filtered_mrr:0.14467, acc:0.66974, ap:0.69451, f1:0.66714, macro_auc:0.73578, micro_auc:0.73578
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:76, positives:4118, sources:359, mean_negatives:81.110, min_negatives:36, max_negatives:96
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57277, official_mrr:0.78427, filtered_mrr:0.18176, acc:0.66440, ap:0.71217, f1:0.66143, macro_auc:0.74732, micro_auc:0.74732
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:77, positives:4118, sources:319, mean_negatives:82.029, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57305, official_mrr:0.73940, filtered_mrr:0.17650, acc:0.66792, ap:0.71646, f1:0.66430, macro_auc:0.74453, micro_auc:0.74453
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:78, positives:4118, sources:352, mean_negatives:83.768, min_negatives:51, max_negatives:96
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57721, official_mrr:0.69473, filtered_mrr:0.17450, acc:0.66039, ap:0.70308, f1:0.65596, macro_auc:0.72432, micro_auc:0.72432
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:79, positives:4118, sources:371, mean_negatives:84.239, min_negatives:63, max_negatives:96
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57063, official_mrr:0.71257, filtered_mrr:0.18185, acc:0.68553, ap:0.71669, f1:0.68078, macro_auc:0.75139, micro_auc:0.75139
+[Fri Sep 11 19:17:13 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:80, positives:4118, sources:401, mean_negatives:83.221, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57201, official_mrr:0.74685, filtered_mrr:0.18532, acc:0.66768, ap:0.71751, f1:0.66501, macro_auc:0.74449, micro_auc:0.74449
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:81, positives:4118, sources:339, mean_negatives:81.805, min_negatives:44, max_negatives:96
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57520, official_mrr:0.65132, filtered_mrr:0.17623, acc:0.65784, ap:0.71396, f1:0.65395, macro_auc:0.73705, micro_auc:0.73705
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:82, positives:4118, sources:396, mean_negatives:82.735, min_negatives:34, max_negatives:96
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57848, official_mrr:0.70619, filtered_mrr:0.16998, acc:0.66027, ap:0.70527, f1:0.65644, macro_auc:0.73225, micro_auc:0.73225
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:83, positives:4118, sources:391, mean_negatives:85.125, min_negatives:64, max_negatives:96
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] meta val epoch:20, loss:0.57896, official_mrr:0.69390, filtered_mrr:0.18618, acc:0.67120, ap:0.71003, f1:0.66740, macro_auc:0.73673, micro_auc:0.73673
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] filtered val epoch:20, snapshot:84, positives:4118, sources:371, mean_negatives:82.074, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] validation summary epoch:20, avg_official_mrr:0.74700, global_filtered_mrr:0.16484, avg_ap:0.70534, selection_metric:filtered_mrr, selection_score:0.16484
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] checkpoint saved metric:ap, epoch:10, score:0.721801, path:/home/lab_user/project/lzc/results/scadyg/checkpoints/20260911_191142_mooc_pid768674/best_ap.pt
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] checkpoint saved metric:mrr, epoch:0, score:0.936181, path:/home/lab_user/project/lzc/results/scadyg/checkpoints/20260911_191142_mooc_pid768674/best_official_mrr.pt
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] checkpoint saved metric:filtered_mrr, epoch:10, score:0.176742, path:/home/lab_user/project/lzc/results/scadyg/checkpoints/20260911_191142_mooc_pid768674/best_filtered_mrr.pt
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:85, loss:0.57080, official_mrr:0.81473, filtered_mrr:0.21104, acc:0.68091, ap:0.74515, f1:0.67996, macro_auc:0.76736, micro_auc:0.76736
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:85, positives:4118, sources:360, mean_negatives:83.669, min_negatives:54, max_negatives:96
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:86, loss:0.57508, official_mrr:0.78256, filtered_mrr:0.18539, acc:0.66149, ap:0.72858, f1:0.66098, macro_auc:0.74962, micro_auc:0.74962
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:86, positives:4118, sources:359, mean_negatives:83.935, min_negatives:58, max_negatives:96
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:87, loss:0.57195, official_mrr:0.79778, filtered_mrr:0.20237, acc:0.66889, ap:0.73807, f1:0.66807, macro_auc:0.75513, micro_auc:0.75513
+[Fri Sep 11 19:17:14 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:87, positives:4118, sources:390, mean_negatives:84.794, min_negatives:53, max_negatives:96
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:88, loss:0.56695, official_mrr:0.81970, filtered_mrr:0.20997, acc:0.67836, ap:0.75161, f1:0.67750, macro_auc:0.77006, micro_auc:0.77006
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:88, positives:4118, sources:348, mean_negatives:83.144, min_negatives:43, max_negatives:96
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:89, loss:0.57114, official_mrr:0.75945, filtered_mrr:0.19311, acc:0.67011, ap:0.73362, f1:0.66965, macro_auc:0.75746, micro_auc:0.75746
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:89, positives:4118, sources:363, mean_negatives:81.235, min_negatives:40, max_negatives:96
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:90, loss:0.57052, official_mrr:0.79882, filtered_mrr:0.19434, acc:0.66452, ap:0.73468, f1:0.66389, macro_auc:0.75255, micro_auc:0.75255
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:90, positives:4118, sources:343, mean_negatives:82.498, min_negatives:46, max_negatives:96
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:91, loss:0.57028, official_mrr:0.78098, filtered_mrr:0.21629, acc:0.68018, ap:0.73293, f1:0.67928, macro_auc:0.75859, micro_auc:0.75859
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:91, positives:4118, sources:369, mean_negatives:81.628, min_negatives:40, max_negatives:96
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:92, loss:0.56883, official_mrr:0.81019, filtered_mrr:0.20772, acc:0.67727, ap:0.74082, f1:0.67659, macro_auc:0.76091, micro_auc:0.76091
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:92, positives:4118, sources:368, mean_negatives:83.389, min_negatives:47, max_negatives:96
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:93, loss:0.56637, official_mrr:0.85048, filtered_mrr:0.21424, acc:0.67120, ap:0.75424, f1:0.67056, macro_auc:0.76354, micro_auc:0.76354
+[Fri Sep 11 19:17:15 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:93, positives:4118, sources:358, mean_negatives:84.213, min_negatives:60, max_negatives:96
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:94, loss:0.71552, official_mrr:0.80525, filtered_mrr:0.20734, acc:0.63915, ap:0.71649, f1:0.63897, macro_auc:0.70721, micro_auc:0.70721
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:94, positives:4118, sources:372, mean_negatives:84.211, min_negatives:48, max_negatives:96
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:95, loss:0.68059, official_mrr:0.74686, filtered_mrr:0.15630, acc:0.59580, ap:0.65108, f1:0.59535, macro_auc:0.63784, micro_auc:0.63784
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:95, positives:4118, sources:342, mean_negatives:81.473, min_negatives:40, max_negatives:96
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:96, loss:0.65745, official_mrr:0.69133, filtered_mrr:0.17707, acc:0.59641, ap:0.67211, f1:0.59612, macro_auc:0.65691, micro_auc:0.65691
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:96, positives:4118, sources:337, mean_negatives:83.412, min_negatives:57, max_negatives:96
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:97, loss:0.64696, official_mrr:0.77597, filtered_mrr:0.20519, acc:0.63405, ap:0.70205, f1:0.63344, macro_auc:0.68775, micro_auc:0.68775
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:97, positives:4118, sources:328, mean_negatives:84.034, min_negatives:60, max_negatives:96
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:98, loss:0.63903, official_mrr:0.79129, filtered_mrr:0.22791, acc:0.64862, ap:0.72288, f1:0.64695, macro_auc:0.69814, micro_auc:0.69814
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:98, positives:4118, sources:321, mean_negatives:84.703, min_negatives:39, max_negatives:96
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] test epoch:20, snapshot:99, loss:0.63980, official_mrr:0.74736, filtered_mrr:0.21989, acc:0.64212, ap:0.72234, f1:0.64048, macro_auc:0.69832, micro_auc:0.69832
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] filtered test snapshot:99, positives:4067, sources:285, mean_negatives:82.947, min_negatives:50, max_negatives:96
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'avg_mrr': 0.7848813227430208}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'avg_official_mrr': 0.7848813227430208}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'avg_filtered_mrr': 0.20186381715246685}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'filtered_positive_count': 61719}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'avg_acc': 0.6539477308446345}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'avg_auc': 0.7281181855911373}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'avg_rcall10': 0.9918941706281372}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_link_prediction.py|INFO] {'avg_ap': 0.7231099218716481}
+[Fri Sep 11 19:17:16 2026|scalable_tgn_main_link_prediction.py|INFO] All accuracy: 0.6539477308446345
+[Fri Sep 11 19:17:16 2026|scalable_tgn_main_link_prediction.py|INFO] All AUC: 0.7281181855911373
+[Fri Sep 11 19:17:16 2026|scalable_tgn_main_link_prediction.py|INFO] All MRR: 0.7848813227430208
+[Fri Sep 11 19:17:16 2026|scalable_tgn_main_link_prediction.py|INFO] All time: 328.2753665447235
+Total number of transformer parameters is: 55364
+Total number of predit_layer parameters is: 641
+56005
+train steps: 70, val steps 15, test steps 15 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+elapsed time:7.729110956192017s
+12.918440818786621
+2.21600079536438
+15
+13.013080358505249
+2.228815793991089
+15
+12.857428789138794
+2.2068989276885986
+15
+12.63767671585083
+2.239532470703125
+15
+12.451823234558105
+2.192474365234375
+15
+12.670937299728394
+2.1959877014160156
+15
+12.613043785095215
+2.59608793258667
+15
+12.631152391433716
+2.31384015083313
+15
+12.821813344955444
+2.202039957046509
+15
+13.061132192611694
+2.2448835372924805
+15
+12.902666091918945
+2.2092933654785156
+15
+12.670904636383057
+2.1937472820281982
+15
+12.627962827682495
+2.209731101989746
+15
+12.733061790466309
+2.166701078414917
+15
+12.752246379852295
+2.212923765182495
+15
+12.43576192855835
+2.2013816833496094
+15
+12.756566047668457
+2.219954013824463
+15
+13.069397687911987
+2.192460775375366
+15
+12.556182384490967
+2.196706533432007
+15
+12.68601107597351
+2.163743734359741
+15
+12.623129844665527
+2.179490566253662
+15
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+324.29245138168335
+[repro] finished_at=2026-09-11T19:17:17+08:00
