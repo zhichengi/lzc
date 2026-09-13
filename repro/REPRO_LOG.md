@@ -1,6 +1,11 @@
 # GCTD 复现日志
 
-> 当前：Cora 1.3% 官方默认 ~30%，建议命令 10-run 66.0 ± 9.4 vs 论文 81.4 ± 1.6。总表：`results/gctd/cora_summary.csv`。L1 是，L3 否。**不要再扫 Cora**。入口：[GCTD_README.md](GCTD_README.md)。
+> 当前：Table 2 三个小图格已跑完（建议命令 `--lr_rec 0.01 --edge_topk 12` + 塌缩重试 + 超点配额，10 seed）——
+> Cora 1.3% `66.0 ± 9.4`、Citeseer 0.9% `64.9 ± 7.7`、Pubmed 0.08% `77.9 ± 1.5`，
+> 论文对应 `81.4 ± 1.6` / `76.8 ± 0.4` / `79.9 ± 0.2`。
+> 汇总表：`results/gctd/table2_summary.csv`（Cora 明细见 `cora_summary.csv`）。
+> L1 是，L2 部分（Pubmed 差 2.0，Cora/Citeseer 差 10–15），L3 否。**不再在 Cora 上扫参**。
+> 入口：[GCTD_README.md](GCTD_README.md)。
 
 记录复现过程中的问题、结论，以及相对官方仓库的重要改动。  
 新条目按时间追加，不要改写旧条目。
@@ -408,9 +413,13 @@ seed 0–9：70.3, 46.0, 51.0, 59.2, 65.9, 60.8, 69.2, 60.6, 56.6, 41.1。
 - [x] 独立环境 `gctd`（Python 3.11 + torch 2.1.2）：10-run 61.0±13.1，未到 81.4%
 - [x] GCond 协议（全合成点 + 原图 train 特征）：relu_sym 23%；+topk 10-run 58.1±9.6
 - [x] Cora 实验总表 `results/gctd/cora_summary.csv`；issue 草稿 `repro/gctd_issue_draft.md`（未发出）
-- [x] Citeseer / Pubmed 原始文件已下（训练尚未跑）
+- [x] Citeseer / Pubmed 原始文件已下
+- [x] Citeseer 0.9% 与 Pubmed 0.08% 各 10 seed（2026-09-13，见文末三节）：64.92±7.72 与 77.90±1.45
+- [x] Citeseer `lr_rec=0.001` 对照 10 seed：66.45±5.09（否证"塌缩降 lr"假设）
+- [x] Table 2 三格汇总 `results/gctd/table2_summary.csv`
+- [ ] GCond 外部对照（R-GCTD-3）
 - [ ] wandb 0.19.6 降级 protobuf 与 tensorboard 的冲突尚未修复（仅影响 `dtgb`）
-- [ ] 向作者发 issue；冻结条目等 Citeseer/Pubmed 或作者回复
+- [ ] 向作者发 issue；冻结条目（R-GCTD-5）待 R-GCTD-3 完成或作者回复
 
 ---
 
@@ -477,13 +486,115 @@ Pubmed SHA-256：
 
 | 文件 | 改动 |
 |------|------|
-| `src/utils/args.py` | 新增 CLI 开关：`--no_wandb`、`--edge_topk`、`--lr_rec`、`--train_supernode_quota`、`--collapse_retry` 等；默认值与官方一致 |
-| `src/train.py` | 塌缩重试、超点配额、按协议选模；`snapshot=true` 合成图时保留原图 train 特征 |
-| `src/models/gctd.py` | `to_edge_index` 支持 `topk` / 相对阈值；`compute_supernode_info` 的簇内平均改为可选（默认关） |
+| `src/utils/args.py` | 新增 CLI 开关：`--no_wandb`、`--data_dir` / `--save_dir` / `--log_file`、`--num_workers`、`--edge_topk` / `--edge_quantile` / `--edge_rel`、`--seed`、`--feat_from_cluster`、`--gcond_protocol`、`--train_all_synth`、`--rec_retries`、`--min_core`、`--rec_proj`；默认值与官方一致（`--lr_rec` 默认仍 0.001、`--seed` 默认仍 42） |
+| `src/train.py` | stdout 落盘（`--log_file`，Tee）；wandb 改为可选（`--no_wandb` / `WANDB_MODE`），官方是无条件 `wandb.login()`；核塌缩时按 `--rec_retries` 把 `lr_rec × 0.1` 重分解；按重建误差选最佳 checkpoint |
+| `src/models/gctd.py` | `to_edge_index` 支持 `--edge_topk` / `--edge_quantile` / `--edge_rel`，替代写死的 0.05 阈值；`--gcond_protocol` 的 ReLU+对称化路径；按原图类别/划分分布分配超点配额；`--feat_from_cluster` 簇内平均（默认关） |
 | `src/utils/data_handling.py` | 特征归一化 / 邻接构建的小修 |
 | `src/utils/utils.py` | 日志与随机种子相关小修 |
 | `src/utils/paths.py` | **新增**：把相对路径解析到仓库根，去掉对 cwd 的隐式依赖 |
 
+注：**没有** `--train_supernode_quota` / `--collapse_retry` 这两个开关；超点配额是 `gctd.py` 内置行为，塌缩重试的开关名是 `--rec_retries`（配合 `--min_core`）。
+
 验证：在官方 `HEAD` 的干净 worktree 上 `git apply --check repro/gctd-repro.patch` 通过（临时 worktree 已清理）。
 
 未包含：`data/`（数据，已在根 `.gitignore` 排除）。默认开关全部关闭时行为与官方原样一致（1 epoch 回归见表内 A 行）。
+
+---
+
+## 2026-09-13 Citeseer 0.9%（R-GCTD-1 第一格）
+
+命令（当前建议设定，与 Cora 收口一致）：
+
+```bash
+bash repro/run_gctd.sh citeseer 0.009 --num_workers 0 --lr_rec 0.01 --edge_topk 12 --seed <S>
+```
+
+环境 `gctd`。烟雾 `20260913_174140_citeseer.log`（2+2 epoch，36.0%）通过后跑正式。
+批量日志 `results/gctd/runs/20260913_citeseer_009_seeds0to9.batch.log`。
+逐运行 CSV：`results/gctd/citeseer_0p009_runs.csv`（解析脚本 `scripts/parse_gctd_log.py`）。
+
+| seed | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 42（单次） |
+|------|---|---|---|---|---|---|---|---|---|---|-----------|
+| test | 65.0 | 62.6 | 72.9 | 60.3 | 59.5 | 72.5 | 74.7 | 49.8 | 61.9 | 70.0 | 59.8 |
+
+- 10 seed：**64.92 ± 7.72**（最好 74.70，seed 6）。
+- 论文 Table 2（Citeseer 0.9%）：**76.8 ± 0.4**。差值 **−11.88**。
+- 方差 7.72 是论文 0.4 的 **约 19 倍**。
+- 全部 10 次 `lr_rec=0.01` **未塌缩**（`rec_attempts=1`，`core_max≈0.7`），
+  核阈值 `thresh≈0.437`、合成图 29 点 / 21–24 边 / 密度 0.025–0.029。
+
+对 Cora 的判定：**差距不是 Cora 特有**——Citeseer 同样低约 12 个点、方差同样大一个数量级。
+
+## 2026-09-13 Citeseer `lr_rec=0.001` 对照（否证"塌缩降 lr"假设）
+
+背景：Pubmed 能到 79 附近，是因为 `lr_rec=0.01` 令核塌缩，代码按 `--rec_retries`
+把 lr 降到 `0.001` 后重分解成功。由此提出假设：Citeseer 低 12 点是否也因为没走
+"降到 0.001"这条路径？做 10 seed 对照。
+
+```bash
+bash repro/run_gctd.sh citeseer 0.009 --num_workers 0 --lr_rec 0.001 --edge_topk 12 --seed <S>
+```
+
+批量日志 `results/gctd/runs/20260913_181552_citeseer_009_lrrec1e3_seeds0to9.batch.log`；
+逐运行 CSV `results/gctd/citeseer_0p009_lrrec1e3_runs.csv`。
+
+| seed | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+|------|---|---|---|---|---|---|---|---|---|---|
+| test | 60.0 | 66.2 | 64.3 | 61.7 | 69.0 | 73.1 | 71.8 | 72.7 | 66.0 | 59.7 |
+
+- 10 seed：**66.45 ± 5.09**（最好 73.10，seed 5）。
+- 对照 `lr_rec=0.01` 的 64.92 ± 7.72：均值只 **+1.53**，σ 从 7.72 降到 5.09。
+- 论文 76.8 ± 0.4 的差仍是 **−10.35**；σ 仍是论文的 **约 13 倍**。
+- 关键：`lr_rec=0.001` 下核 **同样没有塌缩**（`rec_attempts=1`，`lr_rec_used=1.0e-03`），
+  阈值升到 `thresh≈0.578–0.597`，仍 22–24 边。
+
+结论：**假设否证**。Pubmed 的成功不能归因于 lr 落到 0.001；在 Citeseer 上主动降到
+0.001 既不能带来 10 点提升，也不能把方差压到论文量级。
+
+## 2026-09-13 Pubmed 0.08%（R-GCTD-1 第二格）
+
+```bash
+bash repro/run_gctd.sh pubmed 0.0008 --num_workers 0 --lr_rec 0.01 --edge_topk 12 --seed <S>
+```
+
+烟雾 `20260913_174155_pubmed.log`（2+2）与 `20260913_174311_pubmed.log`（20+2）通过后跑正式。
+批量日志 `20260913_pubmed_0008_seed42.batch.log`、`20260913_181359_pubmed_0008_seeds0to4.batch.log`、
+`20260913_182606_pubmed_0008_seeds5to9.batch.log`；
+逐运行 CSV `results/gctd/pubmed_0p0008_runs.csv`。
+
+| seed | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 42（单次） |
+|------|---|---|---|---|---|---|---|---|---|---|-----------|
+| test | 79.0 | 75.2 | 79.4 | 76.7 | 79.8 | 76.8 | 78.8 | 77.0 | 78.3 | 78.0 | 79.7 |
+
+- 10 seed：**77.90 ± 1.45**（最好 79.80，seed 4）。
+- 论文 Table 2（Pubmed 0.08%）：**79.9 ± 0.2**。差值 **−2.00**。
+- seed 42 单次的 79.70 只是落在高端；**不能用单次代表该格**。
+- 全部 10 次都先塌缩、再按 `--rec_retries` 降到 `lr_rec=0.001`（`rec_attempts=2`），
+  之后 15 个合成点、20–24 边、密度 0.089–0.107。
+
+对 R-GCTD-1 的判定：差距 **幅度随数据集下降**（Cora −15.4、Citeseer −11.9、Pubmed −2.0），
+但 **三个格没有一个是严格命中**（Pubmed 的 σ 差 7 倍）。Pubmed 最接近，与它的合成图最稀疏、
+塌缩后落到稳定分支一致。
+
+## 2026-09-13 Table 2 三格汇总（差距是否 Cora 特有）
+
+新增 `results/gctd/table2_summary.csv`：一行一格，含设定 / 环境 / seed 数 / 均值 / σ /
+单次最好 / 论文对照，并列出三个 `paper_*` 参照行。数字由 `scripts/parse_gctd_log.py`
+从原始日志重算，与逐运行 CSV 交叉校验一致。
+
+| 数据集（比例） | 我们（10 seed） | 论文 | 差 | σ 比 |
+|----------------|-----------------|------|-----|------|
+| Cora 1.3% | 65.96 ± 9.43 | 81.4 ± 1.6 | −15.4 | 5.9× |
+| Citeseer 0.9% | 64.92 ± 7.72 | 76.8 ± 0.4 | −11.9 | 19.3× |
+| Citeseer 0.9%（lr_rec=0.001 对照） | 66.45 ± 5.09 | 76.8 ± 0.4 | −10.4 | 12.7× |
+| Pubmed 0.08% | 77.90 ± 1.45 | 79.9 ± 0.2 | −2.0 | 7.3× |
+
+**判定**：不是 Cora 特有。三个数据集全部低于论文，且除 Pubmed 外 σ 都大一个数量级。
+问题指向**统一的配方/协议层面**（官方 wandb 搜索到的完整超参、或官方表格所用的
+稀疏化/配额策略与我们实现的差异），而不是某个数据集的数据特性。
+
+同步更新的文件：`results/gctd/{citeseer_0p009_runs,citeseer_0p009_lrrec1e3_runs,
+pubmed_0p0008_runs,table2_summary}.csv`、`scripts/parse_gctd_log.py`（新增）、
+`GCTD_README.md`、`results/SUMMARY.md`、`CLOSEOUT_PLAN.md`（R-GCTD-1 状态）。
+
+R-GCTD-3（GCond 外部对照）与 R-GCTD-5（冻结条目）仍未做，冻结条件尚未满足。

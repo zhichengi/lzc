@@ -11,13 +11,19 @@
 | 11 | IGNN | wikics public，20 次 | 80.55 ± 0.43 | **80.46 ± 0.41** | — | 是 | 是 | 是* | 已冻结 | 同上 |
 | 11 | IGNN | roman-empire public，10 划分 | 90.75 ± 0.51 | **90.64 ± 0.40** | — | 是 | 是 | 是* | 已冻结；协议同 chameleon（npy 而非 NPZ mask） | 同上 |
 | 43 | ScaDyG（TNNLS 2026） | MOOC 链接预测，seeds 0–4 | 0.931 ± 0.009 | **0.922 ± 0.014**（MRR 选模）；0.915 ± 0.009（AP 选模） | 严格 item 排名协议 **0.204 ± 0.004** | 是 | 是 | 否 | 报告初稿已有；消融与第二数据集待做 | `repro/SCADYG_REPORT.md` |
-| 40 | GCTD（WSDM 2026） | Cora 1.3%，seeds 0–9 | 81.4 ± 1.6 | 官方默认 30.2%（完全图） | topk+配额+重试 **66.0 ± 9.4**；单次最好 76.3% | 是 | 部分 | 否 | Cora 总表已收；待 Citeseer/Pubmed 与作者回复 | `results/gctd/cora_summary.csv` |
+| 40 | GCTD（WSDM 2026） | Cora 1.3%，seeds 0–9 | 81.4 ± 1.6 | 官方默认 30.2%（完全图） | topk+配额+重试 **66.0 ± 9.4**；单次最好 76.3% | 是 | 部分 | 否 | Table 2 三格已跑 | `results/gctd/table2_summary.csv` |
+| 40 | GCTD | Citeseer 0.9%，seeds 0–9 | 76.8 ± 0.4 | `lr_rec=0.01` **64.92 ± 7.72**（σ 19×） | `lr_rec=0.001` 对照 **66.45 ± 5.09**，否证"塌缩降 lr"假设 | 是 | 否 | 否 | 同上 | 同上 |
+| 40 | GCTD | Pubmed 0.08%，seeds 0–9 | 79.9 ± 0.2 | `lr_rec=0.01`（10/10 塌缩→重试 0.001）**77.90 ± 1.45** | seed 42 单次 79.70（不代表该格） | 是 | 部分 | 否 | 同上 | 同上 |
 | 29 | SGPC（AAAI 2026） | 6 异配 10 划分；Cora/Citeseer 5 seed；Pubmed lobpcg | 见表下 | val 选模低于 oracle；Wisconsin 偏高；Pubmed 78.10/78.70 vs 79.9 | 协议开关默认关 | 是 | 部分 | 否 | 步骤 7：6 个异配集 ×10 划分完成 | `repro/SGPC_REPRO_LOG.md` |
 
 \* IGNN 的 L3 按"均值差 < 官方 σ 且方差同量级"成立，但硬件为 RTX 3090 而官方为 V100，作者自己也报告了两者差异，
 因此只表述为"官方配置在 3090 上达到与 V100 表一致的水平"。chameleon / roman-empire 的 `--public True` 因 `graph_datasets` 不读 NPZ mask，实际使用仓库固定 48/32/20 npy，不能称为严格 public。
 
 IGNN custom split（论文主协议）尚未训练，准备单：`repro/IGNN_CUSTOM_SPLIT.md`。
+
+GCTD 的差距**不是 Cora 特有**：Citeseer 同样低 11.9 点、σ 是论文的 19 倍；Pubmed 最接近
+（−2.0，σ 7 倍）。三个数据集全部低于论文，指向统一的配方/协议层面差异。已单独否证
+"Citeseer 因未走塌缩降 lr 路径"的假设。
 
 ## SGPC（步骤 7，不能当 L3）
 

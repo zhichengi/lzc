@@ -7,7 +7,7 @@
 
 ---
 
-## 0. 进度快照（2026-09-12 傍晚）
+## 0. 进度快照（2026-09-13 傍晚）
 
 | 编号 | 状态 |
 |------|------|
@@ -16,7 +16,8 @@
 | R-SCADYG-1 … R-SCADYG-3 | **未完成**。组件对照、消融、BitcoinAlpha 都还没有 |
 | R-SCADYG-4 | **初稿完成**：`repro/SCADYG_REPORT.md`（未含消融 / 第二数据集） |
 | R-SCADYG-5 | **草稿完成、未发出**：`repro/scadyg_issue_draft.md` |
-| R-GCTD-1 / R-GCTD-3 / R-GCTD-5 | **未完成**。Citeseer/Pubmed、GCond 外部对照、冻结条目都还没有 |
+| R-GCTD-1 | **完成**（2026-09-13）：Citeseer 0.9% **64.92 ± 7.72**（`lr_rec=0.01`，10 seed）与 Pubmed 0.08% **77.90 ± 1.45**（10 seed）；另有 Citeseer `lr_rec=0.001` 对照 **66.45 ± 5.09**（否证"塌缩降 lr"假设）。论文 76.8±0.4 / 79.9±0.2。汇总 `results/gctd/table2_summary.csv` |
+| R-GCTD-3 / R-GCTD-5 | **未完成**。GCond 外部对照、冻结条目都还没有 |
 | R-GCTD-2 | **完成**：`results/gctd/cora_summary.csv` |
 | R-GCTD-4 | **草稿完成、未发出**：`repro/gctd_issue_draft.md` |
 | R-WS-1 | **完成**：`.gitignore` 已排除官方克隆与 PDF；GCTD 完整补丁 `gctd-repro.patch` 已生成并验证（2026-09-13）；ScaDyG 的 `eval_protocols.py` 已拷到 `repro/scadyg-extra/` |
@@ -27,7 +28,7 @@
 | R-WS-6 | 未修 protobuf；GCTD 默认 `--no_wandb`，在 README 注明即可 |
 | P4 第四篇 | **已开**：SGPC 步骤 1–6 完成（缺 Pubmed） |
 
-下文第 2–5 节是制定时的原文，任务表不改写；以本节快照为准。
+下文第 2–5 节是制定时的原文，正文任务表只在 R-GCTD-1 上补了完成状态与数字；以本节快照为准。
 
 ---
 
@@ -44,7 +45,7 @@
 | P0 | IGNN public split 收尾（3 个数据集） | < 1 小时 | 已经最接近完成；Actor 10-run 37.43 ± 0.97 与官方 38.01 ± 1.11 差 0.58，在标准差内。剩下只差数据下载和两条命令 |
 | P0 | 把 IGNN Actor 正式结果写入 `IGNN_REPRO_LOG.md` | 0 | 结果已在 `results/ignn/runs/20260912T054919Z_official_actor_c_public_r10/`，日志未更新 |
 | P1 | ScaDyG 消融 + 第二个数据集 + 复现报告 | 3–5 小时 | 这条线的发现（checkpoint bug、评测协议差异）最有价值，值得收成一份完整报告 |
-| P2 | GCTD 收口：Citeseer / Pubmed + 外部基线对照 + 向作者求证，然后冻结 | 1–2 小时 | 已投入最多时间，Cora 差距仍有 ~15 个点且方差大；继续调参边际收益低 |
+| P2 | GCTD 收口：Citeseer / Pubmed ✅ + 外部基线对照 + 向作者求证，然后冻结 | 1–2 小时 | Citeseer/Pubmed 已完成（2026-09-13）：三格差距 15.4 / 11.9 / 2.0 点，非数据集特有；继续调参边际收益低 |
 | P3 | 工作区整理：git 策略、根 README、结果汇总、大文件 | 0 | 目前只有 1 个初始提交，全部工作都是未跟踪状态，有丢失风险 |
 | P4 | 第四篇论文选题与启动 | 视选题 | **已执行**：SGPC 已开，见 `SGPC_REPRO_LOG.md` |
 
@@ -106,14 +107,16 @@
 **当前状态**
 
 - Cora 1.3%：官方默认 30.2%（完全图）→ 单次最好 76.3%（seed 42 网格）→ 10-run 最好 66.0 ± 9.4（`dtgb`，配额+重试）；官方钉扎环境 61.0 ± 13.1；GCond 协议 58.1 ± 9.6。论文 81.4 ± 1.6。
-- 已排除：环境版本、阈值形式、簇内特征、GCond 协议、小网格 R/add_ratio/lr_gnn。
+- Citeseer 0.9%（2026-09-13）：`lr_rec=0.01` 10-run **64.92 ± 7.72**；`lr_rec=0.001` 对照 10-run **66.45 ± 5.09**。论文 76.8 ± 0.4。
+- Pubmed 0.08%（2026-09-13）：10-run **77.90 ± 1.45**（10/10 先塌缩再重试到 0.001）；seed 42 单次 79.70。论文 79.9 ± 0.2。
+- 已排除：环境版本、阈值形式、簇内特征、GCond 协议、小网格 R/add_ratio/lr_gnn、"未走塌缩降 lr 路径"（Citeseer 0.001 对照否证）。
 - 未排除：官方 wandb 贝叶斯搜索得到的完整超参；`weighted` / `drop_ratio` 等与图增强相关的设定；K-Means 初始化。
 
 **任务**
 
 | 编号 | 任务 | 做法 | 验收 |
 |------|------|------|------|
-| R-GCTD-1 | Citeseer / Pubmed | `bash repro/download_planetoid.sh citeseer`、`pubmed`；用当前建议命令 `--lr_rec 0.01 --edge_topk 12`，压缩比取论文 Table 2 对应值；先 seed 42，再 seeds 0–9 | 与论文对应格对照；判断"Cora 上的差距是否是 Cora 特有" |
+| R-GCTD-1 ✅ | Citeseer / Pubmed | `bash repro/download_planetoid.sh citeseer`、`pubmed`；用当前建议命令 `--lr_rec 0.01 --edge_topk 12`，压缩比取论文 Table 2 对应值；先 seed 42，再 seeds 0–9 | **完成 2026-09-13**：Citeseer 0.9% 64.92±7.72、Pubmed 0.08% 77.90±1.45；另加 Citeseer `lr_rec=0.001` 对照 66.45±5.09。差距**不是 Cora 特有** |
 | R-GCTD-2 | Cora 实验总表 | 把 `REPRO_LOG.md` 里散落的 E/Qk/网格/10-run/环境/GCond 各表合并成 `results/gctd/cora_summary.csv`（列：设定、环境、seed 数、均值、std、单次最好、日志），并在日志末尾加"总表"条目 | 一张表能回答"我们到底试过什么" |
 | R-GCTD-3 | 外部基线对照 | 用 GraphSlim 或 GC-Bench 跑 GCond 在 Cora 1.3%（论文 Table 2 里 GCond 的数字作参照）。目的不是复现 GCond，而是确认**我们的评测代码**（合成图训 GCN、原图测）在一个已知方法上能否得到公认数字 | GCond 数字若正常，说明差距在 GCTD 实现侧而非我们的评测侧 |
 | R-GCTD-4 | 向作者求证 | 整理 issue：默认 `lr_rec=0.001` 下 `to_edge_index` 的 0.05 阈值必得完全图（附诊断数字：35 点 1225 边、核值 min 0.057）；请求 Table 2 的完整超参或 wandb sweep 导出 | issue 文本存 `repro/gctd_issue_draft.md`；发出后在日志记日期 |
@@ -157,7 +160,7 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 
 ## 5. 三条线的当前判定（按 `REPRO_ROADMAP.md` 第 5 节的三级标准）
 
-- GCTD：L1 是；L2 单次是（75–76% 对 81.4 ± 1.6 仍差 5 个点，部分归因）；L3 否。
+- GCTD：L1 是；L2 部分（Cora 66.0 ± 9.4、Citeseer 64.9 ± 7.7、Pubmed 77.9 ± 1.5，对论文 81.4 ± 1.6 / 76.8 ± 0.4 / 79.9 ± 0.2；只有 Pubmed 接近）；L3 否（σ 普遍大一个数量级）。
 - ScaDyG：L1 是；L2 是（0.922 ± 0.014 对 0.931 ± 0.009）；L3 否（方差偏大，且发现协议差异）。
 - IGNN public：L1 是；L2 是；L3 在 Actor / wikics 上按「均值差 < 官方 σ」成立（硬件 3090 vs V100）。chameleon / roman-empire 的 public 命令因加载器丢 NPZ mask，实际读的是仓库 48/32/20 npy，协议不纯，数字仍与 V100 表同量级。custom split 未跑。
 
@@ -173,7 +176,7 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 |----|-------------|----------|
 | IGNN | public 冻结；下一步 custom 三数据集。不要补跑“真 public”、不要搜参、不要大图 | critical public 协议不纯；`run_ignn.sh` 现含 85% cap，与提交 `7adde1c` 的无 cap 版本不一致 |
 | ScaDyG | 缺消融、Bitcoin、`SCADYG_REPORT.md` | checkpoint 只存预测层已确认；严格 item 协议 ~0.204 不要和官方 MRR 混排 |
-| GCTD | 不要再扫 Cora；待 Citeseer/Pubmed、总表、GCond 对照、作者 issue、冻结 | 官方默认完全图；10-run 66.0±9.4 vs 81.4±1.6 |
+| GCTD | 不要再扫 Cora；Citeseer/Pubmed 与 Table 2 总表已完成（2026-09-13），剩 GCond 对照、作者 issue、冻结 | 官方默认完全图；三格 66.0±9.4 / 64.9±7.7 / 77.9±1.5 均低于论文，差距非数据集特有 |
 | SGPC | 步骤 6 缺 Pubmed；oracle 接近论文、val 选模偏低 | 论文写每类 20 点，代码用 PyG 自带 split |
 
 ### 仓库

@@ -1,0 +1,11 @@
+log,dataset,reduction_rate,seed,rec_epochs,gnn_epochs,n_synth,unique_x,rec_attempts,lr_rec_used,core_max,edge_mode,edges,density,condensation_s,test_acc,best_val_acc
+results/gctd/runs/20260913_181552_citeseer.log,citeseer,0.009,0,200,600,29,10,1,1.0e-03,8.060e-01,topk12,22,0.0262,25.752491986,60.00,60.20
+results/gctd/runs/20260913_181632_citeseer.log,citeseer,0.009,1,200,600,29,10,1,1.0e-03,8.079e-01,topk12,23,0.0273,26.19756613,66.20,66.00
+results/gctd/runs/20260913_181712_citeseer.log,citeseer,0.009,2,200,600,29,11,1,1.0e-03,8.072e-01,topk12,24,0.0285,25.304800196,64.30,65.00
+results/gctd/runs/20260913_181752_citeseer.log,citeseer,0.009,3,200,600,29,11,1,1.0e-03,8.084e-01,topk12,24,0.0285,25.971016129,61.70,58.80
+results/gctd/runs/20260913_181832_citeseer.log,citeseer,0.009,4,200,600,29,12,1,1.0e-03,8.040e-01,topk12,24,0.0285,25.297574082,69.00,68.60
+results/gctd/runs/20260913_181912_citeseer.log,citeseer,0.009,5,200,600,29,12,1,1.0e-03,8.070e-01,topk12,24,0.0285,26.255762874,73.10,75.80
+results/gctd/runs/20260913_181953_citeseer.log,citeseer,0.009,6,200,600,29,10,1,1.0e-03,8.082e-01,topk12,23,0.0273,25.508884441,71.80,76.00
+results/gctd/runs/20260913_182033_citeseer.log,citeseer,0.009,7,200,600,29,10,1,1.0e-03,8.079e-01,topk12,24,0.0285,25.708006549,72.70,73.40
+results/gctd/runs/20260913_182113_citeseer.log,citeseer,0.009,8,200,600,29,11,1,1.0e-03,8.065e-01,topk12,24,0.0285,28.283598073,66.00,68.00
+results/gctd/runs/20260913_182156_citeseer.log,citeseer,0.009,9,200,600,29,11,1,1.0e-03,8.048e-01,topk12,23,0.0273,26.473995379,59.70,63.80

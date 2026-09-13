@@ -1,0 +1,12 @@
+log,dataset,reduction_rate,seed,rec_epochs,gnn_epochs,n_synth,unique_x,rec_attempts,lr_rec_used,core_max,edge_mode,edges,density,condensation_s,test_acc,best_val_acc
+results/gctd/runs/20260913_181359_pubmed.log,pubmed,0.0008,0,200,600,15,4,2,1.0e-03,6.835e-01,topk12,24,0.1067,150.421918817,79.00,80.20
+results/gctd/runs/20260913_181644_pubmed.log,pubmed,0.0008,1,200,600,15,4,2,1.0e-03,6.817e-01,topk12,23,0.1022,142.434372574,75.20,78.40
+results/gctd/runs/20260913_181921_pubmed.log,pubmed,0.0008,2,200,600,15,4,2,1.0e-03,6.833e-01,topk12,20,0.0889,133.741436217,79.40,79.40
+results/gctd/runs/20260913_182149_pubmed.log,pubmed,0.0008,3,200,600,15,4,2,1.0e-03,6.832e-01,topk12,23,0.1022,86.265821512,76.70,78.80
+results/gctd/runs/20260913_182331_pubmed.log,pubmed,0.0008,4,200,600,15,4,2,1.0e-03,6.830e-01,topk12,24,0.1067,136.286594198,79.80,80.20
+results/gctd/runs/20260913_182606_pubmed.log,pubmed,0.0008,5,200,600,15,4,2,1.0e-03,6.838e-01,topk12,24,0.1067,92.031205592,76.80,78.20
+results/gctd/runs/20260913_182752_pubmed.log,pubmed,0.0008,6,200,600,15,4,2,1.0e-03,6.833e-01,topk12,24,0.1067,125.380433545,78.80,79.20
+results/gctd/runs/20260913_183011_pubmed.log,pubmed,0.0008,7,200,600,15,4,2,1.0e-03,6.819e-01,topk12,23,0.1022,158.015939414,77.00,77.80
+results/gctd/runs/20260913_183302_pubmed.log,pubmed,0.0008,8,200,600,15,4,2,1.0e-03,6.821e-01,topk12,20,0.0889,84.701601081,78.30,81.20
+results/gctd/runs/20260913_183440_pubmed.log,pubmed,0.0008,9,200,600,15,4,2,1.0e-03,6.830e-01,topk12,23,0.1022,113.816747965,78.00,77.80
+results/gctd/runs/20260913_175000_pubmed.log,pubmed,0.0008,42,200,600,15,4,2,1.0e-03,6.832e-01,topk12,24,0.1067,138.411821236,79.70,80.00
