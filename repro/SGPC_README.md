@@ -12,7 +12,7 @@
 
 ## 当前结论
 
-步骤 1–7 进行中。官方原样 8/9 单次已跑；协议开关已加（默认关）。geom-gcn 10 划分已完成 Cornell / Texas / Wisconsin / Chameleon / Squirrel；Pubmed 用 `--spec lobpcg` 跑通。Cora 5 seed 完整；Citeseer seed 3 因稠密 `eigvalsh` 未收敛中断后已重跑。Actor 10 划分进行中。
+步骤 1–7 基本完成。官方原样 8/9 单次已跑（Pubmed 另用 `--spec lobpcg` 跑通）；协议开关已加（默认关）。geom-gcn 10 划分已完成全部 6 个异配集：Actor / Chameleon / Cornell / Texas / Wisconsin / Squirrel（Actor 于 2026-09-12 23:16 收尾）。Cora / Citeseer 各 5 seed 完整（Citeseer seed 3 曾因稠密 `eigvalsh` 未收敛，已重跑）。
 
 **不能**把划分 0 单次数字写成 Table 1。剩余全量：`bash repro/run_sgpc_full.sh`（默认 dry-run）。
 

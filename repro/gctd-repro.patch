@@ -1,0 +1,834 @@
+diff --git a/src/models/gctd.py b/src/models/gctd.py
+index 9fdb8e3..ad9a545 100644
+--- a/src/models/gctd.py
++++ b/src/models/gctd.py
+@@ -40,7 +40,7 @@ class GCTD(torch.nn.Module):
+ 
+ 
+     def init_parameters(self):
+-        factor = torch.nn.Embedding(self.N, self.N_prime, padding_idx=0)
++        factor = torch.nn.Embedding(self.N, self.N_prime)
+         core = nn.ModuleList([
+             nn.Embedding(self.N_prime, self.N_prime) for _ in range(self.R)
+         ])
+@@ -55,6 +55,17 @@ class GCTD(torch.nn.Module):
+             
+         return factor, core
+ 
++    def core_abs_max(self):
++        mx = 0.0
++        for c in self.core:
++            mx = max(mx, float(c.weight.detach().abs().max()))
++        return mx
++
++    def project_nonneg(self):
++        self.factor.weight.data.clamp_(min=0)
++        for c in self.core:
++            c.weight.data.clamp_(min=0)
++
+ 
+     def to_edge_index(self):
+         slices = torch.tensor(
+@@ -65,8 +76,82 @@ class GCTD(torch.nn.Module):
+         assert new_adj.shape[0] == len(self.core[0].weight[0])
+         assert new_adj.shape[1] == len(self.core[0].weight[0])
+ 
+-        edge_index = new_adj >= 0.05
+-        edge_index = edge_index.argwhere().t()
++        n = new_adj.shape[0]
++        n2 = n * n
++        flat = new_adj.reshape(-1)
++        adj_min = float(new_adj.min())
++        adj_mean = float(new_adj.mean())
++        adj_max = float(new_adj.max())
++
++        topk = int(getattr(self.args, "edge_topk", 0) or 0)
++        q = float(getattr(self.args, "edge_quantile", 0) or 0)
++        rel = float(getattr(self.args, "edge_rel", 0) or 0)
++        abs_t = float(getattr(self.args, "edge_thresh", 0.05))
++        gcond = int(getattr(self.args, "gcond_protocol", 0)) == 1
++
++        edge_index = None
++        thresh = None
++        mode = "abs"
++
++        if gcond and topk <= 0 and q <= 0 and rel <= 0:
++            # 论文：核平均后对称化，稀疏来自 ReLU 的零，没有 0.05 阈值
++            new_adj = F.relu(new_adj)
++            new_adj = 0.5 * (new_adj + new_adj.t())
++            adj_min = float(new_adj.min())
++            adj_mean = float(new_adj.mean())
++            adj_max = float(new_adj.max())
++            flat = new_adj.reshape(-1)
++            thresh = 0.0
++            mode = "relu_sym"
++            mask = new_adj > 1e-8
++            if int(mask.sum()) == 0:
++                idx = torch.arange(n)
++                edge_index = torch.stack([idx, idx], dim=0)
++                mode = "relu_sym+fallback_selfloop"
++            else:
++                edge_index = mask.argwhere().t()
++        elif topk > 0:
++            k = min(max(topk, 1), n2)
++            _, lin = torch.topk(flat, k, largest=True, sorted=False)
++            rows = torch.div(lin, n, rounding_mode="floor")
++            cols = lin % n
++            edge_index = torch.stack([rows.long(), cols.long()], dim=0)
++            thresh = float(flat[lin].min())
++            mode = f"topk{k}"
++        else:
++            if 0.0 < q < 1.0:
++                thresh = float(torch.quantile(flat.float(), q))
++                mode = f"q{q:g}"
++            elif rel > 0:
++                thresh = rel * adj_max
++                mode = f"rel{rel:g}"
++            else:
++                thresh = abs_t
++                mode = f"abs{abs_t:g}"
++            mask = new_adj >= thresh
++            if int(mask.sum()) == 0 and adj_max > 0:
++                # 绝对/分位阈值落空时，退回最强 1%（至少 n 条）
++                k = min(max(n, int(0.01 * n2)), n2)
++                _, lin = torch.topk(flat, k, largest=True, sorted=False)
++                rows = torch.div(lin, n, rounding_mode="floor")
++                cols = lin % n
++                edge_index = torch.stack([rows.long(), cols.long()], dim=0)
++                thresh = float(flat[lin].min())
++                mode = f"{mode}+fallback_topk{k}"
++            elif int(mask.sum()) == 0:
++                # 核全零：只能加自环，避免空图崩溃
++                idx = torch.arange(n)
++                edge_index = torch.stack([idx, idx], dim=0)
++                thresh = 0.0
++                mode = f"{mode}+fallback_selfloop"
++            else:
++                edge_index = mask.argwhere().t()
++
++        if edge_index.numel() == 0:
++            raise RuntimeError(
++                f"{mode} produced 0 edges "
++                f"(adj min={adj_min:.4f} max={adj_max:.4f})"
++            )
+         edge_weight = new_adj[edge_index[0], edge_index[1]]
+         assert edge_index[0].shape == edge_weight.shape
+         assert edge_index[0].shape == edge_index[1].shape
+@@ -75,35 +160,52 @@ class GCTD(torch.nn.Module):
+             edge_index, edge_weight = to_undirected(edge_index, edge_weight)
+ 
+         self.synthetic_edges = edge_index.size()[1]
+-        wandb.log({"edge_index_size": edge_index.size()})
++        print(
++            f"[repro] edge_mode={mode} thresh={thresh:.4f} adj min/mean/max="
++            f"{adj_min:.4f}/{adj_mean:.4f}/{adj_max:.4f} "
++            f"edges={self.synthetic_edges} density={self.synthetic_edges / n2:.4f}"
++        )
++        wandb.log({
++            "edge_index_size": edge_index.size(),
++            "edge_thresh": thresh,
++            "edge_mode": mode,
++        })
+ 
+         return edge_index, edge_weight
+ 
+ 
+     def class_split_distribution(self):
+         y_count = torch.bincount(self.data.y_full)
+-        original_dist = y_count/y_count.sum()
++        original_dist = y_count / y_count.sum()
+         supernode_dist = torch.round(self.N_prime * original_dist)
+ 
+-        train_total = self.data.train_idx.sum()
+-        val_total = self.data.val_idx.sum()
+-        test_total = self.data.test_idx.sum()
+-
+-        train_reduced_dist = self.N_prime * train_total // self.N
+-        val_reduced_dist = self.N_prime * val_total // self.N
+-        test_reduced_dist = self.N_prime * test_total // self.N
+-
+-        if train_reduced_dist == 0:
+-            train_reduced_dist += 1
+-        if val_reduced_dist == 0:
+-            val_reduced_dist += 1
+-        if test_reduced_dist == 0:
+-            test_reduced_dist += 1
+-
+         graphsaint = ["reddit", "flickr"]
+         if self.args.dataset in graphsaint:
+-            return supernode_dist, [train_reduced_dist, 0, 0]    
+-        return supernode_dist, [train_reduced_dist, val_reduced_dist, test_reduced_dist]
++            train_total = int(self.data.train_idx.sum())
++            train_reduced = max(1, self.N_prime * train_total // self.N)
++            return supernode_dist, [train_reduced, 0, 0]
++
++        # 官方用 train_mask 计数（Cora 仅 140）做配额，但 mask_list 把未标注也标成 0。
++        # 配额与赋值不一致，训练超点数量随种子在 4–12 间晃。
++        # 改为按 mask_list 的 0/1/2 比例做最大余数法，使三者之和为 N'。
++        if self.data.mask_list.device != y_count.device:
++            masks = self.data.mask_list.cpu()
++        else:
++            masks = self.data.mask_list
++        mask_count = torch.bincount(masks, minlength=3).float()
++        raw = self.N_prime * mask_count / mask_count.sum().clamp(min=1)
++        quotas = torch.floor(raw).long()
++        remain = int(self.N_prime - int(quotas.sum()))
++        if remain > 0:
++            frac = raw - quotas.float()
++            extra = torch.argsort(frac, descending=True)[:remain]
++            quotas[extra] += 1
++        if int(quotas[0]) == 0 and float(mask_count[0]) > 0:
++            donor = int(torch.argmax(quotas[1:]) + 1)
++            if int(quotas[donor]) > 1:
++                quotas[donor] -= 1
++                quotas[0] += 1
++        return supernode_dist, [int(quotas[0]), int(quotas[1]), int(quotas[2])]
+ 
+ 
+     def compute_supernode_info(self, candidate_nodes, supernode_y_count, supernode_mask_count):
+@@ -156,22 +258,139 @@ class GCTD(torch.nn.Module):
+             # the same class, we assign it directly
+             chosen_y = y_chosen_mask
+         else:
+-            raise Exception(f"there is no class to assign to supernode {i}")
++            raise Exception("there is no class to assign to supernode")
++
++        if torch.is_tensor(chosen_y):
++            chosen_y = int(chosen_y.item())
++        if torch.is_tensor(mask):
++            mask = int(mask.item())
++
++        if int(getattr(self.args, "feat_from_cluster", 0)) == 1:
++            # 簇内平均：优先同类同 split 的簇成员，避免把别的类混进超点特征。
++            # 全簇平均（不问标签）会得到 35 种独特特征，但迁回原图会掉到多数类水平。
++            node_idx = self._as_node_index(candidate_nodes)
++            y_c = self.data.y_full[node_idx]
++            m_c = self.data.mask_list[node_idx]
++            if y_c.device != node_idx.device:
++                y_c = y_c.to(node_idx.device)
++                m_c = m_c.to(node_idx.device)
++            merged_nodes = node_idx[(y_c == chosen_y) & (m_c == mask)]
++            if merged_nodes.numel() == 0:
++                merged_nodes = node_idx[y_c == chosen_y]
++            if merged_nodes.numel() == 0:
++                merged_nodes = node_idx
++        else:
++            # 官方：全图中同一 class + 同一 split 的所有节点，簇信息被丢掉
++            merged_nodes = torch.argwhere(
++                (self.data.y_full == chosen_y) & (self.data.mask_list == mask)
++            ).reshape(-1)
++
++        if merged_nodes.numel() == 0:
++            raise Exception("no merged nodes for supernode")
++
++        feats = self.data.feat_full
++        if merged_nodes.device != feats.device:
++            merged_nodes = merged_nodes.to(feats.device)
++        col_embs = feats[merged_nodes]
++        avg_emb = torch.mean(col_embs, axis=0).squeeze()
+ 
+-        merged_nodes = torch.argwhere(
+-            (self.data.y_full == chosen_y) & (self.data.mask_list == mask)
+-        ).squeeze()
++        return chosen_y, mask, avg_emb
+ 
+-        if len(merged_nodes) == 0:
+-            raise Exception(f"no merged nodes for supernode {i}")
++    @staticmethod
++    def _as_node_index(candidate_nodes):
++        if isinstance(candidate_nodes, tuple):
++            idx = candidate_nodes[0]
++        else:
++            idx = candidate_nodes
++        if not torch.is_tensor(idx):
++            idx = torch.as_tensor(idx, dtype=torch.long)
++        return idx.reshape(-1).detach().cpu().long()
++
++    def _orig_train_mask(self):
++        m = self.data.train_idx
++        if not torch.is_tensor(m):
++            m = torch.as_tensor(m)
++        return m.reshape(-1).detach().cpu().bool()
++
++    def compute_gcond_assignments(self):
++        """K-Means 簇 → 只用原图 train 节点的特征与标签；合成点全部视为 train。"""
++        train_mask = self._orig_train_mask()
++        y_full = self.data.y_full.detach().cpu().long().reshape(-1)
++        feats = self.data.feat_full.detach().cpu().float()
++        if feats.device != y_full.device:
++            feats = feats.cpu()
+ 
+-        col_embs = self.data.feat_full[merged_nodes]
+-        avg_emb = torch.mean(col_embs, axis=0).squeeze()
+-        
+-        return chosen_y, mask, avg_emb
++        supernode_x, supernode_y, supernode_masks = [], [], []
++        n_from_cluster_train = 0
++        n_fallback = 0
+ 
++        if int(self.args.use_kmeans) == 0:
++            clusters = []
++            for i in range(len(self.factor.weight[0])):
++                col = self.factor.weight[:, i].cpu().detach()
++                cand = torch.where(col > 0)[0]
++                if cand.numel() == 0:
++                    continue
++                clusters.append(cand.long())
++        else:
++            kmeans = faiss.Kmeans(
++                self.N_prime,
++                self.N_prime,
++                niter=self.args.kmeans_iter,
++                nredo=self.args.kmeans_redo,
++                verbose=False,
++                seed=int(getattr(self.args, "seed", 42)),
++                min_points_per_centroid=1,
++                max_points_per_centroid=self.N,
++                gpu=False,
++            )
++            kmeans.train(self.factor.weight.detach().cpu())
++            _, membership = kmeans.index.search(self.factor.weight.detach().cpu(), 1)
++            grouped = defaultdict(list)
++            for idx, assignment in enumerate(membership):
++                grouped[int(assignment[0])].append(idx)
++            clusters = [
++                torch.tensor(v, dtype=torch.long)
++                for _, v in OrderedDict(sorted(grouped.items())).items()
++                if len(v) > 0
++            ]
++
++        for node_idx in clusters:
++            node_idx = node_idx.reshape(-1).cpu().long()
++            in_train = train_mask[node_idx]
++            cluster_train = node_idx[in_train]
++            if cluster_train.numel() > 0:
++                y_ct = y_full[cluster_train]
++                chosen_y = int(torch.bincount(y_ct).argmax())
++                use_idx = cluster_train[y_ct == chosen_y]
++                if use_idx.numel() == 0:
++                    use_idx = cluster_train
++                n_from_cluster_train += 1
++            else:
++                y_all = y_full[node_idx]
++                chosen_y = int(torch.bincount(y_all).argmax())
++                use_idx = torch.where(train_mask & (y_full == chosen_y))[0]
++                if use_idx.numel() == 0:
++                    use_idx = torch.where(train_mask)[0]
++                n_fallback += 1
++            avg_emb = feats[use_idx].mean(dim=0).squeeze()
++            supernode_x.append(avg_emb)
++            supernode_y.append(chosen_y)
++            supernode_masks.append(0)
++
++        xt = torch.stack([v.detach().cpu().float().reshape(-1) for v in supernode_x])
++        uniq = int(torch.unique(xt, dim=0).shape[0])
++        y_arr = np.array(supernode_y)
++        print(
++            f"[repro] gcond_protocol=1 unique_x={uniq}/{xt.shape[0]} "
++            f"from_cluster_train={n_from_cluster_train} fallback_no_train={n_fallback} "
++            f"y={list(map(int, np.bincount(y_arr, minlength=int(y_arr.max())+1)))}"
++        )
++        return xt.numpy(), y_arr, np.array(supernode_masks)
+ 
+     def compute_assignments(self):
++        if int(getattr(self.args, "gcond_protocol", 0)) == 1:
++            return self.compute_gcond_assignments()
+         supernode_x, supernode_y, supernode_masks = [], [], []
+         supernode_y_count, supernode_mask_count = defaultdict(int), defaultdict(int)
+ 
+@@ -199,7 +418,7 @@ class GCTD(torch.nn.Module):
+                 niter=self.args.kmeans_iter,
+                 nredo=self.args.kmeans_redo,
+                 verbose=False,
+-                seed=42,
++                seed=int(getattr(self.args, "seed", 42)),
+                 min_points_per_centroid=1,
+                 max_points_per_centroid=self.N,
+                 gpu=False # change this to gpu id to run KMeans on GPU
+@@ -229,7 +448,17 @@ class GCTD(torch.nn.Module):
+                 supernode_masks.append(mask)
+                 supernode_x.append(emb)
+ 
+-        return np.array(supernode_x), np.array(supernode_y), np.array(supernode_masks)
++        xt = torch.stack(
++            [v.detach().cpu().float().reshape(-1) for v in supernode_x]
++        )
++        uniq = int(torch.unique(xt, dim=0).shape[0])
++        _, mask_quota = self.class_split_distribution()
++        print(
++            f"[repro] feat_from_cluster={int(getattr(self.args, 'feat_from_cluster', 0))} "
++            f"unique_x={uniq}/{xt.shape[0]} mask_quota(train/val/test)={mask_quota} "
++            f"assigned={list(map(int, np.bincount(np.array(supernode_masks), minlength=3)))}"
++        )
++        return xt.numpy(), np.array(supernode_y), np.array(supernode_masks)
+ 
+ 
+     def to_data_obj(self):
+@@ -260,6 +489,13 @@ class GCTD(torch.nn.Module):
+         test_idx = np.argwhere(masks == 2)
+         data.test_mask[test_idx.squeeze()] = 1
+ 
++        if int(getattr(self.args, "gcond_protocol", 0)) == 1:
++            data.train_mask[:] = True
++            print("[repro] gcond_protocol=1: GNN trains on all synthetic nodes (orig-train features only)")
++        elif int(getattr(self.args, "train_all_synth", 0)) == 1:
++            data.train_mask[:] = True
++            print("[repro] train_all_synth=1: GNN uses all synthetic nodes as train")
++
+         existing_edges = data.edge_index.size()[1]
+         possible_edges = n_nodes * n_nodes
+         wandb.log({
+diff --git a/src/train.py b/src/train.py
+index 9621cee..d12f872 100644
+--- a/src/train.py
++++ b/src/train.py
+@@ -5,6 +5,7 @@ import time
+ import wandb
+ import gc
+ import os
++import sys
+ 
+ from copy import deepcopy
+ from sklearn.metrics import accuracy_score
+@@ -13,11 +14,58 @@ from torch.nn import functional as F
+ from utils.data_handling import *
+ from utils.utils import set_seed, get_gnn, load_configs, get_loaders
+ from utils.args import get_args
++from utils.paths import resolve_rel_path
+ from models.gctd import GCTD
+ from utils.losses import squared_diff, tensor_squared
+ 
+ os.environ["WANDB_AGENT_MAX_INITIAL_FAILURES"]= "10000"
+ 
++
++class _Tee:
++    def __init__(self, *files):
++        self.files = files
++
++    def write(self, data):
++        for f in self.files:
++            f.write(data)
++            f.flush()
++
++    def flush(self):
++        for f in self.files:
++            f.flush()
++
++
++def setup_stdio_log(args):
++    if not getattr(args, "log_file", ""):
++        return None
++    log_path = resolve_rel_path(args.log_file)
++    log_path.parent.mkdir(parents=True, exist_ok=True)
++    fh = open(log_path, "a", encoding="utf-8")
++    sys.stdout = _Tee(sys.__stdout__, fh)
++    sys.stderr = _Tee(sys.__stderr__, fh)
++    print(f"[repro] log_file={log_path}")
++    return fh
++
++
++def setup_wandb(args):
++    """官方会无条件 wandb.login()，无 API key 时会打断复现。"""
++    disable = bool(getattr(args, "no_wandb", False))
++    mode = os.environ.get("WANDB_MODE", "").lower()
++    if disable:
++        os.environ["WANDB_MODE"] = "disabled"
++        wandb.init(mode="disabled", config={"args": vars(args)})
++        return
++    if mode in {"disabled", "offline", "dryrun"}:
++        wandb.init(mode=mode if mode != "dryrun" else "offline", config={"args": vars(args)})
++        return
++    try:
++        wandb.login()
++        wandb.init(config={"args": args})
++    except Exception as exc:
++        print(f"[repro] wandb.login/init failed ({exc}); fallback to disabled")
++        os.environ["WANDB_MODE"] = "disabled"
++        wandb.init(mode="disabled", config={"args": vars(args)})
++
+ def train(train_loader, gnn, gnn_opt, device, args):
+     gnn = gnn.to(device)
+     gnn.train()
+@@ -119,65 +167,84 @@ def gnn_training(loaders, gnn, device, args):
+ 
+ def condensation(rec_loaders, device, gctd, norm_factor, args):
+     loss_fn = torch.nn.MSELoss()
+-
+-    rec_opt = torch.optim.Adam(
+-        list(gctd.parameters()),
+-        lr=args.lr_rec,
+-        weight_decay=args.wd,
+-    )
+-
+-    stop = 0
+-    best_model = deepcopy(gctd.state_dict())
+-    best_rec_err = prev_rec_err = 10**10
+-
++    retries = int(getattr(args, "rec_retries", 2))
++    min_core = float(getattr(args, "min_core", 1e-4))
++    rec_proj = int(getattr(args, "rec_proj", 1)) == 1
++    lr = float(args.lr_rec)
+     elapsed_times = []
+-    for epoch in range(1, args.rec_epochs + 1):
+-        epoch_rec_err = 0.0
+-        start_time = time.time_ns()
+-        for slice_idx, loader in enumerate(rec_loaders):
+-            for batch in loader:
+-                batch[0], batch[1] = batch[0].to(device), batch[1].to(device)
+-                vals = batch[2].to(device)
+-
+-                reconstructed_tensor = gctd.forward(slice_idx, batch)
+-                rec_err = loss_fn(reconstructed_tensor, vals) / norm_factor
+-                epoch_rec_err += rec_err
+-
+-                rec_opt.zero_grad()
+-                rec_err.backward()
+-                rec_opt.step()
+-        elapsed = time.time_ns() - start_time
+-        elapsed_times.append(elapsed)
+-
+-        print(f'epoch: {epoch}, rec error: {epoch_rec_err:.15f}')
+-        wandb.log({
+-            "epoch rec err": epoch_rec_err,
+-        })
+-
+-        if epoch_rec_err < best_rec_err:
+-            stop = 0
+-            best_model = deepcopy(gctd.state_dict())
+-            best_rec_err = epoch_rec_err
+-        else:
+-            stop += 1
+-
+-        abs_diff = (abs(prev_rec_err-epoch_rec_err) < args.atol)
+-        if stop == 10 or abs_diff:
+-            print(f"rec early stopping epoch {epoch}")
++    best_model = None
++    best_rec_err = 10**10
++
++    for attempt in range(retries + 1):
++        if attempt > 0:
++            print(f"[repro] core collapsed, retry {attempt} with lr_rec={lr}")
++            gctd.factor, gctd.core = gctd.init_parameters()
++            gctd.to(device)
++
++        rec_opt = torch.optim.Adam(
++            list(gctd.parameters()),
++            lr=lr,
++            weight_decay=args.wd,
++        )
++        stop = 0
++        attempt_best = deepcopy(gctd.state_dict())
++        attempt_best_err = prev_rec_err = 10**10
++
++        for epoch in range(1, args.rec_epochs + 1):
++            epoch_rec_err = 0.0
++            start_time = time.time_ns()
++            for slice_idx, loader in enumerate(rec_loaders):
++                for batch in loader:
++                    batch[0], batch[1] = batch[0].to(device), batch[1].to(device)
++                    vals = batch[2].to(device)
++
++                    reconstructed_tensor = gctd.forward(slice_idx, batch)
++                    rec_err = loss_fn(reconstructed_tensor, vals) / norm_factor
++                    epoch_rec_err += rec_err
++
++                    rec_opt.zero_grad()
++                    rec_err.backward()
++                    rec_opt.step()
++                    if rec_proj:
++                        gctd.project_nonneg()
++            elapsed_times.append(time.time_ns() - start_time)
++
++            print(f'epoch: {epoch}, rec error: {epoch_rec_err:.15f}')
++            wandb.log({"epoch rec err": epoch_rec_err, "lr_rec_now": lr})
++
++            if epoch_rec_err < attempt_best_err:
++                stop = 0
++                attempt_best = deepcopy(gctd.state_dict())
++                attempt_best_err = epoch_rec_err
++            else:
++                stop += 1
++
++            abs_diff = (abs(prev_rec_err - epoch_rec_err) < args.atol)
++            if stop == 10 or abs_diff:
++                print(f"rec early stopping epoch {epoch}")
++                break
++            prev_rec_err = epoch_rec_err
++
++        gctd.load_state_dict(attempt_best)
++        if rec_proj:
++            gctd.project_nonneg()
++        core_max = gctd.core_abs_max()
++        print(f"[repro] rec attempt={attempt} lr_rec={lr} core_max={core_max:.6e} best_err={float(attempt_best_err):.6e}")
++        best_model = deepcopy(gctd.state_dict())
++        best_rec_err = attempt_best_err
++        if core_max >= min_core:
++            break
++        lr = lr * 0.1
++        if lr < 1e-8:
+             break
+-        
+-        prev_rec_err = epoch_rec_err
+ 
+-    # supernode assignments and dataloader preparation
+     gctd.load_state_dict(best_model)
+     reduced_data = gctd.to_data_obj()
+     loaders = gctd.get_loaders(reduced_data)
+ 
+-    condensation_time = sum(elapsed_times)/1e9
++    condensation_time = sum(elapsed_times) / 1e9
+     print(f"condensation time (s): {condensation_time}")
+-    wandb.log({
+-        "best_log_err": best_rec_err
+-    })
++    wandb.log({"best_log_err": best_rec_err})
+ 
+     return reduced_data, loaders, condensation_time
+ 
+@@ -193,7 +260,7 @@ def experiment(rec_loaders, data, gnn, device, norm_factor, args):
+     print()
+     print("training gnn")
+     test_loss, test_acc, best_val_acc = gnn_training(loaders, gnn, device, args)
+-    print(f"test loss {test_loss} | test acc{test_acc*100:.2f}")
++    print(f"test loss {test_loss} | test acc{test_acc*100:.2f} | best_val_acc {best_val_acc*100:.2f}")
+ 
+     return test_acc, best_val_acc, condensation_time
+ 
+@@ -203,8 +270,7 @@ def run(args):
+     gnn = get_gnn(args)
+     rec_loaders = get_loaders(multi_view, vals, args)
+ 
+-    wandb.login()
+-    wandb.init(config={"args": args})
++    setup_wandb(args)
+ 
+     device = torch.device("cpu")
+     if args.cuda and torch.cuda.is_available():
+@@ -225,10 +291,11 @@ def run(args):
+     wandb.finish()
+ 
+ if __name__ == "__main__":
+-    set_seed(42)
+     args = get_args()
+     args = load_configs(args)
++    set_seed(args.seed)
+     assert 0 < args.reduction_rate <= 1, "reduction rate must be 0 < reduction rate <= 1."
++    setup_stdio_log(args)
+     print(args)
+ 
+     run(args)
+diff --git a/src/utils/args.py b/src/utils/args.py
+index a383da6..cae933b 100644
+--- a/src/utils/args.py
++++ b/src/utils/args.py
+@@ -3,7 +3,35 @@ from argparse import ArgumentParser
+ def get_args():
+     parser = ArgumentParser()
+ 
+-    parser.add_argument("--data_dir", type=str, default="data/")
++    parser.add_argument(
++        "--data_dir",
++        type=str,
++        default="data/",
++        help="数据集目录；相对路径相对本仓库根目录 repro/gctd，而非当前工作目录。",
++    )
++    parser.add_argument(
++        "--save_dir",
++        type=str,
++        default="saved_ours/",
++        help="压缩图缓存目录；相对路径相对本仓库根目录。",
++    )
++    parser.add_argument(
++        "--log_file",
++        type=str,
++        default="",
++        help="可选。把 stdout 同时写入该文件；相对路径相对本仓库根目录。",
++    )
++    parser.add_argument(
++        "--num_workers",
++        type=int,
++        default=4,
++        help="张量分解 DataLoader 的进程数。官方默认写死 16，此处改为可配。",
++    )
++    parser.add_argument(
++        "--no_wandb",
++        action="store_true",
++        help="关闭 wandb 登录与在线上报，便于无账号复现。",
++    )
+     parser.add_argument(
+         "--dataset",
+         type=str,
+@@ -29,10 +57,79 @@ def get_args():
+     parser.add_argument("--wd", type=float, default=0.001)
+     parser.add_argument("--wd_gnn", type=float, default=0.001)
+     parser.add_argument("--weighted", type=int, default=1)
++    parser.add_argument(
++        "--edge_thresh",
++        type=float,
++        default=0.05,
++        help="合成邻接绝对阈值。官方写死 0.05。与 quantile/rel/topk 同时给时，后三者优先。",
++    )
++    parser.add_argument(
++        "--edge_quantile",
++        type=float,
++        default=0.0,
++        help=">0 时用分位数阈值（0–1），与核值尺度无关。例如 0.99 约保留最强 1% 的条目。",
++    )
++    parser.add_argument(
++        "--edge_rel",
++        type=float,
++        default=0.0,
++        help=">0 时阈值 = edge_rel * adj.max()。例如 0.5 表示保留不低于最大值一半的边。",
++    )
++    parser.add_argument(
++        "--edge_topk",
++        type=int,
++        default=0,
++        help=">0 时保留核值最大的 k 条有向边（再补成无向）。尺度无关，且保证有边。",
++    )
+     parser.add_argument("--atol", type=float, default=1e-7)
+     parser.add_argument("--use_kmeans", type=int, default=1)
++    parser.add_argument(
++        "--feat_from_cluster",
++        type=int,
++        default=0,
++        help="超点特征：0=官方，全图同一 class+split 平均（迁回原图更好）；"
++        "1=K-Means 簇内同类同 split 平均（与论文文字更近，Cora 上更差）。",
++    )
+     parser.add_argument("--kmeans_redo", type=int, default=1)
+     parser.add_argument("--kmeans_iter", type=int, default=20)
+     parser.add_argument("--use_cached", action="store_true", default="store_true")
+-    
++    parser.add_argument(
++        "--gcond_protocol",
++        type=int,
++        default=0,
++        help="1=GCond 同款：合成点全部当训练；特征/标签只用原图 train；"
++        "边为 ReLU 后核平均再对称化（>0 为边）；建议同时 --weighted 0。",
++    )
++    parser.add_argument(
++        "--train_all_synth",
++        type=int,
++        default=0,
++        help="1=在全部合成节点上训 GNN（含 val/test 原型，有泄漏）；0=官方只用合成 train。",
++    )
++    parser.add_argument(
++        "--rec_retries",
++        type=int,
++        default=2,
++        help="核张量塌缩（max < min_core）时，把 lr_rec 降 10 倍再分解的额外次数。",
++    )
++    parser.add_argument(
++        "--min_core",
++        type=float,
++        default=1e-4,
++        help="判定压缩塌缩的核值上限阈值。",
++    )
++    parser.add_argument(
++        "--rec_proj",
++        type=int,
++        default=0,
++        help="1=每次 rec 更新后把因子/核投影到非负。与 lr_rec=0.1 合用会立刻塌缩，默认关；"
++        "塌缩仍由 rec_retries 降学习率处理。",
++    )
++    parser.add_argument(
++        "--seed",
++        type=int,
++        default=42,
++        help="随机种子。官方写死 42；论文 Table 2 是 10 次平均，复现时可改。",
++    )
++
+     return parser.parse_args()
+\ No newline at end of file
+diff --git a/src/utils/data_handling.py b/src/utils/data_handling.py
+index 6b523fa..1a853c5 100644
+--- a/src/utils/data_handling.py
++++ b/src/utils/data_handling.py
+@@ -21,6 +21,8 @@ from pathlib import Path
+ import time
+ from ogb.nodeproppred import PygNodePropPredDataset
+ 
++from .paths import resolve_rel_path
++
+ class DataHandler():
+     def __init__(self, dataset):
+         self.dataset = dataset
+@@ -155,14 +157,16 @@ def prepare_data(data_dir, dataset_name):
+ 
+ 
+ def load_data(args):
+-    cache_path = osp.join(osp.join(args.data_dir, args.dataset), "cache/")
++    data_dir = str(resolve_rel_path(args.data_dir))
++    args.data_dir = data_dir
++    cache_path = osp.join(osp.join(data_dir, args.dataset), "cache/")
+     Path(cache_path).mkdir(exist_ok=True, parents=True)
+ 
+     dump_path = osp.join(cache_path, args.dataset + f"_{args.R}")
+     multi_str = f"_{args.add_ratio}_{args.drop_ratio}.multi_view"
+     vals_str = f"_{args.add_ratio}_{args.drop_ratio}.vals"
+     
+-    data = prepare_data(args.data_dir, args.dataset)
++    data = prepare_data(data_dir, args.dataset)
+     
+     if osp.exists(dump_path + multi_str) and osp.exists(dump_path + vals_str):
+         print("loading cached files")
+@@ -221,7 +225,7 @@ def augment_graph_sparse(data, args, transductive):
+ 
+ 
+ def load_cached_data(args):
+-    root_dir = "saved_ours/"
++    root_dir = str(resolve_rel_path(getattr(args, "save_dir", "saved_ours/")))
+     dataset_saved_dir = osp.join(root_dir, args.dataset)
+ 
+     filename = f"{dataset_saved_dir}/{args.dataset}_{args.reduction_rate}_argmax"
+diff --git a/src/utils/paths.py b/src/utils/paths.py
+new file mode 100644
+index 0000000..2056fe5
+--- /dev/null
++++ b/src/utils/paths.py
+@@ -0,0 +1,14 @@
++"""相对路径锚定到 GCTD 仓库根（repro/gctd），不依赖启动时的 cwd。"""
++from pathlib import Path
++
++
++def repo_root() -> Path:
++    # 本文件位于 src/utils/paths.py → 上两级为仓库根
++    return Path(__file__).resolve().parents[2]
++
++
++def resolve_rel_path(p) -> Path:
++    path = Path(p).expanduser()
++    if path.is_absolute():
++        return path
++    return (repo_root() / path).resolve()
+diff --git a/src/utils/utils.py b/src/utils/utils.py
+index c68c83d..c5b4c37 100644
+--- a/src/utils/utils.py
++++ b/src/utils/utils.py
+@@ -8,6 +8,7 @@ from os import path as osp
+ 
+ from models.other_arcs import *
+ from .data_handling import COODataset
++from .paths import resolve_rel_path
+ 
+ def set_seed(seed):
+     np.random.seed(seed)
+@@ -40,7 +41,7 @@ def load_configs(args):
+ 
+ 
+ def save_graph(graph, args):
+-    root_dir = "saved_ours/"
++    root_dir = str(resolve_rel_path(getattr(args, "save_dir", "saved_ours/")))
+     dataset_saved_dir = osp.join(root_dir, args.dataset)
+     
+     Path(root_dir).mkdir(parents=True, exist_ok=True)
+@@ -78,7 +79,8 @@ def get_loaders(multi_view, vals, args):
+     rec_loaders = []
+     for i in range(len(multi_view)):
+         tmp = COODataset(multi_view[i], vals[i])
+-        loader = DataLoader(tmp, batch_size=args.bsz, num_workers=16, shuffle=True)
++        n_workers = int(getattr(args, "num_workers", 4))
++        loader = DataLoader(tmp, batch_size=args.bsz, num_workers=n_workers, shuffle=True)
+         rec_loaders.append(loader)
+ 
+     return rec_loaders

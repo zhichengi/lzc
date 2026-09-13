@@ -1,4 +1,5 @@
 dataset,n,val_mean,val_std,oracle_mean,oracle_std
+Actor,10,36.12,1.24,37.13,0.90
 Chameleon,10,51.91,2.04,52.83,2.02
 Cornell,10,77.57,4.42,80.54,3.99
 Squirrel,10,35.93,1.50,37.08,1.22

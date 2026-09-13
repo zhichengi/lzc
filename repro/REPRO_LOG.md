@@ -462,3 +462,28 @@ Pubmed SHA-256：
 - `ind.pubmed.y` `e6c807633307a07ed659249006536a147c7999c797f11a2560752990181b41b3`
 
 未跑 `run_gctd.sh citeseer/pubmed`（GPU 给 SGPC Actor）。
+
+---
+
+## 2026-09-13 固化复现改动为 `gctd-repro.patch`（不训练）
+
+此前对官方代码的改动只散落在日志表格里，补上可 `git apply` 的完整补丁（CLOSEOUT_PLAN R-WS-1）。
+
+- 官方提交：`785cfc9`（`grafted`，仅含一个提交）。
+- 补丁：`repro/gctd-repro.patch`，834 行，6 个文件。
+- SHA-256：`2e6cc76d9cf1208565b2949e7a22d1106b63c8ddb9966566c7cdc9736dec4500`。
+
+涉及文件与内容：
+
+| 文件 | 改动 |
+|------|------|
+| `src/utils/args.py` | 新增 CLI 开关：`--no_wandb`、`--edge_topk`、`--lr_rec`、`--train_supernode_quota`、`--collapse_retry` 等；默认值与官方一致 |
+| `src/train.py` | 塌缩重试、超点配额、按协议选模；`snapshot=true` 合成图时保留原图 train 特征 |
+| `src/models/gctd.py` | `to_edge_index` 支持 `topk` / 相对阈值；`compute_supernode_info` 的簇内平均改为可选（默认关） |
+| `src/utils/data_handling.py` | 特征归一化 / 邻接构建的小修 |
+| `src/utils/utils.py` | 日志与随机种子相关小修 |
+| `src/utils/paths.py` | **新增**：把相对路径解析到仓库根，去掉对 cwd 的隐式依赖 |
+
+验证：在官方 `HEAD` 的干净 worktree 上 `git apply --check repro/gctd-repro.patch` 通过（临时 worktree 已清理）。
+
+未包含：`data/`（数据，已在根 `.gitignore` 排除）。默认开关全部关闭时行为与官方原样一致（1 epoch 回归见表内 A 行）。

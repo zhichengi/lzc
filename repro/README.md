@@ -16,7 +16,7 @@
 约定：
 
 - 官方仓库放 `repro/<name>/`，自带 `.git`，**不加入根仓库**。
-- 对官方代码的改动以 `repro/<name>-*.patch` 为准；GCTD 目前只有日志里的改动表，完整 patch 仍待补（`CLOSEOUT_PLAN.md` R-WS-1）。
+- 对官方代码的改动以 `repro/<name>-*.patch` 为准；GCTD 的 `gctd-repro.patch` 已补齐并验证（`CLOSEOUT_PLAN.md` R-WS-1）。
 - 运行产物放 `results/<name>/runs/`；每次运行独立日志，不覆盖。
 - 先保留官方算法与评测，只在外层处理环境、GPU、镜像下载和日志。
 - 长任务走 `scripts/run_capped.sh` / `scripts/capped_env.sh`（85% 上限）。

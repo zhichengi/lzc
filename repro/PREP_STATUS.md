@@ -19,7 +19,7 @@
 
 | 编号 | 论文 | README | 全量入口（默认不跑） | 预处理要点 |
 |------|------|--------|----------------------|------------|
-| 29 | SGPC | [SGPC_README.md](SGPC_README.md) | `repro/run_sgpc_full.sh` | Squirrel×10 完成；Actor×10 进行中 |
+| 29 | SGPC | [SGPC_README.md](SGPC_README.md) | `repro/run_sgpc_full.sh` | 6 个异配集 ×10 划分完成（含 Actor）；Cora/Citeseer 5 seed |
 | 11 | IGNN | [IGNN_README.md](IGNN_README.md) | `repro/run_ignn_full.sh` → custom dry-run | public 已冻结，勿改表 |
 | 43 | ScaDyG | [SCADYG_README.md](SCADYG_README.md) | `repro/run_scadyg_full.sh` | 消融与 BitcoinAlpha 待跑 |
 | 40 | GCTD | [GCTD_README.md](GCTD_README.md) | `repro/run_gctd_full.sh` | Citeseer/Pubmed；禁止再扫 Cora |

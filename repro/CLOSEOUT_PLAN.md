@@ -19,7 +19,7 @@
 | R-GCTD-1 / R-GCTD-3 / R-GCTD-5 | **未完成**。Citeseer/Pubmed、GCond 外部对照、冻结条目都还没有 |
 | R-GCTD-2 | **完成**：`results/gctd/cora_summary.csv` |
 | R-GCTD-4 | **草稿完成、未发出**：`repro/gctd_issue_draft.md` |
-| R-WS-1 | 部分：`.gitignore` 已排除官方克隆与 PDF；GCTD 仍缺完整 `.patch`；ScaDyG 的 `eval_protocols.py` 尚未拷到 `repro/scadyg-extra/` |
+| R-WS-1 | **完成**：`.gitignore` 已排除官方克隆与 PDF；GCTD 完整补丁 `gctd-repro.patch` 已生成并验证（2026-09-13）；ScaDyG 的 `eval_protocols.py` 已拷到 `repro/scadyg-extra/` |
 | R-WS-2 | 未提交（大量未跟踪文件） |
 | R-WS-3 | **完成**：根 README 已改为工作区说明 |
 | R-WS-4 | **完成**：`results/SUMMARY.md` 已存在，含四条线 |
@@ -127,7 +127,7 @@
 
 | 编号 | 任务 | 做法 |
 |------|------|------|
-| R-WS-1 | git 策略 | 四个官方克隆（`repro/gctd`、`scadyg`、`ignn`、`sgpc`）各自带 `.git`，已加入根 `.gitignore`。追溯靠提交 SHA + `repro/*.patch` + 外层脚本。GCTD 仍缺完整 `gctd-repro.patch`；ScaDyG 的 `model/eval_protocols.py` 需拷到 `repro/scadyg-extra/`。`results/*/runs/` 文本日志可入库（`results/gctd/runs/` 目前仍被 ignore） |
+| R-WS-1 | git 策略 | 四个官方克隆（`repro/gctd`、`scadyg`、`ignn`、`sgpc`）各自带 `.git`，已加入根 `.gitignore`。追溯靠提交 SHA + `repro/*.patch` + 外层脚本。GCTD 完整 `gctd-repro.patch` 已生成并验证（2026-09-13）；ScaDyG 的 `model/eval_protocols.py` 已拷到 `repro/scadyg-extra/`。`results/*/runs/` 文本日志可入库（`results/gctd/runs/` 目前仍被 ignore） |
 | R-WS-2 | 提交 | 先提交文档与脚本（`repro/*.md`、`repro/*.sh`、`repro/*.patch`、`scripts/`、`papers/*.md|csv|bib`），再提交结果 CSV 与日志。`papers/**/*.pdf`（117 MB）建议不入 git，或走 LFS；`papers-to-DIG.zip` 已忽略 |
 | R-WS-3 | 根 README | **已做**（2026-09-12）：工作区定位、四个 conda 环境、四条线入口与一句话结论、骨架目录说明 |
 | R-WS-4 | 顶层结果汇总 | **已做**：`results/SUMMARY.md` |
@@ -179,7 +179,7 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 ### 仓库
 
 - 根 `README.md`、`repro/README.md`、`scripts/README.md`、`results/SUMMARY.md` 已按四条线现状改写（R-WS-3/4/5）。`main.py` / `configs/example.yaml` / `src/` 仍是空壳，README 已标明不用。
-- `.gitignore` 排除官方克隆、论文 PDF、数据与缓存。GCTD 仍缺完整 `gctd-repro.patch`；ScaDyG `eval_protocols.py` 尚未拷到 `repro/scadyg-extra/`。
+- `.gitignore` 排除官方克隆、论文 PDF、数据与缓存。GCTD 完整 `gctd-repro.patch` 已生成并验证；ScaDyG `eval_protocols.py` 已拷到 `repro/scadyg-extra/`（2026-09-13）。
 - 已跟踪提交主要是早期 IGNN public（到 WikiCS）与骨架文件。未入库：chameleon/roman 正式结果、capped 脚本、custom 准备、GCTD/ScaDyG/SGPC 文档与产物。需要一次文档+脚本提交（R-WS-2），未要求时不 commit。
 - `IGNN_REPRO_LOG.md` 有重复段落（Actor / roman / chameleon 写了两遍）；只追加、不改写历史。
 - conda：`dtgb` / `gctd` / `scadyg` / `ignn` 隔离，不要混装。GitHub 直连常超时，走镜像。

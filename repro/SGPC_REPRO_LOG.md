@@ -190,14 +190,19 @@ Cora 及其余数据集改在 85% 资源上限下重跑（IGNN roman-empire 完�
 
 ### 7c 异配 geom-gcn 10 划分（`--seed 0`）
 
-Actor 尚未跑（单次约 20 min × 10）。Squirrel 10 划分已完成。
+六个异配数据集的 10 划分全部完成（Actor / Chameleon / Cornell / Texas / Wisconsin / Squirrel）。
+
+Actor 10 划分于 2026-09-12 23:16 全部退出 0（`actor_splits_0to9.batch.log`），每划分约 20 min，命令 `--split 0-9 --seed 0`（`spec=dense`）。逐次：`results/sgpc/actor_10split_runs.csv`。
 
 | 数据集 | n | val 选模 | oracle | 论文 | val−论文 | oracle−论文 |
 |--------|---|----------|--------|------|----------|-------------|
+| Actor | 10 | 36.12 ± 1.24 | 37.13 ± 0.90 | 38.1 ± 0.52 | −1.98 | −0.97 |
 | Chameleon | 10 | 51.91 ± 2.04 | 52.83 ± 2.02 | 53.3 ± 1.29 | −1.39 | −0.47 |
 | Cornell | 10 | 77.57 ± 4.42 | 80.54 ± 3.99 | 81.0 ± 2.33 | −3.43 | −0.46 |
 | Texas | 10 | 80.27 ± 6.25 | 85.41 ± 4.63 | 83.2 ± 1.82 | −2.93 | +2.21 |
 | Wisconsin | 10 | 83.53 ± 4.91 | 87.45 ± 2.81 | 81.1 ± 2.60 | +2.43 | +6.35 |
+
+Actor 的 val 选模与 oracle 都低于论文中心值（约 1–2 点），但差值与 Cornell 同量级；std 约为论文 ±0.52 的 2 倍，与其余异配集一致。
 
 Squirrel 10 划分（`--seed 0`，每划分退出 0；s0/s1 各有一次未写完的早停日志，表用完整那次）：
 
@@ -207,12 +212,13 @@ Squirrel 10 划分（`--seed 0`，每划分退出 0；s0/s1 各有一次未写�
 
 逐次：`results/sgpc/squirrel_10split_runs.csv`。val 选模均值贴近论文中心值，std 约为论文 ±0.30 的 5 倍。oracle 偏高约 1.1 点。仍不能称 L3。
 
-逐次：`results/sgpc/webkb_10split_runs.csv`、`chameleon_10split_runs.csv`。汇总：`results/sgpc/hetero_10split_summary.csv`。
+逐次：`results/sgpc/webkb_10split_runs.csv`、`chameleon_10split_runs.csv`、`actor_10split_runs.csv`。汇总：`results/sgpc/hetero_10split_summary.csv`。
 
 读法：
 
 - Cornell / Chameleon 的 **oracle 均值**贴近论文中心值（差 < 0.5 点），但我们的标准差更大。
 - **val 选模**在 Cornell / Texas / Chameleon 上系统性低于论文与 oracle，与审计「`Best Test` 用 test 选模」一致。
+- Actor 的 val 与 oracle 都低于论文约 1–2 点；oracle−论文（−0.97）与 Cornell（−0.46）/ Chameleon（−0.47）同量级，属同一类偏低现象，不是 Actor 特有。
 - Wisconsin 无论 val 还是 oracle 都高于论文；oracle 高约 6 点。可能原因：论文 Table 1 未必是 geom-gcn 10 划分；代码 ∆t=0.15 而论文写 0.5；论文未写选模规则。
 - 我们的跨划分方差普遍大于论文 ±，所以还不能称 L3。
 
@@ -230,16 +236,16 @@ Cora / Citeseer 的 oracle 均值落在论文中心值约 1σ_论文 内，但�
 ### 7e 分层判定（步骤 7 后）
 
 - L1：9/9 数据集管线闭环（Pubmed 用 `lobpcg`，其余默认 `dense`）。
-- L2：Cora / Citeseer / Pubmed / Chameleon / Cornell 的 oracle 与论文中心值同量级（差约 0.4–1.2 点）。Texas oracle 偏高 2.2；Wisconsin 明显偏高。val 选模除 Wisconsin 外都低于论文。
+- L2：Cora / Citeseer / Pubmed / Chameleon / Cornell / Actor 的 oracle 与论文中心值同量级（差约 0.4–1.2 点）。Texas oracle 偏高 2.2；Wisconsin 明显偏高。val 选模除 Wisconsin 外都低于论文。
 - L3：否。异配用的是 geom-gcn 10 划分而非论文「每类 20 个随机训练节点」；同配是 public split 的 init seed，不是重新抽样 20/类；论文 ± 更紧。
 
 总表：`results/sgpc/protocol_summary.csv`。解析：`scripts/parse_sgpc_log.py`、`scripts/summarize_sgpc_splits.py`。
 
 ## 下一步
 
-- Actor 的 geom-gcn 10 划分（补齐异配主表）。Squirrel 已完成。
+- ~~Actor 的 geom-gcn 10 划分（补齐异配主表）~~：**已完成**（2026-09-12 23:16，10/10 退出 0）。
 - Pubmed 补 seed 1–4（可选；论文 ±0.06 极紧，预期仍达不到 L3）。
 - 异配 ∆t=0.5 对照（论文写 0.5，代码 0.15），尤其 Wisconsin。
 - 不把 oracle 写成 Table 1 复现数字；正式引用用 val 选模。
 - 穿插 ScaDyG 消融 / GCTD 冻结（GPU 空闲时）。
-剩余全量入口（默认 dry-run）：`FULL=1 bash repro/run_sgpc_full.sh`（Actor 10 划分仍待跑；Squirrel 已完成）。
+剩余全量入口（默认 dry-run）：`FULL=1 bash repro/run_sgpc_full.sh`（9/9 数据集与 6 个异配集 10 划分已完成）。
