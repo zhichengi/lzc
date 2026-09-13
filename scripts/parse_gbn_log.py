@@ -38,6 +38,17 @@ EVAL_ACC = re.compile(r"Evaluation Acc is\s+([\d.]+)%\s*±\s*([\d.]+)%")
 TEST_ACC = re.compile(r"test_acc=\s*([\d.]+)%")
 
 DS_ARG = re.compile(r"--dataset\s+(\S+)")
+# 消融运行的标签形如 ablate_<mode>_<DS>_r10。
+# mode 名里含下划线（gamma0_beta0 / gamma_all0 / gamma_beta_all0），
+# 用裸 [a-z0-9]+ 会截断成 gamma / beta，所以按已知模式表匹配（长的优先）。
+ABLATION_MODES = ["gamma_beta_all0", "gamma0_beta0", "gamma_all0", "beta_all0"]
+
+
+def ablate_of(label):
+    for m in ABLATION_MODES:
+        if f"ablate_{m}_" in label:
+            return m
+    return ""
 
 
 def parse(path):
@@ -78,6 +89,7 @@ def parse(path):
     return {
         "label": label,
         "dataset": dataset,
+        "ablate": ablate_of(label),
         "n_iters": len(accs),
         "acc_mean": f"{mean:.2f}" if mean != "" else "",
         "std_ddof0": f"{std0:.2f}" if std0 != "" else "",
@@ -101,8 +113,8 @@ def main():
     if not rows:
         print("no parsable log", file=sys.stderr)
         sys.exit(1)
-    rows.sort(key=lambda r: r["dataset"])
-    show = ["dataset", "n_iters", "acc_mean", "std_ddof0", "std_ddof1",
+    rows.sort(key=lambda r: (r.get("ablate", ""), r["dataset"]))
+    show = ["ablate", "dataset", "n_iters", "acc_mean", "std_ddof0", "std_ddof1",
             "exit_code", "runtime_seconds"]
     print("\t".join(show))
     for r in rows:
