@@ -27,7 +27,7 @@
 | R-WS-4 | **完成**：`results/SUMMARY.md` 已存在，含四条线 |
 | R-WS-5 | **完成**：`scripts/README.md` |
 | R-WS-6 | 未修 protobuf；GCTD 默认 `--no_wandb`，在 README 注明即可 |
-| P4 第四篇 | **已开**：SGPC 步骤 1–6 完成（缺 Pubmed） |
+| P4 第四篇 | **SGPC 已冻结**（2026-09-13）：9/9 数据集官方原样跑完，冻结条目见 `SGPC_REPRO_LOG.md` 文末。步骤 1–7 全部完成 |
 
 下文第 2–5 节是制定时的原文，正文任务表只在 R-GCTD-1 上补了完成状态与数字；以本节快照为准。
 
@@ -159,13 +159,21 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 
 ---
 
-## 5. 三条线的当前判定（按 `REPRO_ROADMAP.md` 第 5 节的三级标准）
+## 5. 四条线的当前判定（按 `REPRO_ROADMAP.md` 第 5 节的三级标准）
 
-- GCTD：**已冻结**。L1 是；L2 部分（Cora 66.0 ± 9.4、Citeseer 64.9 ± 7.7、Pubmed 77.9 ± 1.5，对论文 81.4 ± 1.6 / 76.8 ± 0.4 / 79.9 ± 0.2；只有 Pubmed 接近）；L3 否（σ 普遍大一个数量级）。评测链路已由 GCond 官方图验证，差距在压缩侧。issue 决定不发出。
-- ScaDyG：L1 是；L2 是（0.922 ± 0.014 对 0.931 ± 0.009）；L3 否（方差偏大，且发现协议差异）。
-- IGNN public：L1 是；L2 是；L3 在 Actor / wikics 上按「均值差 < 官方 σ」成立（硬件 3090 vs V100）。chameleon / roman-empire 的 public 命令因加载器丢 NPZ mask，实际读的是仓库 48/32/20 npy，协议不纯，数字仍与 V100 表同量级。custom split 未跑。
+| 线 | 冻结状态 | L1 | L2 | L3 |
+|----|----------|----|----|----|
+| 11 IGNN | **已冻结**（public；custom 不在范围） | 是 | 是 | 是* |
+| 40 GCTD | **已冻结**（2026-09-13） | 是 | 部分 | 否 |
+| 29 SGPC | **已冻结**（2026-09-13） | 是 | 部分 | 否 |
+| 43 ScaDyG | **未冻结**，冻结条件是消融表 + 第二数据集入日志 | 是 | 是 | 否 |
 
-三条线都以"达到 L2 并写清 L3 未达到的原因"为冻结条件。IGNN public 已按此冻结。SGPC 尚未进入冻结（步骤 6 完成，L3 明确未到）。
+- GCTD：L2 部分（Cora 66.0 ± 9.4、Citeseer 64.9 ± 7.7、Pubmed 77.9 ± 1.5，对论文 81.4 ± 1.6 / 76.8 ± 0.4 / 79.9 ± 0.2；只有 Pubmed 接近）；L3 否（σ 普遍大一个数量级）。评测链路已由 GCond 官方图验证，差距在压缩侧。issue 决定不发出。
+- SGPC：L2 部分（oracle 在 6 个数据集上与论文差 0.4–1.2 点；val 选模系统性偏低 0.07–3.43；Wisconsin 偏高 +2.43/+6.35）；L3 否（协议不同：异配用 geom-gcn 10 划分而非"每类 20 点"；σ 为论文 2–5 倍）。冻结条目见 `SGPC_REPRO_LOG.md` 文末。
+- IGNN public：L2 是；L3 在 Actor / wikics 上按「均值差 < 官方 σ」成立（硬件 3090 vs V100）。chameleon / roman-empire 的 public 命令因加载器丢 NPZ mask，实际读的是仓库 48/32/20 npy，协议不纯，数字仍与 V100 表同量级。custom split 未跑，不在冻结范围。
+- ScaDyG：L2 是（0.922 ± 0.014 对 0.931 ± 0.009）；L3 否（方差偏大，且发现协议差异）。完成消融与 BitcoinAlpha 后才能冻结。
+
+\* IGNN 的 L3 只在 Actor / wikics 成立，且硬件跨卡（3090 vs V100），作者自述存在差异。
 
 ---
 
@@ -175,10 +183,10 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 
 | 线 | 该停 / 该做 | 主要风险 |
 |----|-------------|----------|
-| IGNN | public 冻结；下一步 custom 三数据集。不要补跑“真 public”、不要搜参、不要大图 | critical public 协议不纯；`run_ignn.sh` 现含 85% cap，与提交 `7adde1c` 的无 cap 版本不一致 |
-| ScaDyG | 缺消融、Bitcoin、`SCADYG_REPORT.md` | checkpoint 只存预测层已确认；严格 item 协议 ~0.204 不要和官方 MRR 混排 |
+| IGNN | **已冻结**（public）。下一步 custom 三数据集（可选）。不要补跑"真 public"、不要搜参、不要大图 | critical public 协议不纯；`run_ignn.sh` 现含 85% cap，与提交 `7adde1c` 的无 cap 版本不一致 |
+| ScaDyG | **未冻结**：缺消融（R-SCADYG-1/2）、BitcoinAlpha（R-SCADYG-3）；报告初稿已有 | checkpoint 只存预测层已确认；严格 item 协议 ~0.204 不要和官方 MRR 混排 |
 | GCTD | **已冻结**（2026-09-13）。不要重扫 Cora；重启条件是作者给出 Table 2 完整超参 | 官方默认完全图；三格 66.0±9.4 / 64.9±7.7 / 77.9±1.5 均低于论文，差距非数据集特有；评测链路已由 GCond 官方图验证正确 |
-| SGPC | 步骤 6 缺 Pubmed；oracle 接近论文、val 选模偏低 | 论文写每类 20 点，代码用 PyG 自带 split |
+| SGPC | **已冻结**（2026-09-13，9/9 数据集）。不要补跑 seed 或重做划分 | 论文写每类 20 点，代码用 PyG 自带 split；`Best Test` 是 test 选模，不可当 Table 1 数字；∆t 代码 0.15 vs 论文 0.5 |
 
 ### 仓库
 

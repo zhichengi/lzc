@@ -1,6 +1,9 @@
 # SGPC 复现日志
 
-> 当前：步骤 1–6 完成（8/9 数据集官方原样，缺 Pubmed）。不要把单次数字写成 Table 1 统计复现。下一步见文末。入口：[SGPC_README.md](SGPC_README.md)。
+> 当前：**已冻结**（2026-09-13，见文末「冻结（步骤 7 收口）」）。9/9 数据集官方原样，
+> oracle 与论文中心值差 0.4–1.2 点（6 个数据集），val 选模系统性偏低，Wisconsin 偏高。
+> **不要**把单次数字写成 Table 1 统计复现，也不要把 oracle 当 Table 1 复现数字。
+> 入口：[SGPC_README.md](SGPC_README.md)。
 
 论文：*Sheaf Graph Neural Networks via PAC-Bayes Spectral Optimization*，AAAI 2026。论文库编号 29。  
 官方代码：https://github.com/ChoiYoonHyuk/SGPC  
@@ -249,3 +252,63 @@ Cora / Citeseer 的 oracle 均值落在论文中心值约 1σ_论文 内，但�
 - 不把 oracle 写成 Table 1 复现数字；正式引用用 val 选模。
 - 穿插 ScaDyG 消融 / GCTD 冻结（GPU 空闲时）。
 剩余全量入口（默认 dry-run）：`FULL=1 bash repro/run_sgpc_full.sh`（9/9 数据集与 6 个异配集 10 划分已完成）。
+
+---
+
+## 2026-09-13 冻结（步骤 7 收口）
+
+**范围**：论文 Table 1 的 9 个数据集。同配（Cora / Citeseer / Pubmed）用 public split，
+异配（Actor / Chameleon / Squirrel / Cornell / Texas / Wisconsin）用 geom-gcn 10 划分。
+正式数字口径为 **val 选模**；`oracle`（官方 `Best Test`，test 取 max）只作对照，不作为
+Table 1 复现数字。
+
+### 三级结论
+
+| 级别 | 判定 | 依据 |
+|------|------|------|
+| L1 管线闭环 | **是** | 9/9 数据集跑通（Pubmed 用 `lobpcg`，其余 `dense`）；Citeseer seed 3 的 `eigvalsh` 病态已加回退并重跑一致；退出码全 0 |
+| L2 数值量级 | **部分** | oracle 在 6 个数据集上与论文中心值差 0.4–1.2 点；val 选模系统性偏低 0.07–3.43 点；Wisconsin 偏高（val +2.43 / oracle +6.35） |
+| L3 统计一致 | **否** | 协议不同（异配用 geom-gcn 10 划分，论文写"每类 20 个随机训练节点"；同配是 public split 的 init seed，不是重新抽样 20/类）；跨划分 σ 普遍为论文的 2–5 倍 |
+
+### 九数据集总表
+
+`results/sgpc/protocol_summary.csv`（本次已补上此前缺失的 Squirrel 行）。
+
+| 数据集 | n | val 选模 | oracle | 论文 | val−论文 | oracle−论文 |
+|--------|---|----------|--------|------|----------|-------------|
+| Cora | 5 | 82.06 ± 1.23 | 82.58 ± 1.13 | 83.0 ± 0.55 | −0.94 | −0.42 |
+| Citeseer | 5 | 71.16 ± 1.26 | 72.02 ± 0.79 | 72.6 ± 0.21 | −1.44 | −0.58 |
+| Pubmed | 1 | 78.10 | 78.70 | 79.9 ± 0.06 | −1.80 | −1.20 |
+| Actor | 10 | 36.12 ± 1.24 | 37.13 ± 0.90 | 38.1 ± 0.52 | −1.98 | −0.97 |
+| Chameleon | 10 | 51.91 ± 2.04 | 52.83 ± 2.02 | 53.3 ± 1.29 | −1.39 | −0.47 |
+| Squirrel | 10 | 35.93 ± 1.50 | 37.08 ± 1.22 | 36.0 ± 0.30 | −0.07 | +1.08 |
+| Cornell | 10 | 77.57 ± 4.42 | 80.54 ± 3.99 | 81.0 ± 2.33 | −3.43 | −0.46 |
+| Texas | 10 | 80.27 ± 6.25 | 85.41 ± 4.63 | 83.2 ± 1.82 | −2.93 | +2.21 |
+| Wisconsin | 10 | 83.53 ± 4.91 | 87.45 ± 2.81 | 81.1 ± 2.60 | +2.43 | +6.35 |
+
+### 关键发现
+
+1. **`Best Test` 是 test 选模**。官方 `main.py` 报告的 `Best Test` 取遍历过程中 test
+   准确率的最大值，不是 val 选模。因此 oracle 系统性高于 val 选模（差 0.5–5.1 点），
+   不能与论文 Table 1 直接对齐。
+2. **∆t 与论文不一致**。论文写 ∆t = 0.02（同配）/ 0.5（异配），代码实际用 0.15。
+   Wisconsin 偏高可能与此有关（未验证）。
+3. **Squirrel 最接近**（val 差 −0.07），**Wisconsin 最异常**（oracle +6.35）。
+4. 官方仓库只有 `main.py`，无 seed / 无 CLI 超参 / 无 `requirements.txt`；`main.py`
+   唯一参数是 0–8 的数据集编号。复现按提交 `114b585d0d0e32afbf1d7232dd04c013fa8453e2`
+   固定。
+
+### 已知局限（未做，不再补）
+
+- Pubmed 仅 seed 0（论文 ±0.06 极紧，补 seed 1–4 预期仍达不到 L3）。
+- 异配 ∆t = 0.5 对照未做（可能解释 Wisconsin）。
+- 未按论文文字重建"每类 20 个随机训练节点"的划分。
+
+### 冻结规则
+
+**不再补跑 SGPC 的数据集或 seed**，不重做划分协议。要重启本条线，触发条件是明确要求
+重建论文的"每类 20 节点"划分并对照 ∆t。
+
+汇总：`results/sgpc/protocol_summary.csv`、`results/sgpc/hetero_10split_summary.csv`、
+`results/sgpc/official_summary.csv`；解析脚本 `scripts/parse_sgpc_log.py`、
+`scripts/summarize_sgpc_splits.py`。

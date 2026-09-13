@@ -14,7 +14,7 @@
 | 40 | GCTD（WSDM 2026） | Cora 1.3%，seeds 0–9 | 81.4 ± 1.6 | 官方默认 30.2%（完全图） | topk+配额+重试 **66.0 ± 9.4**；单次最好 76.3% | 是 | 部分 | 否 | **已冻结**；Table 2 三格已跑 | `results/gctd/table2_summary.csv` |
 | 40 | GCTD | Citeseer 0.9%，seeds 0–9 | 76.8 ± 0.4 | `lr_rec=0.01` **64.92 ± 7.72**（σ 19×） | `lr_rec=0.001` 对照 **66.45 ± 5.09**，否证"塌缩降 lr"假设 | 是 | 否 | 否 | 已冻结 | 同上 |
 | 40 | GCTD | Pubmed 0.08%，seeds 0–9 | 79.9 ± 0.2 | `lr_rec=0.01`（10/10 塌缩→重试 0.001）**77.90 ± 1.45** | seed 42 单次 79.70（不代表该格） | 是 | 部分 | 否 | 已冻结 | 同上 |
-| 29 | SGPC（AAAI 2026） | 6 异配 10 划分；Cora/Citeseer 5 seed；Pubmed lobpcg | 见表下 | val 选模低于 oracle；Wisconsin 偏高；Pubmed 78.10/78.70 vs 79.9 | 协议开关默认关 | 是 | 部分 | 否 | 步骤 7：6 个异配集 ×10 划分完成 | `repro/SGPC_REPRO_LOG.md` |
+| 29 | SGPC（AAAI 2026） | 9 数据集（3 同配 public + 6 异配 geom-gcn 10 划分） | 见表下 | val 选模系统性偏低 0.07–3.43；oracle 6 个数据集差 0.4–1.2；Wisconsin 偏高 | 协议开关默认关 | 是 | 部分 | 否 | **已冻结**（2026-09-13） | `repro/SGPC_REPRO_LOG.md` |
 
 \* IGNN 的 L3 按"均值差 < 官方 σ 且方差同量级"成立，但硬件为 RTX 3090 而官方为 V100，作者自己也报告了两者差异，
 因此只表述为"官方配置在 3090 上达到与 V100 表一致的水平"。chameleon / roman-empire 的 `--public True` 因 `graph_datasets` 不读 NPZ mask，实际使用仓库固定 48/32/20 npy，不能称为严格 public。

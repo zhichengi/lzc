@@ -12,9 +12,28 @@
 
 ## 当前结论
 
-步骤 1–7 基本完成。官方原样 8/9 单次已跑（Pubmed 另用 `--spec lobpcg` 跑通）；协议开关已加（默认关）。geom-gcn 10 划分已完成全部 6 个异配集：Actor / Chameleon / Cornell / Texas / Wisconsin / Squirrel（Actor 于 2026-09-12 23:16 收尾）。Cora / Citeseer 各 5 seed 完整（Citeseer seed 3 曾因稠密 `eigvalsh` 未收敛，已重跑）。
+**已冻结**（2026-09-13）：步骤 1–7 全部完成。官方原样 9/9 单次已跑；协议开关已加
+（默认关）。geom-gcn 10 划分已完成全部 6 个异配集：Actor / Chameleon / Cornell /
+Texas / Wisconsin / Squirrel。Cora / Citeseer 各 5 seed 完整（Citeseer seed 3 曾因
+稠密 `eigvalsh` 未收敛，已加重跑）。
 
-**不能**把划分 0 单次数字写成 Table 1。剩余全量：`bash repro/run_sgpc_full.sh`（默认 dry-run）。
+| 数据集 | val 选模 | oracle | 论文 |
+|--------|----------|--------|------|
+| Cora（5 seed） | 82.06 ± 1.23 | 82.58 ± 1.13 | 83.0 ± 0.55 |
+| Citeseer（5 seed） | 71.16 ± 1.26 | 72.02 ± 0.79 | 72.6 ± 0.21 |
+| Pubmed（1 seed） | 78.10 | 78.70 | 79.9 ± 0.06 |
+| Actor（10 划分） | 36.12 ± 1.24 | 37.13 ± 0.90 | 38.1 ± 0.52 |
+| Chameleon（10 划分） | 51.91 ± 2.04 | 52.83 ± 2.02 | 53.3 ± 1.29 |
+| Squirrel（10 划分） | 35.93 ± 1.50 | 37.08 ± 1.22 | 36.0 ± 0.30 |
+| Cornell（10 划分） | 77.57 ± 4.42 | 80.54 ± 3.99 | 81.0 ± 2.33 |
+| Texas（10 划分） | 80.27 ± 6.25 | 85.41 ± 4.63 | 83.2 ± 1.82 |
+| Wisconsin（10 划分） | 83.53 ± 4.91 | 87.45 ± 2.81 | 81.1 ± 2.60 |
+
+L1 是 / L2 部分 / L3 否。**不能**把 `oracle`（官方 `Best Test`，test 选模）当作
+Table 1 复现数字，正式口径是 val 选模。不再补跑 seed 或重做划分；冻结条目见
+`SGPC_REPRO_LOG.md` 文末。
+
+若需重跑（默认 dry-run）：`bash repro/run_sgpc_full.sh`。
 
 ## 协议开关（默认 = 官方原样）
 
