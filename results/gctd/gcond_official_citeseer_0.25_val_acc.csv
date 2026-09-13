@@ -1,0 +1,6 @@
+dataset,gc_rate,seed,n_synth,edges,density,epsilon,select,best_val_acc,test_acc
+citeseer,0.25,0,30,682,0.7578,0.05,val_acc,71.60,69.80
+citeseer,0.25,1,30,734,0.8156,0.05,val_acc,71.80,68.80
+citeseer,0.25,2,30,758,0.8422,0.05,val_acc,71.40,69.80
+citeseer,0.25,3,30,808,0.8978,0.05,val_acc,71.00,70.40
+citeseer,0.25,4,30,784,0.8711,0.05,val_acc,71.80,69.40

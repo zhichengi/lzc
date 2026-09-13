@@ -7,7 +7,8 @@
 - Table 2 三格汇总：`results/gctd/table2_summary.csv`
 - Cora 明细总表：`results/gctd/cora_summary.csv`
 - 逐运行 CSV：`results/gctd/{citeseer_0p009_runs,citeseer_0p009_lrrec1e3_runs,pubmed_0p0008_runs}.csv`
-- 日志解析脚本：`scripts/parse_gctd_log.py`
+- GCond 外部对照 CSV：`results/gctd/gcond_official_{cora,citeseer}_0.25_{val_loss,val_acc}.csv`
+- 日志解析脚本：`scripts/parse_gctd_log.py`；GCond 对照脚本：`scripts/gcond_eval_official.py`
 - 向作者求证草稿（未发出）：[gctd_issue_draft.md](gctd_issue_draft.md)
 - 本地论文：`papers/gnn-frontier-2025-2026/10-wsdm/40_GCTD_WSDM2026.pdf`
 - 读书笔记：`paper/notes/40_gctd.md`
@@ -26,8 +27,27 @@ Table 2 三个小图格（10 seed，建议命令 `--lr_rec 0.01 --edge_topk 12` 
 **不再在 Cora 上扫参**。Cora/Citeseer 的差距不是数据集特有；已单独否证"Citeseer 未走
 塌缩降 lr 路径"的假设（`lr_rec=0.001` 对照 10 seed 仅 66.45 ± 5.09，σ 仍是论文的 13 倍）。
 
-L1 达到，L2 部分（Pubmed 差 2.0），L3 否。下一步是 R-GCTD-3（GCond 外部对照）与向作者
-求证，见 `CLOSEOUT_PLAN.md` R-GCTD-*。
+L1 达到，L2 部分（Pubmed 差 2.0），L3 否。下一步是向作者求证（R-GCTD-4）与冻结（R-GCTD-5），
+见 `CLOSEOUT_PLAN.md` R-GCTD-*。
+
+## 外部对照：评测链路已验证（R-GCTD-3）
+
+用 **GCond 官方仓库自带的压缩图**（`repro/gcond/saved_ours/`，即 GCond 论文 Table 2 的原始
+产物）走**同一套 GCTD 评测链路**（`MyGCN` + `NeighborLoader` 原图 val/test）：
+
+| 数据集（压缩比） | 我们（GCond 官方图） | 论文 GCond 列 |
+|------------------|---------------------|---------------|
+| Cora 1.3%（35 点） | **79.34 ± 0.69** | 79.8 ± 1.3 |
+| Citeseer 1.8%（30 点） | **69.64 ± 0.59** | 70.5 ± 1.2 |
+
+两组都落在论文 1σ 内 → **评测链路正确**，GCTD 与论文的差距在**压缩/学习侧**
+（官方 wandb 搜索到的超参未公开）。同是 35 个合成点，GCond 79.3、我们 topk12 复现 65.96。
+
+```bash
+bash repro/run_gcond_eval.sh                 # cora + citeseer，5 seed × 2 种选模
+```
+
+注意 Citeseer 论文 Table 2 中 **76.5 是 GCTD 列**，GCond 列是 70.5。
 
 ## 目录
 

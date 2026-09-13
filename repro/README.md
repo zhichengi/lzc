@@ -33,5 +33,5 @@ repro/
 ├── IGNN_README.md / IGNN_REPRO_LOG.md / IGNN_CUSTOM_SPLIT.md / run_ignn*.sh
 ├── SGPC_README.md / SGPC_REPRO_LOG.md / run_sgpc*.sh / download_sgpc_data.py
 ├── download_planetoid.sh / download_critical.sh
-└── gctd/ scadyg/ ignn/ sgpc/      # 官方克隆，不入根 git
+└── gctd/ scadyg/ ignn/ sgpc/ gcond/   # 官方克隆，不入根 git
 ```

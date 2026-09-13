@@ -25,6 +25,11 @@ GCTD 的差距**不是 Cora 特有**：Citeseer 同样低 11.9 点、σ 是论�
 （−2.0，σ 7 倍）。三个数据集全部低于论文，指向统一的配方/协议层面差异。已单独否证
 "Citeseer 因未走塌缩降 lr 路径"的假设。
 
+GCTD 的**评测链路已验证**（R-GCTD-3）：GCond 官方压缩图（即 GCond 论文 Table 2 的原始
+产物）走同一套 GCTD 评测链路得到 Cora 1.3% **79.34 ± 0.69**（论文 GCond 列 79.8 ± 1.3）
+与 Citeseer 1.8% **69.64 ± 0.59**（论文 70.5 ± 1.2），均在 1σ 内。因此差距在压缩/学习侧，
+不在评测侧。同是 35 个合成点，GCond 79.3、GCTD 复现 65.96。
+
 ## SGPC（步骤 7，不能当 L3）
 
 对照论文 Table 1 SGPC 行。正式数字用 **val 选模**（首次最高 val 的 test）；`oracle` = 官方 `Best Test`（test 取 max）。总表：`results/sgpc/protocol_summary.csv`。

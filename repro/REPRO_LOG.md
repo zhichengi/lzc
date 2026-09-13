@@ -4,6 +4,9 @@
 > Cora 1.3% `66.0 ± 9.4`、Citeseer 0.9% `64.9 ± 7.7`、Pubmed 0.08% `77.9 ± 1.5`，
 > 论文对应 `81.4 ± 1.6` / `76.8 ± 0.4` / `79.9 ± 0.2`。
 > 汇总表：`results/gctd/table2_summary.csv`（Cora 明细见 `cora_summary.csv`）。
+> **R-GCTD-3 已完成**：GCond 官方压缩图在**同一评测链路**上打出论文数字
+> （Cora 79.34 ± 0.69 对 79.8 ± 1.3；Citeseer 69.64 ± 0.59 对 70.5 ± 1.2）
+> → 评测链路正确，差距在压缩/学习侧。
 > L1 是，L2 部分（Pubmed 差 2.0，Cora/Citeseer 差 10–15），L3 否。**不再在 Cora 上扫参**。
 > 入口：[GCTD_README.md](GCTD_README.md)。
 
@@ -417,9 +420,11 @@ seed 0–9：70.3, 46.0, 51.0, 59.2, 65.9, 60.8, 69.2, 60.6, 56.6, 41.1。
 - [x] Citeseer 0.9% 与 Pubmed 0.08% 各 10 seed（2026-09-13，见文末三节）：64.92±7.72 与 77.90±1.45
 - [x] Citeseer `lr_rec=0.001` 对照 10 seed：66.45±5.09（否证"塌缩降 lr"假设）
 - [x] Table 2 三格汇总 `results/gctd/table2_summary.csv`
-- [ ] GCond 外部对照（R-GCTD-3）
+- [x] GCond 外部对照（R-GCTD-3，2026-09-13）：GCond 官方压缩图在 GCTD 评测链路上打出
+      79.34 ± 0.69（Cora 1.3%）/ 69.64 ± 0.59（Citeseer 1.8%），对论文 GCond 列
+      79.8 ± 1.3 / 70.5 ± 1.2 → 评测链路正确
 - [ ] wandb 0.19.6 降级 protobuf 与 tensorboard 的冲突尚未修复（仅影响 `dtgb`）
-- [ ] 向作者发 issue；冻结条目（R-GCTD-5）待 R-GCTD-3 完成或作者回复
+- [ ] 向作者发 issue；冻结条目（R-GCTD-5）待作者回复（R-GCTD-1/3 已完成）
 
 ---
 
@@ -598,3 +603,47 @@ pubmed_0p0008_runs,table2_summary}.csv`、`scripts/parse_gctd_log.py`（新增�
 `GCTD_README.md`、`results/SUMMARY.md`、`CLOSEOUT_PLAN.md`（R-GCTD-1 状态）。
 
 R-GCTD-3（GCond 外部对照）与 R-GCTD-5（冻结条目）仍未做，冻结条件尚未满足。
+
+## 2026-09-13 R-GCTD-3：用 GCond 官方压缩图检验评测链路
+
+**动机**：Cora/Citeseer/Pubmed 三格都低于论文，需要区分两种可能——
+(a) 我们的评测链路（合成图训 GCN、原图 val 选模、原图 test 评测）有 bug；
+(b) GCTD 的压缩/学习侧与论文设定的差距。
+用一个**已知方法**的官方压缩图来判定。
+
+**关键发现**：GCond 官方仓库自带 `saved_ours/{adj,feat}_<dataset>_<r>_<seed>.pt`，
+就是论文 Table 2 的原始产物（Cora/Citeseer 各 5 个 seed）。无需重跑 GCond 的压缩过程。
+
+- 仓库：`repro/gcond/`，克隆提交 `e0065cfdfd95963d988c359266a4fb0a4bdf60a1`
+  （`ChandlerBang/GCond`，2025-10-10），已由 GitHub API 核对 SHA 一致。
+- 比例换算（README 明确）：`r` 是相对**训练标签数**的比例，不是全图。
+  Cora `r=0.25` → 35 点 ≈ 论文 1.3%；Citeseer `r=0.25` → 30 点 ≈ 论文 1.8%。
+- 评测脚本：`scripts/gcond_eval_official.py`；包装 `repro/run_gcond_eval.sh`。
+  完全复用 GCTD 的评测链路——`MyGCN`（2 层，hidden 256）、
+  `NeighborLoader(原图, val/test mask)`、Adam(lr 1e-3, wd 1e-3)、600 epoch。
+  GCond 的稠密 `adj` 按 `epsilon=0.05`（与 GCond `tester_other_arcs.py` 一致）截断成边表。
+
+**结果（5 seed，GCond 官方图 + GCTD 评测链路）**
+
+| 数据集（压缩比） | val_loss 选模 | val_acc 选模 | 论文 Table 2 的 **GCond** 列 |
+|------------------|---------------|--------------|------------------------------|
+| Cora 1.3%（35 点） | **79.04 ± 1.02** | **79.34 ± 0.69** | 79.8 ± 1.3 |
+| Citeseer 1.8%（30 点） | **69.74 ± 0.66** | **69.64 ± 0.59** | 70.5 ± 1.2 |
+
+两组都在论文 GCond 数字的 1σ 内（Cora 差 −0.76 / −0.46；Citeseer 差 −0.76 / −0.86）。
+合成图密度 0.63–0.90（GCond 本就用稠密图，非异常）。
+
+**判定**：**评测链路正确，可能 (a) 排除**。同一个 harness 在 GCond 官方图上能打出
+公认数字，且用同规模超点（Cora 35 点）、同一 GCN、同一原图 val/test。
+
+因此 GCTD 的差距（Cora −15.4、Citeseer −11.9、Pubmed −2.0）只能来自**压缩/学习侧**：
+官方表格所用超参（wandb 贝叶斯搜索，README 未给出）、或我们本地稀疏化/配额策略与
+其实际设定的差异。这与 R-GCTD-4 的 issue 诉求一致。
+
+对比直观：同是 35 个合成点，GCond 79.3、我们 topk12 复现 65.96。
+
+逐运行 CSV：`results/gctd/gcond_official_{cora,citeseer}_0.25_{val_loss,val_acc}.csv`。
+注意 Citeseer 论文 Table 2 里 **76.5 是 GCTD 列**，GCond 列是 70.5，不要混用。
+
+未做的变体：Pubmed（`saved_ours/` 无 pubmed 产物）；Cora/Citeseer 的 `r=0.5`、`r=1.0`
+（可用，但不在论文 Table 2 的 1.3%/1.8% 对照范围内）。

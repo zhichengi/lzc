@@ -24,6 +24,7 @@ repro/gctd/saved_ours/
 # 官方克隆各自带独立 .git，不要作为嵌套仓库加入根仓库。
 # 补丁、包装脚本和日志放在 repro/ 根目录后单独跟踪。
 repro/gctd/
+repro/gcond/
 repro/scadyg/
 repro/ignn/
 repro/sgpc/

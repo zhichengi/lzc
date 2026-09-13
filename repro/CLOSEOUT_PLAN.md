@@ -17,7 +17,8 @@
 | R-SCADYG-4 | **初稿完成**：`repro/SCADYG_REPORT.md`（未含消融 / 第二数据集） |
 | R-SCADYG-5 | **草稿完成、未发出**：`repro/scadyg_issue_draft.md` |
 | R-GCTD-1 | **完成**（2026-09-13）：Citeseer 0.9% **64.92 ± 7.72**（`lr_rec=0.01`，10 seed）与 Pubmed 0.08% **77.90 ± 1.45**（10 seed）；另有 Citeseer `lr_rec=0.001` 对照 **66.45 ± 5.09**（否证"塌缩降 lr"假设）。论文 76.8±0.4 / 79.9±0.2。汇总 `results/gctd/table2_summary.csv` |
-| R-GCTD-3 / R-GCTD-5 | **未完成**。GCond 外部对照、冻结条目都还没有 |
+| R-GCTD-3 | **完成**（2026-09-13）：用 GCond 官方自带压缩图（`repro/gcond/saved_ours/`，论文 Table 2 原始产物）走同一 GCTD 评测链路，Cora 1.3% **79.34 ± 0.69**（论文 GCond 79.8±1.3）、Citeseer 1.8% **69.64 ± 0.59**（70.5±1.2），均在 1σ 内 → 评测链路正确，差距在压缩/学习侧 |
+| R-GCTD-5 | **未完成**。冻结条目还没有（R-GCTD-1/3 已完成，等作者回复） |
 | R-GCTD-2 | **完成**：`results/gctd/cora_summary.csv` |
 | R-GCTD-4 | **草稿完成、未发出**：`repro/gctd_issue_draft.md` |
 | R-WS-1 | **完成**：`.gitignore` 已排除官方克隆与 PDF；GCTD 完整补丁 `gctd-repro.patch` 已生成并验证（2026-09-13）；ScaDyG 的 `eval_protocols.py` 已拷到 `repro/scadyg-extra/` |
@@ -109,8 +110,8 @@
 - Cora 1.3%：官方默认 30.2%（完全图）→ 单次最好 76.3%（seed 42 网格）→ 10-run 最好 66.0 ± 9.4（`dtgb`，配额+重试）；官方钉扎环境 61.0 ± 13.1；GCond 协议 58.1 ± 9.6。论文 81.4 ± 1.6。
 - Citeseer 0.9%（2026-09-13）：`lr_rec=0.01` 10-run **64.92 ± 7.72**；`lr_rec=0.001` 对照 10-run **66.45 ± 5.09**。论文 76.8 ± 0.4。
 - Pubmed 0.08%（2026-09-13）：10-run **77.90 ± 1.45**（10/10 先塌缩再重试到 0.001）；seed 42 单次 79.70。论文 79.9 ± 0.2。
-- 已排除：环境版本、阈值形式、簇内特征、GCond 协议、小网格 R/add_ratio/lr_gnn、"未走塌缩降 lr 路径"（Citeseer 0.001 对照否证）。
-- 未排除：官方 wandb 贝叶斯搜索得到的完整超参；`weighted` / `drop_ratio` 等与图增强相关的设定；K-Means 初始化。
+- 已排除：环境版本、阈值形式、簇内特征、GCond 协议、小网格 R/add_ratio/lr_gnn、"未走塌缩降 lr 路径"（Citeseer 0.001 对照否证）、**评测链路本身**（GCond 官方图在 GCTD harness 上命中论文数字）。
+- 未排除：官方 wandb 贝叶斯搜索得到的完整超参；`weighted` / `drop_ratio` 等与图增强相关的设定；K-Means 初始化。差距定位在**压缩/学习侧**。
 
 **任务**
 
@@ -118,7 +119,7 @@
 |------|------|------|------|
 | R-GCTD-1 ✅ | Citeseer / Pubmed | `bash repro/download_planetoid.sh citeseer`、`pubmed`；用当前建议命令 `--lr_rec 0.01 --edge_topk 12`，压缩比取论文 Table 2 对应值；先 seed 42，再 seeds 0–9 | **完成 2026-09-13**：Citeseer 0.9% 64.92±7.72、Pubmed 0.08% 77.90±1.45；另加 Citeseer `lr_rec=0.001` 对照 66.45±5.09。差距**不是 Cora 特有** |
 | R-GCTD-2 | Cora 实验总表 | 把 `REPRO_LOG.md` 里散落的 E/Qk/网格/10-run/环境/GCond 各表合并成 `results/gctd/cora_summary.csv`（列：设定、环境、seed 数、均值、std、单次最好、日志），并在日志末尾加"总表"条目 | 一张表能回答"我们到底试过什么" |
-| R-GCTD-3 | 外部基线对照 | 用 GraphSlim 或 GC-Bench 跑 GCond 在 Cora 1.3%（论文 Table 2 里 GCond 的数字作参照）。目的不是复现 GCond，而是确认**我们的评测代码**（合成图训 GCN、原图测）在一个已知方法上能否得到公认数字 | GCond 数字若正常，说明差距在 GCTD 实现侧而非我们的评测侧 |
+| R-GCTD-3 ✅ | 外部基线对照 | 用 GraphSlim 或 GC-Bench 跑 GCond 在 Cora 1.3%（论文 Table 2 里 GCond 的数字作参照）。目的不是复现 GCond，而是确认**我们的评测代码**（合成图训 GCN、原图测）在一个已知方法上能否得到公认数字 | **完成 2026-09-13**（改用更直接的方案）：GCond 官方仓库自带论文 Table 2 的压缩图产物，直接喂给 GCTD 评测链路。Cora 1.3% 79.34±0.69、Citeseer 1.8% 69.64±0.59，均命中论文 GCond 列 → 评测侧排除，差距在压缩侧。脚本 `scripts/gcond_eval_official.py` / `repro/run_gcond_eval.sh` |
 | R-GCTD-4 | 向作者求证 | 整理 issue：默认 `lr_rec=0.001` 下 `to_edge_index` 的 0.05 阈值必得完全图（附诊断数字：35 点 1225 边、核值 min 0.057）；请求 Table 2 的完整超参或 wandb sweep 导出 | issue 文本存 `repro/gctd_issue_draft.md`；发出后在日志记日期 |
 | R-GCTD-5 | 冻结 | 在 `REPRO_LOG.md` 追加"冻结"条目：三级结论（管线闭环：是；数值量级：单次可到 75–76%；统计一致：否）、剩余假设、等待作者回复 | 条目存在 |
 
@@ -176,7 +177,7 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 |----|-------------|----------|
 | IGNN | public 冻结；下一步 custom 三数据集。不要补跑“真 public”、不要搜参、不要大图 | critical public 协议不纯；`run_ignn.sh` 现含 85% cap，与提交 `7adde1c` 的无 cap 版本不一致 |
 | ScaDyG | 缺消融、Bitcoin、`SCADYG_REPORT.md` | checkpoint 只存预测层已确认；严格 item 协议 ~0.204 不要和官方 MRR 混排 |
-| GCTD | 不要再扫 Cora；Citeseer/Pubmed 与 Table 2 总表已完成（2026-09-13），剩 GCond 对照、作者 issue、冻结 | 官方默认完全图；三格 66.0±9.4 / 64.9±7.7 / 77.9±1.5 均低于论文，差距非数据集特有 |
+| GCTD | 不要再扫 Cora；R-GCTD-1/2/3 已完成（2026-09-13），剩作者 issue、冻结 | 官方默认完全图；三格 66.0±9.4 / 64.9±7.7 / 77.9±1.5 均低于论文，差距非数据集特有；评测链路已由 GCond 官方图验证正确 |
 | SGPC | 步骤 6 缺 Pubmed；oracle 接近论文、val 选模偏低 | 论文写每类 20 点，代码用 PyG 自带 split |
 
 ### 仓库

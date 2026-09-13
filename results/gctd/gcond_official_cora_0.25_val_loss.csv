@@ -1,0 +1,6 @@
+dataset,gc_rate,seed,n_synth,edges,density,epsilon,select,best_val_acc,test_acc
+cora,0.25,0,35,912,0.7445,0.05,val_loss,78.80,80.00
+cora,0.25,1,35,774,0.6318,0.05,val_loss,76.40,77.30
+cora,0.25,2,35,950,0.7755,0.05,val_loss,78.20,79.30
+cora,0.25,3,35,1014,0.8278,0.05,val_loss,78.40,79.30
+cora,0.25,4,35,1002,0.8180,0.05,val_loss,78.40,79.30
