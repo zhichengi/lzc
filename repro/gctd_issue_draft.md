@@ -1,7 +1,11 @@
-# GCTD issue 草稿（先不提交）
+# GCTD issue 草稿（**决定不发出**）
 
+> 2026-09-13：**决定不发出**（R-GCTD-4 收口）。保留本文作为差距分析的证据记录。
+> 若日后要发，目标仓库为 `nicolasrsantos/gctd`（`has_issues: true`，维护者即论文
+> 一作 nicolasr@ucr.edu）；提交前需先用 GitHub API 复核默认分支 SHA。
+>
 > 2026-09-13 更新：加入 GCond 官方压缩图的对照数据（"Where the gap is not" 一节），
-> 用于排除"评测代码有 bug"这一可能。仍未发出。
+> 用于排除"评测代码有 bug"这一可能。
 
 仓库：https://github.com/nicolasrsantos/gctd  
 对照提交：本地克隆当时 HEAD `785cfc9`（*Revise README with project details and usage instructions*）。发出前用 GitHub API 再核一次默认分支 SHA。  

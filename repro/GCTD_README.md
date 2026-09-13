@@ -9,7 +9,7 @@
 - 逐运行 CSV：`results/gctd/{citeseer_0p009_runs,citeseer_0p009_lrrec1e3_runs,pubmed_0p0008_runs}.csv`
 - GCond 外部对照 CSV：`results/gctd/gcond_official_{cora,citeseer}_0.25_{val_loss,val_acc}.csv`
 - 日志解析脚本：`scripts/parse_gctd_log.py`；GCond 对照脚本：`scripts/gcond_eval_official.py`
-- 向作者求证草稿（未发出）：[gctd_issue_draft.md](gctd_issue_draft.md)
+- 向作者求证草稿（**决定不发出**）：[gctd_issue_draft.md](gctd_issue_draft.md)
 - 本地论文：`papers/gnn-frontier-2025-2026/10-wsdm/40_GCTD_WSDM2026.pdf`
 - 读书笔记：`paper/notes/40_gctd.md`
 
@@ -27,8 +27,11 @@ Table 2 三个小图格（10 seed，建议命令 `--lr_rec 0.01 --edge_topk 12` 
 **不再在 Cora 上扫参**。Cora/Citeseer 的差距不是数据集特有；已单独否证"Citeseer 未走
 塌缩降 lr 路径"的假设（`lr_rec=0.001` 对照 10 seed 仅 66.45 ± 5.09，σ 仍是论文的 13 倍）。
 
-L1 达到，L2 部分（Pubmed 差 2.0），L3 否。下一步是向作者求证（R-GCTD-4）与冻结（R-GCTD-5），
-见 `CLOSEOUT_PLAN.md` R-GCTD-*。
+L1 达到，L2 部分（Pubmed 差 2.0），L3 否。
+
+**本条线已冻结（R-GCTD-5，2026-09-13）**：R-GCTD-1…5 全部收口；向作者的 issue
+**决定不发出**（草稿保留）。不再扫超参、不再追加 seed。重启的触发条件是作者给出
+Table 2 完整超参。判定依据见 `REPRO_LOG.md` 的「冻结」节。
 
 ## 外部对照：评测链路已验证（R-GCTD-3）
 
