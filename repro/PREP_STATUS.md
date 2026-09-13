@@ -28,7 +28,7 @@
 
 | 序 | 编号 | 简称 | SHA（12 位） | conda 计划 | 烟雾 | 全量开关 | 阻塞 |
 |----|------|------|--------------|------------|------|----------|------|
-| 1 | 09 | [gbn](GBN_README.md) | `72ad3692916e` | dtgb | **已跑** Texas 2ep，退出 0 | `run_gbn_full.sh` | Coauthor CS 数据未链 |
+| — | 09 | [gbn](GBN_README.md) | `72ad3692916e` | dtgb | **已跑** 8/8 | `run_gbn_table.sh` / `run_gbn_ablation.sh` | **主表与消融均完成**（2026-09-14）；详见 [GBN_REPRO_LOG.md](GBN_REPRO_LOG.md)
 | 2 | 10 | [stable_chebnet](STABLE_CHEBNET_README.md) | `7d7a7e269611` | dtgb | **已跑** 占位 Peptides 2ep GPU，退出 0 | `run_stable_chebnet_full.sh` | Dropbox Peptides 不通；数字非 LRGB |
 | 3 | 31 | [puma](PUMA_README.md) | `9e4e87f53db0` | dtgb 试跑 | **已跑** CoraFull bare 1ep，退出 0 | `run_puma_full.sh` | 官方钉 torch 1.13；`--repeat 1` 的 std 为 nan |
 | 4 | 15 | [scalegnn](SCALEGNN_README.md) | `4825c7ed2ccb` | dtgb | **已跑** Cora 2ep，退出 0 | `run_scalegnn_full.sh` | 官方 yaml 用 test 选模 |

@@ -375,3 +375,45 @@ EXECUTE=1 MODES="gamma0_beta0 gamma_all0 beta_all0 gamma_beta_all0" \
    应当同时改 `ind_bd`）
 3. Appendix E 的 Table 8 只给 7 个超参；`tau`、`add_self_loop`、`val_every`、`embed_dim`
    的取值？
+
+已整理成 [`gbn_issue_draft.md`](gbn_issue_draft.md)（**未发出**）。
+
+## 2026-09-14 步骤 10–11：分层结论与冻结
+
+### 三级判定
+
+| 层级 | 判定 | 依据 |
+|------|------|------|
+| L1 管线闭环 | **是** | 主表 8/8、消融 16/16 全部退出 0；日志含 commit / conda / GPU；同 seed 可重跑；划分与数据源核验过 |
+| L2 数值量级 | **是（部分）** | 主表 7 个对照项中 4 个落在论文 1σ 内（含 CS 近乎逐位 +0.02）；3 项偏低 1.3–3.0 点且方向一致。消融 4/16 在 1σ 内，两个失配已定位到具体原因 |
+| L3 统计一致 | **否** | 主表 3/7 的均值差超过论文 σ；消融仅 4/16 格在 1σ 内。σ 侧不算差（主表 σ 比 0.53–1.79，4 项更小），但均值偏差未闭合 |
+
+### 结论要点
+
+1. **管线与超参在 CS 上是通的**：CS 在主表（+0.02）、`γi=0`（−0.36）、`γi,βi=0`（−0.50）
+   三个设定下都落在论文 1σ 内。这不是偶然，说明代码、划分与评测口径当设置正确时能对上。
+2. **存在一致的小幅系统性偏低**：主表 7 项里 6 项低于论文、1 项持平；消融里 Texas /
+   Ratings 同样偏低。首要可疑因素是硬件（论文 4090 vs 本机 3090）与未公开的构造细节
+   （`tau`、`val_every` 等），**未做受控验证**，只作假设记录。
+3. **消融不是整体吻合，但方向对了**：论文里最伤的是 `γi, βi = 0`（两者皆去），我们
+   也是。两个具体失配（常数未公开、β 映射不完整）已写进 issue 草稿。
+
+### 停止理由
+
+按 [`GBN_README.md`](GBN_README.md) 的停止条件："需要改超参才能接近表格：记录后停止，
+**不搜参**"。因此：
+
+- 没有为接近 Table 3/4 去扫 `lr`、`dropout`、`tau` 或 `γ0,β0` 的常数。
+- 不再重跑已有配置；不再加数据集（flickr / blogcatalog / photo 未下）。
+- Transfer 任务（论文 Fig. 5，报告 MSE 曲线）无表格目标，本轮不做。
+
+除作者回复或硬件换成 4090 外，不再回头。
+
+### 冻结时状态
+
+- 官方克隆回到 `72ad3692916ecc60f2c78d5bd01a55d7c6297a4f`，工作区干净；
+  改动以 [`repro/gbn-ablation.patch`](../gbn-ablation.patch) 为准（`git apply --check` 通过）。
+- 数据不入 git（`repro/gbn/` 整体已忽略）；`roman_empire.npz` / `amazon_ratings.npz`
+  与 IGNN 共用，哈希已在步骤 3 记录。
+- 结构化结果：主表 `results/gbn/nc_table3_summary.csv`；消融 `results/gbn/nc_table4_ablation.csv`。
+- 未做：Transfer 任务；flickr / blogcatalog / photo；`γ0,β0` 常数的确定。
