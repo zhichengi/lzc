@@ -1,6 +1,6 @@
 # IGNN 复现日志
 
-> 导航：public split 冻结表见文末「2026-09-12：IGNN public split 冻结」。custom 尚未训练，见 [IGNN_CUSTOM_SPLIT.md](IGNN_CUSTOM_SPLIT.md) 与 [IGNN_README.md](IGNN_README.md)。
+> 导航：public split 冻结表见文末「2026-09-12：IGNN public split 冻结」；custom split 首轮三数据集正式结果见文末「2026-09-13：custom split 首轮三数据集」。准备单 [IGNN_CUSTOM_SPLIT.md](IGNN_CUSTOM_SPLIT.md)，入口 [IGNN_README.md](IGNN_README.md)。
 > 同日条目有重复记录（并行写入），以文末冻结表为准；本日志只追加、不改写旧段落。
 
 ## 目标
@@ -544,3 +544,54 @@ custom 超参与 public 不同，例如 chameleon：public 为 `h_feats 128 / lr
 停止条件：划分哈希变化、新生成非官方 split、日志显示 public mask 或比例不是 48/32/20、需要改超参才能接近表格。
 
 GPU 空闲后一条命令：`IGNN_EXECUTE=1 bash repro/run_ignn_custom_cignn.sh`。本条记录时 `nvidia-smi` 显示 GPU util 0%、显存 56 MiB，仅残留 `nvidia-cuda-mps-server`；按用户要求仍不训练。
+
+---
+
+## 2026-09-13：custom split 首轮三数据集（c-IGNN，正式结果）
+
+GPU 空闲后执行 `IGNN_EXECUTE=1 bash repro/run_ignn_custom_cignn.sh`，一次跑完三个烟雾 + 三个 10-run。批次日志 `results/ignn/runs/20260913_custom_cignn_r10.batch.log`，运行区间 22:09:43 → 22:17:23（约 8 min，6/6 退出 0）。
+
+### 协议核验（全部通过）
+
+| 检查项 | 结果 |
+|--------|------|
+| 划分来源 | 三者日志均为 `split num: 10` + `random splits train:val:test =48:32:20` |
+| 是否加载官方固定划分 | **是**：三者均**无** `No fixed splits found`，即读的是 `*-48-32-splitsx10.npy` |
+| `splitsx1` 污染 | 无（脚本在烟雾后自动删除） |
+| 划分指纹复核 | 与准备单一致，未变 |
+| 逐折数 | 三者均 `n_parsed=10` |
+| 重算均值 | 与日志 `Results:` 行逐位一致 |
+
+> 注意日志格式差异：**custom** 运行把 `split num: 10` 与 `random splits train:val:test =48:32:20` 打成**两行**；**public** 运行是**一行带分号**（`split num: 10; public split train:val:test = 48.00:32.00:20.00`）。解析脚本 `scripts/parse_ignn_log.py` 对两种都做了处理。
+
+### 正式结果（官方 48/32/20，`--public False --repeat 10`）
+
+| 数据集 | 我们（RTX 3090） | 官方 c-IGNN（V100 `table_our.csv`） | 差 | 是否 < 1σ | σ 比 |
+|--------|------------------|--------------------------------------|-----|-----------|------|
+| actor | **38.41 ± 1.26** | 38.51 ± 0.94 | −0.10 | 是 | 1.34 |
+| chameleon | **48.09 ± 5.04** | 50.79 ± 4.92 | −2.70 | 是 | 1.02 |
+| squirrel | **44.65 ± 1.32** | 45.71 ± 2.13 | −1.06 | 是 | 0.62 |
+
+chameleon 另与 README 的 3090 同参示例 `47.53 ± 3.36` 对照：**+0.56（< 1σ，σ 比 1.50）**。上一节预判"chameleon 在 3090 上可能约 47.5"，实测 48.09 落在该预判与 V100 值之间，与硬件差异的解释一致。
+
+### 分层判定
+
+- **L1 管线闭环：是。** 6/6 退出 0；划分指纹未变；`--repeat 10` 读到官方固定划分；同 seed 可重跑。
+- **L2 数值量级：是。** 三格全部落在官方 1σ 内。
+- **L3 统计一致：是\*\*。** 三格均值差均 < 官方 σ（0.10 / 2.70 / 1.06），且我方 σ 与官方同量级（比 0.62–1.50）。\*\*硬件说明：官方表为 V100，本机为 RTX 3090，作者自己在 README 里给出 chameleon 的同参跨卡示例（V100 50.79 vs 3090 47.53）。因此表述为"在 3090 上以官方配置达到与 V100 表统计一致的水平"，不宜表述为"逐位复现 V100"。
+
+### 与 public 结果的关系（不要混记）
+
+custom 用的是仓库固定 48/32/20 npy，与 public mask **不是同一套划分**（准备单里已核实 Actor 第 0 折训练交集仅 1713/3648）。因此本表三行**不能**与已冻结的 public 行（Actor 37.43 ± 0.97 等）合并平均或直接比较。
+
+### 逐折明细
+
+`results/ignn/custom_cignn_r10_runs.csv`（30 行）；汇总 `results/ignn/custom_cignn_r10_summary.csv`。解析：`scripts/parse_ignn_log.py`。
+
+值得注意的离散度：chameleon 10 折跨度 38.76–55.06（std 5.04，与官方 4.92 几乎相同）；actor 36.05–40.00；squirrel 42.47–47.42。
+
+### 未做
+
+- r-IGNN / a-IGNN 的 custom split。
+- roman-empire custom（数据已在本地）。
+- flickr / blogcatalog / photo（未下载）。

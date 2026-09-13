@@ -10,6 +10,9 @@
 | 11 | IGNN | pubmed public，3 次 | 80.03 ± 0.37 | **79.63 ± 0.26** | — | 是 | 是 | n=3 | 已冻结 | 同上 |
 | 11 | IGNN | wikics public，20 次 | 80.55 ± 0.43 | **80.46 ± 0.41** | — | 是 | 是 | 是* | 已冻结 | 同上 |
 | 11 | IGNN | roman-empire public，10 划分 | 90.75 ± 0.51 | **90.64 ± 0.40** | — | 是 | 是 | 是* | 已冻结；协议同 chameleon（npy 而非 NPZ mask） | 同上 |
+| 11 | IGNN | **actor custom 48/32/20**，10 折 | 38.51 ± 0.94（V100） | **38.41 ± 1.26** | — | 是 | 是 | 是* | 论文主协议；加载官方固定划分 | `results/ignn/custom_cignn_r10_summary.csv` |
+| 11 | IGNN | **chameleon custom 48/32/20**，10 折 | 50.79 ± 4.92（V100；3090 示例 47.53 ± 3.36） | **48.09 ± 5.04** | — | 是 | 是 | 是* | 同上 | 同上 |
+| 11 | IGNN | **squirrel custom 48/32/20**，10 折 | 45.71 ± 2.13 | **44.65 ± 1.32** | — | 是 | 是 | 是* | 同上 | 同上 |
 | 43 | ScaDyG（TNNLS 2026） | MOOC 链接预测，seeds 0–4 | 0.931 ± 0.009 | **0.922 ± 0.014**（MRR 选模）；0.915 ± 0.009（AP 选模） | 严格 item 排名协议 **0.204 ± 0.004** | 是 | 是 | 否 | 报告初稿已有；**消融已完成**（`topo` 塌成随机）；第二数据集待做 | `repro/SCADYG_REPORT.md` |
 | 43 | ScaDyG | 组件消融（MOOC，seeds 0–4） | —（论文无对应表） | `none` **0.9225 ± 0.0142**；`hyper` 0.8032 ± 0.0412；`time` 0.8277 ± 0.0773；`topo` **0.0099 ± 0.0000** | — | 是 | — | — | `topo` 去掉后 AP=0.5 随机；`none` 与论文差 0.0085 < σ | `results/scadyg/ablation_summary.csv` |
 | 40 | GCTD（WSDM 2026） | Cora 1.3%，seeds 0–9 | 81.4 ± 1.6 | 官方默认 30.2%（完全图） | topk+配额+重试 **66.0 ± 9.4**；单次最好 76.3% | 是 | 部分 | 否 | **已冻结**；Table 2 三格已跑 | `results/gctd/table2_summary.csv` |
@@ -20,7 +23,8 @@
 \* IGNN 的 L3 按"均值差 < 官方 σ 且方差同量级"成立，但硬件为 RTX 3090 而官方为 V100，作者自己也报告了两者差异，
 因此只表述为"官方配置在 3090 上达到与 V100 表一致的水平"。chameleon / roman-empire 的 `--public True` 因 `graph_datasets` 不读 NPZ mask，实际使用仓库固定 48/32/20 npy，不能称为严格 public。
 
-IGNN custom split（论文主协议）尚未训练，准备单：`repro/IGNN_CUSTOM_SPLIT.md`。
+IGNN custom split（论文主协议 48/32/20）首轮三数据集已于 2026-09-13 完成：actor 38.41±1.26、chameleon 48.09±5.04、squirrel 44.65±1.32，三者均落在官方 1σ 内。
+详细日志：`repro/IGNN_REPRO_LOG.md`；准备单：`repro/IGNN_CUSTOM_SPLIT.md`。
 
 GCTD 的差距**不是 Cora 特有**：Citeseer 同样低 11.9 点、σ 是论文的 19 倍；Pubmed 最接近
 （−2.0，σ 7 倍）。三个数据集全部低于论文，指向统一的配方/协议层面差异。已单独否证

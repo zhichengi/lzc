@@ -1,5 +1,12 @@
 # IGNN custom split 准备单（10× 48%/32%/20%）
 
+> **2026-09-13 已完成首轮。** 三个数据集（actor / chameleon / squirrel）的 10-run 全部跑完，
+> 三者均落在官方 c-IGNN 的 1σ 内，且均加载了官方固定划分（无 `No fixed splits`）。
+> 结果与协议核验见 [`IGNN_REPRO_LOG.md`](IGNN_REPRO_LOG.md) 文末
+> 「2026-09-13：custom split 首轮三数据集」。结构化数字
+> `results/ignn/custom_cignn_r10_summary.csv`（逐折 `custom_cignn_r10_runs.csv`）。
+> 下文的命令与判定标准保留，供复跑与扩展（r-IGNN / a-IGNN / roman-empire）使用。
+
 服务器占用期间**只准备、不训练**。GPU 空闲后按本文件或包装脚本执行：
 
 ```bash

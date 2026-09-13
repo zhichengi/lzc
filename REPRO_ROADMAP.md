@@ -42,7 +42,7 @@
 | 编号 | 论文 | 状态（2026-09-13） | 下一步 |
 |------|------|--------------------|--------|
 | 29 | SGPC（AAAI 2026） | **已冻结**：6 异配集 ×10 划分 + 3 同配 public 全部跑完；val 选模系统性偏低 | 冻结；见 [`repro/SGPC_REPRO_LOG.md`](repro/SGPC_REPRO_LOG.md) |
-| 11 | IGNN（NeurIPS 2025） | public split 已冻结；custom 48/32/20 只完成准备 | GPU 空闲后按 [`repro/IGNN_CUSTOM_SPLIT.md`](repro/IGNN_CUSTOM_SPLIT.md) 跑；不改已冻结 public 表 |
+| 11 | IGNN（NeurIPS 2025） | public split 已冻结；**custom 48/32/20 首轮三数据集已完成**（actor 38.41±1.26 / chameleon 48.09±5.04 / squirrel 44.65±1.32，均 < 1σ） | 可选：r-IGNN / a-IGNN、roman-empire custom；不改已冻结 public 表 |
 | 43 | ScaDyG（TNNLS 2026） | 官方协议 0.922 ± 0.014 vs 0.931 ± 0.009；严格协议 0.204；**组件消融已完成**（`topo` 塌成随机） | BitcoinAlpha；报告定稿；补完整工作树 patch；冻结 |
 | 40 | GCTD（WSDM 2026） | **已冻结**：Table 2 三格全跑（Cora 66.0 / Citeseer 64.9 / Pubmed 77.9 vs 81.4 / 76.8 / 79.9）；GCond 对照已证评测链路无误 | 冻结，**不再扫参**；见 [`results/gctd/table2_summary.csv`](results/gctd/table2_summary.csv) |
 

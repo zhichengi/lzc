@@ -12,7 +12,7 @@
 | 编号 | 状态 |
 |------|------|
 | R-IGNN-1 … R-IGNN-4 | **完成**。public split 已冻结：Actor 37.43±0.97、roman-empire 90.64±0.40、chameleon 49.55±3.25，另顺带 pubmed / wikics。镜像脚本 `download_critical.sh` 已落地 |
-| R-IGNN-5 / R-IGNN-6 | 未做（可选）。custom split 准备完成（`IGNN_CUSTOM_SPLIT.md`、`run_ignn_custom_cignn.sh`），训练未启动 |
+| R-IGNN-6 / R-IGNN-7 | **完成**（2026-09-13）。custom 48/32/20 首轮三数据集 10-run：actor **38.41±1.26**（官 38.51±0.94）、chameleon **48.09±5.04**（官 50.79±4.92；3090 示例 47.53±3.36）、squirrel **44.65±1.32**（官 45.71±2.13），三者均 < 1σ。划分指纹未变；均加载官方固定划分 |
 | R-SCADYG-1 … R-SCADYG-3 | **未完成**。组件对照、消融、BitcoinAlpha 都还没有 |
 | R-SCADYG-4 | **初稿完成**：`repro/SCADYG_REPORT.md`（未含消融 / 第二数据集） |
 | R-SCADYG-5 | **草稿完成、未发出**：`repro/scadyg_issue_draft.md` |
@@ -60,8 +60,8 @@
 
 - 环境：`/home/lab_user/tools/miniconda3/envs/ignn`（Python 3.8.16、torch 2.1.2+cu121、DGL 2.0.0+cu121）。
 - **public split 已冻结**（见 `IGNN_REPRO_LOG.md` 末表）。Actor / PubMed / WikiCS 为严格 public mask。chameleon / roman-empire 因 `graph_datasets` 丢 NPZ mask，实际读的是仓库 48/32/20 npy，超参仍来自 public 脚本；数字保留，但记账时必须注明协议不纯。
-- R-IGNN-1 至 R-IGNN-4 已完成。R-IGNN-5（跨 seed）不做。R-IGNN-6 升级为下面的 custom 首轮三数据集。
-- custom split：**只完成准备，未训练**。清单 `repro/IGNN_CUSTOM_SPLIT.md`，排队脚本 `repro/run_ignn_custom_cignn.sh`（默认 dry-run）。
+- R-IGNN-1 至 R-IGNN-4 已完成。R-IGNN-5（跨 seed）不做。
+- **custom split：首轮三数据集已完成**（2026-09-13，即 R-IGNN-7）。actor / chameleon / squirrel 的 10-run 均落在官方 1σ 内；三者均加载官方固定划分（无 `No fixed splits`），划分指纹未变。详见 `IGNN_REPRO_LOG.md` 末节。
 
 **任务**
 
@@ -73,11 +73,11 @@
 | R-IGNN-4 | roman-empire、chameleon 正式运行 | `scripts/00-best-racIGNN-public.sh` 第 5、3 行原样，通过 `repro/run_ignn.sh official_<ds>_c_public_r10 ...` 执行 | 两个 10-run 结果写入日志，与官方 90.75 ± 0.51、49.04 ± 4.68 对照 |
 | R-IGNN-5（可选） | 硬件差异的量化 | 对 Actor 追加 `--seed` 0–4 的独立进程（每个仍 `--repeat 10` 是官方语义，不必改），看跨 seed 的均值分布是否覆盖 38.01 | 一张 seed × 均值表 |
 | R-IGNN-6（可选） | custom split 一个数据集 | `scripts/01-best-cIGNN.sh` 中 Actor 一行；对照 `results/table_our.csv` 的 38.51 ± 0.94 | 一条结果 |
-| R-IGNN-7 | custom 10×48/32/20 首轮三数据集 | GPU 空闲后 `IGNN_EXECUTE=1 bash repro/run_ignn_custom_cignn.sh`；c-IGNN Actor / chameleon / squirrel；对照 `table_our.csv` | 三条 10-run 写入日志；划分 SHA 未变；不搜参 |
+| R-IGNN-7 | custom 10×48/32/20 首轮三数据集 | GPU 空闲后 `IGNN_EXECUTE=1 bash repro/run_ignn_custom_cignn.sh`；c-IGNN Actor / chameleon / squirrel；对照 `table_our.csv` | ✅ **完成 2026-09-13**：三条 10-run 写入日志；划分 SHA 未变；不搜参 |
 
 **冻结条件（public，已满足）**：3 个 public 数据集都有 10-run 结果，且每个都写明与 V100 表的差值和作者自己承认的 V100/3090 差异（chameleon 50.79 → 47.53）。**不以"完全一致"为通过条件**。
 
-**冻结条件（custom，待跑）**：首轮三数据集达 L2，或偏差可用 V100/3090 解释并写明；不把 public 数字改记为 custom。
+**冻结条件（custom，已满足）**：首轮三数据集均 < 1σ（L2 与 L3 均成立，附 V100/3090 硬件说明）；不把 public 数字改记为 custom。
 
 **风险**：chameleon 官方 std 4.68，单次波动大，不要因为一次 45% 就去改超参。
 
@@ -163,17 +163,18 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 
 | 线 | 冻结状态 | L1 | L2 | L3 |
 |----|----------|----|----|----|
-| 11 IGNN | **已冻结**（public；custom 不在范围） | 是 | 是 | 是* |
+| 11 IGNN | **已冻结**（public + custom 首轮三数据集） | 是 | 是 | 是* |
 | 40 GCTD | **已冻结**（2026-09-13） | 是 | 部分 | 否 |
 | 29 SGPC | **已冻结**（2026-09-13） | 是 | 部分 | 否 |
-| 43 ScaDyG | **未冻结**，冻结条件是消融表 + 第二数据集入日志 | 是 | 是 | 否 |
+| 43 ScaDyG | **未冻结**，冻结条件是消融表（已完成）+ 第二数据集（未做） | 是 | 是 | 否 |
 
 - GCTD：L2 部分（Cora 66.0 ± 9.4、Citeseer 64.9 ± 7.7、Pubmed 77.9 ± 1.5，对论文 81.4 ± 1.6 / 76.8 ± 0.4 / 79.9 ± 0.2；只有 Pubmed 接近）；L3 否（σ 普遍大一个数量级）。评测链路已由 GCond 官方图验证，差距在压缩侧。issue 决定不发出。
 - SGPC：L2 部分（oracle 在 6 个数据集上与论文差 0.4–1.2 点；val 选模系统性偏低 0.07–3.43；Wisconsin 偏高 +2.43/+6.35）；L3 否（协议不同：异配用 geom-gcn 10 划分而非"每类 20 点"；σ 为论文 2–5 倍）。冻结条目见 `SGPC_REPRO_LOG.md` 文末。
-- IGNN public：L2 是；L3 在 Actor / wikics 上按「均值差 < 官方 σ」成立（硬件 3090 vs V100）。chameleon / roman-empire 的 public 命令因加载器丢 NPZ mask，实际读的是仓库 48/32/20 npy，协议不纯，数字仍与 V100 表同量级。custom split 未跑，不在冻结范围。
+- IGNN public：L2 是；L3 在 Actor / wikics 上按「均值差 < 官方 σ」成立（硬件 3090 vs V100）。chameleon / roman-empire 的 public 命令因加载器丢 NPZ mask，实际读的是仓库 48/32/20 npy，协议不纯，数字仍与 V100 表同量级。
+- IGNN custom（论文主协议 48/32/20）：L1/L2/L3 均成立。actor 38.41±1.26、chameleon 48.09±5.04、squirrel 44.65±1.32，三者与官方 c-IGNN（V100）的差分别为 −0.10 / −2.70 / −1.06，均 < 官方 σ，σ 比 0.62–1.50。均加载官方固定划分。
 - ScaDyG：L2 是（0.922 ± 0.014 对 0.931 ± 0.009）；L3 否（方差偏大，且发现协议差异）。完成消融与 BitcoinAlpha 后才能冻结。
 
-\* IGNN 的 L3 只在 Actor / wikics 成立，且硬件跨卡（3090 vs V100），作者自述存在差异。
+\* IGNN 的 L3 与硬件跨卡（3090 vs V100）有关，作者自述存在差异。public 上 chameleon / roman-empire 因加载器丢 NPZ mask，协议不纯。
 
 ---
 
@@ -183,7 +184,7 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 
 | 线 | 该停 / 该做 | 主要风险 |
 |----|-------------|----------|
-| IGNN | **已冻结**（public）。下一步 custom 三数据集（可选）。不要补跑"真 public"、不要搜参、不要大图 | critical public 协议不纯；`run_ignn.sh` 现含 85% cap，与提交 `7adde1c` 的无 cap 版本不一致 |
+| IGNN | **已冻结**（public + custom 首轮三数据集）。可选：r-IGNN / a-IGNN、roman-empire custom。不要补跑"真 public"、不要搜参、不要大图 | critical public 协议不纯；`run_ignn.sh` 现含 85% cap，与提交 `7adde1c` 的无 cap 版本不一致；custom 数字不可与 public 混记 |
 | ScaDyG | **未冻结**：缺消融（R-SCADYG-1/2）、BitcoinAlpha（R-SCADYG-3）；报告初稿已有 | checkpoint 只存预测层已确认；严格 item 协议 ~0.204 不要和官方 MRR 混排 |
 | GCTD | **已冻结**（2026-09-13）。不要重扫 Cora；重启条件是作者给出 Table 2 完整超参 | 官方默认完全图；三格 66.0±9.4 / 64.9±7.7 / 77.9±1.5 均低于论文，差距非数据集特有；评测链路已由 GCond 官方图验证正确 |
 | SGPC | **已冻结**（2026-09-13，9/9 数据集）。不要补跑 seed 或重做划分 | 论文写每类 20 点，代码用 PyG 自带 split；`Best Test` 是 test 选模，不可当 Table 1 数字；∆t 代码 0.15 vs 论文 0.5 |
@@ -192,15 +193,15 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 
 - 根 `README.md`、`repro/README.md`、`scripts/README.md`、`results/SUMMARY.md` 已按四条线现状改写（R-WS-3/4/5）。`main.py` / `configs/example.yaml` / `src/` 仍是空壳，README 已标明不用。
 - `.gitignore` 排除官方克隆、论文 PDF、数据与缓存。GCTD 完整 `gctd-repro.patch` 已生成并验证；ScaDyG `eval_protocols.py` 已拷到 `repro/scadyg-extra/`（2026-09-13）。
-- 已跟踪提交主要是早期 IGNN public（到 WikiCS）与骨架文件。未入库：chameleon/roman 正式结果、capped 脚本、custom 准备、GCTD/ScaDyG/SGPC 文档与产物。需要一次文档+脚本提交（R-WS-2），未要求时不 commit。
+- 已跟踪提交主要是早期 IGNN public（到 WikiCS）与骨架文件。未入库：chameleon/roman 正式结果、capped 脚本、GCTD/ScaDyG/SGPC 文档与产物。需要一次文档+脚本提交（R-WS-2），未要求时不 commit。
 - `IGNN_REPRO_LOG.md` 有重复段落（Actor / roman / chameleon 写了两遍）；只追加、不改写历史。
 - conda：`dtgb` / `gctd` / `scadyg` / `ignn` 隔离，不要混装。GitHub 直连常超时，走镜像。
 - 长任务走 85% cap（`scripts/capped_env.sh`）。CUDA MPS 可能残留，custom / SGPC 前确认只跑一个训练进程。
 
 ### 现在不要做
 
-- 启动 IGNN custom 训练（等用户确认 GPU 空闲）。
-- 把 49.55 / 90.64 当成 custom。
+- 启动 IGNN r-IGNN / a-IGNN 的 custom（首轮已完，扩展未定）。
+- 把 public 的 49.55 / 90.64 当成 custom 结果（划分不同）。
 - 修 `graph_datasets` 再重跑 public。
 - 开 30 基线、Optuna、arxiv/products/pokec。
 - 把嵌套 `.git` 打进根仓库。
