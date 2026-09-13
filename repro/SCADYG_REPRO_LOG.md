@@ -478,3 +478,100 @@ AP 0.9857572059、AUC 0.9906082116、accuracy 0.9830360181 也逐位一致。该
 - 上游 issue 草稿：`repro/scadyg_issue_draft.md`。只报 Transformer 未写入 / 未恢复的 checkpoint bug，附 seed 2023 的 0.025 → 0.928。**未发出**；评测协议争议不写进 issue。
 - `model/eval_protocols.py` 已复制到 `repro/scadyg-extra/eval_protocols.py`，SHA-256 均为 `fc7bd1550ed359f1f7a085ea75e2eb9e8eb4e0535181279e4499e6fe8f865624`（与日志步骤记录一致）。官方克隆仍 gitignore。
 
+---
+
+## 2026-09-13 R-SCADYG-1：三个组件 → 代码位置 → 开关
+
+官方提交 `28ca94a06771c46073b650de3daa95e0939342ba`。逐文件读了
+`scalable_tgn_link_prediction.py`（51,003 B，核心）、
+`scalable_tgn_main_link_prediction.py`（21,828 B，入口）、`transformer/`。
+
+### 组件对照表
+
+| 论文组件 | 代码位置 | 实际做什么 | 消融方式 |
+|----------|----------|-----------|----------|
+| ① 时间感知拓扑重构 | `snapshot.__init__` / `initialize_edge_node_mat`（397–474）；`snapshot.set_edge_features`（443–448） | 每个快照把边特征按 `node_edge_mat` 聚合到入射节点（`sum` reduce）；时间编码先乘进边特征 | `--ablate topo`：跳过边→节点聚合，退化为全局池化（快照内所有节点用同一个特征） |
+| ② 指数时间编码 | `TimeEncode_exp`（341–369，`forward` 用 `torch.exp`） | `exp(w·Δt)`，`w` 固定不可训练，`vec = linspace(-a, -0.1a, dim)` | `--ablate time`：`forward` 直接返回全 1，时间信息归零 |
+| ③ Hypernetwork 自适应聚合 | `Encoder.__init__`（207–242）；`Encoder.forward`（256–334） | **注意**：Transformer 分支（`layer_stack_time_1/2`、`CustomEncoderLayer*`、`repeat_to_n_dim`）在 `forward` 里**全部被注释掉**。实际生效的是：对时间维度求和 → `scale_matrix` 生成逐样本缩放 → 与 `global_weight` 做 `bmm` → `sigmoid` 得到逐样本/逐维门控 `new_weight`，再与基础权重 `self.weight` 相乘 | `--ablate hyper`：门控置 1，仅保留基础权重矩阵 |
+
+### 重要发现
+
+1. **Transformer 层是死代码**。`Encoder.forward` 内 `layer_stack_time_1` / `layer_stack_time_2` /
+   `layer_stack_feature` 的调用全部被注释；`CustomEncoderLayer`、
+   `CustomEncoderLayer_withScale`、`position_enc` 都不参与前向。所谓"Hypernetwork"
+   实为**输入条件化的权重缩放**（`weight × sigmoid(scale ⊗ global_weight)`），不是
+   产生权重矩阵的超网络。
+2. **`merge_weight`、`TimeEncode`（cos 版）、`graph_coarsening`、`weight_expand` 是死代码**：
+   只有定义，全仓库无调用。`merge_weight`/`graph_coarsening` 在
+   `scalable_tgn_node_affinity_prediction.py` 里也是同名死代码。
+3. **`time_rate` 被写死为 1**。`initialize_edge_node_mat` 里
+   `self.time_rate = torch.ones(...)`，紧邻的上方注释行
+   `#self.time_rate = torch.matmul(self.time_features, self.snapshot_timefeat.t())`
+   是原始设计。因此 `--time_rate` 这个 CLI 参数**不生效**。
+4. `snapshot.time_features` 计算后在 `set_edge_features` 里与边特征逐元素相乘，
+   所以②确实进入前向（并非死代码）。
+5. 入口 `--fusion` 默认 `t2v`，而代码只判断 `if args.fusion == 'v2t'`；`v2t` 分支
+   import 的 `scalable_tgn_affine_v2t_chunk` 模块**不存在**。`t2v` 走到标准分支。
+
+### 消融开关实现（默认 none，不改官方路径）
+
+新增 `--ablate {none,time,topo,hyper}`：
+
+- `scalable_tgn_main_link_prediction.py`：新增参数，并把它传给 `Encoder(..., ablate=args.ablate)`（两处构造，通用分支与 reddit_title 分支）。
+- `scalable_tgn_link_prediction.py`：
+  - `TimeEncode_exp.__init__` 记录 `self.ablate`；`forward` 在 `time` 时返回全 1。
+  - `snapshot.__init__` 记录 `self.ablate`；`set_edge_features` 在 `topo` 时跳过
+    `node_edge_mat` 聚合。
+  - `Encoder.__init__` 新增 `ablate='none'` 形参；`forward` 在 `hyper` 时把
+    `new_weight` 置 1。
+
+**默认回归**（`--ablate` 不传，即 `none`，1 epoch，seed 2023）：
+
+| 指标 | 本次 `20260913_185717_mooc_pid220956` | 基线 `20260912_124851_mooc_pid845844` |
+|------|--------------------------------------|--------------------------------------|
+| `avg_official_mrr` | **0.63610** | 0.63610 |
+| `avg_ap` | **0.98954** | 0.98954 |
+
+逐位一致，确认新增开关不改变官方路径（`CLOSEOUT_PLAN.md` R-SCADYG-1 的验收要求）。
+
+### 消融生效性冒烟（1 epoch，seed 2023，MOOC）
+
+| 设定 | `avg_official_mrr` | `avg_ap` | 相对基线 |
+|------|--------------------|----------|----------|
+| 基线 `--ablate none` | 0.63610 | 0.98954 | — |
+| `--ablate time` | 0.62998 | 0.98940 | −0.006 |
+| `--ablate topo` | **0.00990** | **0.50000** | **塌成随机** |
+| `--ablate hyper` | 0.64828 | 0.98974 | +0.012 |
+
+- 三个开关都改变了数值，说明确实进入前向（非空操作）。
+- `topo` 消融后 MRR 0.0099 / AP 0.5000 = 随机水平，说明**快照内边→节点拓扑聚合是
+  该模型能工作的前提**，不只是"锦上添花"的组件。
+- `time` / `hyper` 在 1 epoch 下差异小（±0.012），需要完整 100 epoch × seeds 0–4
+  才能判断（见 R-SCADYG-2）。
+- 全部退出码 0，无 traceback。日志：`results/scadyg/runs/20260913_1857*`…`1900*`。
+
+### 补丁与可追溯性
+
+- 新增 `repro/scadyg-ablation.patch`（103 行，2 文件），SHA-256
+  `59efcde22da4368a9fbb1dc3b858f0da247388ef8b5bd8c406d3d8e4a4a2dd33`。
+- 验证：在 HEAD 的临时 worktree 上先还原到消融前状态，`git apply --check` 通过，
+  应用后与工作树**逐字一致**；临时 worktree 已清理。
+- 消融前状态由反向还原我的编辑得到，其 `git diff` SHA-256 为
+  `ac6fff66d39df29e96404ec537be87e914d81752500c384bfdcee383a0f21c79`，
+  与 2026-09-12 双协议那组记录的哈希**逐字一致**，确认还原精确、没有夹带其他改动。
+
+### ⚠ 发现的追溯缺口：已有补丁不覆盖工作树
+
+`repro/scadyg-checkpoint-fix.patch`（75 行）与 `repro/scadyg-paper-protocol.patch`
+（110 行）合计 185 行，且**两者互斥**（都从同一 base 改 `train_scalable_tgn` 的同一区域，
+`paper-protocol` 是 `checkpoint-fix` 的超集；按任一顺序连续应用都会冲突）。
+
+而工作树相对 HEAD 是 **458 增 / 32 删**。`paper-protocol` 补丁**不含**双协议与训练
+负采样那批工作的符号（`capture_state`、`report_filtered_bipartite_eval`、
+`negative_sampling_mooc_bipartite`、`from pathlib import Path` 均为 0 处）。
+即：两个补丁都是 **2026-09-12 12:46 的早期快照**，之后的双协议扩展没有固化成补丁。
+
+处理：本次不重写旧补丁（避免与已有 SHA 记录冲突），改为在 R-SCADYG-2 完成后生成一份
+覆盖当前完整工作树的补丁。届时旧的 `scadyg-paper-protocol.patch` 应标注为已过时。
+
+

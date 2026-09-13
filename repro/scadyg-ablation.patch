@@ -1,0 +1,103 @@
+diff --git a/scalable_tgn_link_prediction.py b/scalable_tgn_link_prediction.py
+index 832f7d9..78f652c 100644
+--- a/scalable_tgn_link_prediction.py
++++ b/scalable_tgn_link_prediction.py
+@@ -207,9 +207,10 @@ class CustomEncoderLayer_withScale(nn.Module):
+ class Encoder(nn.Module):
+ 
+     def __init__(self, device, embed_dim_1,embed_dim_2, d_model, d_inner, n_layers, n_head,
+-                d_k, d_v, dropout=0.1):
++                d_k, d_v, dropout=0.1, ablate='none'):
+         super().__init__()
+         self.device = device
++        self.ablate = str(ablate)
+         self.n_head = n_head
+         self.sp = torch.nn.Softplus()
+         self.sigmoid = torch.nn.Sigmoid()
+@@ -294,6 +295,9 @@ class Encoder(nn.Module):
+         
+         global_weight = self.global_weight.unsqueeze(0).expand(src_emb.shape[0], -1, -1)
+         new_weight = self.sigmoid(torch.bmm(scale,global_weight ))
++        # [repro] --ablate hyper: 去掉自适应聚合门控，仅保留基础权重矩阵
++        if self.ablate == 'hyper':
++            new_weight = torch.ones_like(new_weight)
+ 
+         if mode == "val" and step2==0:
+             torch.save(new_weight, './weights/tensor_file'+str(step1)+'.pth')
+@@ -345,6 +349,7 @@ class TimeEncode_exp(nn.Module):
+         self.a = args.a
+         self.base_value = args.base_value
+         self.w = nn.Linear(1, dim)
++        self.ablate = str(getattr(args, 'ablate', 'none'))
+         self.reset_parameters()
+     
+     def reset_parameters(self, ):
+@@ -365,6 +370,10 @@ class TimeEncode_exp(nn.Module):
+     
+     #@torch.no_grad()
+     def forward(self, t):
++        # [repro] --ablate time: 去掉指数时间编码，输出恒为 1
++        if self.ablate == 'time':
++            n = t.reshape((-1, 1)).shape[0]
++            return torch.ones(n, self.dim, dtype=torch.float32, device=t.device)
+         output = torch.exp(self.w(t.reshape((-1, 1))))
+         return output
+     
+@@ -401,6 +410,7 @@ class snapshot():
+         self.time = time
+         self.node_num = graph.num_nodes()
+         self.time_enc = TimeEncode_exp(graph.edge_feature.shape[1], args).to(device)
++        self.ablate = str(getattr(args, 'ablate', 'none'))
+         #self.snapshot_timefeat = self.time_enc(torch.tensor(0).to(torch.float32).to(device))
+         self.device = device
+         
+@@ -437,7 +447,11 @@ class snapshot():
+     def set_edge_features(self, feature):
+         feature = feature.to(self.device)
+         feature =feature*self.time_features
+-        node_feature = self.node_edge_mat.matmul(feature, reduce='sum')  # 使用 mean 或者 sum 作为 reduce 方式
++        # [repro] --ablate topo: 去掉快照内边->节点拓扑聚合，退化为全局池化
++        if self.ablate == 'topo':
++            node_feature = feature.sum(dim=0, keepdim=True).expand(self.node_num, -1)
++        else:
++            node_feature = self.node_edge_mat.matmul(feature, reduce='sum')  # 使用 mean 或者 sum 作为 reduce 方式
+         feature = feature.cpu()
+         return node_feature.to(torch.device("cpu"))
+     
+diff --git a/scalable_tgn_main_link_prediction.py b/scalable_tgn_main_link_prediction.py
+index b866d08..908485a 100644
+--- a/scalable_tgn_main_link_prediction.py
++++ b/scalable_tgn_main_link_prediction.py
+@@ -189,6 +189,14 @@ if __name__ == '__main__':
+                          help='ways to recursively sum')
+     parser.add_argument('--feat_repeat', type=int, default=1,
+                          help='if the edge feature == 1 , repreat for n times')
++
++    # [repro] 组件消融开关。默认 none = 完全走官方路径。
++    #   time  : 去掉指数时间编码（TimeEncode_exp 输出恒为 1）
++    #   topo  : 去掉快照内边->节点拓扑聚合（退化为全局池化）
++    #   hyper : 去掉自适应聚合门控（sigmoid 门控恒为 1，仅用基础权重矩阵）
++    parser.add_argument('--ablate', type=str, default='none',
++                        choices=['none', 'time', 'topo', 'hyper'],
++                        help='[repro] ablate a paper component; none = official path')
+     
+     
+     
+@@ -446,7 +454,7 @@ if __name__ == '__main__':
+             model = Predict_layer(graph.edge_feature.shape[1]+graph.node_feature.shape[1],128,1,hop=args.hop).to(device)
+             model_transformer = Encoder(embed_dim_1=dataset.graphs[0].edge_feature.shape[1]+dataset.graphs[0].node_feature.shape[1], embed_dim_2=dataset.graphs[0].edge_feature.shape[1]+graph.node_feature.shape[1],d_model=64,
+                                             d_inner=graph.edge_feature.shape[1]+graph.node_feature.shape[1], n_layers=1, n_head=8, d_k=64, d_v=64,
+-                                            dropout=0.1,device=device).to(device)
++                                            dropout=0.1,device=device, ablate=args.ablate).to(device)
+             # model_transformer = Encoder(embed_dim_1=100, embed_dim_2=dataset.graphs[0].edge_feature.shape[1]+graph.node_feature.shape[1],d_model=64,
+             #                                 d_inner=1, n_layers=1, n_head=8, d_k=64, d_v=64,
+             #                                 dropout=0.1,device=device).to(device)
+@@ -454,7 +462,7 @@ if __name__ == '__main__':
+             model = Predict_layer(graph.edge_feature.shape[1],64,1,hop=args.hop).to(device)
+             model_transformer = Encoder( embed_dim_1=dataset.graphs[0].edge_feature.shape[1], embed_dim_2=dataset.graphs[0].edge_feature.shape[1],d_model=64,
+                                             d_inner=graph.edge_feature.shape[1], n_layers=1, n_head=8, d_k=64, d_v=64,
+-                                            dropout=0.1,device=device).to(device)
++                                            dropout=0.1,device=device, ablate=args.ablate).to(device)
+             
+         model.train()
+         model_transformer.train()
