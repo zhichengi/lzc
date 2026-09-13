@@ -1,0 +1,27 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:26:54+08:00
+[repro] run_id=20260913_222654_smoke_Amazon-ratings_2ep_pid288049
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Amazon-ratings
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p288121-i300696.scope; invocation ID: 00c6ea8a9eba415eb1ce2833acc206d3
+Loading config file: ./configs/NC/Amazon-ratings.json
+Log path: ./logs//NC_Amazon-ratings_NL5_HD512_DP0.15_ACTgelu_NORMbn_BTrue_LRNC0.0003_LRT0.001.log
+INFO - 09/13/26 22:26:59 - 0:00:00 - {'task': 'NC', 'dataset': 'Amazon-ratings', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Amazon-ratings_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.15, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'bn', 'bias': True, 'tau': 1.0, 'lr_nc': 0.0003, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Amazon-ratings_NL5_HD512_DP0.15_ACTgelu_NORMbn_BTrue_LRNC0.0003_LRT0.001.log', 'result_path': './results//NC_Amazon-ratings.txt'}
+INFO - 09/13/26 22:26:59 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:26:59 - 0:00:01 - Epoch 0: train_loss=1.7442251443862915, train_acc= 19.98%
+INFO - 09/13/26 22:26:59 - 0:00:01 - Epoch 0: val_loss=1.603803038597107, val_acc= 36.78%,val_weighted_f1= 19.78,val_macro_f1= 10.76%
+INFO - 09/13/26 22:27:00 - 0:00:01 - Epoch 1: train_loss=1.6855765581130981, train_acc= 21.55%
+INFO - 09/13/26 22:27:00 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:27:00 - 0:00:01 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:27:00 - 0:00:01 - test_acc= 36.80%, weighted_f1= 19.79,macro_f1= 10.76%
+INFO - 09/13/26 22:27:00 - 0:00:01 - test_acc= 36.80%, weighted_f1= 19.79,macro_f1= 10.76%
+INFO - 09/13/26 22:27:00 - 0:00:01 - Best ACCs: [36.8]
+                                     Evaluation Acc is  36.80% ±  0.00%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=6
+[repro] finished_at=2026-09-13T22:27:01+08:00

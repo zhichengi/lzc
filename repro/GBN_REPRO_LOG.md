@@ -8,7 +8,10 @@
 
 约定：日志只追加。官方仓库 `repro/gbn/`。产物 `results/gbn/runs/`。外层只处理环境、GPU、镜像与日志。
 
-复现目标：节点分类（WikiCS / Texas 等）与深层 GCN 对照；仓库预置 configs/NC/CS.json
+复现目标：节点分类（论文 Table 3，7 个数据集）与消融（论文 Table 4）；另有 Transfer 任务（Fig. 5，未做）。
+
+> 结果速览（2026-09-13）：主表 8/8 完成，**7 个对照项中 4 个落在论文 1σ 内**（CS 95.80 vs 95.78，+0.02）。
+> 详见文末「步骤 6」；结构化数字 `results/gbn/nc_table3_summary.csv`。
 
 ---
 
@@ -51,3 +54,224 @@ echo 'reuse dtgb'`
 ## 步骤 6–11
 
 未开始。启动全量前：`FULL=1 bash repro/run_gbn_full.sh`，然后按 `_TEMPLATE_REPRO_LOG.md` 追加步骤 6。
+
+---
+
+## 2026-09-13 步骤 3 补：数据补齐（8/8）
+
+预处理时只有 WebKB + Planetoid。本次补齐论文 Table 3 所需的全部数据集。
+
+| 数据集 | 来源 | 落点 | 说明 |
+|--------|------|------|------|
+| Texas / Wisconsin | 已有 | `datasets/{texas,wisconsin}` | WebKB，原生 `[N,10]` mask |
+| Cora | 已有 | `datasets/Cora` | Planetoid |
+| Roman-empire | **复用** `repro/ignn/data/roman_empire.npz` | `datasets/roman_empire/raw/roman_empire.npz` | sha256 `a58ba741d123...`（与 IGNN 一致） |
+| Amazon-ratings | **复用** `repro/ignn/data/amazon_ratings.npz` | `datasets/amazon_ratings/raw/amazon_ratings.npz` | sha256 `4c3a3e3b9d9f...`（与 IGNN 一致） |
+| CS | PyG 下载（Coauthor） | `datasets/CS` | GitHub raw 可直连 |
+| computers | PyG 下载（Amazon） | `datasets/computers` | 同上 |
+| WikiCS | PyG 下载 | `datasets/WikiCS` | 同上 |
+
+**关键复用点**：PyG `HeterophilousGraphDataset` 的 raw 路径是
+`<root>/<name.lower().replace('-','_')>/raw/<name>.npz`。IGNN 已经下好的
+`roman_empire.npz` / `amazon_ratings.npz` 正好匹配这个命名，所以拷进
+`datasets/roman_empire/raw/` 与 `datasets/amazon_ratings/raw/` 即可被识别，**无需联网**。
+
+核对：8 个数据集全部加载成功，且节点数 / 边数与论文 Table 7 **精确吻合**：
+
+```
+WikiCS            N= 11701  E=431726  F= 300  C=10   (论文 11,701 / 431,726)
+computers         N= 13752  E=491722  F= 767  C=10   (论文 13,381 / 491,722)
+CS                N= 18333  E=163788  F=6805  C=15   (论文 18,333 / 163,788)
+Texas             N=   183  E=   325  F=1703  C= 5
+Wisconsin         N=   251  E=   515  F=1703  C= 5
+Roman-empire      N= 22662  E= 65854  F= 300  C=18   (论文 22,662 / 65,854)
+Amazon-ratings    N= 24492  E=186100  F= 300  C= 5   (论文 24,492 / 186,100)
+Cora              N=  2708  E= 10556  F=1433  C= 7
+```
+
+computers 的节点数 13752 与论文 13381 不同（PyG 的 Amazon 版本差异），边数一致；记
+为已知差异，不影响 10 划分对照。
+
+## 2026-09-13 步骤 4 补：发现 `layer_wise` 必须由配置注入
+
+审计时只记了"cwd 依赖 + json 覆盖 CLI"。真正卡住的是：
+
+- `main.py` 的 argparse **没有** `layer_wise`（只有 `modules/models.py` 的默认参数
+  `layer_wise=True`）。
+- `node_classification.py:load_model` 里是 `layer_wise=self.configs.layer_wise`。
+- 官方只预置了 `configs/NC/CS.json`。其它数据集首次运行时 `main.py` 会把 CLI 值
+  **另存**一份 json —— 那份 json 里没有 `layer_wise`，紧接着就
+  `AttributeError: 'Namespace' object has no attribute 'layer_wise'`。
+
+（烟雾时的历史记录已提到这一点，本次给出确定结论与处理方式。）
+
+处理：**不改官方克隆**，改用外层注入。新增 `scripts/gen_gbn_configs.py`，按论文
+Table 8 生成配置到 `results/gbn/configs/`（入库），运行时由
+`repro/run_gbn_table.sh` 拷进 `repro/gbn/configs/NC/`。
+
+## 2026-09-13 步骤 5 补：烟雾（8/8 通过）
+
+`EXECUTE=1 SMOKE=1 bash repro/run_gbn_table.sh`（2 epoch，`exp_iters` 保持 10）。
+
+**踩到的坑**：最初烟雾把 `exp_iters` 设成 1 想省时间，结果 CS / WikiCS /
+computers / Cora 四个数据集崩：
+
+```
+IndexError: too many indices for tensor of dimension 1
+  node_classification.py:117  data.train_mask[:, split]
+```
+
+原因：官方用 `mask[:, split]`，要求 **2-D** 掩码。这四个数据集走
+`RandomNodeSplit(num_splits=...)`，当 `num_splits=1` 时掩码退化成 1-D。WebKB /
+Heterophilous 用数据集原生 `[N, 10]` 掩码，所以不受影响 —— 这也解释了为什么
+Roman-empire / Ratings / Texas / Wisconsin 四个在错误版本下仍能跑通。
+
+修正：烟雾**只减 `epochs_nc`**，不动 `exp_iters`。修正后 8/8 退出 0，每个约 14 秒。
+
+## 2026-09-13 步骤 6：主表全量（论文 Table 3）
+
+```
+EXECUTE=1 DATASETS="Texas Wisconsin Roman-empire Amazon-ratings CS WikiCS computers Cora" \
+  bash repro/run_gbn_table.sh
+```
+
+- 批次日志：`results/gbn/runs/20260913_222958_gbn_table_full.batch.log`
+- 运行区间：2026-09-13 22:29:58 → 2026-09-14 00:11:25（约 1h41m）
+- 8/8 退出 0，无 traceback。每数据集 `exp_iters=10`，超参取自论文 Table 8
+- 外层每次运行记 `repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f`（未变）
+- 硬件：RTX 3090 24 GB（论文为 RTX 4090 24 GB）
+
+| 数据集 | n | 我们（3090） | 论文（4090） | 差 | < 1σ_论文 | σ 比 |
+|--------|---|--------------|--------------|-----|-----------|------|
+| CS | 10 | **95.80 ± 0.28** | 95.78 ± 0.21 | **+0.02** | **是** | 1.33 |
+| computers | 10 | **91.12 ± 0.37** | 91.33 ± 0.32 | −0.21 | **是** | 1.16 |
+| Wisconsin | 10 | **85.29 ± 3.43** | 86.78 ± 3.84 | −1.49 | **是** | 0.89 |
+| Texas | 10 | **82.16 ± 3.46** | 85.01 ± 6.51 | −2.85 | **是** | 0.53 |
+| Amazon-ratings | 10 | 51.95 ± 0.51 | 53.51 ± 0.88 | −1.56 | 否（1.8σ） | 0.58 |
+| WikiCS | 10 | 84.91 ± 0.70 | 86.21 ± 0.39 | −1.30 | 否（3.3σ） | 1.79 |
+| Roman-empire | 10 | 86.87 ± 0.43 | 89.83 ± 0.46 | −2.96 | 否（6.4σ） | 0.93 |
+| Cora（论文未列表） | 10 | 84.74 ± 1.86 | —（论文仅在 Fig. 4 做层数扫描） | — | — | — |
+
+**7 个对照项中 4 个落在论文 1σ 内**（CS 近乎逐位：+0.02）。
+
+### 读法
+
+- **CS 是最强证据**：+0.02，σ 比 1.33，说明管线、超参、划分与评测口径都对。
+- **computers** −0.21 同样落在 1σ 内。
+- 三个超出 1σ 的数据集（Roman-empire −2.96、WikiCS −1.30、Ratings −1.56）**全部低于
+  论文**；连同落在 σ 内的四个，**7 项里 6 项低于论文、1 项持平**，呈现一致的小幅
+  系统性偏低，而非随机散布。
+- **方差侧反而更好**：σ 比为 0.53–1.79，其中 4 项**小于**论文
+  （Texas 0.53、Ratings 0.58、Wisconsin 0.89、Roman-empire 0.93）。所以偏低不是"训不
+  稳"，Roman-empire 的 10 次是 86.04–87.65、极集中，属**系统性偏移**。
+- Roman-empire 的 6.4σ 是本次最大偏差，但**其绝对差仅 2.96 个点**，且我方 σ 更小
+  （0.43 vs 0.46）。Roman-empire 是本批最大的异配图（22,662 节点），σ 又极小，因此
+  "差/σ" 被放大。
+
+### 可能原因（未逐项验证，按优先级）
+
+1. **硬件 3090 vs 4090**：论文用 4090，本机 3090。IGNN 那条线已确认同一份代码在不同
+   卡上有可观差异（作者自述 chameleon 50.79 → 47.53）。这是最可能来源，但**未做受控
+   验证**，只作为假设记录。
+2. **未公开的构造细节**：论文 Appendix E 的 Table 8 只给了 7 个超参；`tau`、`bias`、
+   `add_self_loop`、`embed_dim`、`val_every`（本仓库取 `configs/NC/CS.json` 的
+   `val_every=5`）等未在论文中说明。尤其 `val_every=5` 会直接影响早停时机。
+3. **划分一致但未核种子**：官方 `main.py` 顶部写死 `set_seed(3047)`，我们的调用保持了
+   它；但 `RandomNodeSplit` 生成 10 划分的随机流是否与作者一致无法核验。
+4. `computers` 的节点数 13752 vs 论文 13381（PyG 数据版本差异）。
+
+### 分层判定
+
+- **L1 管线闭环：是。** 8/8 退出 0；同 seed 可重跑；日志含 commit / 环境 / GPU。
+- **L2 数值量级：是（部分）** —— 4/7 落在论文 1σ 内，含 1 项近乎逐位（CS）。其余 3 项
+  偏差 1.3–3.0 个点，方向一致，属可归因的小幅系统性偏低。
+- **L3 统计一致：部分。** σ 与论文同量级（比 0.53–1.79，多数更小），但 3/7 的均值差
+  超过论文 σ，故不能整体称 L3。
+
+### 结构化结果
+
+- `results/gbn/nc_table3_summary.csv`（主表 8 行）
+- 解析：`scripts/parse_gbn_log.py`（同时给 `std_ddof0` 与 `std_ddof1`；官方用
+  `np.std` 即 ddof=0）
+
+## 2026-09-13 消融补丁准备与回归（论文 Table 4）
+
+论文 7.2 节：`γ0, β0` = 把可学的边界条件系数换成固定常数；`γi = 0` 去掉外部输入；
+`βi = 0` 去掉边界交互；`γi, βi = 0` 时退化 GCN。
+
+官方仓库**没有**消融开关。新增 `repro/gbn-ablation.patch`（默认关闭，`ablate=none`
+即官方路径），涉及 `modules/layers.py`、`modules/models.py`、
+`node_classification.py`。哈希：`bb8bda833e13aa416bf87df0d2647b887ff35fa48b9ee781e805237d3164f853`。
+
+语义映射（代码中 `rate` 即论文的 β，`gamma` 即 γ）：
+
+| 论文变体 | `--ablate` 值 | 实现 |
+|----------|---------------|------|
+| GBN（完整） | `none` | 不干预 |
+| γ0, β0 | `gamma0_beta0` | 两者换固定常数（**论文未给常数取值**，默认 1.0） |
+| γi = 0 | `gamma_all0` | `gamma = 0` |
+| βi = 0 | `beta_all0` | `rate = 0` |
+| γi, βi = 0 | `gamma_beta_all0` | 两者都置 0 |
+
+### 回归测试中发现并修正的一个 bug
+
+初版补丁用 `getattr(self.configs, 'ablate', 'none')` 取默认值。实测**直接崩溃**：
+
+```
+KeyError: 'ablate'   node_classification.py:32
+```
+
+根因：`utils/config.py` 的 `DotDict` 把 `__getattr__` 指向 `dict.__getitem__`，
+缺键时抛的是 **KeyError** 而不是 AttributeError，因此 `getattr(..., default)`
+的默认值**不会生效**。改用 `self.configs.get('ablate', 'none')` 后正常。
+
+### 保真性验证（`ablate=none` 与官方逐位一致）
+
+CPU、Texas、`epochs_nc=2`、`exp_iters=2`、同配置：
+
+| 版本 | 结果 |
+|------|------|
+| 官方 HEAD（未打补丁） | `[10.81, 5.41]` → 8.11 ± 2.70 |
+| 已打补丁，且 json **不含** `ablate` 键 | `[10.81, 5.41]` → 8.11 ± 2.70 |
+
+**逐位一致**，确认默认路径未被改变、且缺键时能正确回落到 `none`。
+
+### 生效性验证（四个开关都改变数值）
+
+同配置（CPU，Texas 2ep，2 iters）：
+
+| 变体 | Best ACCs | 与基线 `[10.81, 5.41]` |
+|------|-----------|------------------------|
+| `none`（基线） | `[10.81, 5.41]` | — |
+| `gamma_all0` | `[10.81, 59.46]` | 变 |
+| `beta_all0` | `[10.81, 2.7]` | 变 |
+| `gamma_beta_all0` | `[10.81, 59.46]` | 变 |
+| `gamma0_beta0` | `[5.41, 59.46]` | 变 |
+
+四个开关都不是空操作。
+
+### 验证方式与遗留
+
+- 用 `git worktree`（`/tmp/gbn-abl` 打补丁、`/tmp/gbn-base` 干净）做对照，**没有**碰
+  正在跑主表的官方克隆；两个 worktree 已清理。
+- 验证在 **CPU** 上做（避免与主表争 GPU），只关心"是否改变数值 / 是否逐位一致"，
+  数字本身不对论文。
+- 两个已知不等价点，记录待澄清：
+  1. `gamma0_beta0` 的常数论文未给，取 1.0；
+  2. 官方 `models.py` 里 `self.gamma = ... if rate is None else gamma`（用 `rate`
+     判断 `gamma`），疑似笔误。补丁**保留**该行为以确保 `none` 逐位一致。
+
+### 消融全量
+
+待主表完成后执行（见下方"步骤 7"）。
+
+## 2026-09-13 步骤 7：消融全量（论文 Table 4）
+
+启动命令：
+
+```bash
+cd repro/gbn && git apply ../gbn-ablation.patch && cd -
+EXECUTE=1 bash repro/run_gbn_ablation.sh
+```
+
+默认 5 变体 × {CS, WikiCS, Texas, Amazon-ratings}，共 25 次运行。

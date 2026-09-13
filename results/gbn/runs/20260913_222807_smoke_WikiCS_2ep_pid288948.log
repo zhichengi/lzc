@@ -1,0 +1,90 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:28:07+08:00
+[repro] run_id=20260913_222807_smoke_WikiCS_2ep_pid288948
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset WikiCS
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p289019-i281305.scope; invocation ID: 08d12c45f73a4c4593fff4af6757f4dc
+Loading config file: ./configs/NC/WikiCS.json
+Log path: ./logs//NC_WikiCS_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/13/26 22:28:12 - 0:00:00 - {'task': 'NC', 'dataset': 'WikiCS', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 10, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_WikiCS_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 3, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.2, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 3e-05, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_WikiCS_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', 'result_path': './results//NC_WikiCS.txt'}
+INFO - 09/13/26 22:28:12 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:28:12 - 0:00:01 - Epoch 0: train_loss=2.5459792613983154, train_acc= 2.81%
+INFO - 09/13/26 22:28:12 - 0:00:01 - Epoch 0: val_loss=2.4425854682922363, val_acc= 3.38%,val_weighted_f1= 1.01,val_macro_f1= 2.52%
+INFO - 09/13/26 22:28:13 - 0:00:01 - Epoch 1: train_loss=2.4523181915283203, train_acc= 3.25%
+INFO - 09/13/26 22:28:13 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:28:13 - 0:00:01 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:13 - 0:00:01 - test_acc= 2.52%, weighted_f1= 0.36,macro_f1= 0.98%
+INFO - 09/13/26 22:28:13 - 0:00:01 - test_acc= 2.52%, weighted_f1= 0.36,macro_f1= 0.98%
+INFO - 09/13/26 22:28:13 - 0:00:01 - Epoch 0: train_loss=2.2883481979370117, train_acc= 14.21%
+INFO - 09/13/26 22:28:13 - 0:00:01 - Epoch 0: val_loss=2.2135446071624756, val_acc= 22.56%,val_weighted_f1= 8.84,val_macro_f1= 4.01%
+INFO - 09/13/26 22:28:13 - 0:00:01 - Epoch 1: train_loss=2.223372220993042, train_acc= 20.27%
+INFO - 09/13/26 22:28:13 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:28:13 - 0:00:01 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:13 - 0:00:01 - test_acc= 22.05%, weighted_f1= 8.31,macro_f1= 3.80%
+INFO - 09/13/26 22:28:13 - 0:00:01 - test_acc= 22.05%, weighted_f1= 8.31,macro_f1= 3.80%
+INFO - 09/13/26 22:28:13 - 0:00:02 - Epoch 0: train_loss=2.429133176803589, train_acc= 5.58%
+INFO - 09/13/26 22:28:13 - 0:00:02 - Epoch 0: val_loss=2.3381853103637695, val_acc= 6.97%,val_weighted_f1= 2.24,val_macro_f1= 4.47%
+INFO - 09/13/26 22:28:14 - 0:00:02 - Epoch 1: train_loss=2.3481667041778564, train_acc= 5.70%
+INFO - 09/13/26 22:28:14 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:28:14 - 0:00:02 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:14 - 0:00:02 - test_acc= 6.58%, weighted_f1= 2.28,macro_f1= 3.58%
+INFO - 09/13/26 22:28:14 - 0:00:02 - test_acc= 6.58%, weighted_f1= 2.28,macro_f1= 3.58%
+INFO - 09/13/26 22:28:14 - 0:00:02 - Epoch 0: train_loss=2.231837749481201, train_acc= 15.90%
+INFO - 09/13/26 22:28:14 - 0:00:02 - Epoch 0: val_loss=2.1553945541381836, val_acc= 19.27%,val_weighted_f1= 6.64,val_macro_f1= 3.49%
+INFO - 09/13/26 22:28:14 - 0:00:03 - Epoch 1: train_loss=2.1802215576171875, train_acc= 16.91%
+INFO - 09/13/26 22:28:14 - 0:00:03 - --------------Testing--------------------
+INFO - 09/13/26 22:28:14 - 0:00:03 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:14 - 0:00:03 - test_acc= 19.66%, weighted_f1= 6.91,macro_f1= 3.56%
+INFO - 09/13/26 22:28:14 - 0:00:03 - test_acc= 19.66%, weighted_f1= 6.91,macro_f1= 3.56%
+INFO - 09/13/26 22:28:15 - 0:00:03 - Epoch 0: train_loss=2.5184640884399414, train_acc= 2.68%
+INFO - 09/13/26 22:28:15 - 0:00:03 - Epoch 0: val_loss=2.4164528846740723, val_acc= 3.33%,val_weighted_f1= 2.05,val_macro_f1= 1.41%
+INFO - 09/13/26 22:28:15 - 0:00:03 - Epoch 1: train_loss=2.4321062564849854, train_acc= 4.03%
+INFO - 09/13/26 22:28:15 - 0:00:03 - --------------Testing--------------------
+INFO - 09/13/26 22:28:15 - 0:00:03 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:15 - 0:00:03 - test_acc= 3.93%, weighted_f1= 1.67,macro_f1= 1.25%
+INFO - 09/13/26 22:28:15 - 0:00:03 - test_acc= 3.93%, weighted_f1= 1.67,macro_f1= 1.25%
+INFO - 09/13/26 22:28:15 - 0:00:03 - Epoch 0: train_loss=2.7389185428619385, train_acc= 3.63%
+INFO - 09/13/26 22:28:15 - 0:00:04 - Epoch 0: val_loss=2.6362826824188232, val_acc= 3.59%,val_weighted_f1= 0.25,val_macro_f1= 0.69%
+INFO - 09/13/26 22:28:15 - 0:00:04 - Epoch 1: train_loss=2.6150758266448975, train_acc= 3.75%
+INFO - 09/13/26 22:28:15 - 0:00:04 - --------------Testing--------------------
+INFO - 09/13/26 22:28:15 - 0:00:04 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:16 - 0:00:04 - test_acc= 3.25%, weighted_f1= 0.20,macro_f1= 0.63%
+INFO - 09/13/26 22:28:16 - 0:00:04 - test_acc= 3.25%, weighted_f1= 0.20,macro_f1= 0.63%
+INFO - 09/13/26 22:28:16 - 0:00:04 - Epoch 0: train_loss=2.528066635131836, train_acc= 10.11%
+INFO - 09/13/26 22:28:16 - 0:00:04 - Epoch 0: val_loss=2.4571382999420166, val_acc= 16.03%,val_weighted_f1= 5.30,val_macro_f1= 4.28%
+INFO - 09/13/26 22:28:16 - 0:00:04 - Epoch 1: train_loss=2.4377317428588867, train_acc= 12.70%
+INFO - 09/13/26 22:28:16 - 0:00:04 - --------------Testing--------------------
+INFO - 09/13/26 22:28:16 - 0:00:04 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:16 - 0:00:04 - test_acc= 15.90%, weighted_f1= 5.22,macro_f1= 4.24%
+INFO - 09/13/26 22:28:16 - 0:00:04 - test_acc= 15.90%, weighted_f1= 5.22,macro_f1= 4.24%
+INFO - 09/13/26 22:28:16 - 0:00:05 - Epoch 0: train_loss=2.445056915283203, train_acc= 7.58%
+INFO - 09/13/26 22:28:16 - 0:00:05 - Epoch 0: val_loss=2.358530282974243, val_acc= 7.91%,val_weighted_f1= 1.89,val_macro_f1= 1.76%
+INFO - 09/13/26 22:28:17 - 0:00:05 - Epoch 1: train_loss=2.370755672454834, train_acc= 9.46%
+INFO - 09/13/26 22:28:17 - 0:00:05 - --------------Testing--------------------
+INFO - 09/13/26 22:28:17 - 0:00:05 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:17 - 0:00:05 - test_acc= 7.44%, weighted_f1= 1.75,macro_f1= 1.70%
+INFO - 09/13/26 22:28:17 - 0:00:05 - test_acc= 7.44%, weighted_f1= 1.75,macro_f1= 1.70%
+INFO - 09/13/26 22:28:17 - 0:00:05 - Epoch 0: train_loss=2.618755340576172, train_acc= 6.41%
+INFO - 09/13/26 22:28:17 - 0:00:05 - Epoch 0: val_loss=2.4993863105773926, val_acc= 7.14%,val_weighted_f1= 1.47,val_macro_f1= 1.61%
+INFO - 09/13/26 22:28:17 - 0:00:05 - Epoch 1: train_loss=2.5176303386688232, train_acc= 6.74%
+INFO - 09/13/26 22:28:17 - 0:00:05 - --------------Testing--------------------
+INFO - 09/13/26 22:28:17 - 0:00:05 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:17 - 0:00:06 - test_acc= 7.22%, weighted_f1= 1.74,macro_f1= 1.81%
+INFO - 09/13/26 22:28:17 - 0:00:06 - test_acc= 7.22%, weighted_f1= 1.74,macro_f1= 1.81%
+INFO - 09/13/26 22:28:17 - 0:00:06 - Epoch 0: train_loss=2.5922303199768066, train_acc= 10.25%
+INFO - 09/13/26 22:28:18 - 0:00:06 - Epoch 0: val_loss=2.481346607208252, val_acc= 17.52%,val_weighted_f1= 5.57,val_macro_f1= 3.46%
+INFO - 09/13/26 22:28:18 - 0:00:06 - Epoch 1: train_loss=2.499882698059082, train_acc= 11.88%
+INFO - 09/13/26 22:28:18 - 0:00:06 - --------------Testing--------------------
+INFO - 09/13/26 22:28:18 - 0:00:06 - --------------Loading from ./checkpoints/NC_WikiCS_model.pt--------------------
+INFO - 09/13/26 22:28:18 - 0:00:06 - test_acc= 15.77%, weighted_f1= 4.60,macro_f1= 2.78%
+INFO - 09/13/26 22:28:18 - 0:00:06 - test_acc= 15.77%, weighted_f1= 4.60,macro_f1= 2.78%
+INFO - 09/13/26 22:28:18 - 0:00:06 - Best ACCs: [2.52, 22.05, 6.58, 19.66, 3.93, 3.25, 15.9, 7.44, 7.22, 15.77]
+                                     Evaluation Acc is  10.43% ±  6.85%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=10
+[repro] finished_at=2026-09-13T22:28:18+08:00

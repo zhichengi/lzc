@@ -1,0 +1,227 @@
+=== gbn table mode=smoke datasets='CS WikiCS computers Roman-empire Amazon-ratings Texas Wisconsin Cora' 2026-09-13T22:26:20+08:00 ===
+
+>>> smoke_CS_2ep  (2026-09-13T22:26:20+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/CS.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:26:22+08:00
+[repro] run_id=20260913_222622_smoke_CS_2ep_pid287416
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset CS
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p287540-i292755.scope; invocation ID: 849288dd4f8042adb4b4c571f7d8488f
+Loading config file: ./configs/NC/CS.json
+Log path: ./logs//NC_CS_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/13/26 22:26:27 - 0:00:00 - {'task': 'NC', 'dataset': 'CS', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_CS_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 3, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.2, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 3e-05, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_CS_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', 'result_path': './results//NC_CS.txt'}
+INFO - 09/13/26 22:26:27 - 0:00:00 - --------------------------Training Start-------------------------
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/gbn/main.py", line 97, in <module>
+    exp.train()
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 60, in train
+    train_loss, pred, true = self.train_step(nc_model, data, optimizer, split=t)
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 117, in train_step
+    loss, pred, true = self.cal_loss(out, data.y, data.train_mask[:, split])
+IndexError: too many indices for tensor of dimension 1
+<<< smoke_CS_2ep exit=1
+
+>>> smoke_WikiCS_2ep  (2026-09-13T22:26:28+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/WikiCS.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:26:30+08:00
+[repro] run_id=20260913_222630_smoke_WikiCS_2ep_pid287620
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset WikiCS
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p287678-i281167.scope; invocation ID: 1d305c7b142b4953b6dc2cffa7891c8d
+Loading config file: ./configs/NC/WikiCS.json
+Log path: ./logs//NC_WikiCS_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/13/26 22:26:35 - 0:00:00 - {'task': 'NC', 'dataset': 'WikiCS', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_WikiCS_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 3, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.2, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 3e-05, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_WikiCS_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', 'result_path': './results//NC_WikiCS.txt'}
+INFO - 09/13/26 22:26:35 - 0:00:00 - --------------------------Training Start-------------------------
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/gbn/main.py", line 97, in <module>
+    exp.train()
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 60, in train
+    train_loss, pred, true = self.train_step(nc_model, data, optimizer, split=t)
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 117, in train_step
+    loss, pred, true = self.cal_loss(out, data.y, data.train_mask[:, split])
+IndexError: too many indices for tensor of dimension 1
+<<< smoke_WikiCS_2ep exit=1
+
+>>> smoke_computers_2ep  (2026-09-13T22:26:36+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/computers.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:26:37+08:00
+[repro] run_id=20260913_222637_smoke_computers_2ep_pid287738
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset computers
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p287851-i249571.scope; invocation ID: 750da71de2764e51852b18c2ca9f0866
+Loading config file: ./configs/NC/computers.json
+Log path: ./logs//NC_computers_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/13/26 22:26:42 - 0:00:00 - {'task': 'NC', 'dataset': 'computers', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_computers_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 3, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.2, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 3e-05, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_computers_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', 'result_path': './results//NC_computers.txt'}
+INFO - 09/13/26 22:26:42 - 0:00:00 - --------------------------Training Start-------------------------
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/gbn/main.py", line 97, in <module>
+    exp.train()
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 60, in train
+    train_loss, pred, true = self.train_step(nc_model, data, optimizer, split=t)
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 117, in train_step
+    loss, pred, true = self.cal_loss(out, data.y, data.train_mask[:, split])
+IndexError: too many indices for tensor of dimension 1
+<<< smoke_computers_2ep exit=1
+
+>>> smoke_Roman-empire_2ep  (2026-09-13T22:26:44+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/Roman-empire.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:26:45+08:00
+[repro] run_id=20260913_222645_smoke_Roman-empire_2ep_pid287931
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Roman-empire
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p287988-i253533.scope; invocation ID: 557fb13b34b64589b54f891722ec51ff
+Loading config file: ./configs/NC/Roman-empire.json
+Log path: ./logs//NC_Roman-empire_NL5_HD512_DP0.15_ACTgelu_NORMln_BTrue_LRNC0.0003_LRT0.001.log
+INFO - 09/13/26 22:26:50 - 0:00:00 - {'task': 'NC', 'dataset': 'Roman-empire', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Roman-empire_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.15, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 0.0003, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Roman-empire_NL5_HD512_DP0.15_ACTgelu_NORMln_BTrue_LRNC0.0003_LRT0.001.log', 'result_path': './results//NC_Roman-empire.txt'}
+INFO - 09/13/26 22:26:50 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:26:51 - 0:00:01 - Epoch 0: train_loss=2.914520025253296, train_acc= 15.03%
+INFO - 09/13/26 22:26:51 - 0:00:01 - Epoch 0: val_loss=2.562535285949707, val_acc= 23.64%,val_weighted_f1= 12.68,val_macro_f1= 5.08%
+INFO - 09/13/26 22:26:51 - 0:00:01 - Epoch 1: train_loss=2.5731418132781982, train_acc= 24.19%
+INFO - 09/13/26 22:26:51 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:26:51 - 0:00:01 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:26:51 - 0:00:01 - test_acc= 23.69%, weighted_f1= 12.77,macro_f1= 5.12%
+INFO - 09/13/26 22:26:51 - 0:00:01 - test_acc= 23.69%, weighted_f1= 12.77,macro_f1= 5.12%
+INFO - 09/13/26 22:26:51 - 0:00:01 - Best ACCs: [23.69]
+                                     Evaluation Acc is  23.69% ±  0.00%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=6
+[repro] finished_at=2026-09-13T22:26:52+08:00
+[repro] log_file=/home/lab_user/project/lzc/results/gbn/runs/20260913_222645_smoke_Roman-empire_2ep_pid287931.log
+<<< smoke_Roman-empire_2ep exit=0
+
+>>> smoke_Amazon-ratings_2ep  (2026-09-13T22:26:52+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/Amazon-ratings.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:26:54+08:00
+[repro] run_id=20260913_222654_smoke_Amazon-ratings_2ep_pid288049
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Amazon-ratings
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p288121-i300696.scope; invocation ID: 00c6ea8a9eba415eb1ce2833acc206d3
+Loading config file: ./configs/NC/Amazon-ratings.json
+Log path: ./logs//NC_Amazon-ratings_NL5_HD512_DP0.15_ACTgelu_NORMbn_BTrue_LRNC0.0003_LRT0.001.log
+INFO - 09/13/26 22:26:59 - 0:00:00 - {'task': 'NC', 'dataset': 'Amazon-ratings', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Amazon-ratings_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.15, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'bn', 'bias': True, 'tau': 1.0, 'lr_nc': 0.0003, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Amazon-ratings_NL5_HD512_DP0.15_ACTgelu_NORMbn_BTrue_LRNC0.0003_LRT0.001.log', 'result_path': './results//NC_Amazon-ratings.txt'}
+INFO - 09/13/26 22:26:59 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:26:59 - 0:00:01 - Epoch 0: train_loss=1.7442251443862915, train_acc= 19.98%
+INFO - 09/13/26 22:26:59 - 0:00:01 - Epoch 0: val_loss=1.603803038597107, val_acc= 36.78%,val_weighted_f1= 19.78,val_macro_f1= 10.76%
+INFO - 09/13/26 22:27:00 - 0:00:01 - Epoch 1: train_loss=1.6855765581130981, train_acc= 21.55%
+INFO - 09/13/26 22:27:00 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:27:00 - 0:00:01 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:27:00 - 0:00:01 - test_acc= 36.80%, weighted_f1= 19.79,macro_f1= 10.76%
+INFO - 09/13/26 22:27:00 - 0:00:01 - test_acc= 36.80%, weighted_f1= 19.79,macro_f1= 10.76%
+INFO - 09/13/26 22:27:00 - 0:00:01 - Best ACCs: [36.8]
+                                     Evaluation Acc is  36.80% ±  0.00%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=6
+[repro] finished_at=2026-09-13T22:27:01+08:00
+[repro] log_file=/home/lab_user/project/lzc/results/gbn/runs/20260913_222654_smoke_Amazon-ratings_2ep_pid288049.log
+<<< smoke_Amazon-ratings_2ep exit=0
+
+>>> smoke_Texas_2ep  (2026-09-13T22:27:01+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/Texas.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:27:02+08:00
+[repro] run_id=20260913_222702_smoke_Texas_2ep_pid288181
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Texas
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p288252-i225187.scope; invocation ID: 4bee96ff9b07453493be57cd20d923be
+Loading config file: ./configs/NC/Texas.json
+Log path: ./logs//NC_Texas_NL5_HD512_DP0.3_ACTgelu_NORMln_BTrue_LRNC0.0001_LRT0.001.log
+INFO - 09/13/26 22:27:07 - 0:00:00 - {'task': 'NC', 'dataset': 'Texas', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Texas_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.3, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 0.0001, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Texas_NL5_HD512_DP0.3_ACTgelu_NORMln_BTrue_LRNC0.0001_LRT0.001.log', 'result_path': './results//NC_Texas.txt'}
+INFO - 09/13/26 22:27:07 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:27:08 - 0:00:00 - Epoch 0: train_loss=1.936338186264038, train_acc= 22.99%
+INFO - 09/13/26 22:27:08 - 0:00:00 - Epoch 0: val_loss=1.7286454439163208, val_acc= 10.17%,val_weighted_f1= 4.63,val_macro_f1= 4.42%
+INFO - 09/13/26 22:27:08 - 0:00:00 - Epoch 1: train_loss=1.516440749168396, train_acc= 26.44%
+INFO - 09/13/26 22:27:08 - 0:00:00 - --------------Testing--------------------
+INFO - 09/13/26 22:27:08 - 0:00:00 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:27:08 - 0:00:01 - test_acc= 10.81%, weighted_f1= 2.77,macro_f1= 5.13%
+INFO - 09/13/26 22:27:08 - 0:00:01 - test_acc= 10.81%, weighted_f1= 2.77,macro_f1= 5.13%
+INFO - 09/13/26 22:27:08 - 0:00:01 - Best ACCs: [10.81]
+                                     Evaluation Acc is  10.81% ±  0.00%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=4
+[repro] finished_at=2026-09-13T22:27:08+08:00
+[repro] log_file=/home/lab_user/project/lzc/results/gbn/runs/20260913_222702_smoke_Texas_2ep_pid288181.log
+<<< smoke_Texas_2ep exit=0
+
+>>> smoke_Wisconsin_2ep  (2026-09-13T22:27:09+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/Wisconsin.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:27:10+08:00
+[repro] run_id=20260913_222710_smoke_Wisconsin_2ep_pid288315
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Wisconsin
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p288372-i269120.scope; invocation ID: 5d9c1037a2974eebbf2649ffa4180f06
+Loading config file: ./configs/NC/Wisconsin.json
+Log path: ./logs//NC_Wisconsin_NL5_HD512_DP0.7_ACTgelu_NORMln_BTrue_LRNC0.001_LRT0.001.log
+INFO - 09/13/26 22:27:15 - 0:00:00 - {'task': 'NC', 'dataset': 'Wisconsin', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Wisconsin_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.7, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 0.001, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Wisconsin_NL5_HD512_DP0.7_ACTgelu_NORMln_BTrue_LRNC0.001_LRT0.001.log', 'result_path': './results//NC_Wisconsin.txt'}
+INFO - 09/13/26 22:27:15 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:27:16 - 0:00:00 - Epoch 0: train_loss=1.827430248260498, train_acc= 11.67%
+INFO - 09/13/26 22:27:16 - 0:00:00 - Epoch 0: val_loss=1.5575542449951172, val_acc= 60.00%,val_weighted_f1= 49.83,val_macro_f1= 24.76%
+INFO - 09/13/26 22:27:16 - 0:00:00 - Epoch 1: train_loss=1.271144986152649, train_acc= 50.83%
+INFO - 09/13/26 22:27:16 - 0:00:00 - --------------Testing--------------------
+INFO - 09/13/26 22:27:16 - 0:00:00 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:27:16 - 0:00:00 - test_acc= 66.67%, weighted_f1= 57.60,macro_f1= 29.95%
+INFO - 09/13/26 22:27:16 - 0:00:00 - test_acc= 66.67%, weighted_f1= 57.60,macro_f1= 29.95%
+INFO - 09/13/26 22:27:16 - 0:00:00 - Best ACCs: [66.67]
+                                     Evaluation Acc is  66.67% ±  0.00%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=5
+[repro] finished_at=2026-09-13T22:27:16+08:00
+[repro] log_file=/home/lab_user/project/lzc/results/gbn/runs/20260913_222710_smoke_Wisconsin_2ep_pid288315.log
+<<< smoke_Wisconsin_2ep exit=0
+
+>>> smoke_Cora_2ep  (2026-09-13T22:27:16+08:00)  cfg=/home/lab_user/project/lzc/results/gbn/configs/smoke/Cora.json
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:27:18+08:00
+[repro] run_id=20260913_222718_smoke_Cora_2ep_pid288450
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Cora
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p288521-i253556.scope; invocation ID: a8b67d48498b4684b7b2c1546a880be9
+Loading config file: ./configs/NC/Cora.json
+Log path: ./logs//NC_Cora_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/13/26 22:27:23 - 0:00:00 - {'task': 'NC', 'dataset': 'Cora', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Cora_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 3, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.2, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 3e-05, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Cora_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', 'result_path': './results//NC_Cora.txt'}
+INFO - 09/13/26 22:27:23 - 0:00:00 - --------------------------Training Start-------------------------
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/gbn/main.py", line 97, in <module>
+    exp.train()
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 60, in train
+    train_loss, pred, true = self.train_step(nc_model, data, optimizer, split=t)
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 117, in train_step
+    loss, pred, true = self.cal_loss(out, data.y, data.train_mask[:, split])
+IndexError: too many indices for tensor of dimension 1
+<<< smoke_Cora_2ep exit=1
+
+=== gbn table done 2026-09-13T22:27:24+08:00 ===

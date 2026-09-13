@@ -1,0 +1,22 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:26:37+08:00
+[repro] run_id=20260913_222637_smoke_computers_2ep_pid287738
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset computers
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p287851-i249571.scope; invocation ID: 750da71de2764e51852b18c2ca9f0866
+Loading config file: ./configs/NC/computers.json
+Log path: ./logs//NC_computers_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/13/26 22:26:42 - 0:00:00 - {'task': 'NC', 'dataset': 'computers', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_computers_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 3, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.2, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 3e-05, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_computers_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', 'result_path': './results//NC_computers.txt'}
+INFO - 09/13/26 22:26:42 - 0:00:00 - --------------------------Training Start-------------------------
+Traceback (most recent call last):
+  File "/home/lab_user/project/lzc/repro/gbn/main.py", line 97, in <module>
+    exp.train()
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 60, in train
+    train_loss, pred, true = self.train_step(nc_model, data, optimizer, split=t)
+  File "/home/lab_user/project/lzc/repro/gbn/node_classification.py", line 117, in train_step
+    loss, pred, true = self.cal_loss(out, data.y, data.train_mask[:, split])
+IndexError: too many indices for tensor of dimension 1

@@ -39,8 +39,9 @@
 
 ### 3.1 进行中
 
-| 编号 | 论文 | 状态（2026-09-13） | 下一步 |
+| 编号 | 论文 | 状态（2026-09-14） | 下一步 |
 |------|------|--------------------|--------|
+| 09 | GBN（NeurIPS 2025） | **主表已完成**（8 数据集 ×10 iters，1h41m）：7 个论文对照项中 4 个落在 1σ 内（CS 95.80 vs 95.78，+0.02）；3 项偏低 1.3–3.0 点。消融（Table 4）补丁已备并做过保真/生效验证 | 跑 Table 4 消融（25 次）→ 冻结；见 [`repro/GBN_REPRO_LOG.md`](repro/GBN_REPRO_LOG.md) |
 | 29 | SGPC（AAAI 2026） | **已冻结**：6 异配集 ×10 划分 + 3 同配 public 全部跑完；val 选模系统性偏低 | 冻结；见 [`repro/SGPC_REPRO_LOG.md`](repro/SGPC_REPRO_LOG.md) |
 | 11 | IGNN（NeurIPS 2025） | public split 已冻结；**custom 48/32/20 首轮三数据集已完成**（actor 38.41±1.26 / chameleon 48.09±5.04 / squirrel 44.65±1.32，均 < 1σ） | 可选：r-IGNN / a-IGNN、roman-empire custom；不改已冻结 public 表 |
 | 43 | ScaDyG（TNNLS 2026） | 官方协议 0.922 ± 0.014 vs 0.931 ± 0.009；严格协议 0.204；**组件消融已完成**（`topo` 塌成随机） | BitcoinAlpha；报告定稿；补完整工作树 patch；冻结 |
@@ -52,7 +53,6 @@
 
 | 序 | 编号 | 论文 | 会议 | 为什么排在这里 | 主表实验（单卡预估） | 环境 | 学习模块 |
 |----|------|------|------|----------------|----------------------|------|----------|
-| 1 | 09 | GBN：Riemannian geometry 对抗过平滑 / 过挤压 | NeurIPS 2025 | 可复现性高；小图（WikiCS、Texas 等）；补"深层 GNN"这一块，与 35 TPAMI 理论对照 | 深度 64–256 层，单数据集 10–30 分钟 | `dtgb` | M1 |
 | 2 | 10 | Stable-ChebNet：长程任务上的谱方法 | NeurIPS 2025 Spotlight | 可复现性高；进入图级任务与 LRGB；谱滤波知识承接 SGPC | Peptides-func / struct 各约 1–3 小时 | 视 PyG 版本，可能新建 `chebnet` | M1、M5 |
 | 3 | 31 | PUMA：持续图学习 + 图压缩 | TKDE 2025 | 可复现性高；直接复用 GCTD 积累的图压缩知识；把"压缩"从静态扩到流式 | 节点分类流式任务，单数据集小时级 | 新建 `puma` | M2 |
 | 4 | 15 | ScaleGNN：自适应高阶邻居融合 | WWW 2026 | 可复现性中高；ogbn-arxiv 单卡可做；补"大规模"主线；预传播思想与 ScaDyG 同源 | ogbn-arxiv 10 seed 约 1 小时；products 视内存 | `dtgb` | M3 |

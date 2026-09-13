@@ -1,0 +1,90 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:28:49+08:00
+[repro] run_id=20260913_222849_smoke_Amazon-ratings_2ep_pid289426
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Amazon-ratings
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p289497-i304723.scope; invocation ID: f7ce30d5f3c94059b63a71915ba2db73
+Loading config file: ./configs/NC/Amazon-ratings.json
+Log path: ./logs//NC_Amazon-ratings_NL5_HD512_DP0.15_ACTgelu_NORMbn_BTrue_LRNC0.0003_LRT0.001.log
+INFO - 09/13/26 22:28:54 - 0:00:00 - {'task': 'NC', 'dataset': 'Amazon-ratings', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 10, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Amazon-ratings_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.15, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'bn', 'bias': True, 'tau': 1.0, 'lr_nc': 0.0003, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Amazon-ratings_NL5_HD512_DP0.15_ACTgelu_NORMbn_BTrue_LRNC0.0003_LRT0.001.log', 'result_path': './results//NC_Amazon-ratings.txt'}
+INFO - 09/13/26 22:28:54 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:28:55 - 0:00:01 - Epoch 0: train_loss=1.7442251443862915, train_acc= 19.98%
+INFO - 09/13/26 22:28:55 - 0:00:01 - Epoch 0: val_loss=1.6037795543670654, val_acc= 36.78%,val_weighted_f1= 19.78,val_macro_f1= 10.76%
+INFO - 09/13/26 22:28:55 - 0:00:01 - Epoch 1: train_loss=1.6855765581130981, train_acc= 21.55%
+INFO - 09/13/26 22:28:55 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:28:55 - 0:00:01 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:28:55 - 0:00:01 - test_acc= 36.80%, weighted_f1= 19.79,macro_f1= 10.76%
+INFO - 09/13/26 22:28:55 - 0:00:01 - test_acc= 36.80%, weighted_f1= 19.79,macro_f1= 10.76%
+INFO - 09/13/26 22:28:56 - 0:00:02 - Epoch 0: train_loss=1.7413991689682007, train_acc= 20.62%
+INFO - 09/13/26 22:28:56 - 0:00:02 - Epoch 0: val_loss=1.6105625629425049, val_acc= 8.69%,val_weighted_f1= 6.45,val_macro_f1= 6.21%
+INFO - 09/13/26 22:28:56 - 0:00:02 - Epoch 1: train_loss=1.6900444030761719, train_acc= 22.77%
+INFO - 09/13/26 22:28:56 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:28:56 - 0:00:02 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:28:56 - 0:00:02 - test_acc= 8.56%, weighted_f1= 6.23,macro_f1= 6.10%
+INFO - 09/13/26 22:28:56 - 0:00:02 - test_acc= 8.56%, weighted_f1= 6.23,macro_f1= 6.10%
+INFO - 09/13/26 22:28:57 - 0:00:02 - Epoch 0: train_loss=1.7386748790740967, train_acc= 20.50%
+INFO - 09/13/26 22:28:57 - 0:00:02 - Epoch 0: val_loss=1.6107041835784912, val_acc= 13.83%,val_weighted_f1= 7.71,val_macro_f1= 8.69%
+INFO - 09/13/26 22:28:57 - 0:00:03 - Epoch 1: train_loss=1.6934607028961182, train_acc= 22.00%
+INFO - 09/13/26 22:28:57 - 0:00:03 - --------------Testing--------------------
+INFO - 09/13/26 22:28:57 - 0:00:03 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:28:57 - 0:00:03 - test_acc= 13.39%, weighted_f1= 7.34,macro_f1= 8.37%
+INFO - 09/13/26 22:28:57 - 0:00:03 - test_acc= 13.39%, weighted_f1= 7.34,macro_f1= 8.37%
+INFO - 09/13/26 22:28:57 - 0:00:03 - Epoch 0: train_loss=1.739506721496582, train_acc= 19.81%
+INFO - 09/13/26 22:28:58 - 0:00:03 - Epoch 0: val_loss=1.6237226724624634, val_acc= 7.09%,val_weighted_f1= 1.74,val_macro_f1= 4.77%
+INFO - 09/13/26 22:28:58 - 0:00:04 - Epoch 1: train_loss=1.6936317682266235, train_acc= 22.06%
+INFO - 09/13/26 22:28:58 - 0:00:04 - --------------Testing--------------------
+INFO - 09/13/26 22:28:58 - 0:00:04 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:28:58 - 0:00:04 - test_acc= 7.19%, weighted_f1= 1.75,macro_f1= 4.73%
+INFO - 09/13/26 22:28:58 - 0:00:04 - test_acc= 7.19%, weighted_f1= 1.75,macro_f1= 4.73%
+INFO - 09/13/26 22:28:58 - 0:00:04 - Epoch 0: train_loss=1.7528351545333862, train_acc= 19.83%
+INFO - 09/13/26 22:28:58 - 0:00:04 - Epoch 0: val_loss=1.616886019706726, val_acc= 26.78%,val_weighted_f1= 11.32,val_macro_f1= 8.45%
+INFO - 09/13/26 22:28:59 - 0:00:04 - Epoch 1: train_loss=1.7038078308105469, train_acc= 21.38%
+INFO - 09/13/26 22:28:59 - 0:00:04 - --------------Testing--------------------
+INFO - 09/13/26 22:28:59 - 0:00:04 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:28:59 - 0:00:05 - test_acc= 26.78%, weighted_f1= 11.32,macro_f1= 8.45%
+INFO - 09/13/26 22:28:59 - 0:00:05 - test_acc= 26.78%, weighted_f1= 11.32,macro_f1= 8.45%
+INFO - 09/13/26 22:28:59 - 0:00:05 - Epoch 0: train_loss=1.7275052070617676, train_acc= 20.69%
+INFO - 09/13/26 22:28:59 - 0:00:05 - Epoch 0: val_loss=1.6007583141326904, val_acc= 36.80%,val_weighted_f1= 19.79,val_macro_f1= 10.76%
+INFO - 09/13/26 22:29:00 - 0:00:05 - Epoch 1: train_loss=1.6769254207611084, train_acc= 22.72%
+INFO - 09/13/26 22:29:00 - 0:00:05 - --------------Testing--------------------
+INFO - 09/13/26 22:29:00 - 0:00:05 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:29:00 - 0:00:05 - test_acc= 36.78%, weighted_f1= 19.78,macro_f1= 10.76%
+INFO - 09/13/26 22:29:00 - 0:00:05 - test_acc= 36.78%, weighted_f1= 19.78,macro_f1= 10.76%
+INFO - 09/13/26 22:29:00 - 0:00:06 - Epoch 0: train_loss=1.7308766841888428, train_acc= 19.71%
+INFO - 09/13/26 22:29:00 - 0:00:06 - Epoch 0: val_loss=1.6121457815170288, val_acc= 23.31%,val_weighted_f1= 10.71,val_macro_f1= 9.09%
+INFO - 09/13/26 22:29:00 - 0:00:06 - Epoch 1: train_loss=1.679532527923584, train_acc= 22.71%
+INFO - 09/13/26 22:29:00 - 0:00:06 - --------------Testing--------------------
+INFO - 09/13/26 22:29:00 - 0:00:06 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:29:01 - 0:00:06 - test_acc= 23.58%, weighted_f1= 11.21,macro_f1= 9.65%
+INFO - 09/13/26 22:29:01 - 0:00:06 - test_acc= 23.58%, weighted_f1= 11.21,macro_f1= 9.65%
+INFO - 09/13/26 22:29:01 - 0:00:07 - Epoch 0: train_loss=1.731632113456726, train_acc= 20.02%
+INFO - 09/13/26 22:29:01 - 0:00:07 - Epoch 0: val_loss=1.6097289323806763, val_acc= 9.55%,val_weighted_f1= 2.90,val_macro_f1= 4.21%
+INFO - 09/13/26 22:29:01 - 0:00:07 - Epoch 1: train_loss=1.688048005104065, train_acc= 21.65%
+INFO - 09/13/26 22:29:01 - 0:00:07 - --------------Testing--------------------
+INFO - 09/13/26 22:29:01 - 0:00:07 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:29:01 - 0:00:07 - test_acc= 9.19%, weighted_f1= 2.46,macro_f1= 3.88%
+INFO - 09/13/26 22:29:01 - 0:00:07 - test_acc= 9.19%, weighted_f1= 2.46,macro_f1= 3.88%
+INFO - 09/13/26 22:29:02 - 0:00:07 - Epoch 0: train_loss=1.7534323930740356, train_acc= 18.91%
+INFO - 09/13/26 22:29:02 - 0:00:08 - Epoch 0: val_loss=1.615752935409546, val_acc= 4.34%,val_weighted_f1= 0.39,val_macro_f1= 1.68%
+INFO - 09/13/26 22:29:02 - 0:00:08 - Epoch 1: train_loss=1.6976321935653687, train_acc= 22.58%
+INFO - 09/13/26 22:29:02 - 0:00:08 - --------------Testing--------------------
+INFO - 09/13/26 22:29:02 - 0:00:08 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:29:02 - 0:00:08 - test_acc= 4.34%, weighted_f1= 0.36,macro_f1= 1.67%
+INFO - 09/13/26 22:29:02 - 0:00:08 - test_acc= 4.34%, weighted_f1= 0.36,macro_f1= 1.67%
+INFO - 09/13/26 22:29:03 - 0:00:08 - Epoch 0: train_loss=1.754539966583252, train_acc= 19.79%
+INFO - 09/13/26 22:29:03 - 0:00:08 - Epoch 0: val_loss=1.6178251504898071, val_acc= 8.92%,val_weighted_f1= 1.46,val_macro_f1= 3.27%
+INFO - 09/13/26 22:29:03 - 0:00:09 - Epoch 1: train_loss=1.6978404521942139, train_acc= 21.25%
+INFO - 09/13/26 22:29:03 - 0:00:09 - --------------Testing--------------------
+INFO - 09/13/26 22:29:03 - 0:00:09 - --------------Loading from ./checkpoints/NC_Amazon-ratings_model.pt--------------------
+INFO - 09/13/26 22:29:03 - 0:00:09 - test_acc= 8.92%, weighted_f1= 1.46,macro_f1= 3.27%
+INFO - 09/13/26 22:29:03 - 0:00:09 - test_acc= 8.92%, weighted_f1= 1.46,macro_f1= 3.27%
+INFO - 09/13/26 22:29:03 - 0:00:09 - Best ACCs: [36.8, 8.56, 13.39, 7.19, 26.78, 36.78, 23.58, 9.19, 4.34, 8.92]
+                                     Evaluation Acc is  17.55% ±  11.77%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=13
+[repro] finished_at=2026-09-13T22:29:04+08:00

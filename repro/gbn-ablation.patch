@@ -1,0 +1,85 @@
+diff --git a/modules/layers.py b/modules/layers.py
+index e472cd0..519557b 100644
+--- a/modules/layers.py
++++ b/modules/layers.py
+@@ -46,8 +46,12 @@ class GCNLayer(nn.Module):
+ 
+ class BoundaryConvLayer(nn.Module):
+     def __init__(self, in_dim, hid_dim, out_dim, bias, act='gelu', drop=0.3, norm='ln',
+-                 rate=None, gamma=None):
++                 rate=None, gamma=None, ablate='none',
++                 ablate_gamma_const=1.0, ablate_rate_const=1.0):
+         super().__init__()
++        self.ablate = ablate
++        self.gamma_const = ablate_gamma_const
++        self.rate_const = ablate_rate_const
+         self.rate = nn.Sequential(nn.Linear(in_dim, hid_dim, bias=bias),
+                                   nn.Dropout(drop),
+                                   ActivateModule(act),
+@@ -70,6 +74,21 @@ class BoundaryConvLayer(nn.Module):
+         """
+         rate = self.rate(xt)
+         gamma = self.gamma(x0)
++        # --- repro ablation (default 'none' = 官方路径，逐位一致) ---
++        # 对应论文 Table 4：gamma 是外部输入项，rate 是边界交互系数。
++        #   gamma_all0      : 去掉外部输入（γ_i = 0）
++        #   beta_all0       : 去掉边界交互（β_i = 0）
++        #   gamma_beta_all0 : 两者皆零（论文说此时退化为 GCN）
++        #   gamma0_beta0    : 两者换成固定常数（论文未给出常数的具体取值）
++        if self.ablate != 'none':
++            if self.ablate in ('gamma_all0', 'gamma_beta_all0'):
++                gamma = torch.zeros_like(gamma)
++            elif self.ablate == 'gamma0_beta0':
++                gamma = torch.full_like(gamma, self.gamma_const)
++            if self.ablate in ('beta_all0', 'gamma_beta_all0'):
++                rate = torch.zeros_like(rate)
++            elif self.ablate == 'gamma0_beta0':
++                rate = torch.full_like(rate, self.rate_const)
+         ind_int = 1 - ind_bd
+         p_deg = ind_bd * self.aggregate(torch.ones_like(ind_bd), edge_index) + (ind_int - ind_bd) * self.aggregate(
+             ind_int, edge_index) + 1
+diff --git a/modules/models.py b/modules/models.py
+index 7f6e6ef..2323d16 100644
+--- a/modules/models.py
++++ b/modules/models.py
+@@ -8,7 +8,8 @@ from torch_geometric.utils import add_self_loops
+ class BoundaryGCN(nn.Module):
+     def __init__(self, n_layers, in_dim, hid_dim, embed_dim, out_dim,
+                  bias, input_act, act, drop=0.3, norm='ln',
+-                 add_self_loop=True, tau=0.1, layer_wise=True):
++                 add_self_loop=True, tau=0.1, layer_wise=True, ablate='none',
++                 ablate_gamma_const=1.0, ablate_rate_const=1.0):
+         super().__init__()
+         self.input_lin = nn.Sequential(nn.Linear(in_dim, embed_dim, bias=bias),
+                                        nn.Dropout(drop),
+@@ -27,7 +28,10 @@ class BoundaryGCN(nn.Module):
+                                    ) if layer_wise else None
+         self.layers = nn.ModuleList([BoundaryConvLayer(embed_dim, hid_dim, embed_dim,
+                                                        bias, act, drop, norm,
+-                                                       self.rate, self.gamma) for _ in range(n_layers)])
++                                                       self.rate, self.gamma,
++                                                       ablate=ablate,
++                                                       ablate_gamma_const=ablate_gamma_const,
++                                                       ablate_rate_const=ablate_rate_const) for _ in range(n_layers)])
+         self.out_norm = NormModule(norm, hid_dim)
+         self.out_lin = nn.Linear(embed_dim, out_dim, bias=bias)
+         self.drop = nn.Dropout(drop)
+diff --git a/node_classification.py b/node_classification.py
+index 99c2226..06df44e 100644
+--- a/node_classification.py
++++ b/node_classification.py
+@@ -28,7 +28,13 @@ class Exp:
+                                bias=self.configs.bias, act=self.configs.act, input_act=self.configs.input_act,
+                                drop=self.configs.dropout, norm=self.configs.norm,
+                                add_self_loop=self.configs.add_self_loop,
+-                               tau=self.configs.tau, layer_wise=self.configs.layer_wise).to(self.device)
++                               tau=self.configs.tau, layer_wise=self.configs.layer_wise,
++                               # 注意：utils/config.py 的 DotDict 把 __getattr__ 指向
++                               # dict.__getitem__，缺键时抛 KeyError 而非 AttributeError，
++                               # 所以 getattr(..., 默认值) 不会生效，必须用 .get()。
++                               ablate=self.configs.get('ablate', 'none'),
++                               ablate_gamma_const=float(self.configs.get('ablate_gamma_const', 1.0)),
++                               ablate_rate_const=float(self.configs.get('ablate_rate_const', 1.0))).to(self.device)
+         return nc_model
+ 
+     def load_data(self):

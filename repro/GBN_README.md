@@ -11,33 +11,82 @@
 
 **本文件只服务这一篇。不要和其它论文共用命令、数据目录或 conda 环境改动。**
 
-## 预处理状态（2026-09-12）
+## 预处理状态（2026-09-13 更新）
 
 | 项 | 状态 |
 |----|------|
-| 源码固定 | 已克隆，SHA 见上 |
-| 环境 | 计划 `dtgb`；# 复用 dtgb。若 BoundaryGCN / torch-scatter 报错再新建 gbn。 |
-| 数据 | PyG：WebKB / Planetoid / Coauthor / WikiCS / Heterophilous。优先符号链接已有 `repro/sgpc/data/`。Coauthor CS 需另下。 |
-| 代码审计 | 见日志步骤 4（只记录，未改官方代码） |
-| 烟雾 | 命令见下；数字不对论文 |
-| 全量 | `FULL=1 bash repro/run_gbn_full.sh`（默认 dry-run） |
+| 源码固定 | 已克隆，SHA 见上（未改动；改动以 `repro/gbn-ablation.patch` 为准） |
+| 环境 | **`dtgb`**（Python 3.10.20、torch 2.2.1+cu121、PyG 2.8、torch_scatter 可用）。未新建 `gbn` 环境 |
+| 数据 | **8/8 就绪**，含论文 Table 3 的 7 个数据集 + 额外 Cora。节点/边数与论文 Table 7 吻合 |
+| 配置 | `results/gbn/configs/<DS>.json`（论文 Table 8 超参，含必需的 `layer_wise`） |
+| 主表 | `repro/run_gbn_table.sh`（8 数据集 × 10 iters） |
+| 消融 | `repro/run_gbn_ablation.sh` + `repro/gbn-ablation.patch`（论文 Table 4） |
+| 解析 | `scripts/parse_gbn_log.py` |
 
-对照目标：节点分类（WikiCS / Texas 等）与深层 GCN 对照；仓库预置 configs/NC/CS.json
+对照目标：论文 Table 3（节点分类 ACC）与 Table 4（消融）。
 
-## 烟雾（短）
+### 为什么必须注入配置 json
+
+`main.py` 的 argparse **没有** `layer_wise`，但 `node_classification.py:load_model`
+读 `configs.layer_wise`。官方只预置了 `configs/NC/CS.json`，其余数据集首次运行时
+`main.py` 会把 CLI 值另存一份 json —— 里面没有 `layer_wise`，随即
+`AttributeError: 'Namespace' object has no attribute 'layer_wise'`。
+
+因此外层用 `scripts/gen_gbn_configs.py` 按论文 Table 8 生成配置到
+`results/gbn/configs/`（入库），运行时由 `run_gbn_table.sh` 拷进
+`repro/gbn/configs/NC/`（官方克隆不入库）。
 
 ```bash
-bash repro/run_gbn.sh smoke_texas -- --task NC --dataset Texas --epochs_nc 2 --exp_iters 1 --patience_nc 1 --hid_dim 64 --embed_dim 64
+conda run -n dtgb python scripts/gen_gbn_configs.py --smoke --ablation
 ```
 
-烟雾用 Texas 并在运行后删除 configs/NC/Texas.json（若原本不存在）。不要改 CS.json。
+### 数据来源与哈希
 
-## 全量（默认不跑）
+- **复用已有**：`roman_empire.npz`、`amazon_ratings.npz` 直接来自
+  `repro/ignn/data/`（哈希见 `IGNN_CUSTOM_SPLIT.md`）。PyG
+  `HeterophilousGraphDataset` 的 `raw` 路径是
+  `<root>/<name.lower().replace('-','_')>/raw/<name>.npz`，所以放到
+  `repro/gbn/datasets/roman_empire/raw/` 与 `.../amazon_ratings/raw/` 即被识别，
+  无需联网。
+- **PyG 下载**：CS / computers / WikiCS（Coauthor / Amazon / WikiCS），走 GitHub
+  raw，可直连。
+- WebKB（Texas / Wisconsin）与 Planetoid（Cora）此前已下。
+- **注意**：`load_data` 里 `Amazon-ratings` / `Roman-empire` 用的是连字符名字，
+  经 PyG 规范化后对应 `amazon_ratings` / `roman_empire` 目录；而 `computers` 走
+  `Amazon(root, name='computers')`（PyG 内部映射到 `amazon_computers`）。
+
+## 主表（论文 Table 3）
 
 ```bash
-bash repro/run_gbn_full.sh          # 只打印命令
-FULL=1 bash repro/run_gbn_full.sh   # 真正训练
+# 烟雾（2 epoch，验证管线与计时；exp_iters 保持 10，见下）
+EXECUTE=1 SMOKE=1 bash repro/run_gbn_table.sh
+
+# 全量（8 数据集 × 10 iters，小→大排序）
+EXECUTE=1 DATASETS="Texas Wisconsin Roman-empire Amazon-ratings CS WikiCS computers Cora" \
+  bash repro/run_gbn_table.sh
 ```
+
+**烟雾不能把 `exp_iters` 设成 1**：官方 `node_classification.py` 用
+`data.train_mask[:, split]`，要求 2-D 掩码；CS / WikiCS / computers / Cora 走
+`RandomNodeSplit`，当 `num_splits=1` 时掩码退化为 1-D，会
+`IndexError: too many indices for tensor of dimension 1`。
+WebKB / Heterophilous 用数据集原生 `[N, 10]` 掩码，不受影响。烟雾只减
+`epochs_nc`。
+
+## 消融（论文 Table 4）
+
+```bash
+# 前置：应用补丁（默认关闭，ablate=none 与官方逐位一致）
+cd repro/gbn && git apply ../gbn-ablation.patch && cd -
+
+EXECUTE=1 bash repro/run_gbn_ablation.sh
+# 默认 5 变体 × {CS, WikiCS, Texas, Amazon-ratings}
+```
+
+变体语义（论文 7.2 节）：`gamma_all0`（γ_i=0，去外部输入）、`beta_all0`
+（β_i=0，去边界交互）、`gamma_beta_all0`（两者皆零，论文称退化为 GCN）、
+`gamma0_beta0`（两者换固定常数）。**论文未给出 `γ0,β0` 的常数取值**，本仓库取
+1.0，属待澄清项。
 
 ## 不要做的事
 

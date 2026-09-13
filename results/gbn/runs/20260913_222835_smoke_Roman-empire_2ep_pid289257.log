@@ -1,0 +1,90 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:28:35+08:00
+[repro] run_id=20260913_222835_smoke_Roman-empire_2ep_pid289257
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Roman-empire
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p289328-i304692.scope; invocation ID: dc3bfb3e401b4fe4ae9730fe5e01a209
+Loading config file: ./configs/NC/Roman-empire.json
+Log path: ./logs//NC_Roman-empire_NL5_HD512_DP0.15_ACTgelu_NORMln_BTrue_LRNC0.0003_LRT0.001.log
+INFO - 09/13/26 22:28:40 - 0:00:00 - {'task': 'NC', 'dataset': 'Roman-empire', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 10, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Roman-empire_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.15, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 0.0003, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Roman-empire_NL5_HD512_DP0.15_ACTgelu_NORMln_BTrue_LRNC0.0003_LRT0.001.log', 'result_path': './results//NC_Roman-empire.txt'}
+INFO - 09/13/26 22:28:40 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:28:40 - 0:00:01 - Epoch 0: train_loss=2.914520025253296, train_acc= 15.03%
+INFO - 09/13/26 22:28:40 - 0:00:01 - Epoch 0: val_loss=2.562535285949707, val_acc= 23.64%,val_weighted_f1= 12.68,val_macro_f1= 5.08%
+INFO - 09/13/26 22:28:41 - 0:00:01 - Epoch 1: train_loss=2.573141574859619, train_acc= 24.19%
+INFO - 09/13/26 22:28:41 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:28:41 - 0:00:01 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:41 - 0:00:01 - test_acc= 23.69%, weighted_f1= 12.77,macro_f1= 5.12%
+INFO - 09/13/26 22:28:41 - 0:00:01 - test_acc= 23.69%, weighted_f1= 12.77,macro_f1= 5.12%
+INFO - 09/13/26 22:28:41 - 0:00:01 - Epoch 0: train_loss=3.2083449363708496, train_acc= 10.98%
+INFO - 09/13/26 22:28:41 - 0:00:01 - Epoch 0: val_loss=2.679567337036133, val_acc= 21.25%,val_weighted_f1= 10.16,val_macro_f1= 4.36%
+INFO - 09/13/26 22:28:41 - 0:00:02 - Epoch 1: train_loss=2.6876423358917236, train_acc= 19.04%
+INFO - 09/13/26 22:28:41 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:28:41 - 0:00:02 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:41 - 0:00:02 - test_acc= 21.50%, weighted_f1= 10.17,macro_f1= 4.37%
+INFO - 09/13/26 22:28:41 - 0:00:02 - test_acc= 21.50%, weighted_f1= 10.17,macro_f1= 4.37%
+INFO - 09/13/26 22:28:42 - 0:00:02 - Epoch 0: train_loss=2.948737144470215, train_acc= 13.73%
+INFO - 09/13/26 22:28:42 - 0:00:02 - Epoch 0: val_loss=2.576789140701294, val_acc= 23.34%,val_weighted_f1= 12.89,val_macro_f1= 5.16%
+INFO - 09/13/26 22:28:42 - 0:00:02 - Epoch 1: train_loss=2.5921053886413574, train_acc= 22.50%
+INFO - 09/13/26 22:28:42 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:28:42 - 0:00:02 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:42 - 0:00:02 - test_acc= 23.54%, weighted_f1= 13.20,macro_f1= 5.29%
+INFO - 09/13/26 22:28:42 - 0:00:02 - test_acc= 23.54%, weighted_f1= 13.20,macro_f1= 5.29%
+INFO - 09/13/26 22:28:42 - 0:00:03 - Epoch 0: train_loss=3.0011818408966064, train_acc= 9.49%
+INFO - 09/13/26 22:28:42 - 0:00:03 - Epoch 0: val_loss=2.5976855754852295, val_acc= 25.00%,val_weighted_f1= 11.48,val_macro_f1= 4.59%
+INFO - 09/13/26 22:28:43 - 0:00:03 - Epoch 1: train_loss=2.6088902950286865, train_acc= 23.90%
+INFO - 09/13/26 22:28:43 - 0:00:03 - --------------Testing--------------------
+INFO - 09/13/26 22:28:43 - 0:00:03 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:43 - 0:00:03 - test_acc= 25.10%, weighted_f1= 11.53,macro_f1= 4.61%
+INFO - 09/13/26 22:28:43 - 0:00:03 - test_acc= 25.10%, weighted_f1= 11.53,macro_f1= 4.61%
+INFO - 09/13/26 22:28:43 - 0:00:03 - Epoch 0: train_loss=3.096423387527466, train_acc= 11.04%
+INFO - 09/13/26 22:28:43 - 0:00:03 - Epoch 0: val_loss=2.61734676361084, val_acc= 16.42%,val_weighted_f1= 7.57,val_macro_f1= 3.26%
+INFO - 09/13/26 22:28:43 - 0:00:04 - Epoch 1: train_loss=2.628736734390259, train_acc= 15.79%
+INFO - 09/13/26 22:28:43 - 0:00:04 - --------------Testing--------------------
+INFO - 09/13/26 22:28:43 - 0:00:04 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:44 - 0:00:04 - test_acc= 16.57%, weighted_f1= 7.84,macro_f1= 3.37%
+INFO - 09/13/26 22:28:44 - 0:00:04 - test_acc= 16.57%, weighted_f1= 7.84,macro_f1= 3.37%
+INFO - 09/13/26 22:28:44 - 0:00:04 - Epoch 0: train_loss=2.9996142387390137, train_acc= 2.10%
+INFO - 09/13/26 22:28:44 - 0:00:04 - Epoch 0: val_loss=2.5711512565612793, val_acc= 24.55%,val_weighted_f1= 12.46,val_macro_f1= 4.99%
+INFO - 09/13/26 22:28:44 - 0:00:04 - Epoch 1: train_loss=2.578462600708008, train_acc= 23.85%
+INFO - 09/13/26 22:28:44 - 0:00:04 - --------------Testing--------------------
+INFO - 09/13/26 22:28:44 - 0:00:04 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:44 - 0:00:04 - test_acc= 24.69%, weighted_f1= 12.56,macro_f1= 5.03%
+INFO - 09/13/26 22:28:44 - 0:00:04 - test_acc= 24.69%, weighted_f1= 12.56,macro_f1= 5.03%
+INFO - 09/13/26 22:28:44 - 0:00:05 - Epoch 0: train_loss=3.203216075897217, train_acc= 2.10%
+INFO - 09/13/26 22:28:45 - 0:00:05 - Epoch 0: val_loss=2.6429574489593506, val_acc= 17.23%,val_weighted_f1= 9.82,val_macro_f1= 4.50%
+INFO - 09/13/26 22:28:45 - 0:00:05 - Epoch 1: train_loss=2.6552181243896484, train_acc= 17.99%
+INFO - 09/13/26 22:28:45 - 0:00:05 - --------------Testing--------------------
+INFO - 09/13/26 22:28:45 - 0:00:05 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:45 - 0:00:05 - test_acc= 16.89%, weighted_f1= 9.76,macro_f1= 4.49%
+INFO - 09/13/26 22:28:45 - 0:00:05 - test_acc= 16.89%, weighted_f1= 9.76,macro_f1= 4.49%
+INFO - 09/13/26 22:28:45 - 0:00:05 - Epoch 0: train_loss=2.9817636013031006, train_acc= 5.49%
+INFO - 09/13/26 22:28:45 - 0:00:05 - Epoch 0: val_loss=2.5662715435028076, val_acc= 24.04%,val_weighted_f1= 12.78,val_macro_f1= 5.40%
+INFO - 09/13/26 22:28:45 - 0:00:06 - Epoch 1: train_loss=2.57688045501709, train_acc= 23.42%
+INFO - 09/13/26 22:28:45 - 0:00:06 - --------------Testing--------------------
+INFO - 09/13/26 22:28:45 - 0:00:06 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:45 - 0:00:06 - test_acc= 23.54%, weighted_f1= 12.51,macro_f1= 5.27%
+INFO - 09/13/26 22:28:45 - 0:00:06 - test_acc= 23.54%, weighted_f1= 12.51,macro_f1= 5.27%
+INFO - 09/13/26 22:28:46 - 0:00:06 - Epoch 0: train_loss=3.1384077072143555, train_acc= 3.04%
+INFO - 09/13/26 22:28:46 - 0:00:06 - Epoch 0: val_loss=2.621298313140869, val_acc= 29.55%,val_weighted_f1= 17.79,val_macro_f1= 7.58%
+INFO - 09/13/26 22:28:46 - 0:00:06 - Epoch 1: train_loss=2.632472515106201, train_acc= 25.11%
+INFO - 09/13/26 22:28:46 - 0:00:06 - --------------Testing--------------------
+INFO - 09/13/26 22:28:46 - 0:00:06 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:46 - 0:00:06 - test_acc= 29.76%, weighted_f1= 17.84,macro_f1= 7.62%
+INFO - 09/13/26 22:28:46 - 0:00:06 - test_acc= 29.76%, weighted_f1= 17.84,macro_f1= 7.62%
+INFO - 09/13/26 22:28:46 - 0:00:07 - Epoch 0: train_loss=2.8660380840301514, train_acc= 3.83%
+INFO - 09/13/26 22:28:46 - 0:00:07 - Epoch 0: val_loss=2.539910078048706, val_acc= 25.74%,val_weighted_f1= 11.51,val_macro_f1= 4.65%
+INFO - 09/13/26 22:28:47 - 0:00:07 - Epoch 1: train_loss=2.5435118675231934, train_acc= 23.49%
+INFO - 09/13/26 22:28:47 - 0:00:07 - --------------Testing--------------------
+INFO - 09/13/26 22:28:47 - 0:00:07 - --------------Loading from ./checkpoints/NC_Roman-empire_model.pt--------------------
+INFO - 09/13/26 22:28:47 - 0:00:07 - test_acc= 25.70%, weighted_f1= 11.36,macro_f1= 4.57%
+INFO - 09/13/26 22:28:47 - 0:00:07 - test_acc= 25.70%, weighted_f1= 11.36,macro_f1= 4.57%
+INFO - 09/13/26 22:28:47 - 0:00:07 - Best ACCs: [23.69, 21.5, 23.54, 25.1, 16.57, 24.69, 16.89, 23.54, 29.76, 25.7]
+                                     Evaluation Acc is  23.10% ±  3.77%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=12
+[repro] finished_at=2026-09-13T22:28:48+08:00

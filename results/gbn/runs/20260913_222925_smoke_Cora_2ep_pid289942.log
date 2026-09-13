@@ -1,0 +1,90 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:29:25+08:00
+[repro] run_id=20260913_222925_smoke_Cora_2ep_pid289942
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Cora
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p290013-i264801.scope; invocation ID: 2d1bf378264d4efbb3d87bd3284cf7b6
+Loading config file: ./configs/NC/Cora.json
+Log path: ./logs//NC_Cora_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log
+INFO - 09/13/26 22:29:30 - 0:00:00 - {'task': 'NC', 'dataset': 'Cora', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 10, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Cora_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 3, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.2, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 3e-05, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Cora_NL3_HD512_DP0.2_ACTgelu_NORMln_BTrue_LRNC3e-05_LRT0.001.log', 'result_path': './results//NC_Cora.txt'}
+INFO - 09/13/26 22:29:30 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:29:30 - 0:00:00 - Epoch 0: train_loss=2.341287612915039, train_acc= 12.81%
+INFO - 09/13/26 22:29:30 - 0:00:00 - Epoch 0: val_loss=2.3336493968963623, val_acc= 12.55%,val_weighted_f1= 2.80,val_macro_f1= 3.19%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=2.2666001319885254, train_acc= 14.10%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 11.99%, weighted_f1= 2.57,macro_f1= 3.06%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 11.99%, weighted_f1= 2.57,macro_f1= 3.06%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=2.2414941787719727, train_acc= 16.81%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=2.1745197772979736, val_acc= 14.94%,val_weighted_f1= 3.89,val_macro_f1= 3.71%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=2.160878896713257, train_acc= 16.81%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 13.28%, weighted_f1= 3.12,macro_f1= 3.36%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 13.28%, weighted_f1= 3.12,macro_f1= 3.36%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=2.1863908767700195, train_acc= 10.34%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=2.2132785320281982, val_acc= 12.92%,val_weighted_f1= 8.26,val_macro_f1= 7.79%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=2.125105619430542, train_acc= 13.73%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 12.36%, weighted_f1= 9.23,macro_f1= 6.41%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 12.36%, weighted_f1= 9.23,macro_f1= 6.41%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=1.9087605476379395, train_acc= 29.50%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=1.8535081148147583, val_acc= 30.81%,val_weighted_f1= 14.56,val_macro_f1= 6.75%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=1.8826932907104492, train_acc= 29.43%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 31.00%, weighted_f1= 14.78,macro_f1= 6.77%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 31.00%, weighted_f1= 14.78,macro_f1= 6.77%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=2.172222375869751, train_acc= 16.01%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=2.106442451477051, val_acc= 16.79%,val_weighted_f1= 4.83,val_macro_f1= 4.11%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=2.083794593811035, train_acc= 16.01%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 13.84%, weighted_f1= 3.37,macro_f1= 3.48%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 13.84%, weighted_f1= 3.37,macro_f1= 3.48%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=2.308751106262207, train_acc= 13.92%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=2.2482972145080566, val_acc= 14.94%,val_weighted_f1= 6.48,val_macro_f1= 6.69%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=2.2311129570007324, train_acc= 12.81%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 14.02%, weighted_f1= 6.38,macro_f1= 5.85%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 14.02%, weighted_f1= 6.38,macro_f1= 5.85%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=2.4413421154022217, train_acc= 11.95%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=2.379324197769165, val_acc= 9.23%,val_weighted_f1= 1.56,val_macro_f1= 2.41%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=2.335850954055786, train_acc= 11.88%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 9.96%, weighted_f1= 1.81,macro_f1= 2.59%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 9.96%, weighted_f1= 1.81,macro_f1= 2.59%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=2.1190109252929688, train_acc= 7.57%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=2.0366740226745605, val_acc= 7.75%,val_weighted_f1= 4.52,val_macro_f1= 5.32%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 1: train_loss=2.0629591941833496, train_acc= 9.48%
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 7.20%, weighted_f1= 2.67,macro_f1= 3.52%
+INFO - 09/13/26 22:29:31 - 0:00:01 - test_acc= 7.20%, weighted_f1= 2.67,macro_f1= 3.52%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: train_loss=2.2508792877197266, train_acc= 8.37%
+INFO - 09/13/26 22:29:31 - 0:00:01 - Epoch 0: val_loss=2.1779582500457764, val_acc= 7.93%,val_weighted_f1= 3.13,val_macro_f1= 5.04%
+INFO - 09/13/26 22:29:32 - 0:00:02 - Epoch 1: train_loss=2.167746067047119, train_acc= 8.31%
+INFO - 09/13/26 22:29:32 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:29:32 - 0:00:02 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:32 - 0:00:02 - test_acc= 9.23%, weighted_f1= 4.15,macro_f1= 6.16%
+INFO - 09/13/26 22:29:32 - 0:00:02 - test_acc= 9.23%, weighted_f1= 4.15,macro_f1= 6.16%
+INFO - 09/13/26 22:29:32 - 0:00:02 - Epoch 0: train_loss=2.0185813903808594, train_acc= 12.75%
+INFO - 09/13/26 22:29:32 - 0:00:02 - Epoch 0: val_loss=1.9620122909545898, val_acc= 13.10%,val_weighted_f1= 6.71,val_macro_f1= 6.40%
+INFO - 09/13/26 22:29:32 - 0:00:02 - Epoch 1: train_loss=1.967344880104065, train_acc= 13.49%
+INFO - 09/13/26 22:29:32 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:29:32 - 0:00:02 - --------------Loading from ./checkpoints/NC_Cora_model.pt--------------------
+INFO - 09/13/26 22:29:32 - 0:00:02 - test_acc= 11.81%, weighted_f1= 4.83,macro_f1= 5.64%
+INFO - 09/13/26 22:29:32 - 0:00:02 - test_acc= 11.81%, weighted_f1= 4.83,macro_f1= 5.64%
+INFO - 09/13/26 22:29:32 - 0:00:02 - Best ACCs: [11.99, 13.28, 12.36, 31.0, 13.84, 14.02, 9.96, 7.2, 9.23, 11.81]
+                                     Evaluation Acc is  13.47% ±  6.19%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=6
+[repro] finished_at=2026-09-13T22:29:32+08:00

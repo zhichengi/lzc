@@ -1,0 +1,90 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:29:06+08:00
+[repro] run_id=20260913_222906_smoke_Texas_2ep_pid289575
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Texas
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p289646-i264766.scope; invocation ID: 41d2eff38c66421da43b0e3fdf00cdcc
+Loading config file: ./configs/NC/Texas.json
+Log path: ./logs//NC_Texas_NL5_HD512_DP0.3_ACTgelu_NORMln_BTrue_LRNC0.0001_LRT0.001.log
+INFO - 09/13/26 22:29:11 - 0:00:00 - {'task': 'NC', 'dataset': 'Texas', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 10, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Texas_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.3, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 0.0001, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Texas_NL5_HD512_DP0.3_ACTgelu_NORMln_BTrue_LRNC0.0001_LRT0.001.log', 'result_path': './results//NC_Texas.txt'}
+INFO - 09/13/26 22:29:11 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:29:11 - 0:00:00 - Epoch 0: train_loss=1.9363384246826172, train_acc= 22.99%
+INFO - 09/13/26 22:29:11 - 0:00:00 - Epoch 0: val_loss=1.7286455631256104, val_acc= 10.17%,val_weighted_f1= 4.63,val_macro_f1= 4.42%
+INFO - 09/13/26 22:29:11 - 0:00:00 - Epoch 1: train_loss=1.516440510749817, train_acc= 26.44%
+INFO - 09/13/26 22:29:11 - 0:00:00 - --------------Testing--------------------
+INFO - 09/13/26 22:29:11 - 0:00:00 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:11 - 0:00:01 - test_acc= 10.81%, weighted_f1= 2.77,macro_f1= 5.13%
+INFO - 09/13/26 22:29:11 - 0:00:01 - test_acc= 10.81%, weighted_f1= 2.77,macro_f1= 5.13%
+INFO - 09/13/26 22:29:11 - 0:00:01 - Epoch 0: train_loss=1.7877312898635864, train_acc= 20.69%
+INFO - 09/13/26 22:29:11 - 0:00:01 - Epoch 0: val_loss=1.5456808805465698, val_acc= 25.42%,val_weighted_f1= 23.23,val_macro_f1= 11.46%
+INFO - 09/13/26 22:29:11 - 0:00:01 - Epoch 1: train_loss=1.457655906677246, train_acc= 43.68%
+INFO - 09/13/26 22:29:11 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:11 - 0:00:01 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:11 - 0:00:01 - test_acc= 24.32%, weighted_f1= 25.11,macro_f1= 12.91%
+INFO - 09/13/26 22:29:11 - 0:00:01 - test_acc= 24.32%, weighted_f1= 25.11,macro_f1= 12.91%
+INFO - 09/13/26 22:29:11 - 0:00:01 - Epoch 0: train_loss=1.3423880338668823, train_acc= 39.08%
+INFO - 09/13/26 22:29:11 - 0:00:01 - Epoch 0: val_loss=1.2376110553741455, val_acc= 54.24%,val_weighted_f1= 38.14,val_macro_f1= 17.58%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 1: train_loss=1.174805998802185, train_acc= 57.47%
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 48.65%, weighted_f1= 31.84,macro_f1= 13.09%
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 48.65%, weighted_f1= 31.84,macro_f1= 13.09%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: train_loss=1.516810417175293, train_acc= 36.78%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: val_loss=1.4080562591552734, val_acc= 52.54%,val_weighted_f1= 36.60,val_macro_f1= 17.42%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 1: train_loss=1.2185684442520142, train_acc= 56.32%
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 62.16%, weighted_f1= 47.66,macro_f1= 19.17%
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 62.16%, weighted_f1= 47.66,macro_f1= 19.17%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: train_loss=1.746660828590393, train_acc= 14.94%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: val_loss=1.3276962041854858, val_acc= 61.02%,val_weighted_f1= 48.03,val_macro_f1= 19.15%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 1: train_loss=1.409757375717163, train_acc= 47.13%
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 59.46%, weighted_f1= 46.77,macro_f1= 24.31%
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 59.46%, weighted_f1= 46.77,macro_f1= 24.31%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: train_loss=1.8988561630249023, train_acc= 1.15%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: val_loss=1.5204797983169556, val_acc= 40.68%,val_weighted_f1= 41.36,val_macro_f1= 19.50%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 1: train_loss=1.5298774242401123, train_acc= 32.18%
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 35.14%, weighted_f1= 36.23,macro_f1= 16.15%
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 35.14%, weighted_f1= 36.23,macro_f1= 16.15%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: train_loss=1.6564253568649292, train_acc= 12.64%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: val_loss=1.3217862844467163, val_acc= 55.93%,val_weighted_f1= 44.49,val_macro_f1= 18.75%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 1: train_loss=1.3264447450637817, train_acc= 47.13%
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Testing--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 54.05%, weighted_f1= 42.26,macro_f1= 24.74%
+INFO - 09/13/26 22:29:12 - 0:00:01 - test_acc= 54.05%, weighted_f1= 42.26,macro_f1= 24.74%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: train_loss=1.6638413667678833, train_acc= 19.54%
+INFO - 09/13/26 22:29:12 - 0:00:01 - Epoch 0: val_loss=1.3162274360656738, val_acc= 61.02%,val_weighted_f1= 52.23,val_macro_f1= 27.91%
+INFO - 09/13/26 22:29:12 - 0:00:02 - Epoch 1: train_loss=1.3643929958343506, train_acc= 55.17%
+INFO - 09/13/26 22:29:12 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:29:12 - 0:00:02 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:12 - 0:00:02 - test_acc= 56.76%, weighted_f1= 45.01,macro_f1= 14.48%
+INFO - 09/13/26 22:29:12 - 0:00:02 - test_acc= 56.76%, weighted_f1= 45.01,macro_f1= 14.48%
+INFO - 09/13/26 22:29:12 - 0:00:02 - Epoch 0: train_loss=1.5540255308151245, train_acc= 24.14%
+INFO - 09/13/26 22:29:12 - 0:00:02 - Epoch 0: val_loss=1.401772379875183, val_acc= 47.46%,val_weighted_f1= 31.64,val_macro_f1= 16.09%
+INFO - 09/13/26 22:29:12 - 0:00:02 - Epoch 1: train_loss=1.2674334049224854, train_acc= 57.47%
+INFO - 09/13/26 22:29:12 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:29:12 - 0:00:02 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:12 - 0:00:02 - test_acc= 59.46%, weighted_f1= 45.11,macro_f1= 18.97%
+INFO - 09/13/26 22:29:12 - 0:00:02 - test_acc= 59.46%, weighted_f1= 45.11,macro_f1= 18.97%
+INFO - 09/13/26 22:29:12 - 0:00:02 - Epoch 0: train_loss=2.052471399307251, train_acc= 9.20%
+INFO - 09/13/26 22:29:13 - 0:00:02 - Epoch 0: val_loss=1.6664243936538696, val_acc= 18.64%,val_weighted_f1= 11.46,val_macro_f1= 14.19%
+INFO - 09/13/26 22:29:13 - 0:00:02 - Epoch 1: train_loss=1.637232780456543, train_acc= 17.24%
+INFO - 09/13/26 22:29:13 - 0:00:02 - --------------Testing--------------------
+INFO - 09/13/26 22:29:13 - 0:00:02 - --------------Loading from ./checkpoints/NC_Texas_model.pt--------------------
+INFO - 09/13/26 22:29:13 - 0:00:02 - test_acc= 5.41%, weighted_f1= 5.02,macro_f1= 3.77%
+INFO - 09/13/26 22:29:13 - 0:00:02 - test_acc= 5.41%, weighted_f1= 5.02,macro_f1= 3.77%
+INFO - 09/13/26 22:29:13 - 0:00:02 - Best ACCs: [10.81, 24.32, 48.65, 62.16, 59.46, 35.14, 54.05, 56.76, 59.46, 5.41]
+                                     Evaluation Acc is  41.62% ±  20.23%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=6
+[repro] finished_at=2026-09-13T22:29:13+08:00

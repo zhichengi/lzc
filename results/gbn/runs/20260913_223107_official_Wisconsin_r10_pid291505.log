@@ -1,0 +1,1994 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:31:07+08:00
+[repro] run_id=20260913_223107_official_Wisconsin_r10_pid291505
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Wisconsin
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p291608-i269346.scope; invocation ID: 117455268c334cd2b4f5e8d44fbb83f0
+Loading config file: ./configs/NC/Wisconsin.json
+Log path: ./logs//NC_Wisconsin_NL5_HD512_DP0.7_ACTgelu_NORMln_BTrue_LRNC0.001_LRT0.001.log
+INFO - 09/13/26 22:31:12 - 0:00:00 - {'task': 'NC', 'dataset': 'Wisconsin', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 10, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Wisconsin_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.7, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 0.001, 'weight_decay_nc': 0, 'epochs_nc': 2000, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Wisconsin_NL5_HD512_DP0.7_ACTgelu_NORMln_BTrue_LRNC0.001_LRT0.001.log', 'result_path': './results//NC_Wisconsin.txt'}
+INFO - 09/13/26 22:31:12 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:31:12 - 0:00:00 - Epoch 0: train_loss=1.827430248260498, train_acc= 11.67%
+INFO - 09/13/26 22:31:12 - 0:00:00 - Epoch 0: val_loss=1.5575542449951172, val_acc= 60.00%,val_weighted_f1= 49.83,val_macro_f1= 24.76%
+INFO - 09/13/26 22:31:12 - 0:00:00 - Epoch 1: train_loss=1.271145224571228, train_acc= 50.83%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 2: train_loss=1.0963555574417114, train_acc= 59.17%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 3: train_loss=0.8594809174537659, train_acc= 80.83%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 4: train_loss=0.7094241380691528, train_acc= 81.67%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 5: train_loss=0.5854709148406982, train_acc= 83.33%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 5: val_loss=0.7233157157897949, val_acc= 80.00%,val_weighted_f1= 75.72,val_macro_f1= 54.92%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 6: train_loss=0.5029593706130981, train_acc= 86.67%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 7: train_loss=0.39941027760505676, train_acc= 88.33%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 8: train_loss=0.3120827078819275, train_acc= 90.83%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 9: train_loss=0.2536816895008087, train_acc= 92.50%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 10: train_loss=0.1831725686788559, train_acc= 94.17%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 10: val_loss=0.5047551393508911, val_acc= 83.75%,val_weighted_f1= 80.30,val_macro_f1= 59.82%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 11: train_loss=0.1749648153781891, train_acc= 95.00%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 12: train_loss=0.1507391780614853, train_acc= 96.67%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 13: train_loss=0.10244500637054443, train_acc= 99.17%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 14: train_loss=0.08678077906370163, train_acc= 98.33%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 15: train_loss=0.07443360984325409, train_acc= 97.50%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 15: val_loss=0.4262029528617859, val_acc= 86.25%,val_weighted_f1= 83.39,val_macro_f1= 64.89%
+INFO - 09/13/26 22:31:12 - 0:00:01 - Epoch 16: train_loss=0.07575961202383041, train_acc= 98.33%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 17: train_loss=0.09337759763002396, train_acc= 96.67%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 18: train_loss=0.055348679423332214, train_acc= 98.33%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 19: train_loss=0.05780757963657379, train_acc= 97.50%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 20: train_loss=0.034892335534095764, train_acc= 99.17%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 20: val_loss=0.4219784140586853, val_acc= 85.00%,val_weighted_f1= 82.01,val_macro_f1= 63.76%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 21: train_loss=0.036196887493133545, train_acc= 99.17%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 22: train_loss=0.03264899179339409, train_acc= 98.33%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 23: train_loss=0.01899927668273449, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 24: train_loss=0.03663843870162964, train_acc= 99.17%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 25: train_loss=0.019259069114923477, train_acc= 99.17%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 25: val_loss=0.39860662817955017, val_acc= 86.25%,val_weighted_f1= 83.36,val_macro_f1= 66.84%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 26: train_loss=0.021805912256240845, train_acc= 99.17%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 27: train_loss=0.015451238490641117, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 28: train_loss=0.011236784979701042, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 29: train_loss=0.015504521317780018, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 30: train_loss=0.007406559772789478, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 30: val_loss=0.3275422155857086, val_acc= 87.50%,val_weighted_f1= 85.10,val_macro_f1= 67.79%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 31: train_loss=0.009287353605031967, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 32: train_loss=0.01134250033646822, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 33: train_loss=0.010580367408692837, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 34: train_loss=0.0077967862598598, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 35: train_loss=0.0041909306310117245, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 35: val_loss=0.3191390633583069, val_acc= 87.50%,val_weighted_f1= 86.25,val_macro_f1= 73.26%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 36: train_loss=0.010082270950078964, train_acc= 99.17%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 37: train_loss=0.005739179905503988, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 38: train_loss=0.004111053422093391, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:01 - Epoch 39: train_loss=0.005620673298835754, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 40: train_loss=0.0210060253739357, train_acc= 99.17%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 40: val_loss=0.42847028374671936, val_acc= 86.25%,val_weighted_f1= 83.21,val_macro_f1= 64.51%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 41: train_loss=0.0040269154123961926, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 42: train_loss=0.002889360999688506, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 43: train_loss=0.0015431293286383152, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 44: train_loss=0.0038787205703556538, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 45: train_loss=0.008689045906066895, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 45: val_loss=0.48029589653015137, val_acc= 87.50%,val_weighted_f1= 86.10,val_macro_f1= 72.93%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 46: train_loss=0.0014241165481507778, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 47: train_loss=0.0014501491095870733, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 48: train_loss=0.0023584431037306786, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 49: train_loss=0.0010569137521088123, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 50: train_loss=0.001626387471333146, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 50: val_loss=0.5740739107131958, val_acc= 85.00%,val_weighted_f1= 81.61,val_macro_f1= 64.77%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 51: train_loss=0.0010185035644099116, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 52: train_loss=0.0018711688462644815, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 53: train_loss=0.0015856706304475665, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 54: train_loss=0.0017189732752740383, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 55: train_loss=0.0014571868814527988, train_acc= 100.00%
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 55: val_loss=0.6362853050231934, val_acc= 85.00%,val_weighted_f1= 81.61,val_macro_f1= 64.77%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:13 - 0:00:02 - Epoch 56: train_loss=0.001075542881153524, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 57: train_loss=0.0006872543599456549, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 58: train_loss=0.0005681670736521482, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 59: train_loss=0.0004735912079922855, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 60: train_loss=0.0016384186455979943, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 60: val_loss=0.6895052194595337, val_acc= 85.00%,val_weighted_f1= 81.61,val_macro_f1= 64.77%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 61: train_loss=0.0005358365597203374, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 62: train_loss=0.0006641984218731523, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 63: train_loss=0.0006777738453820348, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 64: train_loss=0.004719204269349575, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 65: train_loss=0.0008691861876286566, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 65: val_loss=0.6927832365036011, val_acc= 85.00%,val_weighted_f1= 81.61,val_macro_f1= 64.77%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 66: train_loss=0.0008168459171429276, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 67: train_loss=0.0005610050284303725, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 68: train_loss=0.0005199593142606318, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 69: train_loss=0.000821284600533545, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 70: train_loss=0.0005288334796205163, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 70: val_loss=0.6674618124961853, val_acc= 85.00%,val_weighted_f1= 81.61,val_macro_f1= 64.77%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 71: train_loss=0.0009222709923051298, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 72: train_loss=0.0003263506223447621, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 73: train_loss=0.0005386447883211076, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 74: train_loss=0.0008143839077092707, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 75: train_loss=0.0018410036573186517, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 75: val_loss=0.659856915473938, val_acc= 85.00%,val_weighted_f1= 81.61,val_macro_f1= 64.77%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 76: train_loss=0.0007498838240280747, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 77: train_loss=0.0006119267782196403, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 78: train_loss=0.0004188295570202172, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 79: train_loss=0.0003530459071043879, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 80: train_loss=0.0005438345251604915, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 80: val_loss=0.6687573194503784, val_acc= 83.75%,val_weighted_f1= 79.81,val_macro_f1= 60.66%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:14 - 0:00:02 - Epoch 81: train_loss=0.0006701159873045981, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 82: train_loss=0.001886687008664012, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 83: train_loss=0.0028838582802563906, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 84: train_loss=0.0003568679967429489, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 85: train_loss=0.00036209230893291533, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 85: val_loss=0.6438177824020386, val_acc= 86.25%,val_weighted_f1= 82.79,val_macro_f1= 65.51%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 86: train_loss=0.0008370017167180777, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 87: train_loss=0.0002779081114567816, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 88: train_loss=0.0004846731899306178, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 89: train_loss=0.0004970016307197511, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 90: train_loss=0.000551662698853761, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 90: val_loss=0.6162649393081665, val_acc= 86.25%,val_weighted_f1= 82.79,val_macro_f1= 65.51%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 91: train_loss=0.0003064492775592953, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 92: train_loss=0.0002713740977924317, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 93: train_loss=0.00035657398984767497, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 94: train_loss=0.0004777557624038309, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 95: train_loss=0.0003509063390083611, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 95: val_loss=0.6058769822120667, val_acc= 87.50%,val_weighted_f1= 84.42,val_macro_f1= 68.25%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 96: train_loss=0.0013591181486845016, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 97: train_loss=0.0004050825664307922, train_acc= 100.00%
+INFO - 09/13/26 22:31:14 - 0:00:03 - Epoch 98: train_loss=0.00029406193061731756, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 99: train_loss=0.0012944894842803478, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 100: train_loss=0.0018487698398530483, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 100: val_loss=0.6068969964981079, val_acc= 87.50%,val_weighted_f1= 84.42,val_macro_f1= 68.25%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 101: train_loss=0.0003020690055564046, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 102: train_loss=0.00040145174716599286, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 103: train_loss=0.0003894432447850704, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 104: train_loss=0.0003378101100679487, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 105: train_loss=0.0004374753625597805, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 105: val_loss=0.5924878120422363, val_acc= 87.50%,val_weighted_f1= 85.47,val_macro_f1= 71.58%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 106: train_loss=0.0005572829395532608, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 107: train_loss=0.0003112778067588806, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 108: train_loss=0.0006534060230478644, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 109: train_loss=0.0005161849549040198, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 110: train_loss=0.0003261794918216765, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 110: val_loss=0.5882746577262878, val_acc= 87.50%,val_weighted_f1= 85.47,val_macro_f1= 71.58%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 111: train_loss=0.00039477754035033286, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 112: train_loss=0.00024472709628753364, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 113: train_loss=0.00045356954797171056, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 114: train_loss=0.0002595332043711096, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 115: train_loss=0.0004092585004400462, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 115: val_loss=0.591281533241272, val_acc= 87.50%,val_weighted_f1= 85.47,val_macro_f1= 71.58%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 116: train_loss=0.00021911140356678516, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 117: train_loss=0.0003038770519196987, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 118: train_loss=0.0004018427280243486, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 119: train_loss=0.00026699216687120497, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:03 - Epoch 120: train_loss=0.0003248459252063185, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 120: val_loss=0.5985455513000488, val_acc= 86.25%,val_weighted_f1= 82.87,val_macro_f1= 64.71%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 121: train_loss=0.0002995049289893359, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 122: train_loss=0.00023713926202617586, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 123: train_loss=0.0004063872911501676, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 124: train_loss=0.0004196353838779032, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 125: train_loss=0.0002392097667325288, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 125: val_loss=0.6092872619628906, val_acc= 86.25%,val_weighted_f1= 82.87,val_macro_f1= 64.71%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 126: train_loss=0.0003107126394752413, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 127: train_loss=0.0011277144076302648, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 128: train_loss=0.0008626311901025474, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 129: train_loss=0.0006260240916162729, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 130: train_loss=0.0005812736344523728, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 130: val_loss=0.6242561936378479, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 131: train_loss=0.0003735316568054259, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 132: train_loss=0.0002878984378185123, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 133: train_loss=0.0004382495244499296, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 134: train_loss=0.00023979083925951272, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 135: train_loss=0.00019038609752897173, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 135: val_loss=0.6390621066093445, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 136: train_loss=0.0006119647296145558, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 137: train_loss=0.00024738747742958367, train_acc= 100.00%
+INFO - 09/13/26 22:31:15 - 0:00:04 - Epoch 138: train_loss=0.0003591952845454216, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 139: train_loss=0.0005835848278366029, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 140: train_loss=0.0003467150672804564, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 140: val_loss=0.6531316041946411, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 141: train_loss=0.0005578425480052829, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 142: train_loss=0.0003082120092585683, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 143: train_loss=0.0003892510721925646, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 144: train_loss=0.0002473090135026723, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 145: train_loss=0.00034409615909680724, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 145: val_loss=0.6537374258041382, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 146: train_loss=0.0002884423593059182, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 147: train_loss=0.0004318663268350065, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 148: train_loss=0.00018118972366210073, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 149: train_loss=0.000358022894943133, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 150: train_loss=0.00026025279657915235, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 150: val_loss=0.6649924516677856, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 151: train_loss=0.00017096710507757962, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 152: train_loss=0.0002611948293633759, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 153: train_loss=0.0002849633456207812, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 154: train_loss=0.0002552517980802804, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 155: train_loss=0.0003397297114133835, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 155: val_loss=0.6769915819168091, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 156: train_loss=0.00018899858696386218, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 157: train_loss=0.00017235041013918817, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 158: train_loss=0.00039189806557260454, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 159: train_loss=0.0002536250394769013, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 160: train_loss=0.00023980271362233907, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 160: val_loss=0.6907147169113159, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 161: train_loss=0.00020669007790274918, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 162: train_loss=0.00018576702859718353, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:04 - Epoch 163: train_loss=0.00015659380005672574, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 164: train_loss=0.0002001642424147576, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 165: train_loss=0.00017900347302202135, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 165: val_loss=0.7046583890914917, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 166: train_loss=0.00017442158423364162, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 167: train_loss=0.00018016622925642878, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 168: train_loss=0.000255618360824883, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 169: train_loss=0.00026399752823635936, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 170: train_loss=0.00015108197112567723, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 170: val_loss=0.7189533710479736, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 171: train_loss=0.00016937417967710644, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 172: train_loss=0.0003814621304627508, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 173: train_loss=0.00015596169396303594, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 174: train_loss=0.000187491430551745, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 175: train_loss=0.0003004068275913596, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 175: val_loss=0.7315415740013123, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 176: train_loss=0.00014369540440384299, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 177: train_loss=0.0002329763228772208, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 178: train_loss=0.0006879964494146407, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 179: train_loss=0.0003191944269929081, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 180: train_loss=0.0002935068914666772, train_acc= 100.00%
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 180: val_loss=0.7450078725814819, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:16 - 0:00:05 - Epoch 181: train_loss=0.00011755137529689819, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 182: train_loss=0.00019744675955735147, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 183: train_loss=0.0002681409823708236, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 184: train_loss=0.00017018968355841935, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 185: train_loss=0.002835235558450222, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 185: val_loss=0.725507378578186, val_acc= 85.00%,val_weighted_f1= 80.99,val_macro_f1= 61.40%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 186: train_loss=0.00026775029255077243, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 187: train_loss=0.00029781772173009813, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 188: train_loss=0.0002326669346075505, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 189: train_loss=0.00020515140204224735, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 190: train_loss=0.00022284618171397597, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 190: val_loss=0.6363612413406372, val_acc= 85.00%,val_weighted_f1= 82.66,val_macro_f1= 67.07%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:17 - 0:00:05 - --------------Testing--------------------
+INFO - 09/13/26 22:31:17 - 0:00:05 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:17 - 0:00:05 - test_acc= 80.39%, weighted_f1= 78.46,macro_f1= 54.57%
+INFO - 09/13/26 22:31:17 - 0:00:05 - test_acc= 80.39%, weighted_f1= 78.46,macro_f1= 54.57%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 0: train_loss=1.788073182106018, train_acc= 11.67%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 0: val_loss=2.036391019821167, val_acc= 40.00%,val_weighted_f1= 24.24,val_macro_f1= 12.94%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 1: train_loss=1.16830313205719, train_acc= 54.17%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 2: train_loss=0.8955828547477722, train_acc= 70.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 3: train_loss=0.7807994484901428, train_acc= 72.50%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 4: train_loss=0.675467848777771, train_acc= 77.50%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 5: train_loss=0.5045631527900696, train_acc= 85.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 5: val_loss=1.6520538330078125, val_acc= 67.50%,val_weighted_f1= 62.62,val_macro_f1= 48.45%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 6: train_loss=0.40987807512283325, train_acc= 88.33%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 7: train_loss=0.3136148154735565, train_acc= 91.67%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 8: train_loss=0.260871559381485, train_acc= 93.33%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 9: train_loss=0.18086574971675873, train_acc= 95.00%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 10: train_loss=0.16320206224918365, train_acc= 96.67%
+INFO - 09/13/26 22:31:17 - 0:00:05 - Epoch 10: val_loss=1.3418890237808228, val_acc= 82.50%,val_weighted_f1= 78.59,val_macro_f1= 66.35%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 11: train_loss=0.09873037040233612, train_acc= 97.50%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 12: train_loss=0.09063991904258728, train_acc= 96.67%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 13: train_loss=0.06263799220323563, train_acc= 99.17%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 14: train_loss=0.04429857060313225, train_acc= 99.17%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 15: train_loss=0.03620733693242073, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 15: val_loss=1.361254096031189, val_acc= 80.00%,val_weighted_f1= 76.15,val_macro_f1= 63.41%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 16: train_loss=0.022221149876713753, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 17: train_loss=0.014754976145923138, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 18: train_loss=0.012956573627889156, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 19: train_loss=0.014173826202750206, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 20: train_loss=0.009438199922442436, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 20: val_loss=1.4688845872879028, val_acc= 78.75%,val_weighted_f1= 74.74,val_macro_f1= 61.27%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 21: train_loss=0.012017418630421162, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 22: train_loss=0.00914723053574562, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 23: train_loss=0.010107332840561867, train_acc= 99.17%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 24: train_loss=0.006221540737897158, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 25: train_loss=0.004475311376154423, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 25: val_loss=1.4897483587265015, val_acc= 80.00%,val_weighted_f1= 75.96,val_macro_f1= 62.01%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 26: train_loss=0.0053198812529444695, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 27: train_loss=0.004456630442291498, train_acc= 100.00%
+INFO - 09/13/26 22:31:17 - 0:00:06 - Epoch 28: train_loss=0.003683264832943678, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 29: train_loss=0.0024525851476937532, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 30: train_loss=0.0028712525963783264, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 30: val_loss=1.4978315830230713, val_acc= 80.00%,val_weighted_f1= 75.96,val_macro_f1= 62.01%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 31: train_loss=0.006253517232835293, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 32: train_loss=0.0030773719772696495, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 33: train_loss=0.0018026427133008838, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 34: train_loss=0.001658121356740594, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 35: train_loss=0.005084160249680281, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 35: val_loss=1.4900543689727783, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 36: train_loss=0.001992564182728529, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 37: train_loss=0.0019914088770747185, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 38: train_loss=0.0020087948068976402, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 39: train_loss=0.005641667637974024, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 40: train_loss=0.0011582608567550778, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 40: val_loss=1.4915038347244263, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 41: train_loss=0.0022846900392323732, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 42: train_loss=0.0010135568445548415, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 43: train_loss=0.0035669596400111914, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 44: train_loss=0.0015649388078600168, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 45: train_loss=0.0013856473378837109, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 45: val_loss=1.5188325643539429, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 46: train_loss=0.008366983383893967, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 47: train_loss=0.0024211490526795387, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 48: train_loss=0.0010088024428114295, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 49: train_loss=0.0012120917672291398, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 50: train_loss=0.0010514742461964488, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 50: val_loss=1.5455341339111328, val_acc= 82.50%,val_weighted_f1= 78.69,val_macro_f1= 66.51%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 51: train_loss=0.002218905370682478, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:06 - Epoch 52: train_loss=0.0008654099074192345, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 53: train_loss=0.001490674214437604, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 54: train_loss=0.0007609169115312397, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 55: train_loss=0.0021258771885186434, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 55: val_loss=1.5722980499267578, val_acc= 81.25%,val_weighted_f1= 77.46,val_macro_f1= 65.77%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 56: train_loss=0.000764789991080761, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 57: train_loss=0.000636214972473681, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 58: train_loss=0.0012116699945181608, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 59: train_loss=0.0007635023794136941, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 60: train_loss=0.0005605717306025326, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 60: val_loss=1.5991474390029907, val_acc= 80.00%,val_weighted_f1= 76.33,val_macro_f1= 64.74%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 61: train_loss=0.0005255466676317155, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 62: train_loss=0.0021752608008682728, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 63: train_loss=0.0006230463623069227, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 64: train_loss=0.0032091550529003143, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 65: train_loss=0.001616218825802207, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 65: val_loss=1.6157585382461548, val_acc= 80.00%,val_weighted_f1= 76.33,val_macro_f1= 64.74%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 66: train_loss=0.0007379113812930882, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 67: train_loss=0.0011328948894515634, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 68: train_loss=0.003759522456675768, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 69: train_loss=0.00048304666415788233, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 70: train_loss=0.0017924807034432888, train_acc= 100.00%
+INFO - 09/13/26 22:31:18 - 0:00:07 - Epoch 70: val_loss=1.6435461044311523, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 71: train_loss=0.0006310325697995722, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 72: train_loss=0.0004634031211026013, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 73: train_loss=0.0006231848383322358, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 74: train_loss=0.002320654224604368, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 75: train_loss=0.00040733118657954037, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 75: val_loss=1.6950914859771729, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 76: train_loss=0.0004699482524301857, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 77: train_loss=0.0007047732942737639, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 78: train_loss=0.0004051237483508885, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 79: train_loss=0.00028073726571165025, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 80: train_loss=0.0003342801355756819, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 80: val_loss=1.7298476696014404, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 81: train_loss=0.0004949275753460824, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 82: train_loss=0.0003984666836913675, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 83: train_loss=0.0005495161167345941, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 84: train_loss=0.000540337001439184, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 85: train_loss=0.0006170604610815644, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 85: val_loss=1.7512575387954712, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 86: train_loss=0.0009118827874772251, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 87: train_loss=0.0010599272791296244, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 88: train_loss=0.0008246867801062763, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 89: train_loss=0.0005753992008976638, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 90: train_loss=0.0005117390537634492, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 90: val_loss=1.7595049142837524, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 91: train_loss=0.00044790172250941396, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 92: train_loss=0.0012118791928514838, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 93: train_loss=0.0006988972309045494, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 94: train_loss=0.00016095905448310077, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 95: train_loss=0.0002619072038214654, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 95: val_loss=1.7687536478042603, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:07 - Epoch 96: train_loss=0.0007011949201114476, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 97: train_loss=0.00029815983725711703, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 98: train_loss=0.0002232499682577327, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 99: train_loss=0.0003611814172472805, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 100: train_loss=0.0027499301359057426, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 100: val_loss=1.7783855199813843, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 101: train_loss=0.0002591701049823314, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 102: train_loss=0.0003254739858675748, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 103: train_loss=0.0002810298465192318, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 104: train_loss=0.00023574655642732978, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 105: train_loss=0.00018482300220057368, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 105: val_loss=1.783503532409668, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 106: train_loss=0.0008370529976673424, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 107: train_loss=0.00020728564413730055, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 108: train_loss=0.0007103739189915359, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 109: train_loss=0.00018448101764079183, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 110: train_loss=0.0002187963982578367, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 110: val_loss=1.779581069946289, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 111: train_loss=0.0003317142545711249, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 112: train_loss=0.0004618012753780931, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 113: train_loss=0.00046648099669255316, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 114: train_loss=0.00023137433163356036, train_acc= 100.00%
+INFO - 09/13/26 22:31:19 - 0:00:08 - Epoch 115: train_loss=0.00015314306074287742, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 115: val_loss=1.7788184881210327, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 116: train_loss=0.00020313271670602262, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 117: train_loss=0.00021929782815277576, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 118: train_loss=0.00030655981390736997, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 119: train_loss=0.00028065498918294907, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 120: train_loss=0.000217374850763008, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 120: val_loss=1.781614899635315, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 121: train_loss=0.00028393653337843716, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 122: train_loss=0.0004914432065561414, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 123: train_loss=0.00239308038726449, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 124: train_loss=0.00021323905093595386, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 125: train_loss=0.00045217241859063506, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 125: val_loss=1.7774884700775146, val_acc= 81.25%,val_weighted_f1= 77.39,val_macro_f1= 64.60%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:20 - 0:00:08 - --------------Testing--------------------
+INFO - 09/13/26 22:31:20 - 0:00:08 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:20 - 0:00:08 - test_acc= 86.27%, weighted_f1= 84.37,macro_f1= 61.35%
+INFO - 09/13/26 22:31:20 - 0:00:08 - test_acc= 86.27%, weighted_f1= 84.37,macro_f1= 61.35%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 0: train_loss=1.9931243658065796, train_acc= 5.83%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 0: val_loss=1.7139285802841187, val_acc= 48.75%,val_weighted_f1= 31.95,val_macro_f1= 13.11%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 1: train_loss=1.2547149658203125, train_acc= 55.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 2: train_loss=1.1682460308074951, train_acc= 64.17%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 3: train_loss=0.8998140692710876, train_acc= 70.83%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 4: train_loss=0.6748281121253967, train_acc= 77.50%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 5: train_loss=0.5316333174705505, train_acc= 85.00%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 5: val_loss=0.5360747575759888, val_acc= 82.50%,val_weighted_f1= 79.99,val_macro_f1= 55.19%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 6: train_loss=0.4623279571533203, train_acc= 88.33%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 7: train_loss=0.39590901136398315, train_acc= 90.83%
+INFO - 09/13/26 22:31:20 - 0:00:08 - Epoch 8: train_loss=0.35681474208831787, train_acc= 87.50%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 9: train_loss=0.24279162287712097, train_acc= 92.50%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 10: train_loss=0.2085755318403244, train_acc= 93.33%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 10: val_loss=0.7595411539077759, val_acc= 81.25%,val_weighted_f1= 78.69,val_macro_f1= 59.19%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 11: train_loss=0.16518370807170868, train_acc= 95.83%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 12: train_loss=0.14106647670269012, train_acc= 95.00%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 13: train_loss=0.09554289281368256, train_acc= 98.33%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 14: train_loss=0.07648618519306183, train_acc= 98.33%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 15: train_loss=0.09801485389471054, train_acc= 97.50%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 15: val_loss=0.8133227229118347, val_acc= 82.50%,val_weighted_f1= 81.49,val_macro_f1= 61.24%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 16: train_loss=0.08656039088964462, train_acc= 97.50%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 17: train_loss=0.04939704015851021, train_acc= 99.17%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 18: train_loss=0.042405106127262115, train_acc= 99.17%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 19: train_loss=0.03247479349374771, train_acc= 99.17%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 20: train_loss=0.0368044450879097, train_acc= 99.17%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 20: val_loss=0.7329769730567932, val_acc= 85.00%,val_weighted_f1= 83.92,val_macro_f1= 63.11%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 21: train_loss=0.02462713234126568, train_acc= 99.17%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 22: train_loss=0.018022695556282997, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 23: train_loss=0.0281293336302042, train_acc= 99.17%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 24: train_loss=0.0076117003336548805, train_acc= 100.00%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 25: train_loss=0.02771344967186451, train_acc= 99.17%
+INFO - 09/13/26 22:31:20 - 0:00:09 - Epoch 25: val_loss=0.6987221240997314, val_acc= 87.50%,val_weighted_f1= 86.66,val_macro_f1= 67.43%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 26: train_loss=0.009345230646431446, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 27: train_loss=0.010142778046429157, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 28: train_loss=0.007787474896758795, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 29: train_loss=0.014349945820868015, train_acc= 99.17%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 30: train_loss=0.004079950973391533, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 30: val_loss=0.6821303963661194, val_acc= 87.50%,val_weighted_f1= 86.62,val_macro_f1= 65.99%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 31: train_loss=0.005456149578094482, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 32: train_loss=0.0035150533076375723, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 33: train_loss=0.004512715619057417, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 34: train_loss=0.007694870233535767, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 35: train_loss=0.0035426064860075712, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 35: val_loss=0.6783981919288635, val_acc= 87.50%,val_weighted_f1= 86.62,val_macro_f1= 65.99%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 36: train_loss=0.004107492044568062, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 37: train_loss=0.0049518439918756485, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 38: train_loss=0.0024819220416247845, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 39: train_loss=0.014525732956826687, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 40: train_loss=0.003916587680578232, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 40: val_loss=0.7201421856880188, val_acc= 88.75%,val_weighted_f1= 87.92,val_macro_f1= 68.19%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 41: train_loss=0.002131246030330658, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 42: train_loss=0.001616226159967482, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 43: train_loss=0.0013920922065153718, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 44: train_loss=0.0024275663308799267, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 45: train_loss=0.0015281995292752981, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 45: val_loss=0.7907389998435974, val_acc= 87.50%,val_weighted_f1= 86.49,val_macro_f1= 65.92%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:21 - 0:00:09 - Epoch 46: train_loss=0.003984801471233368, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 47: train_loss=0.0013413989217951894, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 48: train_loss=0.0018202046630904078, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 49: train_loss=0.0009401344577781856, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 50: train_loss=0.0008378049824386835, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 50: val_loss=0.836933434009552, val_acc= 86.25%,val_weighted_f1= 84.94,val_macro_f1= 62.89%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 51: train_loss=0.0025571289006620646, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 52: train_loss=0.006636315956711769, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 53: train_loss=0.0028857088182121515, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 54: train_loss=0.0009107414516620338, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 55: train_loss=0.0009121924522332847, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 55: val_loss=0.8474079966545105, val_acc= 88.75%,val_weighted_f1= 87.64,val_macro_f1= 66.83%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 56: train_loss=0.0005840144003741443, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 57: train_loss=0.0007406377117149532, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 58: train_loss=0.000726434460375458, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 59: train_loss=0.0017173080705106258, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 60: train_loss=0.0007320402073673904, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 60: val_loss=0.859336256980896, val_acc= 87.50%,val_weighted_f1= 86.30,val_macro_f1= 64.69%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 61: train_loss=0.0007273619412444532, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 62: train_loss=0.0005258090095594525, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 63: train_loss=0.0011382348602637649, train_acc= 100.00%
+INFO - 09/13/26 22:31:21 - 0:00:10 - Epoch 64: train_loss=0.0004874941660091281, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 65: train_loss=0.0008308441028930247, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 65: val_loss=0.8714855313301086, val_acc= 87.50%,val_weighted_f1= 86.30,val_macro_f1= 64.69%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 66: train_loss=0.0014769709669053555, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 67: train_loss=0.0020550061017274857, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 68: train_loss=0.0004538866924121976, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 69: train_loss=0.0006336315418593585, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 70: train_loss=0.00044590194011107087, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 70: val_loss=0.8703036308288574, val_acc= 87.50%,val_weighted_f1= 86.30,val_macro_f1= 64.69%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 71: train_loss=0.00044920126674696803, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 72: train_loss=0.0007187002920545638, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 73: train_loss=0.000740636489354074, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 74: train_loss=0.0005202557658776641, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 75: train_loss=0.0006973121780902147, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 75: val_loss=0.870093822479248, val_acc= 87.50%,val_weighted_f1= 86.30,val_macro_f1= 64.69%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 76: train_loss=0.0008036577492021024, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 77: train_loss=0.000500773370731622, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 78: train_loss=0.000761869887355715, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 79: train_loss=0.0003477711870800704, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 80: train_loss=0.000555560807697475, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 80: val_loss=0.8650455474853516, val_acc= 87.50%,val_weighted_f1= 86.30,val_macro_f1= 64.69%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 81: train_loss=0.0005977185210213065, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 82: train_loss=0.0008433093898929656, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 83: train_loss=0.000526386545971036, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 84: train_loss=0.000436674541560933, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 85: train_loss=0.0007956445915624499, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 85: val_loss=0.8641642332077026, val_acc= 87.50%,val_weighted_f1= 86.30,val_macro_f1= 64.69%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 86: train_loss=0.00045596531708724797, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 87: train_loss=0.00032301293686032295, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 88: train_loss=0.0008828604477457702, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:10 - Epoch 89: train_loss=0.0005574087263084948, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 90: train_loss=0.00045869903988204896, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 90: val_loss=0.866350531578064, val_acc= 86.25%,val_weighted_f1= 85.16,val_macro_f1= 63.80%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 91: train_loss=0.0006092021358199418, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 92: train_loss=0.004039142746478319, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 93: train_loss=0.0003101082402281463, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 94: train_loss=0.0005031432374380529, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 95: train_loss=0.000631774659268558, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 95: val_loss=0.8687240481376648, val_acc= 86.25%,val_weighted_f1= 85.16,val_macro_f1= 63.80%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 96: train_loss=0.000940056808758527, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 97: train_loss=0.0005960837588645518, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 98: train_loss=0.0009552938281558454, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 99: train_loss=0.000675220915582031, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 100: train_loss=0.00026287490618415177, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 100: val_loss=0.8720769882202148, val_acc= 86.25%,val_weighted_f1= 85.16,val_macro_f1= 63.80%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 101: train_loss=0.0004910184652544558, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 102: train_loss=0.002111654495820403, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 103: train_loss=0.000446749065304175, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 104: train_loss=0.00043076646397821605, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 105: train_loss=0.00042088914779014885, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 105: val_loss=0.8636935353279114, val_acc= 86.25%,val_weighted_f1= 85.16,val_macro_f1= 63.80%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 106: train_loss=0.00036857856321148574, train_acc= 100.00%
+INFO - 09/13/26 22:31:22 - 0:00:11 - Epoch 107: train_loss=0.0003759985265787691, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 108: train_loss=0.0007089923601597548, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 109: train_loss=0.0005946453311480582, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 110: train_loss=0.001041475567035377, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 110: val_loss=0.8621629476547241, val_acc= 86.25%,val_weighted_f1= 85.16,val_macro_f1= 63.80%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 111: train_loss=0.0003656806657090783, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 112: train_loss=0.00029909933800809085, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 113: train_loss=0.0002982722653541714, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 114: train_loss=0.0006148796528577805, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 115: train_loss=0.0002997572591993958, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 115: val_loss=0.8694418668746948, val_acc= 86.25%,val_weighted_f1= 85.16,val_macro_f1= 63.80%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 116: train_loss=0.00045718130422756076, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 117: train_loss=0.0010137360077351332, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 118: train_loss=0.0002750333514995873, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 119: train_loss=0.0003588132676668465, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 120: train_loss=0.0006262253737077117, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 120: val_loss=0.8733509182929993, val_acc= 86.25%,val_weighted_f1= 85.16,val_macro_f1= 63.80%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 121: train_loss=0.0002900394320022315, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 122: train_loss=0.000341374019626528, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 123: train_loss=0.0004310935328248888, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 124: train_loss=0.00035028831916861236, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 125: train_loss=0.0004322235763538629, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 125: val_loss=0.8730533719062805, val_acc= 85.00%,val_weighted_f1= 83.54,val_macro_f1= 61.01%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 126: train_loss=0.000366723514162004, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 127: train_loss=0.0004896054742857814, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 128: train_loss=0.0002811762096825987, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 129: train_loss=0.00023636597325094044, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 130: train_loss=0.000502656796015799, train_acc= 100.00%
+INFO - 09/13/26 22:31:23 - 0:00:11 - Epoch 130: val_loss=0.8740946054458618, val_acc= 85.00%,val_weighted_f1= 83.54,val_macro_f1= 61.01%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:23 - 0:00:11 - --------------Testing--------------------
+INFO - 09/13/26 22:31:23 - 0:00:11 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:23 - 0:00:11 - test_acc= 88.24%, weighted_f1= 85.95,macro_f1= 67.21%
+INFO - 09/13/26 22:31:23 - 0:00:11 - test_acc= 88.24%, weighted_f1= 85.95,macro_f1= 67.21%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 0: train_loss=1.7119691371917725, train_acc= 17.50%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 0: val_loss=1.8452274799346924, val_acc= 48.75%,val_weighted_f1= 31.95,val_macro_f1= 13.11%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 1: train_loss=1.2409573793411255, train_acc= 50.83%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 2: train_loss=1.012827754020691, train_acc= 68.33%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 3: train_loss=0.8376445770263672, train_acc= 72.50%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 4: train_loss=0.6950904130935669, train_acc= 77.50%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 5: train_loss=0.5060780048370361, train_acc= 83.33%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 5: val_loss=0.8421134948730469, val_acc= 78.75%,val_weighted_f1= 74.76,val_macro_f1= 48.98%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 6: train_loss=0.4436401128768921, train_acc= 86.67%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 7: train_loss=0.36174869537353516, train_acc= 89.17%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 8: train_loss=0.3357153534889221, train_acc= 90.00%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 9: train_loss=0.2815494239330292, train_acc= 91.67%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 10: train_loss=0.20333917438983917, train_acc= 93.33%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 10: val_loss=0.664480447769165, val_acc= 82.50%,val_weighted_f1= 80.36,val_macro_f1= 58.47%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 11: train_loss=0.15474599599838257, train_acc= 95.83%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 12: train_loss=0.1520339548587799, train_acc= 95.83%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 13: train_loss=0.10658814013004303, train_acc= 99.17%
+INFO - 09/13/26 22:31:23 - 0:00:12 - Epoch 14: train_loss=0.10359189659357071, train_acc= 97.50%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 15: train_loss=0.07766249030828476, train_acc= 98.33%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 15: val_loss=0.8330148458480835, val_acc= 83.75%,val_weighted_f1= 81.97,val_macro_f1= 61.33%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 16: train_loss=0.04582112655043602, train_acc= 99.17%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 17: train_loss=0.046284500509500504, train_acc= 99.17%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 18: train_loss=0.04695959389209747, train_acc= 99.17%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 19: train_loss=0.0450090654194355, train_acc= 98.33%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 20: train_loss=0.03373071178793907, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 20: val_loss=0.8973132967948914, val_acc= 82.50%,val_weighted_f1= 81.36,val_macro_f1= 58.09%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 21: train_loss=0.02811151184141636, train_acc= 99.17%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 22: train_loss=0.02153569832444191, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 23: train_loss=0.03285614401102066, train_acc= 98.33%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 24: train_loss=0.018919438123703003, train_acc= 99.17%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 25: train_loss=0.01319883856922388, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 25: val_loss=0.920915961265564, val_acc= 81.25%,val_weighted_f1= 81.26,val_macro_f1= 64.71%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 26: train_loss=0.007739027962088585, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 27: train_loss=0.005564158782362938, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 28: train_loss=0.006010837387293577, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 29: train_loss=0.012765226885676384, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 30: train_loss=0.01647164300084114, train_acc= 99.17%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 30: val_loss=0.9799626469612122, val_acc= 82.50%,val_weighted_f1= 82.14,val_macro_f1= 65.65%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 31: train_loss=0.007853875868022442, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 32: train_loss=0.004780878778547049, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 33: train_loss=0.0062867882661521435, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 34: train_loss=0.003132784506306052, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 35: train_loss=0.002079333644360304, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 35: val_loss=1.029749870300293, val_acc= 83.75%,val_weighted_f1= 82.23,val_macro_f1= 62.24%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 36: train_loss=0.00294412299990654, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:12 - Epoch 37: train_loss=0.0017100359546020627, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 38: train_loss=0.0018633080180734396, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 39: train_loss=0.0024666795507073402, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 40: train_loss=0.002150883199647069, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 40: val_loss=1.0776203870773315, val_acc= 83.75%,val_weighted_f1= 82.23,val_macro_f1= 62.24%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 41: train_loss=0.0054992432706058025, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 42: train_loss=0.001976403873413801, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 43: train_loss=0.001527635846287012, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 44: train_loss=0.001972723286598921, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 45: train_loss=0.0015760211972519755, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 45: val_loss=1.1315343379974365, val_acc= 83.75%,val_weighted_f1= 82.23,val_macro_f1= 62.24%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 46: train_loss=0.001046138466335833, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 47: train_loss=0.0011697353329509497, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 48: train_loss=0.008834457956254482, train_acc= 99.17%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 49: train_loss=0.0015163853531703353, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 50: train_loss=0.0010356333805248141, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 50: val_loss=1.1493394374847412, val_acc= 82.50%,val_weighted_f1= 80.78,val_macro_f1= 59.17%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 51: train_loss=0.0034296864178031683, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 52: train_loss=0.0014017217326909304, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 53: train_loss=0.0011368407867848873, train_acc= 100.00%
+INFO - 09/13/26 22:31:24 - 0:00:13 - Epoch 54: train_loss=0.0009505750495009124, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 55: train_loss=0.0007283209706656635, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 55: val_loss=1.1392894983291626, val_acc= 83.75%,val_weighted_f1= 82.80,val_macro_f1= 67.38%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 56: train_loss=0.0006979686440899968, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 57: train_loss=0.0009697923669591546, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 58: train_loss=0.0009316333453170955, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 59: train_loss=0.0006949600647203624, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 60: train_loss=0.0026097081135958433, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 60: val_loss=1.1507771015167236, val_acc= 80.00%,val_weighted_f1= 79.23,val_macro_f1= 56.50%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 61: train_loss=0.0012907421914860606, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 62: train_loss=0.002265165327116847, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 63: train_loss=0.0009915301343426108, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 64: train_loss=0.00043110063415952027, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 65: train_loss=0.0007607402512803674, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 65: val_loss=1.1873409748077393, val_acc= 80.00%,val_weighted_f1= 79.23,val_macro_f1= 56.50%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 66: train_loss=0.0005745738744735718, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 67: train_loss=0.0006494671106338501, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 68: train_loss=0.0007655316148884594, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 69: train_loss=0.00047917297342792153, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 70: train_loss=0.0008561554714106023, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 70: val_loss=1.2195552587509155, val_acc= 80.00%,val_weighted_f1= 79.23,val_macro_f1= 56.50%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 71: train_loss=0.0012758859666064382, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 72: train_loss=0.0005648699006997049, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 73: train_loss=0.00037624745164066553, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 74: train_loss=0.0007597423973493278, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 75: train_loss=0.0008089983020909131, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 75: val_loss=1.2531237602233887, val_acc= 80.00%,val_weighted_f1= 79.23,val_macro_f1= 56.50%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 76: train_loss=0.0005576638504862785, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 77: train_loss=0.0003549876273609698, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:13 - Epoch 78: train_loss=0.0005182036547921598, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 79: train_loss=0.0007151610334403813, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 80: train_loss=0.012124634347856045, train_acc= 99.17%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 80: val_loss=1.2766196727752686, val_acc= 80.00%,val_weighted_f1= 79.23,val_macro_f1= 56.50%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 81: train_loss=0.00035052135353907943, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 82: train_loss=0.0005373463500291109, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 83: train_loss=0.00044257001718506217, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 84: train_loss=0.0004468513070605695, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 85: train_loss=0.0006987095694057643, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 85: val_loss=1.2906486988067627, val_acc= 80.00%,val_weighted_f1= 79.23,val_macro_f1= 56.50%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 86: train_loss=0.0006084115011617541, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 87: train_loss=0.0005601259181275964, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 88: train_loss=0.0006242292583920062, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 89: train_loss=0.0004873088910244405, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 90: train_loss=0.003044119570404291, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 90: val_loss=1.3030434846878052, val_acc= 80.00%,val_weighted_f1= 79.23,val_macro_f1= 56.50%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 91: train_loss=0.00048526740283705294, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 92: train_loss=0.0002753571898210794, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 93: train_loss=0.00039109488716349006, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 94: train_loss=0.00030827330192551017, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 95: train_loss=0.0004397876327857375, train_acc= 100.00%
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 95: val_loss=1.3137413263320923, val_acc= 78.75%,val_weighted_f1= 78.36,val_macro_f1= 55.64%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:25 - 0:00:14 - Epoch 96: train_loss=0.0005222528125159442, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 97: train_loss=0.0003050623054150492, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 98: train_loss=0.00036319068749435246, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 99: train_loss=0.00043696313514374197, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 100: train_loss=0.0005105535383336246, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 100: val_loss=1.3274943828582764, val_acc= 78.75%,val_weighted_f1= 78.79,val_macro_f1= 55.53%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 101: train_loss=0.0008844017283990979, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 102: train_loss=0.0003230616566725075, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 103: train_loss=0.0003132036654278636, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 104: train_loss=0.0005114020896144211, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 105: train_loss=0.00047597894445061684, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 105: val_loss=1.3426949977874756, val_acc= 78.75%,val_weighted_f1= 78.79,val_macro_f1= 55.53%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 106: train_loss=0.0008614059188403189, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 107: train_loss=0.00027803602279163897, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 108: train_loss=0.0006567451055161655, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 109: train_loss=0.0005935534718446434, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 110: train_loss=0.00021448088227771223, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 110: val_loss=1.3567442893981934, val_acc= 78.75%,val_weighted_f1= 78.79,val_macro_f1= 55.53%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 111: train_loss=0.0003600310010369867, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 112: train_loss=0.001180563005618751, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 113: train_loss=0.00038282573223114014, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 114: train_loss=0.0002477993839420378, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 115: train_loss=0.0002823823888320476, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 115: val_loss=1.367069959640503, val_acc= 78.75%,val_weighted_f1= 78.79,val_macro_f1= 55.53%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 116: train_loss=0.00034041417529806495, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 117: train_loss=0.0003765590372495353, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 118: train_loss=0.0005188387585803866, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 119: train_loss=0.0003421242581680417, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 120: train_loss=0.0004667968605645001, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 120: val_loss=1.3731961250305176, val_acc= 78.75%,val_weighted_f1= 78.79,val_macro_f1= 55.53%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 121: train_loss=0.00035936583299189806, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:14 - Epoch 122: train_loss=0.00022651543258689344, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 123: train_loss=0.0002491677878424525, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 124: train_loss=0.0002795036998577416, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 125: train_loss=0.0005814280011691153, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 125: val_loss=1.378999948501587, val_acc= 78.75%,val_weighted_f1= 78.79,val_macro_f1= 55.53%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 126: train_loss=0.00026708003133535385, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 127: train_loss=0.00031077154562808573, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 128: train_loss=0.0007203396526165307, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 129: train_loss=0.00020936509827151895, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 130: train_loss=0.0003259113000240177, train_acc= 100.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 130: val_loss=1.3822993040084839, val_acc= 78.75%,val_weighted_f1= 78.79,val_macro_f1= 55.53%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:26 - 0:00:15 - --------------Testing--------------------
+INFO - 09/13/26 22:31:26 - 0:00:15 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:26 - 0:00:15 - test_acc= 92.16%, weighted_f1= 91.43,macro_f1= 83.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - test_acc= 92.16%, weighted_f1= 91.43,macro_f1= 83.00%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 0: train_loss=1.491378903388977, train_acc= 33.33%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 0: val_loss=1.9468090534210205, val_acc= 51.25%,val_weighted_f1= 34.73,val_macro_f1= 13.55%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 1: train_loss=1.2344799041748047, train_acc= 52.50%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 2: train_loss=1.0008779764175415, train_acc= 66.67%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 3: train_loss=0.7584155797958374, train_acc= 78.33%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 4: train_loss=0.6521480679512024, train_acc= 78.33%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 5: train_loss=0.5268612504005432, train_acc= 83.33%
+INFO - 09/13/26 22:31:26 - 0:00:15 - Epoch 5: val_loss=1.0331909656524658, val_acc= 73.75%,val_weighted_f1= 67.70,val_macro_f1= 44.18%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 6: train_loss=0.4278748631477356, train_acc= 90.00%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 7: train_loss=0.2749829888343811, train_acc= 93.33%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 8: train_loss=0.31202876567840576, train_acc= 91.67%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 9: train_loss=0.2279745191335678, train_acc= 93.33%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 10: train_loss=0.14975064992904663, train_acc= 96.67%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 10: val_loss=0.7790505886077881, val_acc= 80.00%,val_weighted_f1= 75.35,val_macro_f1= 57.52%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 11: train_loss=0.14561152458190918, train_acc= 95.00%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 12: train_loss=0.10598302632570267, train_acc= 95.83%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 13: train_loss=0.11353838443756104, train_acc= 95.83%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 14: train_loss=0.10896596312522888, train_acc= 95.83%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 15: train_loss=0.04088810831308365, train_acc= 98.33%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 15: val_loss=0.982827365398407, val_acc= 81.25%,val_weighted_f1= 76.73,val_macro_f1= 55.83%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 16: train_loss=0.03434217348694801, train_acc= 99.17%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 17: train_loss=0.03724643215537071, train_acc= 99.17%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 18: train_loss=0.03465304896235466, train_acc= 99.17%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 19: train_loss=0.012072479352355003, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 20: train_loss=0.025878431275486946, train_acc= 99.17%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 20: val_loss=0.9946404695510864, val_acc= 81.25%,val_weighted_f1= 78.45,val_macro_f1= 60.65%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 21: train_loss=0.02018170803785324, train_acc= 99.17%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 22: train_loss=0.015417976304888725, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 23: train_loss=0.007326862309128046, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 24: train_loss=0.023180723190307617, train_acc= 98.33%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 25: train_loss=0.014402060769498348, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:15 - Epoch 25: val_loss=1.0943174362182617, val_acc= 82.50%,val_weighted_f1= 80.59,val_macro_f1= 67.50%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 26: train_loss=0.0076139443553984165, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 27: train_loss=0.022196127101778984, train_acc= 99.17%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 28: train_loss=0.007135322783142328, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 29: train_loss=0.0032619228586554527, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 30: train_loss=0.0054652211256325245, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 30: val_loss=1.3129425048828125, val_acc= 78.75%,val_weighted_f1= 75.17,val_macro_f1= 55.80%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 31: train_loss=0.004071717616170645, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 32: train_loss=0.006996617186814547, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 33: train_loss=0.00944350566715002, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 34: train_loss=0.002175652189180255, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 35: train_loss=0.0017001599771901965, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 35: val_loss=1.4987808465957642, val_acc= 77.50%,val_weighted_f1= 71.86,val_macro_f1= 49.44%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 36: train_loss=0.002400763100013137, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 37: train_loss=0.002079044934362173, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 38: train_loss=0.002335183322429657, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 39: train_loss=0.002089445712044835, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 40: train_loss=0.008138417266309261, train_acc= 99.17%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 40: val_loss=1.6013286113739014, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 41: train_loss=0.007826053537428379, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 42: train_loss=0.0018166209338232875, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 43: train_loss=0.0018514645053073764, train_acc= 100.00%
+INFO - 09/13/26 22:31:27 - 0:00:16 - Epoch 44: train_loss=0.0009577859891578555, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 45: train_loss=0.0009408652549609542, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 45: val_loss=1.6591390371322632, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 46: train_loss=0.0013704659650102258, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 47: train_loss=0.0008724835934117436, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 48: train_loss=0.0013855817960575223, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 49: train_loss=0.0019430448301136494, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 50: train_loss=0.0009986978257074952, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 50: val_loss=1.6877750158309937, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 51: train_loss=0.0007399695459753275, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 52: train_loss=0.0011364875826984644, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 53: train_loss=0.0016496388707309961, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 54: train_loss=0.0013651404296979308, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 55: train_loss=0.0006334454519674182, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 55: val_loss=1.689597725868225, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 56: train_loss=0.00106840452644974, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 57: train_loss=0.0007818713784217834, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 58: train_loss=0.0009061601012945175, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 59: train_loss=0.0006194239249452949, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 60: train_loss=0.0004178882227279246, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 60: val_loss=1.6810896396636963, val_acc= 78.75%,val_weighted_f1= 74.49,val_macro_f1= 54.06%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 61: train_loss=0.0005610937369056046, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 62: train_loss=0.0010819894960150123, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 63: train_loss=0.0006620950880460441, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 64: train_loss=0.0006651133298873901, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 65: train_loss=0.0006315636564977467, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 65: val_loss=1.673658013343811, val_acc= 78.75%,val_weighted_f1= 74.49,val_macro_f1= 54.06%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 66: train_loss=0.000427991064498201, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 67: train_loss=0.002610284835100174, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 68: train_loss=0.0008919077226892114, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:16 - Epoch 69: train_loss=0.0009330163011327386, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 70: train_loss=0.00047059819917194545, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 70: val_loss=1.6788043975830078, val_acc= 78.75%,val_weighted_f1= 74.49,val_macro_f1= 54.06%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 71: train_loss=0.003346839686855674, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 72: train_loss=0.0007539995131082833, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 73: train_loss=0.0009561795159243047, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 74: train_loss=0.001883748103864491, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 75: train_loss=0.0004277430707588792, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 75: val_loss=1.6911952495574951, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 76: train_loss=0.0005948682082816958, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 77: train_loss=0.0008235888089984655, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 78: train_loss=0.001462651533074677, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 79: train_loss=0.00046287363511510193, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 80: train_loss=0.00033262590295635164, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 80: val_loss=1.6906369924545288, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 81: train_loss=0.0007337495917454362, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 82: train_loss=0.0004507192352320999, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 83: train_loss=0.0007399703026749194, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 84: train_loss=0.0006445873877964914, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 85: train_loss=0.0007214422803372145, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 85: val_loss=1.6884949207305908, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 86: train_loss=0.0006576199666596949, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 87: train_loss=0.0004056297766510397, train_acc= 100.00%
+INFO - 09/13/26 22:31:28 - 0:00:17 - Epoch 88: train_loss=0.0004283421440050006, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 89: train_loss=0.00035882621887139976, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 90: train_loss=0.0006339307874441147, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 90: val_loss=1.6846740245819092, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 91: train_loss=0.0003776421945076436, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 92: train_loss=0.00039410058525390923, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 93: train_loss=0.0012727455468848348, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 94: train_loss=0.001925132586620748, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 95: train_loss=0.00036956515396013856, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 95: val_loss=1.6746501922607422, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 96: train_loss=0.0003388901532161981, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 97: train_loss=0.0003873953828588128, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 98: train_loss=0.00047346780775114894, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 99: train_loss=0.0004879074404016137, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 100: train_loss=0.0004321468295529485, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 100: val_loss=1.6618506908416748, val_acc= 77.50%,val_weighted_f1= 71.85,val_macro_f1= 48.88%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:29 - 0:00:17 - --------------Testing--------------------
+INFO - 09/13/26 22:31:29 - 0:00:17 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:29 - 0:00:17 - test_acc= 82.35%, weighted_f1= 80.90,macro_f1= 56.73%
+INFO - 09/13/26 22:31:29 - 0:00:17 - test_acc= 82.35%, weighted_f1= 80.90,macro_f1= 56.73%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 0: train_loss=1.8202974796295166, train_acc= 16.67%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 0: val_loss=1.5246317386627197, val_acc= 48.75%,val_weighted_f1= 31.95,val_macro_f1= 13.11%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 1: train_loss=1.1939646005630493, train_acc= 49.17%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 2: train_loss=0.9957857728004456, train_acc= 63.33%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 3: train_loss=0.8652368187904358, train_acc= 73.33%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 4: train_loss=0.5762326121330261, train_acc= 82.50%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 5: train_loss=0.49218806624412537, train_acc= 85.00%
+INFO - 09/13/26 22:31:29 - 0:00:17 - Epoch 5: val_loss=0.6674357056617737, val_acc= 78.75%,val_weighted_f1= 76.15,val_macro_f1= 52.92%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 6: train_loss=0.44936904311180115, train_acc= 85.83%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 7: train_loss=0.34538617730140686, train_acc= 88.33%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 8: train_loss=0.2828635573387146, train_acc= 90.83%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 9: train_loss=0.26289236545562744, train_acc= 92.50%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 10: train_loss=0.15797045826911926, train_acc= 96.67%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 10: val_loss=0.5233790278434753, val_acc= 86.25%,val_weighted_f1= 84.80,val_macro_f1= 64.02%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 11: train_loss=0.15502391755580902, train_acc= 96.67%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 12: train_loss=0.14211328327655792, train_acc= 95.00%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 13: train_loss=0.09971128404140472, train_acc= 98.33%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 14: train_loss=0.0867823138833046, train_acc= 97.50%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 15: train_loss=0.07698941975831985, train_acc= 97.50%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 15: val_loss=0.5408081412315369, val_acc= 87.50%,val_weighted_f1= 86.37,val_macro_f1= 66.29%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 16: train_loss=0.06309262663125992, train_acc= 98.33%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 17: train_loss=0.03461816534399986, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 18: train_loss=0.02600151114165783, train_acc= 99.17%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 19: train_loss=0.024247152730822563, train_acc= 98.33%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 20: train_loss=0.018895456567406654, train_acc= 100.00%
+INFO - 09/13/26 22:31:29 - 0:00:18 - Epoch 20: val_loss=0.5443052053451538, val_acc= 88.75%,val_weighted_f1= 87.32,val_macro_f1= 68.01%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 21: train_loss=0.007416968699544668, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 22: train_loss=0.019515205174684525, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 23: train_loss=0.014701981097459793, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 24: train_loss=0.008139029145240784, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 25: train_loss=0.0050340075977146626, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 25: val_loss=0.5565292835235596, val_acc= 87.50%,val_weighted_f1= 86.16,val_macro_f1= 68.18%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 26: train_loss=0.009570210240781307, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 27: train_loss=0.005448603071272373, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 28: train_loss=0.006442138459533453, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 29: train_loss=0.003343283897265792, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 30: train_loss=0.004580127075314522, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 30: val_loss=0.5905274152755737, val_acc= 88.75%,val_weighted_f1= 87.35,val_macro_f1= 69.54%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 31: train_loss=0.003468720708042383, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 32: train_loss=0.0016562846722081304, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 33: train_loss=0.003063867101445794, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 34: train_loss=0.005697008688002825, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 35: train_loss=0.003296622773632407, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 35: val_loss=0.6164268255233765, val_acc= 88.75%,val_weighted_f1= 87.35,val_macro_f1= 69.54%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 36: train_loss=0.004007038194686174, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 37: train_loss=0.004338101018220186, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 38: train_loss=0.0022602712269872427, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 39: train_loss=0.0016084809321910143, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 40: train_loss=0.0017221131129190326, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 40: val_loss=0.669326663017273, val_acc= 88.75%,val_weighted_f1= 87.35,val_macro_f1= 69.54%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 41: train_loss=0.003078782232478261, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 42: train_loss=0.0028751955833286047, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:18 - Epoch 43: train_loss=0.0013553968165069818, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 44: train_loss=0.013984772376716137, train_acc= 99.17%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 45: train_loss=0.0013399174204096198, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 45: val_loss=0.7081929445266724, val_acc= 88.75%,val_weighted_f1= 87.35,val_macro_f1= 69.54%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 46: train_loss=0.0007174527854658663, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 47: train_loss=0.0008681938052177429, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 48: train_loss=0.0029921617824584246, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 49: train_loss=0.0021750391460955143, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 50: train_loss=0.001145349582657218, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 50: val_loss=0.7137132287025452, val_acc= 88.75%,val_weighted_f1= 87.35,val_macro_f1= 69.54%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 51: train_loss=0.0012017389526590705, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 52: train_loss=0.0006091141840443015, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 53: train_loss=0.0014166031032800674, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 54: train_loss=0.0008120586280710995, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 55: train_loss=0.0010742251761257648, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 55: val_loss=0.702831506729126, val_acc= 87.50%,val_weighted_f1= 86.16,val_macro_f1= 68.18%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 56: train_loss=0.00188158405944705, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 57: train_loss=0.0011497323866933584, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 58: train_loss=0.0007961702649481595, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 59: train_loss=0.0018930694786831737, train_acc= 100.00%
+INFO - 09/13/26 22:31:30 - 0:00:19 - Epoch 60: train_loss=0.0011106162564828992, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 60: val_loss=0.6950517296791077, val_acc= 87.50%,val_weighted_f1= 86.16,val_macro_f1= 68.18%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 61: train_loss=0.0008368808194063604, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 62: train_loss=0.0007823003106750548, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 63: train_loss=0.0005075840745121241, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 64: train_loss=0.0004974929033778608, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 65: train_loss=0.0005418292130343616, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 65: val_loss=0.6856688857078552, val_acc= 87.50%,val_weighted_f1= 86.68,val_macro_f1= 68.39%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 66: train_loss=0.0004228201578371227, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 67: train_loss=0.0005420467932708561, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 68: train_loss=0.0007700500427745283, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 69: train_loss=0.0006988534005358815, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 70: train_loss=0.0007828306406736374, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 70: val_loss=0.681700587272644, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 71: train_loss=0.0010197361698374152, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 72: train_loss=0.0004717685515061021, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 73: train_loss=0.0004267166368663311, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 74: train_loss=0.0008075862424448133, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 75: train_loss=0.0004987676511518657, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 75: val_loss=0.6767728924751282, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 76: train_loss=0.0005642063915729523, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 77: train_loss=0.00046938855666667223, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 78: train_loss=0.0005407860153354704, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 79: train_loss=0.0003963369526900351, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 80: train_loss=0.0012461590813472867, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 80: val_loss=0.673695981502533, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 81: train_loss=0.0004066594992764294, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 82: train_loss=0.0004419273172970861, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 83: train_loss=0.0006265778210945427, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 84: train_loss=0.0003138771280646324, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:19 - Epoch 85: train_loss=0.00041259702993556857, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 85: val_loss=0.6772779226303101, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 86: train_loss=0.00028584490064531565, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 87: train_loss=0.0004672243958339095, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 88: train_loss=0.0005075523513369262, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 89: train_loss=0.0006142114871181548, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 90: train_loss=0.0026365884114056826, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 90: val_loss=0.6838120818138123, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 91: train_loss=0.00035158434184268117, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 92: train_loss=0.0010438371682539582, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 93: train_loss=0.0003851332003250718, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 94: train_loss=0.0003241439408157021, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 95: train_loss=0.003370865248143673, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 95: val_loss=0.6928154826164246, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 96: train_loss=0.0004919275525026023, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 97: train_loss=0.0003565849910955876, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 98: train_loss=0.00035393823054619133, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 99: train_loss=0.000293741119094193, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 100: train_loss=0.0003863572492264211, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 100: val_loss=0.7017132043838501, val_acc= 85.00%,val_weighted_f1= 83.88,val_macro_f1= 62.80%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 101: train_loss=0.0005284721846692264, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 102: train_loss=0.0009712429600767791, train_acc= 100.00%
+INFO - 09/13/26 22:31:31 - 0:00:20 - Epoch 103: train_loss=0.0004751595261041075, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 104: train_loss=0.00027595413848757744, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 105: train_loss=0.0006500771851278841, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 105: val_loss=0.7108112573623657, val_acc= 85.00%,val_weighted_f1= 83.88,val_macro_f1= 62.80%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 106: train_loss=0.0005059790564700961, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 107: train_loss=0.00040341177373193204, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 108: train_loss=0.0003477872523944825, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 109: train_loss=0.00031061755726113915, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 110: train_loss=0.0007470145355910063, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 110: val_loss=0.7159760594367981, val_acc= 85.00%,val_weighted_f1= 83.88,val_macro_f1= 62.80%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 111: train_loss=0.0002451704058330506, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 112: train_loss=0.0002408849395578727, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 113: train_loss=0.00028703658608719707, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 114: train_loss=0.0002153097011614591, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 115: train_loss=0.0024179823230952024, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 115: val_loss=0.7175020575523376, val_acc= 85.00%,val_weighted_f1= 83.88,val_macro_f1= 62.80%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 116: train_loss=0.00024395094078499824, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 117: train_loss=0.00022460789477918297, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 118: train_loss=0.0002057844103546813, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 119: train_loss=0.0001827278028940782, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 120: train_loss=0.00024144581402651966, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 120: val_loss=0.7181956171989441, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 121: train_loss=0.0006634008605033159, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 122: train_loss=0.00024676931207068264, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 123: train_loss=0.00023058803344611079, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 124: train_loss=0.0005036512739025056, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 125: train_loss=0.000304855580907315, train_acc= 100.00%
+INFO - 09/13/26 22:31:32 - 0:00:20 - Epoch 125: val_loss=0.718948245048523, val_acc= 86.25%,val_weighted_f1= 85.32,val_macro_f1= 65.68%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:32 - 0:00:20 - --------------Testing--------------------
+INFO - 09/13/26 22:31:32 - 0:00:20 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:32 - 0:00:20 - test_acc= 82.35%, weighted_f1= 79.46,macro_f1= 60.32%
+INFO - 09/13/26 22:31:32 - 0:00:20 - test_acc= 82.35%, weighted_f1= 79.46,macro_f1= 60.32%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 0: train_loss=1.6555994749069214, train_acc= 28.33%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 0: val_loss=1.650901198387146, val_acc= 56.25%,val_weighted_f1= 44.21,val_macro_f1= 22.29%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 1: train_loss=1.0905920267105103, train_acc= 63.33%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 2: train_loss=0.9173303246498108, train_acc= 65.00%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 3: train_loss=0.698297917842865, train_acc= 80.00%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 4: train_loss=0.6170276999473572, train_acc= 83.33%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 5: train_loss=0.5555709600448608, train_acc= 80.83%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 5: val_loss=0.9890583753585815, val_acc= 78.75%,val_weighted_f1= 73.24,val_macro_f1= 51.95%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 6: train_loss=0.39769336581230164, train_acc= 86.67%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 7: train_loss=0.3214869797229767, train_acc= 92.50%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 8: train_loss=0.26218411326408386, train_acc= 93.33%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 9: train_loss=0.19071929156780243, train_acc= 95.00%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 10: train_loss=0.14528192579746246, train_acc= 96.67%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 10: val_loss=0.9734576344490051, val_acc= 77.50%,val_weighted_f1= 73.15,val_macro_f1= 53.08%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 11: train_loss=0.16371695697307587, train_acc= 95.83%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 12: train_loss=0.1327773630619049, train_acc= 95.83%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 13: train_loss=0.0944533422589302, train_acc= 96.67%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 14: train_loss=0.07197189331054688, train_acc= 98.33%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 15: train_loss=0.07601455599069595, train_acc= 97.50%
+INFO - 09/13/26 22:31:32 - 0:00:21 - Epoch 15: val_loss=0.9197617769241333, val_acc= 82.50%,val_weighted_f1= 79.25,val_macro_f1= 60.58%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 16: train_loss=0.04371106997132301, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 17: train_loss=0.07437953352928162, train_acc= 99.17%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 18: train_loss=0.032941196113824844, train_acc= 98.33%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 19: train_loss=0.02821376547217369, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 20: train_loss=0.019344065338373184, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 20: val_loss=0.9656378030776978, val_acc= 82.50%,val_weighted_f1= 79.25,val_macro_f1= 60.58%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 21: train_loss=0.02483471669256687, train_acc= 99.17%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 22: train_loss=0.029270196333527565, train_acc= 98.33%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 23: train_loss=0.02121768519282341, train_acc= 99.17%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 24: train_loss=0.008926349692046642, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 25: train_loss=0.011507449671626091, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 25: val_loss=0.9855169057846069, val_acc= 82.50%,val_weighted_f1= 79.25,val_macro_f1= 60.58%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 26: train_loss=0.01696445420384407, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 27: train_loss=0.009592183865606785, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 28: train_loss=0.008617785759270191, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 29: train_loss=0.0092519111931324, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 30: train_loss=0.0053297001868486404, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 30: val_loss=1.0460361242294312, val_acc= 82.50%,val_weighted_f1= 79.27,val_macro_f1= 60.12%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 31: train_loss=0.006889378651976585, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 32: train_loss=0.003960648085922003, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 33: train_loss=0.004284098278731108, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 34: train_loss=0.005879365839064121, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 35: train_loss=0.00296593364328146, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 35: val_loss=1.1556428670883179, val_acc= 82.50%,val_weighted_f1= 79.29,val_macro_f1= 60.81%
+INFO - 09/13/26 22:31:33 - 0:00:21 - Epoch 36: train_loss=0.01458262000232935, train_acc= 99.17%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 37: train_loss=0.010669661685824394, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 38: train_loss=0.0022566698025912046, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 39: train_loss=0.0030611169058829546, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 40: train_loss=0.0016716959653422236, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 40: val_loss=1.2432421445846558, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 41: train_loss=0.002138101728633046, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 42: train_loss=0.002076618606224656, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 43: train_loss=0.0016040577320382, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 44: train_loss=0.0011929745087400079, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 45: train_loss=0.001995255472138524, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 45: val_loss=1.2710745334625244, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 46: train_loss=0.0005664658965542912, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 47: train_loss=0.0008347303373739123, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 48: train_loss=0.0021677478216588497, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 49: train_loss=0.005576090421527624, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 50: train_loss=0.004015149548649788, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 50: val_loss=1.2807477712631226, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 51: train_loss=0.0006389589398168027, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 52: train_loss=0.0007987788412719965, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 53: train_loss=0.00048026128206402063, train_acc= 100.00%
+INFO - 09/13/26 22:31:33 - 0:00:22 - Epoch 54: train_loss=0.0005064591532573104, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 55: train_loss=0.0008751623099669814, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 55: val_loss=1.293151617050171, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 56: train_loss=0.0010700293350964785, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 57: train_loss=0.001031982828862965, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 58: train_loss=0.0006479431758634746, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 59: train_loss=0.0008368080598302186, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 60: train_loss=0.001993139274418354, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 60: val_loss=1.3090002536773682, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 61: train_loss=0.0003491511452011764, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 62: train_loss=0.0006003091693855822, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 63: train_loss=0.000391893379855901, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 64: train_loss=0.0007663060678169131, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 65: train_loss=0.0010771735105663538, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 65: val_loss=1.318902850151062, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 66: train_loss=0.0005647439975291491, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 67: train_loss=0.0005596286500804126, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 68: train_loss=0.0020140460692346096, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 69: train_loss=0.0005861442186869681, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 70: train_loss=0.0006417451659217477, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 70: val_loss=1.3017226457595825, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 71: train_loss=0.0003912479733116925, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 72: train_loss=0.0010069889249280095, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 73: train_loss=0.0005372373852878809, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 74: train_loss=0.0011570942588150501, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 75: train_loss=0.0004154666094109416, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 75: val_loss=1.2771552801132202, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 76: train_loss=0.0008990283240564167, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 77: train_loss=0.0007311232620850205, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 78: train_loss=0.0007809496601112187, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:22 - Epoch 79: train_loss=0.0007352254469878972, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 80: train_loss=0.00041114905616268516, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 80: val_loss=1.26889967918396, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 81: train_loss=0.0010089647257700562, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 82: train_loss=0.000507667544297874, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 83: train_loss=0.0012065877672284842, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 84: train_loss=0.0011306460946798325, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 85: train_loss=0.0005647735088132322, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 85: val_loss=1.2731027603149414, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 86: train_loss=0.00041687802877277136, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 87: train_loss=0.0006448531639762223, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 88: train_loss=0.0010098275961354375, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 89: train_loss=0.0012964154593646526, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 90: train_loss=0.0004090701986569911, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 90: val_loss=1.300447702407837, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 91: train_loss=0.0005766128888353705, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 92: train_loss=0.00032945218845270574, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 93: train_loss=0.0006853816448710859, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 94: train_loss=0.00046537109301425517, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 95: train_loss=0.0008000882808119059, train_acc= 100.00%
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 95: val_loss=1.3244692087173462, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:34 - 0:00:23 - Epoch 96: train_loss=0.00048401072854176164, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 97: train_loss=0.00048000377137213945, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 98: train_loss=0.0004862658097408712, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 99: train_loss=0.0006982407066971064, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 100: train_loss=0.0005112370126880705, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 100: val_loss=1.341994047164917, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 101: train_loss=0.0005253253621049225, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 102: train_loss=0.0008147471235133708, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 103: train_loss=0.0002561159199103713, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 104: train_loss=0.0002227230870630592, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 105: train_loss=0.000243860122282058, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 105: val_loss=1.3662108182907104, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 106: train_loss=0.0002329519047634676, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 107: train_loss=0.0002794261963572353, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 108: train_loss=0.000261087465332821, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 109: train_loss=0.0003497441648505628, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 110: train_loss=0.0006472926470451057, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 110: val_loss=1.3896466493606567, val_acc= 81.25%,val_weighted_f1= 77.52,val_macro_f1= 58.32%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:35 - 0:00:23 - --------------Testing--------------------
+INFO - 09/13/26 22:31:35 - 0:00:23 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:35 - 0:00:23 - test_acc= 86.27%, weighted_f1= 83.44,macro_f1= 65.04%
+INFO - 09/13/26 22:31:35 - 0:00:23 - test_acc= 86.27%, weighted_f1= 83.44,macro_f1= 65.04%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 0: train_loss=1.8137948513031006, train_acc= 14.17%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 0: val_loss=1.6565008163452148, val_acc= 48.75%,val_weighted_f1= 31.95,val_macro_f1= 13.11%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 1: train_loss=1.285439372062683, train_acc= 53.33%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 2: train_loss=1.040481686592102, train_acc= 69.17%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 3: train_loss=0.8897650837898254, train_acc= 72.50%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 4: train_loss=0.6920366883277893, train_acc= 80.00%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 5: train_loss=0.5539207458496094, train_acc= 82.50%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 5: val_loss=0.7015421390533447, val_acc= 81.25%,val_weighted_f1= 79.96,val_macro_f1= 57.17%
+INFO - 09/13/26 22:31:35 - 0:00:23 - Epoch 6: train_loss=0.4815290868282318, train_acc= 85.00%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 7: train_loss=0.4638271629810333, train_acc= 85.83%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 8: train_loss=0.32580238580703735, train_acc= 93.33%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 9: train_loss=0.2976940870285034, train_acc= 90.83%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 10: train_loss=0.21408788859844208, train_acc= 93.33%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 10: val_loss=0.577501654624939, val_acc= 87.50%,val_weighted_f1= 86.33,val_macro_f1= 64.13%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 11: train_loss=0.19438175857067108, train_acc= 93.33%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 12: train_loss=0.23207953572273254, train_acc= 92.50%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 13: train_loss=0.14903952181339264, train_acc= 97.50%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 14: train_loss=0.09927931427955627, train_acc= 98.33%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 15: train_loss=0.0685839131474495, train_acc= 97.50%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 15: val_loss=0.5577467083930969, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 16: train_loss=0.07577934116125107, train_acc= 96.67%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 17: train_loss=0.06513263285160065, train_acc= 98.33%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 18: train_loss=0.08208584785461426, train_acc= 97.50%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 19: train_loss=0.054304517805576324, train_acc= 97.50%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 20: train_loss=0.019167251884937286, train_acc= 100.00%
+INFO - 09/13/26 22:31:35 - 0:00:24 - Epoch 20: val_loss=0.61257004737854, val_acc= 87.50%,val_weighted_f1= 86.73,val_macro_f1= 65.35%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 21: train_loss=0.02497635968029499, train_acc= 99.17%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 22: train_loss=0.02460336685180664, train_acc= 99.17%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 23: train_loss=0.013430706225335598, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 24: train_loss=0.013002716936171055, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 25: train_loss=0.009555619210004807, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 25: val_loss=0.6598216891288757, val_acc= 87.50%,val_weighted_f1= 86.54,val_macro_f1= 66.07%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 26: train_loss=0.018249845132231712, train_acc= 99.17%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 27: train_loss=0.00607762997969985, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 28: train_loss=0.006123578641563654, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 29: train_loss=0.012064684182405472, train_acc= 99.17%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 30: train_loss=0.01191730797290802, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 30: val_loss=0.7034156322479248, val_acc= 87.50%,val_weighted_f1= 86.54,val_macro_f1= 66.07%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 31: train_loss=0.005506323650479317, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 32: train_loss=0.007753413636237383, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 33: train_loss=0.010864656418561935, train_acc= 99.17%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 34: train_loss=0.0026758057065308094, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 35: train_loss=0.005232873372733593, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 35: val_loss=0.6707963943481445, val_acc= 88.75%,val_weighted_f1= 87.88,val_macro_f1= 67.28%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 36: train_loss=0.003391238395124674, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 37: train_loss=0.003498520003631711, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 38: train_loss=0.0019560628570616245, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 39: train_loss=0.0023833054583519697, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 40: train_loss=0.0015539188170805573, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 40: val_loss=0.6478311419487, val_acc= 87.50%,val_weighted_f1= 87.38,val_macro_f1= 66.22%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 41: train_loss=0.0024878166150301695, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 42: train_loss=0.0015851091593503952, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 43: train_loss=0.0021507611963897943, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 44: train_loss=0.0009916351409628987, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 45: train_loss=0.0014599165879189968, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 45: val_loss=0.6485798954963684, val_acc= 87.50%,val_weighted_f1= 87.38,val_macro_f1= 66.22%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 46: train_loss=0.0010875302832573652, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 47: train_loss=0.000936834781896323, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 48: train_loss=0.0013143455144017935, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:24 - Epoch 49: train_loss=0.0012242775410413742, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 50: train_loss=0.0019858097657561302, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 50: val_loss=0.6523301005363464, val_acc= 87.50%,val_weighted_f1= 87.38,val_macro_f1= 66.22%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 51: train_loss=0.0007210023468360305, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 52: train_loss=0.0010367551585659385, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 53: train_loss=0.0018343999981880188, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 54: train_loss=0.0012123876949772239, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 55: train_loss=0.0007652344065718353, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 55: val_loss=0.6522043347358704, val_acc= 87.50%,val_weighted_f1= 87.38,val_macro_f1= 66.22%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 56: train_loss=0.0007873948197811842, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 57: train_loss=0.0016027303645387292, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 58: train_loss=0.000846853363327682, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 59: train_loss=0.0006276530912145972, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 60: train_loss=0.002380529884248972, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 60: val_loss=0.6515992879867554, val_acc= 87.50%,val_weighted_f1= 87.38,val_macro_f1= 66.22%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 61: train_loss=0.0006631130236200988, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 62: train_loss=0.0006429568747989833, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 63: train_loss=0.0005373710300773382, train_acc= 100.00%
+INFO - 09/13/26 22:31:36 - 0:00:25 - Epoch 64: train_loss=0.0009622183861210942, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 65: train_loss=0.0005852328613400459, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 65: val_loss=0.6538223028182983, val_acc= 87.50%,val_weighted_f1= 87.38,val_macro_f1= 66.22%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 66: train_loss=0.0004498557245824486, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 67: train_loss=0.0007828937959857285, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 68: train_loss=0.000759563990868628, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 69: train_loss=0.000523424125276506, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 70: train_loss=0.00036615345743484795, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 70: val_loss=0.6578930020332336, val_acc= 87.50%,val_weighted_f1= 87.38,val_macro_f1= 66.22%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 71: train_loss=0.0008834355976432562, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 72: train_loss=0.0020836282055824995, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 73: train_loss=0.00041735981358215213, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 74: train_loss=0.00045698127360083163, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 75: train_loss=0.0004767721111420542, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 75: val_loss=0.6651676297187805, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 76: train_loss=0.002305548172444105, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 77: train_loss=0.0004944647080264986, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 78: train_loss=0.0005983959999866784, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 79: train_loss=0.000882465741597116, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 80: train_loss=0.00041754342964850366, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 80: val_loss=0.6897190809249878, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 81: train_loss=0.000636089826002717, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 82: train_loss=0.0006160432239994407, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 83: train_loss=0.0006511535029858351, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 84: train_loss=0.0005870527820661664, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 85: train_loss=0.0004459442279767245, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 85: val_loss=0.7063366174697876, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 86: train_loss=0.0021427946630865335, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 87: train_loss=0.0006503437180072069, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 88: train_loss=0.0004372187831904739, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 89: train_loss=0.00041139026870951056, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 90: train_loss=0.0003339756513014436, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:25 - Epoch 90: val_loss=0.7153384685516357, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 91: train_loss=0.0004070951254107058, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 92: train_loss=0.00040988062391988933, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 93: train_loss=0.0005421843961812556, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 94: train_loss=0.0003059333248529583, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 95: train_loss=0.00032777825254015625, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 95: val_loss=0.7216894626617432, val_acc= 88.75%,val_weighted_f1= 87.51,val_macro_f1= 64.62%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 96: train_loss=0.0003319929528515786, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 97: train_loss=0.0005633088876493275, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 98: train_loss=0.0008354553137905896, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 99: train_loss=0.0005578101263381541, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 100: train_loss=0.001375095802359283, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 100: val_loss=0.7264496088027954, val_acc= 88.75%,val_weighted_f1= 87.51,val_macro_f1= 64.62%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 101: train_loss=0.0005380442016758025, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 102: train_loss=0.000660229881759733, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 103: train_loss=0.0004840940237045288, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 104: train_loss=0.0005202284082770348, train_acc= 100.00%
+INFO - 09/13/26 22:31:37 - 0:00:26 - Epoch 105: train_loss=0.0006287958240136504, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 105: val_loss=0.7283814549446106, val_acc= 88.75%,val_weighted_f1= 87.51,val_macro_f1= 64.62%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 106: train_loss=0.00031125900568440557, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 107: train_loss=0.00036175045534037054, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 108: train_loss=0.0005468653398565948, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 109: train_loss=0.0005015254719182849, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 110: train_loss=0.0003746289585251361, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 110: val_loss=0.7295045852661133, val_acc= 88.75%,val_weighted_f1= 87.51,val_macro_f1= 64.62%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 111: train_loss=0.001160641317255795, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 112: train_loss=0.0005397304776124656, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 113: train_loss=0.0003841665748041123, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 114: train_loss=0.0003886450722347945, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 115: train_loss=0.0003535998985171318, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 115: val_loss=0.7278317213058472, val_acc= 88.75%,val_weighted_f1= 87.51,val_macro_f1= 64.62%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 116: train_loss=0.00039149675285443664, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 117: train_loss=0.0002642378385644406, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 118: train_loss=0.0002771960571408272, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 119: train_loss=0.00040187861304730177, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 120: train_loss=0.0004993891925550997, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 120: val_loss=0.7265298962593079, val_acc= 88.75%,val_weighted_f1= 87.51,val_macro_f1= 64.62%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 121: train_loss=0.0013756291009485722, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 122: train_loss=0.0003292638866696507, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 123: train_loss=0.00040991761488839984, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 124: train_loss=0.0002500922419130802, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 125: train_loss=0.0002554364618845284, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 125: val_loss=0.7359446287155151, val_acc= 88.75%,val_weighted_f1= 87.51,val_macro_f1= 64.62%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 126: train_loss=0.003852176247164607, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 127: train_loss=0.0004156935028731823, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 128: train_loss=0.0010440481128171086, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 129: train_loss=0.00024274116731248796, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 130: train_loss=0.0002473936474416405, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 130: val_loss=0.7263456583023071, val_acc= 87.50%,val_weighted_f1= 86.88,val_macro_f1= 64.36%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 131: train_loss=0.0002990430220961571, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 132: train_loss=0.00055747851729393, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 133: train_loss=0.00045521510764956474, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 134: train_loss=0.00033896483364515007, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:26 - Epoch 135: train_loss=0.0003172573051415384, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 135: val_loss=0.7241897583007812, val_acc= 87.50%,val_weighted_f1= 86.88,val_macro_f1= 64.36%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 136: train_loss=0.0006206650868989527, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 137: train_loss=0.0003391267964616418, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 138: train_loss=0.0007269560592249036, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 139: train_loss=0.00034814022365026176, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 140: train_loss=0.00025553657906129956, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 140: val_loss=0.7230725288391113, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 141: train_loss=0.0006741799297742546, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 142: train_loss=0.00027582389884628356, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 143: train_loss=0.0003090323880314827, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 144: train_loss=0.00019121906370855868, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 145: train_loss=0.00047021883074194193, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 145: val_loss=0.7191791534423828, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 146: train_loss=0.0003007661725860089, train_acc= 100.00%
+INFO - 09/13/26 22:31:38 - 0:00:27 - Epoch 147: train_loss=0.0003333204076625407, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 148: train_loss=0.00023768533719703555, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 149: train_loss=0.00036666716914623976, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 150: train_loss=0.0006358890095725656, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 150: val_loss=0.7171100378036499, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 151: train_loss=0.0001888877450255677, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 152: train_loss=0.0006429730565287173, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 153: train_loss=0.0004084394022356719, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 154: train_loss=0.00025686886510811746, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 155: train_loss=0.00023615083773620427, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 155: val_loss=0.7163381576538086, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 156: train_loss=0.00019047937530558556, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 157: train_loss=0.0003308011800982058, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 158: train_loss=0.00035922782262787223, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 159: train_loss=0.00017641800513956696, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 160: train_loss=0.0003900884767062962, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 160: val_loss=0.7165012359619141, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 161: train_loss=0.0003109109529759735, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 162: train_loss=0.00024382701667491347, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 163: train_loss=0.0001691590587142855, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 164: train_loss=0.00025464585633017123, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 165: train_loss=0.0007054351735860109, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 165: val_loss=0.7191444039344788, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 166: train_loss=0.0001885742967715487, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 167: train_loss=0.0003220482321921736, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 168: train_loss=0.0002833062026184052, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 169: train_loss=0.00018265929247718304, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 170: train_loss=0.0007678031688556075, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 170: val_loss=0.7238494753837585, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 171: train_loss=0.00021181529155001044, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 172: train_loss=0.0002506118034943938, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 173: train_loss=0.0002271246339660138, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 174: train_loss=0.00015547344810329378, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 175: train_loss=0.0002416219504084438, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:27 - Epoch 175: val_loss=0.7252770662307739, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 176: train_loss=0.0003234244941268116, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 177: train_loss=0.00025558480410836637, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 178: train_loss=0.0003376897657290101, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 179: train_loss=0.00044602382695302367, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 180: train_loss=0.000345731561537832, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 180: val_loss=0.7264912128448486, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 181: train_loss=0.000123920981422998, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 182: train_loss=0.000223872484639287, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 183: train_loss=0.00012726768909487873, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 184: train_loss=0.00027264669188298285, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 185: train_loss=0.0001973648031707853, train_acc= 100.00%
+INFO - 09/13/26 22:31:39 - 0:00:28 - Epoch 185: val_loss=0.726874053478241, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 186: train_loss=0.00016239377146121114, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 187: train_loss=0.0010172505863010883, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 188: train_loss=0.000707276223693043, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 189: train_loss=9.890150249702856e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 190: train_loss=0.00023682983010075986, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 190: val_loss=0.727396547794342, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 191: train_loss=0.0004578987427521497, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 192: train_loss=0.00024483687593601644, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 193: train_loss=0.0001658943365328014, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 194: train_loss=0.00022678587993141264, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 195: train_loss=0.00016856234287843108, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 195: val_loss=0.7283534407615662, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 196: train_loss=0.0001881773059722036, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 197: train_loss=0.00022835936397314072, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 198: train_loss=0.00021970276429783553, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 199: train_loss=0.00020299432799220085, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 200: train_loss=0.00024014116206672043, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 200: val_loss=0.7295041680335999, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 201: train_loss=0.0004731232183985412, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 202: train_loss=0.00016249011969193816, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 203: train_loss=0.00011603654274949804, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 204: train_loss=0.0002298334293300286, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 205: train_loss=0.00043118439498357475, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 205: val_loss=0.7303532361984253, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 206: train_loss=0.0001583454286446795, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 207: train_loss=0.00014930375618860126, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 208: train_loss=0.00032402854412794113, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 209: train_loss=0.0002203481417382136, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 210: train_loss=0.00015738313959445804, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 210: val_loss=0.7283283472061157, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:40 - 0:00:28 - Epoch 211: train_loss=0.00016499821504112333, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 212: train_loss=0.0001784619380487129, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 213: train_loss=0.0001927774428622797, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 214: train_loss=0.0002192052488680929, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 215: train_loss=0.00015761629038024694, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 215: val_loss=0.7272536158561707, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 216: train_loss=0.00019793050887528807, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 217: train_loss=8.571205398766324e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 218: train_loss=0.0002877270453609526, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 219: train_loss=0.00020507581939455122, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 220: train_loss=0.0005590133368968964, train_acc= 100.00%
+INFO - 09/13/26 22:31:40 - 0:00:29 - Epoch 220: val_loss=0.7268590331077576, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 221: train_loss=0.0005814742762595415, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 222: train_loss=0.00012753326154779643, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 223: train_loss=0.00014296788140200078, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 224: train_loss=0.0006110849208198488, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 225: train_loss=0.0003009656793437898, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 225: val_loss=0.7205065488815308, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 226: train_loss=0.00013998827489558607, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 227: train_loss=0.0001243382866960019, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 228: train_loss=0.0002957509714178741, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 229: train_loss=0.0001149818126577884, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 230: train_loss=0.00023885566042736173, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 230: val_loss=0.7171503305435181, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 231: train_loss=0.00020119523105677217, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 232: train_loss=0.0009336954681202769, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 233: train_loss=0.0002474434731993824, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 234: train_loss=0.00038344625500030816, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 235: train_loss=0.00012931748642586172, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 235: val_loss=0.7092193365097046, val_acc= 90.00%,val_weighted_f1= 89.18,val_macro_f1= 68.42%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 236: train_loss=0.00021208687394391745, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 237: train_loss=0.00020037985814269632, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 238: train_loss=8.993197843665257e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 239: train_loss=0.0004934481694363058, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 240: train_loss=9.156105079455301e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 240: val_loss=0.7077332139015198, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 241: train_loss=0.00012765773863065988, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 242: train_loss=9.215235331794247e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 243: train_loss=0.00010387889778940007, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 244: train_loss=0.0014611368533223867, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 245: train_loss=9.865740867098793e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 245: val_loss=0.7221609354019165, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 246: train_loss=0.0001388990058330819, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 247: train_loss=0.0003526607761159539, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 248: train_loss=0.0002810049627441913, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 249: train_loss=0.0001449997362215072, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 250: train_loss=0.0003121719346381724, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:29 - Epoch 250: val_loss=0.7476370930671692, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 251: train_loss=0.00010570496669970453, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 252: train_loss=0.00013014512660447508, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 253: train_loss=8.404872642131522e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 254: train_loss=9.658557246439159e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 255: train_loss=0.00014013276086188853, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 255: val_loss=0.7637299299240112, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 256: train_loss=0.0001707859628368169, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 257: train_loss=0.00023056945065036416, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 258: train_loss=0.00042390296584926546, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 259: train_loss=9.867901826510206e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 260: train_loss=0.00010554411710472777, train_acc= 100.00%
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 260: val_loss=0.7727431058883667, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:41 - 0:00:30 - Epoch 261: train_loss=0.00011747898679459468, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 262: train_loss=0.00012488522042986006, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 263: train_loss=0.0002188275393564254, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 264: train_loss=9.200913336826488e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 265: train_loss=0.00025130054564215243, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 265: val_loss=0.7785037755966187, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 266: train_loss=0.00019642575352918357, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 267: train_loss=0.00010456921881996095, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 268: train_loss=0.00010465719242347404, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 269: train_loss=0.0003185966925229877, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 270: train_loss=0.00022292303037829697, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 270: val_loss=0.7824381589889526, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 271: train_loss=8.70683288667351e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 272: train_loss=0.00011185710172867402, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 273: train_loss=0.00035091544850729406, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 274: train_loss=0.0002889044408220798, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 275: train_loss=0.00019601191161200404, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 275: val_loss=0.7841390371322632, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 276: train_loss=6.243385723792017e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 277: train_loss=0.000277018581982702, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 278: train_loss=9.117121226154268e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 279: train_loss=0.00011040531535400078, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 280: train_loss=0.000157502232468687, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 280: val_loss=0.7861210703849792, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 281: train_loss=9.892709931591526e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 282: train_loss=0.0005370409926399589, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 283: train_loss=0.00012980187602806836, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 284: train_loss=0.0009981937473639846, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 285: train_loss=8.862053800839931e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 285: val_loss=0.7798010110855103, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 286: train_loss=8.651083771837875e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 287: train_loss=0.00014156576071400195, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 288: train_loss=0.0003176457539666444, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 289: train_loss=0.00011064144200645387, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 290: train_loss=8.633558172732592e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 290: val_loss=0.7718023657798767, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 291: train_loss=9.281719394493848e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 292: train_loss=9.920007869368419e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 293: train_loss=0.00018978245498146862, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 294: train_loss=0.00014330293925013393, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:30 - Epoch 295: train_loss=0.00020770081027876586, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 295: val_loss=0.7668020129203796, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 296: train_loss=0.00027406736626289785, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 297: train_loss=0.0001734465768095106, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 298: train_loss=0.0004908132250420749, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 299: train_loss=0.00011950790212722495, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 300: train_loss=0.00010246615420328453, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 300: val_loss=0.7629040479660034, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 301: train_loss=0.00016988338029477745, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 302: train_loss=8.424364204984158e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 303: train_loss=0.000103464670246467, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 304: train_loss=9.804473666008562e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:42 - 0:00:31 - Epoch 305: train_loss=0.00010921962530119345, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 305: val_loss=0.7606847882270813, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 306: train_loss=0.0003201384679414332, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 307: train_loss=0.0001822534395614639, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 308: train_loss=0.000136016562464647, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 309: train_loss=0.00010205940634477884, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 310: train_loss=8.381322550121695e-05, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 310: val_loss=0.7617169618606567, val_acc= 88.75%,val_weighted_f1= 88.55,val_macro_f1= 68.16%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:43 - 0:00:31 - --------------Testing--------------------
+INFO - 09/13/26 22:31:43 - 0:00:31 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:43 - 0:00:31 - test_acc= 82.35%, weighted_f1= 79.36,macro_f1= 64.73%
+INFO - 09/13/26 22:31:43 - 0:00:31 - test_acc= 82.35%, weighted_f1= 79.36,macro_f1= 64.73%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 0: train_loss=1.5775281190872192, train_acc= 25.83%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 0: val_loss=2.7487540245056152, val_acc= 38.75%,val_weighted_f1= 21.64,val_macro_f1= 11.17%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 1: train_loss=1.3734166622161865, train_acc= 53.33%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 2: train_loss=0.9776788353919983, train_acc= 68.33%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 3: train_loss=0.8298730850219727, train_acc= 71.67%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 4: train_loss=0.630855143070221, train_acc= 77.50%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 5: train_loss=0.5672325491905212, train_acc= 84.17%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 5: val_loss=0.9409462809562683, val_acc= 72.50%,val_weighted_f1= 68.45,val_macro_f1= 46.38%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 6: train_loss=0.39520561695098877, train_acc= 87.50%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 7: train_loss=0.3098171651363373, train_acc= 89.17%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 8: train_loss=0.2879098057746887, train_acc= 90.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 9: train_loss=0.22247566282749176, train_acc= 91.67%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 10: train_loss=0.16380660235881805, train_acc= 95.83%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 10: val_loss=0.5581793785095215, val_acc= 88.75%,val_weighted_f1= 86.30,val_macro_f1= 68.88%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 11: train_loss=0.11058367788791656, train_acc= 96.67%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 12: train_loss=0.10687550157308578, train_acc= 98.33%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 13: train_loss=0.09479514509439468, train_acc= 97.50%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 14: train_loss=0.05055536329746246, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 15: train_loss=0.05800612270832062, train_acc= 98.33%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 15: val_loss=0.6959645748138428, val_acc= 85.00%,val_weighted_f1= 82.20,val_macro_f1= 63.11%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 16: train_loss=0.025035865604877472, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 17: train_loss=0.032545603811740875, train_acc= 99.17%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 18: train_loss=0.024990612640976906, train_acc= 99.17%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 19: train_loss=0.027345838025212288, train_acc= 99.17%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 20: train_loss=0.04183699190616608, train_acc= 99.17%
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 20: val_loss=0.7333192229270935, val_acc= 83.75%,val_weighted_f1= 81.81,val_macro_f1= 64.44%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:43 - 0:00:31 - Epoch 21: train_loss=0.014584547840058804, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 22: train_loss=0.005352182779461145, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 23: train_loss=0.009665338322520256, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 24: train_loss=0.004882988054305315, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 25: train_loss=0.01165077742189169, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 25: val_loss=0.7603021860122681, val_acc= 86.25%,val_weighted_f1= 83.96,val_macro_f1= 66.63%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 26: train_loss=0.002927364083006978, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 27: train_loss=0.00514656025916338, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 28: train_loss=0.005155895836651325, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 29: train_loss=0.007006819825619459, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 30: train_loss=0.0026125952135771513, train_acc= 100.00%
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 30: val_loss=0.8489429354667664, val_acc= 85.00%,val_weighted_f1= 83.31,val_macro_f1= 67.32%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:43 - 0:00:32 - Epoch 31: train_loss=0.002428363775834441, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 32: train_loss=0.002023187931627035, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 33: train_loss=0.0018380506662651896, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 34: train_loss=0.001302478020079434, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 35: train_loss=0.0033527533523738384, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 35: val_loss=0.9655912518501282, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 36: train_loss=0.002828838536515832, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 37: train_loss=0.0010714142117649317, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 38: train_loss=0.0020326203666627407, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 39: train_loss=0.0042493403889238834, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 40: train_loss=0.0012941894819959998, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 40: val_loss=1.0395115613937378, val_acc= 83.75%,val_weighted_f1= 81.66,val_macro_f1= 65.83%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 41: train_loss=0.0008520188275724649, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 42: train_loss=0.0028187711723148823, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 43: train_loss=0.0026503487024456263, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 44: train_loss=0.001444661756977439, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 45: train_loss=0.0017291322583332658, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 45: val_loss=1.0471994876861572, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 46: train_loss=0.0008372499723918736, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 47: train_loss=0.001230161520652473, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 48: train_loss=0.0018002857686951756, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 49: train_loss=0.0014591888757422566, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 50: train_loss=0.002575543010607362, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 50: val_loss=1.0196119546890259, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 51: train_loss=0.0008660756284371018, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 52: train_loss=0.0009182614739984274, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 53: train_loss=0.001018382958136499, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 54: train_loss=0.0013204572023823857, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 55: train_loss=0.0008678791346028447, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 55: val_loss=0.9935475587844849, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 56: train_loss=0.001347497571259737, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 57: train_loss=0.0007353853434324265, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 58: train_loss=0.000699492811691016, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 59: train_loss=0.0020128998439759016, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 60: train_loss=0.001958726439625025, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 60: val_loss=0.9787599444389343, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 61: train_loss=0.0005812300951220095, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 62: train_loss=0.0005812898743897676, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 63: train_loss=0.0016381285386160016, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 64: train_loss=0.0005005815764889121, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:32 - Epoch 65: train_loss=0.0005741444765590131, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 65: val_loss=0.9621847867965698, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 66: train_loss=0.0004353318363428116, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 67: train_loss=0.0008979366393759847, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 68: train_loss=0.0006465278565883636, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 69: train_loss=0.0013519132044166327, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 70: train_loss=0.0006245839758776128, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 70: val_loss=0.9619879722595215, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 71: train_loss=0.0006261254311539233, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 72: train_loss=0.0005810065777041018, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 73: train_loss=0.000468607060611248, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 74: train_loss=0.0010139538208022714, train_acc= 100.00%
+INFO - 09/13/26 22:31:44 - 0:00:33 - Epoch 75: train_loss=0.00042988869245164096, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 75: val_loss=0.9619362950325012, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 76: train_loss=0.0009024657774716616, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 77: train_loss=0.0004178409872110933, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 78: train_loss=0.0012597714085131884, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 79: train_loss=0.0003402118163648993, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 80: train_loss=0.0010056871687993407, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 80: val_loss=0.9534643292427063, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 81: train_loss=0.0004843055212404579, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 82: train_loss=0.0005263481289148331, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 83: train_loss=0.00045816643978469074, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 84: train_loss=0.00040070406976155937, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 85: train_loss=0.00043391092913225293, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 85: val_loss=0.9542009234428406, val_acc= 83.75%,val_weighted_f1= 82.09,val_macro_f1= 66.06%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:45 - 0:00:33 - --------------Testing--------------------
+INFO - 09/13/26 22:31:45 - 0:00:33 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:45 - 0:00:33 - test_acc= 84.31%, weighted_f1= 82.52,macro_f1= 57.35%
+INFO - 09/13/26 22:31:45 - 0:00:33 - test_acc= 84.31%, weighted_f1= 82.52,macro_f1= 57.35%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 0: train_loss=1.495404601097107, train_acc= 35.83%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 0: val_loss=1.926517128944397, val_acc= 50.00%,val_weighted_f1= 36.45,val_macro_f1= 18.70%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 1: train_loss=1.1365025043487549, train_acc= 55.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 2: train_loss=0.9425013661384583, train_acc= 64.17%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 3: train_loss=0.6906077265739441, train_acc= 80.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 4: train_loss=0.606779158115387, train_acc= 80.83%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 5: train_loss=0.5001088380813599, train_acc= 84.17%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 5: val_loss=0.945809006690979, val_acc= 75.00%,val_weighted_f1= 69.24,val_macro_f1= 49.33%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 6: train_loss=0.3061474561691284, train_acc= 88.33%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 7: train_loss=0.34121766686439514, train_acc= 88.33%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 8: train_loss=0.1971530318260193, train_acc= 95.83%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 9: train_loss=0.1444401741027832, train_acc= 97.50%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 10: train_loss=0.12200389057397842, train_acc= 97.50%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 10: val_loss=0.8599377870559692, val_acc= 83.75%,val_weighted_f1= 81.80,val_macro_f1= 76.62%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 11: train_loss=0.06332466006278992, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 12: train_loss=0.06871870160102844, train_acc= 98.33%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 13: train_loss=0.04121106117963791, train_acc= 99.17%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 14: train_loss=0.08527816832065582, train_acc= 97.50%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 15: train_loss=0.048653099685907364, train_acc= 99.17%
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 15: val_loss=0.9560533761978149, val_acc= 80.00%,val_weighted_f1= 76.64,val_macro_f1= 59.42%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:45 - 0:00:33 - Epoch 16: train_loss=0.047600824385881424, train_acc= 99.17%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 17: train_loss=0.027344753965735435, train_acc= 99.17%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 18: train_loss=0.020266391336917877, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 19: train_loss=0.005884361919015646, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 20: train_loss=0.009766637347638607, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 20: val_loss=0.9983479380607605, val_acc= 83.75%,val_weighted_f1= 80.96,val_macro_f1= 63.88%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 21: train_loss=0.006657994817942381, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 22: train_loss=0.01033731922507286, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 23: train_loss=0.02846718579530716, train_acc= 99.17%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 24: train_loss=0.014203783124685287, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 25: train_loss=0.004935641307383776, train_acc= 100.00%
+INFO - 09/13/26 22:31:45 - 0:00:34 - Epoch 25: val_loss=0.9705865979194641, val_acc= 82.50%,val_weighted_f1= 79.90,val_macro_f1= 62.64%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 26: train_loss=0.005810393486171961, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 27: train_loss=0.007441053632646799, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 28: train_loss=0.0026091772597283125, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 29: train_loss=0.0036564774345606565, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 30: train_loss=0.005441907327622175, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 30: val_loss=0.9074416160583496, val_acc= 83.75%,val_weighted_f1= 82.25,val_macro_f1= 72.84%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 31: train_loss=0.0035732313990592957, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 32: train_loss=0.005283324513584375, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 33: train_loss=0.0036088689230382442, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 34: train_loss=0.0014605094911530614, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 35: train_loss=0.0022951604332774878, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 35: val_loss=0.8993521928787231, val_acc= 85.00%,val_weighted_f1= 83.31,val_macro_f1= 74.08%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 36: train_loss=0.00167823804076761, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 37: train_loss=0.001556786592118442, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 38: train_loss=0.0041173710487782955, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 39: train_loss=0.0017328044632449746, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 40: train_loss=0.0023209615610539913, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 40: val_loss=0.9229820370674133, val_acc= 82.50%,val_weighted_f1= 79.54,val_macro_f1= 66.80%
+EarlyStopping counter: 1 out of 15
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 41: train_loss=0.00390667887404561, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 42: train_loss=0.0015117482980713248, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 43: train_loss=0.0019137493800371885, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 44: train_loss=0.0038992215413600206, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 45: train_loss=0.0012882641749456525, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 45: val_loss=0.9768301248550415, val_acc= 81.25%,val_weighted_f1= 77.26,val_macro_f1= 63.29%
+EarlyStopping counter: 2 out of 15
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 46: train_loss=0.0016386762727051973, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 47: train_loss=0.0011743385111913085, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 48: train_loss=0.003503121668472886, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 49: train_loss=0.001141545595601201, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 50: train_loss=0.0013120154617354274, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 50: val_loss=1.0373423099517822, val_acc= 81.25%,val_weighted_f1= 76.98,val_macro_f1= 63.39%
+EarlyStopping counter: 3 out of 15
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 51: train_loss=0.0006217147456482053, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 52: train_loss=0.0010207104496657848, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 53: train_loss=0.0006253060419112444, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 54: train_loss=0.0015082582831382751, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 55: train_loss=0.01161943469196558, train_acc= 99.17%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 55: val_loss=1.0576988458633423, val_acc= 81.25%,val_weighted_f1= 76.98,val_macro_f1= 63.39%
+EarlyStopping counter: 4 out of 15
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 56: train_loss=0.001931539154611528, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:34 - Epoch 57: train_loss=0.0014710219111293554, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 58: train_loss=0.005447630770504475, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 59: train_loss=0.0016265417216345668, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 60: train_loss=0.0010297218104824424, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 60: val_loss=1.0244998931884766, val_acc= 82.50%,val_weighted_f1= 79.25,val_macro_f1= 68.42%
+EarlyStopping counter: 5 out of 15
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 61: train_loss=0.0005764319794252515, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 62: train_loss=0.0010934550082311034, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 63: train_loss=0.0009038420976139605, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 64: train_loss=0.0005038726376369596, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 65: train_loss=0.0010559838265180588, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 65: val_loss=0.995573878288269, val_acc= 82.50%,val_weighted_f1= 79.39,val_macro_f1= 68.11%
+EarlyStopping counter: 6 out of 15
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 66: train_loss=0.0005468876915983856, train_acc= 100.00%
+INFO - 09/13/26 22:31:46 - 0:00:35 - Epoch 67: train_loss=0.0009542618063278496, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 68: train_loss=0.0005515560624189675, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 69: train_loss=0.0009764258866198361, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 70: train_loss=0.0012198215117678046, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 70: val_loss=0.9879975318908691, val_acc= 82.50%,val_weighted_f1= 79.40,val_macro_f1= 67.69%
+EarlyStopping counter: 7 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 71: train_loss=0.0005008784937672317, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 72: train_loss=0.0006687453133054078, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 73: train_loss=0.0005148288328200579, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 74: train_loss=0.0007891530985943973, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 75: train_loss=0.0013317653210833669, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 75: val_loss=0.9974249005317688, val_acc= 80.00%,val_weighted_f1= 76.13,val_macro_f1= 56.47%
+EarlyStopping counter: 8 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 76: train_loss=0.0007692124345339835, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 77: train_loss=0.00037121056811884046, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 78: train_loss=0.0004485085664782673, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 79: train_loss=0.00047924500540830195, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 80: train_loss=0.0006483076140284538, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 80: val_loss=1.0229393243789673, val_acc= 80.00%,val_weighted_f1= 76.13,val_macro_f1= 56.47%
+EarlyStopping counter: 9 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 81: train_loss=0.0003894525580108166, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 82: train_loss=0.0006333639612421393, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 83: train_loss=0.000394664763007313, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 84: train_loss=0.0005065877339802682, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 85: train_loss=0.0006320599350146949, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 85: val_loss=1.0501275062561035, val_acc= 80.00%,val_weighted_f1= 75.93,val_macro_f1= 56.70%
+EarlyStopping counter: 10 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 86: train_loss=0.0004639142716769129, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 87: train_loss=0.00033292267471551895, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 88: train_loss=0.0004073380259796977, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 89: train_loss=0.00037272286135703325, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 90: train_loss=0.000803684233687818, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 90: val_loss=1.073819875717163, val_acc= 78.75%,val_weighted_f1= 73.71,val_macro_f1= 53.69%
+EarlyStopping counter: 11 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 91: train_loss=0.0007429266115650535, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 92: train_loss=0.000772847153712064, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 93: train_loss=0.00030164382769726217, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 94: train_loss=0.0004521622322499752, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 95: train_loss=0.000336102326400578, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 95: val_loss=1.0950363874435425, val_acc= 78.75%,val_weighted_f1= 73.71,val_macro_f1= 53.69%
+EarlyStopping counter: 12 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 96: train_loss=0.00029852063744328916, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 97: train_loss=0.00047343020560219884, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 98: train_loss=0.0005352224688977003, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 99: train_loss=0.0005224987980909646, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 100: train_loss=0.00030447522294707596, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 100: val_loss=1.1183326244354248, val_acc= 78.75%,val_weighted_f1= 73.71,val_macro_f1= 53.69%
+EarlyStopping counter: 13 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:35 - Epoch 101: train_loss=0.0003597791073843837, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 102: train_loss=0.0009150051046162844, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 103: train_loss=0.0004361422616057098, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 104: train_loss=0.00025835965061560273, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 105: train_loss=0.0007486125105060637, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 105: val_loss=1.1368199586868286, val_acc= 80.00%,val_weighted_f1= 74.55,val_macro_f1= 54.56%
+EarlyStopping counter: 14 out of 15
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 106: train_loss=0.00038306135684251785, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 107: train_loss=0.000585872505325824, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 108: train_loss=0.0007266990141943097, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 109: train_loss=0.0006013663951307535, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 110: train_loss=0.0005892658955417573, train_acc= 100.00%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Epoch 110: val_loss=1.148115873336792, val_acc= 80.00%,val_weighted_f1= 74.55,val_macro_f1= 54.56%
+EarlyStopping counter: 15 out of 15
+---------Early stopping--------
+INFO - 09/13/26 22:31:47 - 0:00:36 - --------------Testing--------------------
+INFO - 09/13/26 22:31:47 - 0:00:36 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:31:47 - 0:00:36 - test_acc= 88.24%, weighted_f1= 86.22,macro_f1= 66.84%
+INFO - 09/13/26 22:31:47 - 0:00:36 - test_acc= 88.24%, weighted_f1= 86.22,macro_f1= 66.84%
+INFO - 09/13/26 22:31:47 - 0:00:36 - Best ACCs: [80.39, 86.27, 88.24, 92.16, 82.35, 82.35, 86.27, 82.35, 84.31, 88.24]
+                                     Evaluation Acc is  85.29% ±  3.42%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=40
+[repro] finished_at=2026-09-13T22:31:48+08:00

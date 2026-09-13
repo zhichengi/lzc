@@ -1,0 +1,27 @@
+[repro] paper=gbn
+[repro] started_at=2026-09-13T22:27:10+08:00
+[repro] run_id=20260913_222710_smoke_Wisconsin_2ep_pid288315
+[repro] repo_commit=72ad3692916ecc60f2c78d5bd01a55d7c6297a4f
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/gbn
+[repro] command=python main.py --task NC --dataset Wisconsin
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p288372-i269120.scope; invocation ID: 5d9c1037a2974eebbf2649ffa4180f06
+Loading config file: ./configs/NC/Wisconsin.json
+Log path: ./logs//NC_Wisconsin_NL5_HD512_DP0.7_ACTgelu_NORMln_BTrue_LRNC0.001_LRT0.001.log
+INFO - 09/13/26 22:27:15 - 0:00:00 - {'task': 'NC', 'dataset': 'Wisconsin', 'root_path': './datasets', 'val_every': 5, 'exp_iters': 1, 'log_dir': './logs/', 'result_dir': './results/', 'task_model_path': 'NC_Wisconsin_model.pt', 'checkpoints': './checkpoints/', 'add_self_loop': False, 'n_layers': 5, 'hid_dim': 512, 'embed_dim': 512, 'dropout': 0.7, 'act': 'gelu', 'input_act': 'gelu', 'norm': 'ln', 'bias': True, 'tau': 1.0, 'lr_nc': 0.001, 'weight_decay_nc': 0, 'epochs_nc': 2, 'patience_nc': 15, 'additional_layers': 0, 'distance_list': [50, 10, 5, 3], 'lr_trans': 0.001, 'weight_decay_trans': 0, 'epochs_trans': 2000, 'patience_trans': 10, 'use_gpu': True, 'gpu': 0, 'devices': '0', 'layer_wise': True, 'log_path': './logs//NC_Wisconsin_NL5_HD512_DP0.7_ACTgelu_NORMln_BTrue_LRNC0.001_LRT0.001.log', 'result_path': './results//NC_Wisconsin.txt'}
+INFO - 09/13/26 22:27:15 - 0:00:00 - --------------------------Training Start-------------------------
+INFO - 09/13/26 22:27:16 - 0:00:00 - Epoch 0: train_loss=1.827430248260498, train_acc= 11.67%
+INFO - 09/13/26 22:27:16 - 0:00:00 - Epoch 0: val_loss=1.5575542449951172, val_acc= 60.00%,val_weighted_f1= 49.83,val_macro_f1= 24.76%
+INFO - 09/13/26 22:27:16 - 0:00:00 - Epoch 1: train_loss=1.271144986152649, train_acc= 50.83%
+INFO - 09/13/26 22:27:16 - 0:00:00 - --------------Testing--------------------
+INFO - 09/13/26 22:27:16 - 0:00:00 - --------------Loading from ./checkpoints/NC_Wisconsin_model.pt--------------------
+INFO - 09/13/26 22:27:16 - 0:00:00 - test_acc= 66.67%, weighted_f1= 57.60,macro_f1= 29.95%
+INFO - 09/13/26 22:27:16 - 0:00:00 - test_acc= 66.67%, weighted_f1= 57.60,macro_f1= 29.95%
+INFO - 09/13/26 22:27:16 - 0:00:00 - Best ACCs: [66.67]
+                                     Evaluation Acc is  66.67% ±  0.00%
+                                     
+[repro] exit_code=0
+[repro] runtime_seconds=5
+[repro] finished_at=2026-09-13T22:27:16+08:00
