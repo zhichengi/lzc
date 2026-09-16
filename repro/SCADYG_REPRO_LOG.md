@@ -1,6 +1,6 @@
 # ScaDyG 复现日志
 
-> 当前：官方协议 MRR 选模 0.922 ± 0.014 vs 论文 0.931 ± 0.009；严格 item 排名 0.204 ± 0.004。组件消融已完成（R-SCADYG-2，2026-09-13）：`none` 0.9225±0.0142（1σ 内）> `hyper` 0.8032±0.0412 ≈ `time` 0.8277±0.0773 ≫ `topo` 0.0099（塌成随机）。报告初稿：[SCADYG_REPORT.md](SCADYG_REPORT.md)。BitcoinAlpha 未做。入口：[SCADYG_README.md](SCADYG_README.md)。
+> 当前：官方协议 MRR 选模 0.922 ± 0.014 vs 论文 0.931 ± 0.009；严格 item 排名 0.204 ± 0.004。组件消融已完成（R-SCADYG-2，2026-09-13）：`none` 0.9225±0.0142（1σ 内）> `hyper` 0.8032±0.0412 ≈ `time` 0.8277±0.0773 ≫ `topo` 0.0099（塌成随机）。BitcoinAlpha 已完成 5 seed：0.719470 ± 0.006932。报告：[SCADYG_REPORT.md](SCADYG_REPORT.md)。入口：[SCADYG_README.md](SCADYG_README.md)。
 
 论文：*ScaDyG: A New Paradigm for Large-Scale Dynamic Graph Learning*，IEEE TNNLS 2026。  
 官方代码：https://github.com/BITNEO/ScaDyG  
@@ -641,5 +641,26 @@ python scripts/summarize_scadyg_ablation.py $LOGS --csv results/scadyg/ablation_
 
 - 覆盖当前完整工作树的补丁（见上节追溯缺口）。R-SCADYG-2 已完成，可生成。
 - BitcoinAlpha 第二数据集（R-SCADYG-3）。
+
+## 2026-09-16 R-SCADYG-3：BitcoinAlpha 第二数据集
+
+- 原始数据：SNAP `soc-sign-bitcoinalpha.csv.gz`；SHA-256：`3a178611b9c2f39c9a0dc75936f28557317f1733319b49da4838232b3757cd76`。
+- 下载入口：`repro/download_scadyg_bitcoinalpha.sh`；预处理脚本：`repro/scadyg-extra/process_bitcoin.py`。
+- 默认切片宽度 723000 秒、补充反向边，生成 226 个快照；四组快照文件各 226 个，首个快照形状为 `(2, 46)`、`(46, 2)`、`(46,)`、`(3783, 1)`。
+- 烟雾命令 `bash repro/run_scadyg.sh bitcoinalpha --epochs 1 --seed 2023` 退出码 0，`avg_official_mrr=0.7340658586`；该数字只用于管线检查。
+
+正式运行使用独立进程、`--selection_metric mrr`、官方训练负采样与官方排名协议：
+
+| seed | official MRR |
+|------|--------------|
+| 0 | 0.7170117487 |
+| 1 | 0.7272967349 |
+| 2 | 0.7160102901 |
+| 3 | 0.7110614720 |
+| 4 | 0.7259677410 |
+
+均值 ± 样本标准差：**0.719470 ± 0.006932**（n=5）。5/5 正常完成，无 traceback；不宣称论文数值匹配，且与 MOOC 的 0.922 ± 0.014 分开记账。结构化数字：`results/scadyg/bitcoinalpha_multiseed_summary.csv`。
+
+R-SCADYG-3 数据、训练、评测和日志均已完成。L1 管线闭环为是；冻结前剩余任务是整理 `SCADYG_REPORT.md` 与完整补丁追溯说明。
 
 

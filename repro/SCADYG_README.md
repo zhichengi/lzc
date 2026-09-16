@@ -75,4 +75,39 @@ bash repro/run_scadyg_multiseed.sh mrr
 | `time` | 0.8277 ± 0.0773 | −0.1033 |
 | `topo` | **0.0099 ± 0.0000** | −0.9211（塌成随机）|
 
-默认 1 epoch 回归：official MRR 0.6247271678，与最初基线逐位一致。**BitcoinAlpha 尚未做**，消融已完成（见 `results/scadyg/ablation_summary.csv`）。报告初稿见 [SCADYG_REPORT.md](SCADYG_REPORT.md)。结构化数字：`results/scadyg/multiseed_summary.csv`。
+默认 1 epoch 回归：official MRR 0.6247271678，与最初基线逐位一致。**BitcoinAlpha 第二数据集已完成**：canonical seeds 0–4 的 official MRR 为 **0.719470 ± 0.006932**。消融已完成（见 `results/scadyg/ablation_summary.csv`）。报告初稿见 [SCADYG_REPORT.md](SCADYG_REPORT.md)。结构化数字：`results/scadyg/multiseed_summary.csv`。
+
+## BitcoinAlpha
+
+BitcoinAlpha 的原始数据来自 SNAP，下载、哈希记录、去注释和快照预处理由以下入口完成：
+
+```bash
+bash repro/download_scadyg_bitcoinalpha.sh
+```
+
+默认使用 723000 秒切片，并按原始预处理脚本的默认行为补充反向边。生成目录为
+`repro/scadyg/dataset/bitcoinalpha/`。如需改变切片宽度，可设置
+`SCADYG_SNAPSHOT_SECONDS`；如需保留有向边，可直接调用预处理脚本并加上
+`--no-reverse-edges`：
+
+```bash
+conda run -n scadyg python repro/scadyg/process_raw_data/process_bitcoin.py \
+	--input repro/scadyg/dataset_raw/bitcoinalpha/bitcoinalpha.csv \
+	--output-root repro/scadyg/dataset \
+	--snapshot-seconds 723000 \
+	--no-reverse-edges
+```
+
+生成数据后，先做 1 epoch 管线检查：
+
+```bash
+bash repro/run_scadyg.sh bitcoinalpha --epochs 1 --seed 2023
+```
+
+正式多 seed 使用：
+
+```bash
+bash repro/run_scadyg_multiseed.sh mrr bitcoinalpha 0 1 2 3 4
+```
+
+结构化数字：`results/scadyg/bitcoinalpha_multiseed_summary.csv`。

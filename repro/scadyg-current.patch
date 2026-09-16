@@ -1,0 +1,944 @@
+diff --git a/process_raw_data/process_bitcoin.py b/process_raw_data/process_bitcoin.py
+index 1ea5d74..cf7305a 100644
+--- a/process_raw_data/process_bitcoin.py
++++ b/process_raw_data/process_bitcoin.py
+@@ -12,11 +12,9 @@ import torch
+ from deepsnap.graph import Graph
+ from sklearn.preprocessing import MinMaxScaler, OrdinalEncoder
+ import argparse
+-from graphgym.config import cfg
+-from graphgym.register import register_loader
+ import numpy as np
+-def save_snapshot(dataset,dataset_name):
+-    dataset_dir = "/home/wuxiang/WinGNN-main/dataset/"+dataset_name
++def save_snapshot(dataset, dataset_name, output_root):
++    dataset_dir = os.path.join(output_root, dataset_name)
+ 
+     if os.path.exists(dataset_dir) == False:
+         os.makedirs(dataset_dir)
+@@ -36,7 +34,7 @@ def save_snapshot(dataset,dataset_name):
+         np.save(dataset_dir + '/node_feature/' + str(i) + '.npy',node_feature.numpy() )
+         
+ 
+-def load_single_dataset(dataset_dir: str) -> Graph:
++def load_single_dataset(dataset_dir: str, add_reverse_edges: bool) -> Graph:
+     dataset_dir = "/"+dataset_dir
+     df_trans = pd.read_csv(dataset_dir, sep=',', header=None, index_col=None)
+     df_trans.columns = ['SOURCE', 'TARGET', 'RATING', 'TIME']
+@@ -44,7 +42,7 @@ def load_single_dataset(dataset_dir: str) -> Graph:
+     num_nodes = len(pd.unique(df_trans[['SOURCE', 'TARGET']].to_numpy().ravel()))
+ 
+     # bitcoin OTC contains decimal numbers, round them.
+-    df_trans['TIME'] = df_trans['TIME'].astype(np.int).astype(np.float)
++    df_trans['TIME'] = df_trans['TIME'].astype(int).astype(float)
+     assert not np.any(pd.isna(df_trans).values)
+ 
+     time_scaler = MinMaxScaler((0, 2))
+@@ -69,7 +67,7 @@ def load_single_dataset(dataset_dir: str) -> Graph:
+ 
+     edge_time = torch.FloatTensor(df_trans['TIME'].values)
+ 
+-    if cfg.train.mode in ['baseline', 'baseline_v2', 'live_update_fixed_split']:
++    if add_reverse_edges:
+         edge_feature = torch.cat((edge_feature, edge_feature.clone()), dim=0)
+         reversed_idx = torch.stack([edge_index[1], edge_index[0]]).clone()
+         edge_index = torch.cat((edge_index, reversed_idx), dim=1)
+@@ -148,10 +146,12 @@ def split_by_seconds(g_all, freq_sec: int):
+ 
+ def load_generic(dataset_dir: str,
+                  snapshot: bool = True,
+-                 snapshot_freq: str = None
++                 snapshot_freq: str = None,
++                 add_reverse_edges: bool = True,
++                 layers_mp: int = 2
+                  ) -> Union[deepsnap.graph.Graph,
+                             List[deepsnap.graph.Graph]]:
+-    g_all = load_single_dataset(dataset_dir)
++    g_all = load_single_dataset(dataset_dir, add_reverse_edges)
+     if not snapshot:
+         return g_all
+ 
+@@ -167,8 +167,8 @@ def load_generic(dataset_dir: str,
+ 
+ 
+     for g_snapshot in snapshot_list:
+-        g_snapshot.node_states = [0 for _ in range(cfg.gnn.layers_mp)]
+-        g_snapshot.node_cells = [0 for _ in range(cfg.gnn.layers_mp)]
++        g_snapshot.node_states = [0 for _ in range(layers_mp)]
++        g_snapshot.node_cells = [0 for _ in range(layers_mp)]
+         g_snapshot.node_degree_existing = torch.zeros(num_nodes)
+ 
+     # check snapshots ordering.
+@@ -178,11 +178,29 @@ def load_generic(dataset_dir: str,
+         assert prev_end < start <= end
+         prev_end = end
+ 
+-    save_snapshot(snapshot_list, 'bitcoinotc')
+     return snapshot_list
+-dir = "/home/wuxiang/roland-master/roland_public_data/bitcoinalpha.csv"
+-list = load_generic(dir,True,'723000s')
+-#bitconinalpha:723000s
+-#bitconinalpha:630000s
+-print(len(list))
+-save_snapshot(list,"bitcoinalpha")
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--input', required=True, help='BitcoinAlpha CSV path')
++    parser.add_argument('--output-root', default='dataset',
++                        help='directory containing the generated dataset')
++    parser.add_argument('--snapshot-seconds', type=int, default=723000,
++                        help='snapshot width in seconds')
++    parser.add_argument('--no-reverse-edges', action='store_true',
++                        help='do not add the reverse edge for each transaction')
++    parser.add_argument('--layers-mp', type=int, default=2,
++                        help='number of message-passing state slots to create')
++    args = parser.parse_args()
++
++    snapshots = load_generic(
++        args.input,
++        True,
++        f'{args.snapshot_seconds}s',
++        add_reverse_edges=not args.no_reverse_edges,
++        layers_mp=args.layers_mp,
++    )
++    save_snapshot(snapshots, 'bitcoinalpha', args.output_root)
++    print(f'generated {len(snapshots)} snapshots in '
++          f'{os.path.join(args.output_root, "bitcoinalpha")}')
+diff --git a/scalable_tgn_link_prediction.py b/scalable_tgn_link_prediction.py
+index 9ce258e..78f652c 100644
+--- a/scalable_tgn_link_prediction.py
++++ b/scalable_tgn_link_prediction.py
+@@ -9,9 +9,11 @@ from sklearn import preprocessing
+ import torch.nn.functional as F
+ from model.loss import prediction, Link_loss_meta
+ from copy import deepcopy
++from pathlib import Path
+ import time
+ from transformer.Layers import EncoderLayer,EncoderLayer_with_scale 
+ import math
++from model.eval_protocols import report_filtered_bipartite_eval
+ from model.utils import report_rank_based_eval_scalable
+ from torch_sparse import SparseTensor
+ 
+@@ -205,9 +207,10 @@ class CustomEncoderLayer_withScale(nn.Module):
+ class Encoder(nn.Module):
+ 
+     def __init__(self, device, embed_dim_1,embed_dim_2, d_model, d_inner, n_layers, n_head,
+-                d_k, d_v, dropout=0.1):
++                d_k, d_v, dropout=0.1, ablate='none'):
+         super().__init__()
+         self.device = device
++        self.ablate = str(ablate)
+         self.n_head = n_head
+         self.sp = torch.nn.Softplus()
+         self.sigmoid = torch.nn.Sigmoid()
+@@ -292,6 +295,9 @@ class Encoder(nn.Module):
+         
+         global_weight = self.global_weight.unsqueeze(0).expand(src_emb.shape[0], -1, -1)
+         new_weight = self.sigmoid(torch.bmm(scale,global_weight ))
++        # [repro] --ablate hyper: 去掉自适应聚合门控，仅保留基础权重矩阵
++        if self.ablate == 'hyper':
++            new_weight = torch.ones_like(new_weight)
+ 
+         if mode == "val" and step2==0:
+             torch.save(new_weight, './weights/tensor_file'+str(step1)+'.pth')
+@@ -343,6 +349,7 @@ class TimeEncode_exp(nn.Module):
+         self.a = args.a
+         self.base_value = args.base_value
+         self.w = nn.Linear(1, dim)
++        self.ablate = str(getattr(args, 'ablate', 'none'))
+         self.reset_parameters()
+     
+     def reset_parameters(self, ):
+@@ -363,6 +370,10 @@ class TimeEncode_exp(nn.Module):
+     
+     #@torch.no_grad()
+     def forward(self, t):
++        # [repro] --ablate time: 去掉指数时间编码，输出恒为 1
++        if self.ablate == 'time':
++            n = t.reshape((-1, 1)).shape[0]
++            return torch.ones(n, self.dim, dtype=torch.float32, device=t.device)
+         output = torch.exp(self.w(t.reshape((-1, 1))))
+         return output
+     
+@@ -399,6 +410,7 @@ class snapshot():
+         self.time = time
+         self.node_num = graph.num_nodes()
+         self.time_enc = TimeEncode_exp(graph.edge_feature.shape[1], args).to(device)
++        self.ablate = str(getattr(args, 'ablate', 'none'))
+         #self.snapshot_timefeat = self.time_enc(torch.tensor(0).to(torch.float32).to(device))
+         self.device = device
+         
+@@ -435,7 +447,11 @@ class snapshot():
+     def set_edge_features(self, feature):
+         feature = feature.to(self.device)
+         feature =feature*self.time_features
+-        node_feature = self.node_edge_mat.matmul(feature, reduce='sum')  # 使用 mean 或者 sum 作为 reduce 方式
++        # [repro] --ablate topo: 去掉快照内边->节点拓扑聚合，退化为全局池化
++        if self.ablate == 'topo':
++            node_feature = feature.sum(dim=0, keepdim=True).expand(self.node_num, -1)
++        else:
++            node_feature = self.node_edge_mat.matmul(feature, reduce='sum')  # 使用 mean 或者 sum 作为 reduce 方式
+         feature = feature.cpu()
+         return node_feature.to(torch.device("cpu"))
+     
+@@ -644,7 +660,42 @@ def weight_expand(weight,coarsening_num,node_num):
+ 
+ 
+ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logger, train_n,val_n,test_n,args):
+-    best_param = {'best_acc': 0, 'best_state': None, 'best_s_dw': None}
++    run_official_eval = args.eval_protocol in ['official', 'both']
++    run_filtered_eval = args.eval_protocol in ['mooc_full_item', 'both']
++
++    def capture_state(epoch, score, validation_metrics):
++        return {
++            'best_epoch': epoch,
++            'best_score': float(score),
++            'validation_metrics': dict(validation_metrics),
++            'best_state': {
++                key: value.detach().cpu().clone()
++                for key, value in model.state_dict().items()
++            },
++            'best_transformer_state': {
++                key: value.detach().cpu().clone()
++                for key, value in model_transformer.state_dict().items()
++            },
++        }
++
++    best_param = {
++        'best_epoch': None,
++        'best_score': float('-inf'),
++        'best_state': None,
++        'best_transformer_state': None,
++    }
++    checkpoint_candidates = {
++        'ap': {
++            'best_epoch': None,
++            'best_score': float('-inf'),
++            'best_state': None,
++            'best_transformer_state': None,
++        }
++    }
++    if run_official_eval:
++        checkpoint_candidates['mrr'] = deepcopy(best_param)
++    if run_filtered_eval:
++        checkpoint_candidates['filtered_mrr'] = deepcopy(best_param)
+     graph_train = graph_l[:train_n]
+     graph_val = graph_l[train_n:val_n]
+     graph_test = graph_l[val_n:]
+@@ -836,6 +887,9 @@ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logg
+         val_acc = 0
+         count = 0
+         val_ap =0
++        val_mrr = 0
++        val_filtered_reciprocal_rank_sum = 0
++        val_filtered_positive_count = 0
+         with torch.no_grad():
+             st_time = time.time()
+             for idx in range(len(graph_val)):
+@@ -899,45 +953,178 @@ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logg
+                 loss = Link_loss_meta(pred, graph_val[idx].edge_label)
+                 edge_label = graph_val[idx].edge_label
+                 edge_label_index = graph_val[idx].edge_label_index
+-                
+-                if args.dataset in ['UNvote']:
+-                    mrr, rl1, rl3, rl10 = report_rank_based_eval_scalable(model, graph_val[idx], feature,num_neg_per_node=50)
+-                else:
+-                    mrr, rl1, rl3, rl10 = report_rank_based_eval_scalable(model.cpu(), graph_val[idx].cpu(), feature.cpu(),num_neg_per_node=100)
++
++                official_mrr = float('nan')
++                filtered_metrics = None
++                if run_official_eval:
++                    if args.dataset in ['UNvote']:
++                        official_mrr, rl1, rl3, rl10 = report_rank_based_eval_scalable(
++                            model, graph_val[idx], feature, num_neg_per_node=50
++                        )
++                    else:
++                        official_mrr, rl1, rl3, rl10 = report_rank_based_eval_scalable(
++                            model.cpu(), graph_val[idx].cpu(), feature.cpu(),
++                            num_neg_per_node=100
++                        )
++                if run_filtered_eval:
++                    filtered_metrics = report_filtered_bipartite_eval(
++                        model.cpu(),
++                        graph_val[idx].cpu(),
++                        feature.cpu(),
++                        args.valid_destination_nodes,
++                    )
+                 graph_val[idx].edge_label = edge_label
+                 graph_val[idx].edge_label_index = edge_label_index
+                 acc, ap, f1, macro_auc, micro_auc = prediction(pred, graph_val[idx].edge_label)
+-                
+ 
+-                
+-                logger.info('meta val epoch:{}, loss: {:.5f},mrr:{:.5f},  acc: {:.5f}, ap: {:.5f}, f1: {:.5f}, macro_auc: {:.5f}, micro_auc: {:.5f}'.
+-                                format(epoch,  loss, mrr,acc, ap, f1, macro_auc, micro_auc))
++                filtered_mrr = (
++                    filtered_metrics['mrr']
++                    if filtered_metrics is not None
++                    else float('nan')
++                )
++                logger.info(
++                    'meta val epoch:{}, loss:{:.5f}, official_mrr:{:.5f}, '
++                    'filtered_mrr:{:.5f}, acc:{:.5f}, ap:{:.5f}, f1:{:.5f}, '
++                    'macro_auc:{:.5f}, micro_auc:{:.5f}'.format(
++                        epoch, loss, official_mrr, filtered_mrr, acc, ap, f1,
++                        macro_auc, micro_auc
++                    )
++                )
++                if filtered_metrics is not None:
++                    logger.info(
++                        'filtered val epoch:{}, snapshot:{}, positives:{}, '
++                        'sources:{}, mean_negatives:{:.3f}, min_negatives:{}, '
++                        'max_negatives:{}'.format(
++                            epoch, idx + len(graph_train),
++                            filtered_metrics['positive_count'],
++                            filtered_metrics['source_count'],
++                            filtered_metrics['mean_negative_count'],
++                            filtered_metrics['min_negative_count'],
++                            filtered_metrics['max_negative_count'],
++                        )
++                    )
+                 feature =feature.cpu()
+                 model = model.to(device)
+                 val_acc += acc
+                 val_ap += ap
++                if run_official_eval:
++                    val_mrr += official_mrr
++                if filtered_metrics is not None:
++                    positive_count = filtered_metrics['positive_count']
++                    val_filtered_reciprocal_rank_sum += (
++                        filtered_metrics['mrr'] * positive_count
++                    )
++                    val_filtered_positive_count += positive_count
+                 count +=1
+             ed_time = time.time()
+             print(ed_time-st_time)
+         print(count)
+         val_acc = val_acc / count
+         val_ap = val_ap / count
+-        if val_ap > best_param['best_acc']:
+-            best_param = {'best_acc': val_ap, 'best_state': deepcopy(model.state_dict())}
++        val_mrr = val_mrr / count if run_official_eval else float('nan')
++        val_filtered_mrr = (
++            val_filtered_reciprocal_rank_sum / val_filtered_positive_count
++            if run_filtered_eval
++            else float('nan')
++        )
++        current_metrics = {
++            'ap': val_ap,
++            'mrr': val_mrr,
++            'filtered_mrr': val_filtered_mrr,
++        }
++        selection_score = current_metrics[args.selection_metric]
++        logger.info(
++            'validation summary epoch:{}, avg_official_mrr:{:.5f}, '
++            'global_filtered_mrr:{:.5f}, avg_ap:{:.5f}, selection_metric:{}, '
++            'selection_score:{:.5f}'.format(
++                epoch, val_mrr, val_filtered_mrr, val_ap,
++                args.selection_metric, selection_score
++            )
++        )
++        improved_metrics = [
++            metric_name
++            for metric_name in checkpoint_candidates
++            if current_metrics[metric_name]
++            > checkpoint_candidates[metric_name]['best_score']
++        ]
++        if improved_metrics:
++            captured = capture_state(epoch, 0, current_metrics)
++            for metric_name in improved_metrics:
++                candidate = dict(captured)
++                candidate['best_score'] = float(current_metrics[metric_name])
++                checkpoint_candidates[metric_name] = candidate
++
++        if args.selection_metric in improved_metrics:
++            best_param = checkpoint_candidates[args.selection_metric]
+             earl_stop_c = 0
+         else:
+             earl_stop_c += 1
+             if earl_stop_c == 10:
+                 break
++
++    if best_param['best_state'] is None:
++        raise RuntimeError(
++            f'no checkpoint was selected for metric {args.selection_metric}'
++        )
++
++    if args.checkpoint_dir:
++        checkpoint_dir = Path(args.checkpoint_dir)
++        checkpoint_dir.mkdir(parents=True, exist_ok=True)
++        checkpoint_filenames = {
++            'ap': 'best_ap.pt',
++            'mrr': 'best_official_mrr.pt',
++            'filtered_mrr': 'best_filtered_mrr.pt',
++        }
++        for metric_name, candidate in checkpoint_candidates.items():
++            if candidate['best_state'] is None:
++                continue
++            checkpoint_path = checkpoint_dir / checkpoint_filenames[metric_name]
++            torch.save(
++                {
++                    'format_version': 1,
++                    'dataset': args.dataset,
++                    'seed': args.seed,
++                    'selection_metric': metric_name,
++                    'selected_for_test': metric_name == args.selection_metric,
++                    'best_epoch': candidate['best_epoch'],
++                    'best_validation_score': candidate['best_score'],
++                    'validation_metrics': candidate['validation_metrics'],
++                    'eval_protocol': args.eval_protocol,
++                    'eval_manifest': args.eval_manifest,
++                    'eval_manifest_sha256': args.eval_manifest_sha256,
++                    'edge_index_sha256': args.edge_index_sha256,
++                    'train_negative_protocol': args.train_negative_protocol,
++                    'training_negative_sha256': args.training_negative_sha256,
++                    'repo_commit': args.repo_commit,
++                    'args': vars(args),
++                    'model_state_dict': candidate['best_state'],
++                    'model_transformer_state_dict': (
++                        candidate['best_transformer_state']
++                    ),
++                },
++                checkpoint_path,
++            )
++            logger.info(
++                'checkpoint saved metric:{}, epoch:{}, score:{:.6f}, path:{}'.format(
++                    metric_name,
++                    candidate['best_epoch'],
++                    candidate['best_score'],
++                    checkpoint_path,
++                )
++            )
+     # testing
+ 
+     model.load_state_dict(best_param['best_state'])
++    model_transformer.load_state_dict(best_param['best_transformer_state'])
+     model.eval()
++    model_transformer.eval()
+     avg_mrr = 0.0
+     avg_acc = 0.0
+     avg_auc = 0.0
+     avg_rcall10 = 0.0
+     avg_ap = 0.0
++    filtered_reciprocal_rank_sum = 0.0
++    filtered_positive_count = 0
+     len_test = len(graph_test)
+     all_edge = 0
+     with torch.no_grad():
+@@ -1003,35 +1190,92 @@ def train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logg
+             loss = Link_loss_meta(pred, graph_test[idx].edge_label)
+             edge_label = graph_test[idx].edge_label
+             edge_label_index = graph_test[idx].edge_label_index
+-            mrr, rl1, rl3, rl10 = report_rank_based_eval_scalable(model.cpu(), graph_test[idx].cpu(), all_feature.cpu(),num_neg_per_node=100)
+-            
++
++            official_mrr = float('nan')
++            rl10 = float('nan')
++            filtered_metrics = None
++            if run_official_eval:
++                official_mrr, rl1, rl3, rl10 = report_rank_based_eval_scalable(
++                    model.cpu(), graph_test[idx].cpu(), all_feature.cpu(),
++                    num_neg_per_node=100
++                )
++            if run_filtered_eval:
++                filtered_metrics = report_filtered_bipartite_eval(
++                    model.cpu(),
++                    graph_test[idx].cpu(),
++                    all_feature.cpu(),
++                    args.valid_destination_nodes,
++                )
+             graph_test[idx].edge_label = edge_label
+             graph_test[idx].edge_label_index = edge_label_index
+             acc, ap, f1, macro_auc, micro_auc = prediction(pred, graph_test[idx].edge_label)
+-            logger.info('test epoch:{}, loss: {:.5f},mrr:{:.5f}, acc: {:.5f}, ap: {:.5f}, f1: {:.5f}, macro_auc: {:.5f}, micro_auc: {:.5f}'.
+-                            format(epoch,  loss, mrr,acc, ap, f1, macro_auc, micro_auc))
++            filtered_mrr = (
++                filtered_metrics['mrr']
++                if filtered_metrics is not None
++                else float('nan')
++            )
++            logger.info(
++                'test epoch:{}, snapshot:{}, loss:{:.5f}, official_mrr:{:.5f}, '
++                'filtered_mrr:{:.5f}, acc:{:.5f}, ap:{:.5f}, f1:{:.5f}, '
++                'macro_auc:{:.5f}, micro_auc:{:.5f}'.format(
++                    epoch, idx + len(graph_train) + len(graph_val), loss,
++                    official_mrr, filtered_mrr, acc, ap, f1, macro_auc,
++                    micro_auc
++                )
++            )
++            if filtered_metrics is not None:
++                logger.info(
++                    'filtered test snapshot:{}, positives:{}, sources:{}, '
++                    'mean_negatives:{:.3f}, min_negatives:{}, max_negatives:{}'.format(
++                        idx + len(graph_train) + len(graph_val),
++                        filtered_metrics['positive_count'],
++                        filtered_metrics['source_count'],
++                        filtered_metrics['mean_negative_count'],
++                        filtered_metrics['min_negative_count'],
++                        filtered_metrics['max_negative_count'],
++                    )
++                )
+             feature =feature.cpu()
+             del all_feature
+             num_edges = graph_test[idx].num_edges()
+-            avg_mrr += mrr*num_edges
++            if run_official_eval:
++                avg_mrr += official_mrr*num_edges
+             avg_ap += ap*num_edges
+             avg_acc += acc*num_edges
+             avg_auc += macro_auc*num_edges
+-            avg_rcall10 += rl10*num_edges
++            if run_official_eval:
++                avg_rcall10 += rl10*num_edges
++            if filtered_metrics is not None:
++                positive_count = filtered_metrics['positive_count']
++                filtered_reciprocal_rank_sum += (
++                    filtered_metrics['mrr'] * positive_count
++                )
++                filtered_positive_count += positive_count
+             all_edge +=num_edges
+         
+     #print("sum"+str(i))
+-    avg_mrr /= all_edge
++    avg_mrr = avg_mrr / all_edge if run_official_eval else float('nan')
+     avg_acc /= all_edge
+     avg_auc /= all_edge
+-    avg_rcall10 /= all_edge
++    avg_rcall10 = (
++        avg_rcall10 / all_edge if run_official_eval else float('nan')
++    )
+     avg_ap /= all_edge
++    avg_filtered_mrr = (
++        filtered_reciprocal_rank_sum / filtered_positive_count
++        if run_filtered_eval
++        else float('nan')
++    )
+     logger.info({'avg_mrr': avg_mrr})
++    logger.info({'avg_official_mrr': avg_mrr})
++    logger.info({'avg_filtered_mrr': avg_filtered_mrr})
++    logger.info({'filtered_positive_count': filtered_positive_count})
+     logger.info({'avg_acc': avg_acc})
+     logger.info({'avg_auc': avg_auc})
+     logger.info({'avg_rcall10': avg_rcall10})
+     logger.info({'avg_ap': avg_ap})
+-    return avg_mrr,avg_auc,avg_acc
++    primary_mrr = avg_mrr if run_official_eval else avg_filtered_mrr
++    return primary_mrr,avg_auc,avg_acc
+     
+             
+     
+diff --git a/scalable_tgn_main_link_prediction.py b/scalable_tgn_main_link_prediction.py
+index ae2cf0f..908485a 100644
+--- a/scalable_tgn_main_link_prediction.py
++++ b/scalable_tgn_main_link_prediction.py
+@@ -1,9 +1,11 @@
+ import dgl
++import hashlib
+ import math
+ import torch
+ import random
+ import argparse
+ import numpy as np
++from pathlib import Path
+ 
+ from tqdm import tqdm
+ 
+@@ -79,6 +81,48 @@ def negative_sampling(edges, max_node_id):
+     return all_edges, labels     
+ 
+ 
++def negative_sampling_mooc_bipartite(edges, valid_destination_nodes):
++    """Generate one legal item negative per positive while preserving sources."""
++    positive_edges = edges.t().tolist()
++    valid_destinations = [int(node) for node in valid_destination_nodes]
++    valid_destination_set = set(valid_destinations)
++    positive_targets_by_source = {}
++    for source, destination in positive_edges:
++        if destination not in valid_destination_set:
++            raise ValueError(
++                f'positive destination {destination} is not a valid MOOC item'
++            )
++        positive_targets_by_source.setdefault(source, set()).add(destination)
++
++    candidates_by_source = {}
++    candidate_offsets = {}
++    negative_edges = []
++    for source, _ in positive_edges:
++        if source not in candidates_by_source:
++            candidates = [
++                destination
++                for destination in valid_destinations
++                if destination not in positive_targets_by_source[source]
++            ]
++            if not candidates:
++                raise ValueError(
++                    f'source {source} has no legal non-positive destination'
++                )
++            candidates_by_source[source] = candidates
++            candidate_offsets[source] = 0
++
++        candidates = candidates_by_source[source]
++        offset = candidate_offsets[source]
++        if offset % len(candidates) == 0:
++            random.shuffle(candidates)
++        negative_edges.append([source, candidates[offset % len(candidates)]])
++        candidate_offsets[source] = offset + 1
++
++    all_edges = positive_edges + negative_edges
++    labels = [1] * len(positive_edges) + [0] * len(negative_edges)
++    return all_edges, labels
++
++
+ if __name__ == '__main__':
+ # 
+     parser = argparse.ArgumentParser()
+@@ -89,6 +133,23 @@ if __name__ == '__main__':
+ 
+     parser.add_argument('--seed', type=int, default=2023, help='split seed')
+ 
++    parser.add_argument('--selection_metric', choices=['ap', 'mrr', 'filtered_mrr'], default='ap',
++                        help='validation metric used for checkpointing and early stopping')
++    parser.add_argument('--eval_protocol', choices=['official', 'mooc_full_item', 'both'],
++                        default='official', help='ranking evaluation protocol')
++    parser.add_argument('--eval_manifest', type=str, default='',
++                        help='full-item protocol manifest generated by build_scadyg_mooc_protocol.py')
++    parser.add_argument('--checkpoint_dir', type=str, default='',
++                        help='directory for complete best-metric checkpoints')
++    parser.add_argument('--repo_commit', type=str, default='',
++                        help='source revision recorded in the checkpoint')
++    parser.add_argument(
++        '--train_negative_protocol',
++        choices=['official', 'mooc_bipartite'],
++        default='official',
++        help='training negative edge protocol',
++    )
++
+     parser.add_argument('--repeat', type=int, default=1, help='number of repeat model')
+ 
+     parser.add_argument('--epochs', type=int, default=100,
+@@ -128,12 +189,24 @@ if __name__ == '__main__':
+                          help='ways to recursively sum')
+     parser.add_argument('--feat_repeat', type=int, default=1,
+                          help='if the edge feature == 1 , repreat for n times')
++
++    # [repro] 组件消融开关。默认 none = 完全走官方路径。
++    #   time  : 去掉指数时间编码（TimeEncode_exp 输出恒为 1）
++    #   topo  : 去掉快照内边->节点拓扑聚合（退化为全局池化）
++    #   hyper : 去掉自适应聚合门控（sigmoid 门控恒为 1，仅用基础权重矩阵）
++    parser.add_argument('--ablate', type=str, default='none',
++                        choices=['none', 'time', 'topo', 'hyper'],
++                        help='[repro] ablate a paper component; none = official path')
+     
+     
+     
+ 
+ 
+     args = parser.parse_args()
++    if args.selection_metric == 'filtered_mrr' and args.eval_protocol == 'official':
++        parser.error('--selection_metric filtered_mrr requires --eval_protocol mooc_full_item or both')
++    if args.train_negative_protocol == 'mooc_bipartite' and args.dataset != 'mooc':
++        parser.error('--train_negative_protocol mooc_bipartite supports only --dataset mooc')
+ 
+     logger = getLogger(cfg.log_path)
+ 
+@@ -175,6 +248,51 @@ if __name__ == '__main__':
+     
+     graphs, e_feat, e_time, n_feat = load_r(args.dataset)
+ 
++    args.valid_destination_nodes = []
++    args.eval_manifest_sha256 = ''
++    args.edge_index_sha256 = ''
++    args.training_negative_sha256 = ''
++    needs_mooc_manifest = (
++        args.eval_protocol in ['mooc_full_item', 'both']
++        or args.train_negative_protocol == 'mooc_bipartite'
++    )
++    if needs_mooc_manifest:
++        if args.dataset != 'mooc':
++            parser.error('mooc_full_item evaluation currently supports only --dataset mooc')
++        if not args.eval_manifest:
++            parser.error('--eval_manifest is required for mooc_full_item evaluation')
++        manifest_path = Path(args.eval_manifest)
++        if not manifest_path.is_file():
++            parser.error(f'evaluation manifest not found: {manifest_path}')
++        args.eval_manifest_sha256 = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
++        with np.load(manifest_path, allow_pickle=False) as manifest:
++            protocol = str(manifest['protocol'].item())
++            dataset = str(manifest['dataset'].item())
++            snapshot_count = int(manifest['snapshot_count'].item())
++            edge_counts = manifest['edge_counts'].astype(np.int64)
++            valid_destination_nodes = manifest['valid_destination_nodes'].astype(np.int64)
++            args.edge_index_sha256 = str(manifest['edge_index_sha256'].item())
++        if protocol != 'mooc_full_item_filtered_v1':
++            parser.error(f'unsupported evaluation protocol in manifest: {protocol}')
++        if dataset != args.dataset or snapshot_count != len(graphs):
++            parser.error(
++                f'manifest/data mismatch: dataset={dataset}, snapshots={snapshot_count}, '
++                f'loaded_dataset={args.dataset}, loaded_snapshots={len(graphs)}'
++            )
++        loaded_edge_counts = np.asarray([graph.nnz for graph in graphs], dtype=np.int64)
++        if not np.array_equal(edge_counts, loaded_edge_counts):
++            parser.error('manifest edge counts do not match loaded snapshots')
++        args.valid_destination_nodes = valid_destination_nodes.tolist()
++        logger.info(
++            'evaluation protocol:{}, manifest_sha256:{}, edge_index_sha256:{}, '
++            'valid_destination_count:{}'.format(
++                args.eval_protocol,
++                args.eval_manifest_sha256,
++                args.edge_index_sha256,
++                len(args.valid_destination_nodes),
++            )
++        )
++
+     if e_feat[0].shape[1] == 1:
+         for i,e in enumerate(e_feat):
+             
+@@ -199,7 +317,6 @@ if __name__ == '__main__':
+     best_mrr = 0.0
+     best_model = 0
+     all_acc = 0
+-    all_ap = 0
+     all_auc = 0
+     all_start_time = time.time()
+     for rep in range(args.repeat):
+@@ -245,6 +362,12 @@ if __name__ == '__main__':
+ 
+             graph_l.append(graph_d)
+         # Negative sample sampling 1:1
++        training_negative_digest = hashlib.sha256()
++        training_negative_total = 0
++        training_negative_fixed_source = 0
++        training_negative_legal_destination = 0
++        training_negative_positive_collisions = 0
++        training_negative_unique_pairs = 0
+         for idx, graph in tqdm(enumerate(graphs)):
+             graph = Graph(
+                 node_feature=graph_l[idx].node_feature,
+@@ -258,11 +381,70 @@ if __name__ == '__main__':
+                                    task='link_pred',
+                                    edge_negative_sampling_ratio=1.0,
+                                    minimum_node_per_graph=5)
+-            
+-            edge_label_index,edge_label = negative_sampling(edge_labe_index,graph.num_nodes-1)
++
++            if args.train_negative_protocol == 'mooc_bipartite':
++                edge_label_index, edge_label = negative_sampling_mooc_bipartite(
++                    edge_labe_index, args.valid_destination_nodes
++                )
++            else:
++                edge_label_index, edge_label = negative_sampling(
++                    edge_labe_index, graph.num_nodes - 1
++                )
++
++            positive_count = edge_labe_index.shape[1]
++            sampled_edges = np.asarray(edge_label_index, dtype=np.int64)
++            positive_edges = sampled_edges[:positive_count]
++            negative_edges = np.ascontiguousarray(sampled_edges[positive_count:])
++            positive_edge_set = set(map(tuple, positive_edges.tolist()))
++
++            training_negative_digest.update(idx.to_bytes(4, byteorder='little'))
++            training_negative_digest.update(
++                np.asarray(negative_edges.shape, dtype=np.int64).tobytes()
++            )
++            training_negative_digest.update(negative_edges.tobytes())
++            training_negative_total += negative_edges.shape[0]
++            training_negative_fixed_source += int(
++                np.sum(negative_edges[:, 0] == positive_edges[:, 0])
++            )
++            if args.valid_destination_nodes:
++                training_negative_legal_destination += int(
++                    np.sum(
++                        np.isin(
++                            negative_edges[:, 1],
++                            np.asarray(args.valid_destination_nodes),
++                        )
++                    )
++                )
++            training_negative_positive_collisions += sum(
++                tuple(edge) in positive_edge_set for edge in negative_edges
++            )
++            training_negative_unique_pairs += len(
++                set(map(tuple, negative_edges.tolist()))
++            )
++
+             graph_l[idx].edge_label_index = torch.LongTensor(edge_label_index).t()
++            graph_l[idx].edge_label = torch.Tensor(edge_label)
+             # edge_labe_index = dataset.graphs[0].edge_label_index
+             # graph_l[idx].edge_label_index = torch.LongTensor(edge_labe_index)
++        args.training_negative_sha256 = training_negative_digest.hexdigest()
++        legal_destination_fraction = (
++            training_negative_legal_destination / training_negative_total
++            if args.valid_destination_nodes
++            else float('nan')
++        )
++        logger.info(
++            'training negatives protocol:{}, count:{}, fixed_source_fraction:{:.6f}, '
++            'legal_destination_fraction:{:.6f}, positive_collisions:{}, '
++            'unique_pair_fraction:{:.6f}, sha256:{}'.format(
++                args.train_negative_protocol,
++                training_negative_total,
++                training_negative_fixed_source / training_negative_total,
++                legal_destination_fraction,
++                training_negative_positive_collisions,
++                training_negative_unique_pairs / training_negative_total,
++                args.training_negative_sha256,
++            )
++        )
+         #model = Predict_layer(graph.edge_feature.shape[1],64,1,hop=1).to(device)
+         if args.fusion == 'v2t':
+             from scalable_tgn_affine_v2t_chunk import train_scalable_tgn,Predict_layer,Encoder
+@@ -272,7 +454,7 @@ if __name__ == '__main__':
+             model = Predict_layer(graph.edge_feature.shape[1]+graph.node_feature.shape[1],128,1,hop=args.hop).to(device)
+             model_transformer = Encoder(embed_dim_1=dataset.graphs[0].edge_feature.shape[1]+dataset.graphs[0].node_feature.shape[1], embed_dim_2=dataset.graphs[0].edge_feature.shape[1]+graph.node_feature.shape[1],d_model=64,
+                                             d_inner=graph.edge_feature.shape[1]+graph.node_feature.shape[1], n_layers=1, n_head=8, d_k=64, d_v=64,
+-                                            dropout=0.1,device=device).to(device)
++                                            dropout=0.1,device=device, ablate=args.ablate).to(device)
+             # model_transformer = Encoder(embed_dim_1=100, embed_dim_2=dataset.graphs[0].edge_feature.shape[1]+graph.node_feature.shape[1],d_model=64,
+             #                                 d_inner=1, n_layers=1, n_head=8, d_k=64, d_v=64,
+             #                                 dropout=0.1,device=device).to(device)
+@@ -280,7 +462,7 @@ if __name__ == '__main__':
+             model = Predict_layer(graph.edge_feature.shape[1],64,1,hop=args.hop).to(device)
+             model_transformer = Encoder( embed_dim_1=dataset.graphs[0].edge_feature.shape[1], embed_dim_2=dataset.graphs[0].edge_feature.shape[1],d_model=64,
+                                             d_inner=graph.edge_feature.shape[1], n_layers=1, n_head=8, d_k=64, d_v=64,
+-                                            dropout=0.1,device=device).to(device)
++                                            dropout=0.1,device=device, ablate=args.ablate).to(device)
+             
+         model.train()
+         model_transformer.train()
+@@ -301,20 +483,20 @@ if __name__ == '__main__':
+         optimizer = create_optimizer(args.optimizer, parameters, args.lr, args.weight_decay)
+         start_time = time.time()
+         
+-        avg_ap,auc,acc = train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logger,train_n,val_n,test_n,args)
++        avg_mrr,auc,acc = train_scalable_tgn(model, model_transformer,optimizer, device, graph_l, logger,train_n,val_n,test_n,args)
+         #model.load_state_dict(best_param['best_state'])
+         end_time = time.time()
+         print(end_time-start_time)
+-        all_ap += avg_ap
++        all_mrr_avg += avg_mrr
+         all_acc += acc
+         all_auc += auc
+     all_acc = all_acc/ args.repeat
+     all_auc = all_auc/ args.repeat
+-    all_ap = all_ap/ args.repeat
++    all_mrr_avg = all_mrr_avg / args.repeat
+     all_end_time = (time.time()-all_start_time)/args.repeat
+     logger.info(f"All accuracy: {all_acc}")
+     logger.info(f"All AUC: {all_auc}")
+-    logger.info(f"All AP: {all_ap}")
++    logger.info(f"All MRR: {all_mrr_avg}")
+     logger.info(f"All time: {all_end_time}")
+         
+     
+diff --git a/model/eval_protocols.py b/model/eval_protocols.py
+new file mode 100644
+index 0000000..ef3a274
+--- /dev/null
++++ b/model/eval_protocols.py
+@@ -0,0 +1,103 @@
++"""Deterministic ranking protocols kept separate from the released evaluator."""
++
++from __future__ import annotations
++
++import torch
++
++
++@torch.no_grad()
++def report_filtered_bipartite_eval(model, graph, x, valid_destination_nodes):
++    """Rank every positive edge against all valid non-positive destinations.
++
++    Other positive destinations of the same source in the current snapshot are
++    filtered out. The metric is deterministic and does not consume an RNG.
++    """
++    x = x.detach()
++    edge_index = graph.edge_label_index[:, graph.edge_label == 1].to("cpu").long()
++    if edge_index.numel() == 0:
++        raise ValueError("filtered evaluation requires at least one positive edge")
++
++    valid_destination_nodes = torch.as_tensor(
++        valid_destination_nodes, dtype=torch.long, device="cpu"
++    )
++    if valid_destination_nodes.ndim != 1 or valid_destination_nodes.numel() == 0:
++        raise ValueError("valid_destination_nodes must be a non-empty vector")
++    if torch.unique(valid_destination_nodes).numel() != valid_destination_nodes.numel():
++        raise ValueError("valid_destination_nodes contains duplicates")
++    valid_destination_nodes = torch.sort(valid_destination_nodes).values
++
++    source_nodes, source_inverse = torch.unique(
++        edge_index[0], sorted=True, return_inverse=True
++    )
++    candidate_edge_index = torch.stack(
++        [
++            source_nodes.repeat_interleave(valid_destination_nodes.numel()),
++            valid_destination_nodes.repeat(source_nodes.numel()),
++        ],
++        dim=0,
++    )
++
++    model.eval()
++    positive_scores = (
++        model(edge_index.to(x.device), x, mode="train").detach().cpu().reshape(-1)
++    )
++    candidate_scores = (
++        model(candidate_edge_index.to(x.device), x, mode="train")
++        .detach()
++        .cpu()
++        .reshape(source_nodes.numel(), valid_destination_nodes.numel())
++    )
++
++    destination_lookup = torch.full(
++        (graph.num_nodes(),), -1, dtype=torch.long, device="cpu"
++    )
++    destination_lookup[valid_destination_nodes] = torch.arange(
++        valid_destination_nodes.numel(), dtype=torch.long
++    )
++    positive_destination_columns = destination_lookup[edge_index[1]]
++    if torch.any(positive_destination_columns < 0):
++        invalid = torch.unique(edge_index[1][positive_destination_columns < 0])
++        raise ValueError(
++            "positive destinations missing from protocol manifest: "
++            f"{invalid.tolist()}"
++        )
++
++    positive_mask = torch.zeros(
++        (source_nodes.numel(), valid_destination_nodes.numel()), dtype=torch.bool
++    )
++    positive_mask[source_inverse, positive_destination_columns] = True
++    negative_mask = ~positive_mask
++
++    positive_scores_from_grid = candidate_scores[
++        source_inverse, positive_destination_columns
++    ]
++    if not torch.allclose(positive_scores, positive_scores_from_grid):
++        raise RuntimeError(
++            "positive scores do not align with the full destination score grid"
++        )
++
++    negative_scores_by_positive = candidate_scores[source_inverse]
++    valid_negatives_by_positive = negative_mask[source_inverse]
++    ranks = (
++        (
++            (negative_scores_by_positive >= positive_scores.unsqueeze(1))
++            & valid_negatives_by_positive
++        )
++        .sum(dim=1)
++        .float()
++        + 1
++    )
++    reciprocal_ranks = ranks.reciprocal()
++    negative_counts = valid_negatives_by_positive.sum(dim=1)
++
++    return {
++        "mrr": float(reciprocal_ranks.mean()),
++        "recall_at_1": float((ranks <= 1).float().mean()),
++        "recall_at_3": float((ranks <= 3).float().mean()),
++        "recall_at_10": float((ranks <= 10).float().mean()),
++        "positive_count": int(edge_index.shape[1]),
++        "source_count": int(source_nodes.numel()),
++        "mean_negative_count": float(negative_counts.float().mean()),
++        "min_negative_count": int(negative_counts.min()),
++        "max_negative_count": int(negative_counts.max()),
++    }

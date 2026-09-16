@@ -13,8 +13,8 @@
 |------|------|
 | R-IGNN-1 … R-IGNN-4 | **完成**。public split 已冻结：Actor 37.43±0.97、roman-empire 90.64±0.40、chameleon 49.55±3.25，另顺带 pubmed / wikics。镜像脚本 `download_critical.sh` 已落地 |
 | R-IGNN-6 / R-IGNN-7 | **完成**（2026-09-13）。custom 48/32/20 首轮三数据集 10-run：actor **38.41±1.26**（官 38.51±0.94）、chameleon **48.09±5.04**（官 50.79±4.92；3090 示例 47.53±3.36）、squirrel **44.65±1.32**（官 45.71±2.13），三者均 < 1σ。划分指纹未变；均加载官方固定划分 |
-| R-SCADYG-1 … R-SCADYG-3 | **未完成**。组件对照、消融、BitcoinAlpha 都还没有 |
-| R-SCADYG-4 | **初稿完成**：`repro/SCADYG_REPORT.md`（未含消融 / 第二数据集） |
+| R-SCADYG-1 … R-SCADYG-3 | **完成**（2026-09-16）。三个组件→代码位置→开关对照；消融 4 变体 × seeds 0–4（`topo` 塌成随机）；BitcoinAlpha 第二数据集 5 seed **0.719470 ± 0.006932**（SNAP 原始数据，723000 秒切片，226 快照） |
+| R-SCADYG-4 | **完成**：`repro/SCADYG_REPORT.md` 已含消融（第 9 节）与 BitcoinAlpha；完整源码补丁 `repro/scadyg-current.patch` 已生成并在干净 worktree 验证（基线 `28ca94a`，SHA-256 `1c219b33…ba6750`） |
 | R-SCADYG-5 | **草稿完成、未发出**：`repro/scadyg_issue_draft.md` |
 | R-GCTD-1 | **完成**（2026-09-13）：Citeseer 0.9% **64.92 ± 7.72**（`lr_rec=0.01`，10 seed）与 Pubmed 0.08% **77.90 ± 1.45**（10 seed）；另有 Citeseer `lr_rec=0.001` 对照 **66.45 ± 5.09**（否证"塌缩降 lr"假设）。论文 76.8±0.4 / 79.9±0.2。汇总 `results/gctd/table2_summary.csv` |
 | R-GCTD-3 | **完成**（2026-09-13）：用 GCond 官方自带压缩图（`repro/gcond/saved_ours/`，论文 Table 2 原始产物）走同一 GCTD 评测链路，Cora 1.3% **79.34 ± 0.69**（论文 GCond 79.8±1.3）、Citeseer 1.8% **69.64 ± 0.59**（70.5±1.2），均在 1σ 内 → 评测链路正确，差距在压缩/学习侧 |
@@ -88,18 +88,19 @@
 - 四层结果已齐：官方原样（0.025，checkpoint bug）→ checkpoint-fix（seed 2023：0.9278；seeds 0–4：0.915 ± 0.009）→ MRR 选模（0.922 ± 0.014）→ 严格 full-item 协议（0.204 ± 0.004）。
 - 合法二部图训练负采样对 filtered MRR 无改进（配对差 −0.0006）。
 - 默认行为回归检查通过（1 epoch official MRR 逐位一致）。
+- 组件消融（R-SCADYG-2）与 BitcoinAlpha（R-SCADYG-3）均已完成；完整源码补丁已验证。
 
 **任务**
 
 | 编号 | 任务 | 做法 | 验收 |
 |------|------|------|------|
-| R-SCADYG-1 | 核对消融开关 | 论文的三个组件：时间感知拓扑重构、指数时间编码、Hypernetwork 自适应聚合。CLI 目前没有直接的消融开关（`--fusion v2t` 引用不存在的文件，`--recursive_sum`、`--hop` 语义待查）。先读 `model/` 与 `transformer/` 源码，把每个组件对应到代码位置，写进日志；需要时新增 `--ablate {topo,time,hyper}`，默认关闭，保持 official 回归不变 | 日志有"组件 → 代码位置 → 开关"对照表；默认 1 epoch 仍为 0.6247271678 |
-| R-SCADYG-2 | 三个消融 × seeds 0–4 | `--eval_protocol both --selection_metric mrr`，同时输出 official 与 filtered MRR；用 `repro/run_scadyg_multiseed.sh` 的方式起独立进程 | 消融表：每行 official 均值±std、filtered 均值±std；与论文消融表对照 |
-| R-SCADYG-3 | 第二个数据集 | 仓库有 `process_raw_data/process_bitcoin.py` 但没有原始数据。先从镜像取 BitcoinAlpha 原始文件，重建快照并记录哈希；然后官方原样 + checkpoint-fix 各跑 seeds 0–4。注意 Bitcoin 不是二部图，`mooc_full_item` 协议不适用，只比较 official 协议 | 与论文对应数据集的 MRR 对照；日志说明协议差异 |
-| R-SCADYG-4 | 复现报告 | 新建 `repro/SCADYG_REPORT.md`，结构：目标 / 环境 / 数据核验 / 官方原样结果 / 根因 1（checkpoint 只存预测层） / 根因 2（AP 选模 vs MRR 主指标） / 根因 3（排名协议：每源取最佳正边、全节点负采样、共享 RNG） / 双协议结果 / 训练负采样对照 / 未解决因素 / 结论分层 | 一份可以直接给导师看的 4–6 页报告 |
+| R-SCADYG-1 ✅ | 核对消融开关 | 论文的三个组件：时间感知拓扑重构、指数时间编码、Hypernetwork 自适应聚合。CLI 目前没有直接的消融开关（`--fusion v2t` 引用不存在的文件，`--recursive_sum`、`--hop` 语义待查）。先读 `model/` 与 `transformer/` 源码，把每个组件对应到代码位置，写进日志；需要时新增 `--ablate {topo,time,hyper}`，默认关闭，保持 official 回归不变 | 日志有"组件 → 代码位置 → 开关"对照表；默认 1 epoch 仍为 0.6247271678 |
+| R-SCADYG-2 ✅ | 三个消融 × seeds 0–4 | `--eval_protocol both --selection_metric mrr`，同时输出 official 与 filtered MRR；用 `repro/run_scadyg_multiseed.sh` 的方式起独立进程 | 消融表：每行 official 均值±std、filtered 均值±std；与论文消融表对照 |
+| R-SCADYG-3 ✅ | 第二个数据集 | 仓库有 `process_raw_data/process_bitcoin.py` 但没有原始数据。先从镜像取 BitcoinAlpha 原始文件，重建快照并记录哈希；然后官方原样 + checkpoint-fix 各跑 seeds 0–4。注意 Bitcoin 不是二部图，`mooc_full_item` 协议不适用，只比较 official 协议 | **完成 2026-09-16**：SNAP CSV（SHA-256 `3a178611…57cd76`）→ 226 快照 → seeds 0–4 official MRR **0.719470 ± 0.006932**；入口 `repro/download_scadyg_bitcoinalpha.sh`，预处理 `repro/scadyg-extra/process_bitcoin.py` |
+| R-SCADYG-4 ✅ | 复现报告 | 新建 `repro/SCADYG_REPORT.md`，结构：目标 / 环境 / 数据核验 / 官方原样结果 / 根因 1（checkpoint 只存预测层） / 根因 2（AP 选模 vs MRR 主指标） / 根因 3（排名协议：每源取最佳正边、全节点负采样、共享 RNG） / 双协议结果 / 训练负采样对照 / 未解决因素 / 结论分层 | 一份可以直接给导师看的 4–6 页报告 |
 | R-SCADYG-5（可选） | 向上游反馈 | 把 `repro/scadyg-checkpoint-fix.patch` 与最小复现步骤整理成 issue 文本（先不提评测协议争议，只报确定的 bug） | issue 文本存 `repro/scadyg_issue_draft.md` |
 
-**冻结条件**：消融表与第二个数据集结果入日志，报告初稿完成。
+**冻结条件**：消融表与第二个数据集结果入日志，报告初稿完成。→ **已满足（2026-09-16）**；可冻结。
 
 **风险**：消融若需要改模型代码，务必新增开关而不是改默认路径；每次改完跑一次 1 epoch 默认回归。
 
@@ -166,13 +167,13 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 | 11 IGNN | **已冻结**（public + custom 首轮三数据集） | 是 | 是 | 是* |
 | 40 GCTD | **已冻结**（2026-09-13） | 是 | 部分 | 否 |
 | 29 SGPC | **已冻结**（2026-09-13） | 是 | 部分 | 否 |
-| 43 ScaDyG | **未冻结**，冻结条件是消融表（已完成）+ 第二数据集（未做） | 是 | 是 | 否 |
+| 43 ScaDyG | **可冻结**（2026-09-16）：消融表与 BitcoinAlpha 均已完成，报告与完整补丁已收口 | 是 | 是 | 否 |
 
 - GCTD：L2 部分（Cora 66.0 ± 9.4、Citeseer 64.9 ± 7.7、Pubmed 77.9 ± 1.5，对论文 81.4 ± 1.6 / 76.8 ± 0.4 / 79.9 ± 0.2；只有 Pubmed 接近）；L3 否（σ 普遍大一个数量级）。评测链路已由 GCond 官方图验证，差距在压缩侧。issue 决定不发出。
 - SGPC：L2 部分（oracle 在 6 个数据集上与论文差 0.4–1.2 点；val 选模系统性偏低 0.07–3.43；Wisconsin 偏高 +2.43/+6.35）；L3 否（协议不同：异配用 geom-gcn 10 划分而非"每类 20 点"；σ 为论文 2–5 倍）。冻结条目见 `SGPC_REPRO_LOG.md` 文末。
 - IGNN public：L2 是；L3 在 Actor / wikics 上按「均值差 < 官方 σ」成立（硬件 3090 vs V100）。chameleon / roman-empire 的 public 命令因加载器丢 NPZ mask，实际读的是仓库 48/32/20 npy，协议不纯，数字仍与 V100 表同量级。
 - IGNN custom（论文主协议 48/32/20）：L1/L2/L3 均成立。actor 38.41±1.26、chameleon 48.09±5.04、squirrel 44.65±1.32，三者与官方 c-IGNN（V100）的差分别为 −0.10 / −2.70 / −1.06，均 < 官方 σ，σ 比 0.62–1.50。均加载官方固定划分。
-- ScaDyG：L2 是（0.922 ± 0.014 对 0.931 ± 0.009）；L3 否（方差偏大，且发现协议差异）。完成消融与 BitcoinAlpha 后才能冻结。
+- ScaDyG：L2 是（0.922 ± 0.014 对 0.931 ± 0.009）；L3 否（方差偏大，且发现协议差异）。消融与 BitcoinAlpha（0.719470 ± 0.006932，5 seed）均已完成。
 
 \* IGNN 的 L3 与硬件跨卡（3090 vs V100）有关，作者自述存在差异。public 上 chameleon / roman-empire 因加载器丢 NPZ mask，协议不纯。
 
@@ -185,7 +186,7 @@ GPU 排队顺序：IGNN（分钟级）→ ScaDyG 消融（每次 5–10 分钟�
 | 线 | 该停 / 该做 | 主要风险 |
 |----|-------------|----------|
 | IGNN | **已冻结**（public + custom 首轮三数据集）。可选：r-IGNN / a-IGNN、roman-empire custom。不要补跑"真 public"、不要搜参、不要大图 | critical public 协议不纯；`run_ignn.sh` 现含 85% cap，与提交 `7adde1c` 的无 cap 版本不一致；custom 数字不可与 public 混记 |
-| ScaDyG | **未冻结**：缺消融（R-SCADYG-1/2）、BitcoinAlpha（R-SCADYG-3）；报告初稿已有 | checkpoint 只存预测层已确认；严格 item 协议 ~0.204 不要和官方 MRR 混排 |
+| ScaDyG | **可冻结**（2026-09-16）：消融、BitcoinAlpha、报告、完整补丁均已完成 | checkpoint 只存预测层已确认；严格 item 协议 ~0.204 不要和官方 MRR 混排 |
 | GCTD | **已冻结**（2026-09-13）。不要重扫 Cora；重启条件是作者给出 Table 2 完整超参 | 官方默认完全图；三格 66.0±9.4 / 64.9±7.7 / 77.9±1.5 均低于论文，差距非数据集特有；评测链路已由 GCond 官方图验证正确 |
 | SGPC | **已冻结**（2026-09-13，9/9 数据集）。不要补跑 seed 或重做划分 | 论文写每类 20 点，代码用 PyG 自带 split；`Best Test` 是 test 选模，不可当 Table 1 数字；∆t 代码 0.15 vs 论文 0.5 |
 

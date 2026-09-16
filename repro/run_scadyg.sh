@@ -65,10 +65,14 @@ REPO_COMMIT="$(git rev-parse HEAD)"
     fi
   done
   echo "[repro] dataset=${DATASET} gpu=${GPU_ID} env=${ENV_NAME}"
-  echo "[repro] eval_manifest=${EVAL_MANIFEST}"
-  echo "[repro] eval_manifest_sha256=$(sha256sum "${EVAL_MANIFEST}" | awk '{print $1}')"
+  if [[ "${DATASET}" == "mooc" && -f "${EVAL_MANIFEST}" ]]; then
+    echo "[repro] eval_manifest=${EVAL_MANIFEST}"
+    echo "[repro] eval_manifest_sha256=$(sha256sum "${EVAL_MANIFEST}" | awk '{print $1}')"
+  else
+    echo "[repro] eval_manifest=none"
+  fi
   echo "[repro] checkpoint_dir=${CHECKPOINT_DIR}"
-  echo "[repro] command=python scalable_tgn_main_link_prediction.py --dataset ${DATASET} --cuda_device ${GPU_ID} --eval_manifest ${EVAL_MANIFEST} --checkpoint_dir ${CHECKPOINT_DIR} --repo_commit ${REPO_COMMIT} $*"
+  echo "[repro] command=python scalable_tgn_main_link_prediction.py --dataset ${DATASET} --cuda_device ${GPU_ID} --checkpoint_dir ${CHECKPOINT_DIR} --repo_commit ${REPO_COMMIT} $*"
   python - <<'PY'
 import dgl
 import torch
@@ -79,13 +83,17 @@ print(f"[repro] cuda={torch.cuda.is_available()} gpu_count={torch.cuda.device_co
 if torch.cuda.is_available():
     print(f"[repro] gpu_name={torch.cuda.get_device_name(0)}")
 PY
-  python scalable_tgn_main_link_prediction.py \
+  COMMAND=(python scalable_tgn_main_link_prediction.py \
     --dataset "${DATASET}" \
     --cuda_device "${GPU_ID}" \
-    --eval_manifest "${EVAL_MANIFEST}" \
     --checkpoint_dir "${CHECKPOINT_DIR}" \
     --repo_commit "${REPO_COMMIT}" \
-    "$@"
+  )
+  if [[ "${DATASET}" == "mooc" ]]; then
+    COMMAND+=(--eval_manifest "${EVAL_MANIFEST}")
+  fi
+  COMMAND+=("$@")
+  "${COMMAND[@]}"
   echo "[repro] finished_at=$(date --iso-8601=seconds)"
 } 2>&1 | tee -a "${LOG_FILE}"
 

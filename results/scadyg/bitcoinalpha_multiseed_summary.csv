@@ -1,0 +1,2 @@
+dataset,variant,seeds,n,mean_official_mrr,sample_std_mrr,min_mrr,max_mrr,runs
+bitcoinalpha,official_mrr_selection,0;1;2;3;4,5,0.7194695973,0.0069317089,0.7110614720,0.7272967349,20260916_195311;20260916_195540;20260916_195727;20260916_200044;20260916_200215

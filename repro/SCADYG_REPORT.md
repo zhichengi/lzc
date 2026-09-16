@@ -3,9 +3,9 @@
 论文：*ScaDyG: A New Paradigm for Large-Scale Dynamic Graph Learning*（IEEE TNNLS 2026）。  
 官方仓库：https://github.com/BITNEO/ScaDyG ，固定提交 `28ca94a06771c46073b650de3daa95e0939342ba`。  
 过程日志：[SCADYG_REPRO_LOG.md](SCADYG_REPRO_LOG.md)。入口：[SCADYG_README.md](SCADYG_README.md)。  
-本报告覆盖 **MOOC 动态链接预测**与**四个组件的消融**（第 9 节）。BitcoinAlpha 尚未做，不写入结论。
+本报告覆盖 **MOOC 动态链接预测**、**BitcoinAlpha 第二数据集**与**四个组件的消融**（第 9 节）。
 
-日期：2026-09-12（第 9 节组件消融于 2026-09-13 补入）。硬件：单张 RTX 3090 24 GB，与论文实验卡型号一致。
+日期：2026-09-16（组件消融于 2026-09-13、BitcoinAlpha 于 2026-09-16 补入）。硬件：单张 RTX 3090 24 GB，与论文实验卡型号一致。
 
 ---
 
@@ -206,9 +206,13 @@ seeds 0–4，每格独立进程，选模口径固定 `--selection_metric mrr`�
 - 评测负样本未持久化，早停长度会改变 official 测试负样本。
 - 节点随机特征在 `torch.manual_seed(args.seed)` **之前**生成，CLI seed 管不到这一块。
 - `--fusion v2t` 引用仓库里不存在的文件（未使用）。
-- 三个组件的消融开关已做成（第 9 节），但**双协议扩展尚未固化成补丁**：现有
-  `scadyg-paper-protocol.patch` 是 2026-09-12 12:46 的早期快照，不含双协议与训练负采样那批改动。
-- BitcoinAlpha / UCI 未跑。
+- 三个组件、双协议和训练负采样扩展已固化到 `repro/scadyg-current.patch`。
+   补丁基线为官方提交 `28ca94a06771c46073b650de3daa95e0939342ba`，SHA-256 为
+   `1c219b332660b3acc9e3e3a33943197b82d398335e0889da63eddd5039ba6750`。
+   旧的 `scadyg-paper-protocol.patch` 保留为历史早期快照，不再作为当前完整补丁。
+- BitcoinAlpha 已完成 5 seed；UCI 未跑。
+- BitcoinAlpha 使用 SNAP 原始数据、723000 秒切片，official MRR 为 **0.719470 ± 0.006932**。
+   该结果用于第二数据集的 L1 管线闭环，不与 MOOC 的论文数值直接比较。
 - 未用 TGB 的 `Evaluator` 重评已保存的 `best_*.pt`。
 
 这些都不改变第 4–8 节已经定位的三处失配。
@@ -227,6 +231,7 @@ seeds 0–4，每格独立进程，选模口径固定 `--selection_metric mrr`�
 | 把训练负采样改成合法 item 就能抬高 0.20 | 否 |
 | 去掉快照内拓扑聚合后模型仍能工作 | **否**；MRR 0.0099 = 随机（第 9 节） |
 | Hypernetwork / 时间编码各贡献约 0.10 | 是（第 9 节，各约 0.10–0.13） |
+| BitcoinAlpha 第二数据集管线可重跑 | 是；5 seeds 为 0.719470 ± 0.006932 |
 
 建议引用时分开写两行：
 

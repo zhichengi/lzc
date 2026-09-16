@@ -7,6 +7,11 @@ if [[ $# -gt 0 ]]; then
   shift
 fi
 
+DATASET="${1:-mooc}"
+if [[ $# -gt 0 ]]; then
+  shift
+fi
+
 if [[ "${SELECTION_METRIC}" != "ap" && "${SELECTION_METRIC}" != "mrr" && "${SELECTION_METRIC}" != "filtered_mrr" ]]; then
   echo "selection metric 必须是 ap、mrr 或 filtered_mrr" >&2
   exit 1
@@ -25,7 +30,7 @@ fi
 
 for seed in "${SEEDS[@]}"; do
   echo "[multiseed] selection_metric=${SELECTION_METRIC} seed=${seed}"
-  bash "${SCRIPT_DIR}/run_scadyg.sh" mooc \
+  bash "${SCRIPT_DIR}/run_scadyg.sh" "${DATASET}" \
     --seed "${seed}" \
     --selection_metric "${SELECTION_METRIC}" \
     "${EVAL_ARGS[@]}"

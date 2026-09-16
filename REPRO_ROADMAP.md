@@ -39,12 +39,12 @@
 
 ### 3.1 进行中
 
-| 编号 | 论文 | 状态（2026-09-14） | 下一步 |
+| 编号 | 论文 | 状态（2026-09-16） | 下一步 |
 |------|------|--------------------|--------|
 | 09 | GBN（NeurIPS 2025） | **主表（Table 3）已完成**：7 个论文对照项中 4 个在 1σ 内（CS 95.80 vs 95.78，+0.02）。**消融（Table 4）已完成**：4/16 格在 1σ 内，定位两个失配（`γ0,β0` 常数未公开；`βi=0` 映射不完整） | 可冻结；见 [`repro/GBN_REPRO_LOG.md`](repro/GBN_REPRO_LOG.md) |
 | 29 | SGPC（AAAI 2026） | **已冻结**：6 异配集 ×10 划分 + 3 同配 public 全部跑完；val 选模系统性偏低 | 冻结；见 [`repro/SGPC_REPRO_LOG.md`](repro/SGPC_REPRO_LOG.md) |
 | 11 | IGNN（NeurIPS 2025） | public split 已冻结；**custom 48/32/20 首轮三数据集已完成**（actor 38.41±1.26 / chameleon 48.09±5.04 / squirrel 44.65±1.32，均 < 1σ） | 可选：r-IGNN / a-IGNN、roman-empire custom；不改已冻结 public 表 |
-| 43 | ScaDyG（TNNLS 2026） | 官方协议 0.922 ± 0.014 vs 0.931 ± 0.009；严格协议 0.204；**组件消融已完成**（`topo` 塌成随机） | BitcoinAlpha；报告定稿；补完整工作树 patch；冻结 |
+| 43 | ScaDyG（TNNLS 2026） | 官方协议 0.922 ± 0.014 vs 0.931 ± 0.009；严格协议 0.204；组件消融已完成（`topo` 塌成随机）；**BitcoinAlpha 已完成**（0.719470 ± 0.006932，5 seeds） | 报告定稿；冻结（完整补丁 `repro/scadyg-current.patch` 已验证） |
 | 40 | GCTD（WSDM 2026） | **已冻结**：Table 2 三格全跑（Cora 66.0 / Citeseer 64.9 / Pubmed 77.9 vs 81.4 / 76.8 / 79.9）；GCond 对照已证评测链路无误 | 冻结，**不再扫参**；见 [`results/gctd/table2_summary.csv`](results/gctd/table2_summary.csv) |
 
 收尾任务编号见 [`repro/CLOSEOUT_PLAN.md`](repro/CLOSEOUT_PLAN.md)。GPU 只有一张：**不要并行开第五篇**；SGPC 等待时间里穿插三条线的收尾。
