@@ -3,7 +3,7 @@
 本文件只做**索引**。每篇论文的命令、SHA、审计、烟雾与全量入口都在该篇自己的 `repro/<NAME>_README.md` 和 `repro/<NAME>_REPRO_LOG.md`。
 不要把数字抄到别的论文日志里。全量默认 **dry-run**：`FULL=1 bash repro/run_<name>_full.sh` 才会训练。
 
-预处理日期：2026-09-12。克隆一律 `ghfast.top`，SHA 已与 `git ls-remote HEAD` 比对。
+预处理日期：2026-09-12（各篇状态更新至 2026-09-16）。克隆一律 `ghfast.top`，SHA 已与 `git ls-remote HEAD` 比对。
 
 ## 怎么开一篇
 
@@ -21,7 +21,7 @@
 |------|------|--------|----------------------|------------|
 | 29 | SGPC | [SGPC_README.md](SGPC_README.md) | `repro/run_sgpc_full.sh` | 6 个异配集 ×10 划分完成（含 Actor）；Cora/Citeseer 5 seed |
 | 11 | IGNN | [IGNN_README.md](IGNN_README.md) | `repro/run_ignn_full.sh` → custom dry-run | public 已冻结，勿改表 |
-| 43 | ScaDyG | [SCADYG_README.md](SCADYG_README.md) | `repro/run_scadyg_full.sh` | 消融与 BitcoinAlpha 待跑 |
+| 43 | ScaDyG | [SCADYG_README.md](SCADYG_README.md) | `repro/run_scadyg_full.sh` | 消融与 BitcoinAlpha 已完成（0.719470 ± 0.006932）；可冻结 |
 | 40 | GCTD | [GCTD_README.md](GCTD_README.md) | `repro/run_gctd_full.sh` | Citeseer/Pubmed；禁止再扫 Cora |
 
 ## 队列论文（各自独立目录）

@@ -5,16 +5,17 @@
 
 数字总表：[results/SUMMARY.md](results/SUMMARY.md)。判定标准（L1 管线闭环 / L2 数值量级 / L3 统计一致）见 [REPRO_ROADMAP.md](REPRO_ROADMAP.md) 第 5 节。
 
-## 当前四条复现线（2026-09-12）
+## 当前复现线（2026-09-16）
 
 | 编号 | 论文 | 入口 | 当前结论 | 状态 |
 |------|------|------|----------|------|
-| 11 | IGNN（NeurIPS 2025） | [repro/IGNN_README.md](repro/IGNN_README.md) | public split 上 c-IGNN 与 V100 表同量级（Actor 37.43 vs 38.01） | public 已冻结；custom 待跑 |
-| 43 | ScaDyG（TNNLS 2026） | [repro/SCADYG_README.md](repro/SCADYG_README.md) | 官方协议 0.922 ± 0.014 vs 论文 0.931 ± 0.009；严格 item 排名 0.204 | L2；消融与第二数据集待做 |
-| 40 | GCTD（WSDM 2026） | [repro/GCTD_README.md](repro/GCTD_README.md) | Cora 1.3% 官方默认 30%；修正后 10-run 66.0 ± 9.4 vs 81.4 ± 1.6 | L1；不再在 Cora 上扫参 |
-| 29 | SGPC（AAAI 2026） | [repro/SGPC_README.md](repro/SGPC_README.md) | 8/9 数据集单次官方原样已跑；Pubmed 因稠密特征分解未跑 | 步骤 6 完成，未冻结 |
+| 09 | GBN（NeurIPS 2025） | [repro/GBN_README.md](repro/GBN_README.md) | 主表 7 项中 4 项在论文 1σ 内（CS 95.80 vs 95.78）；消融 4/16 在 1σ 内 | **已完成，可冻结** |
+| 11 | IGNN（NeurIPS 2025） | [repro/IGNN_README.md](repro/IGNN_README.md) | public（Actor 37.43 vs 38.01）与 custom 48/32/20 首轮三数据集均 < 1σ | **已冻结**（public + custom） |
+| 43 | ScaDyG（TNNLS 2026） | [repro/SCADYG_README.md](repro/SCADYG_README.md) | 官方协议 0.922 ± 0.014 vs 论文 0.931 ± 0.009；严格 item 0.204 ± 0.004；BitcoinAlpha 0.719470 ± 0.006932 | **可冻结**；报告与完整补丁已收口 |
+| 40 | GCTD（WSDM 2026） | [repro/GCTD_README.md](repro/GCTD_README.md) | Cora 1.3% 官方默认 30%；修正后 10-run 66.0 ± 9.4 vs 81.4 ± 1.6 | **已冻结**；不再在 Cora 上扫参 |
+| 29 | SGPC（AAAI 2026） | [repro/SGPC_README.md](repro/SGPC_README.md) | 9/9 数据集官方原样已跑；val 选模系统性偏低 0.07–3.43 | **已冻结** |
 
-队列里尚未全量训练的论文已经**按篇做完预处理**（独立克隆、审计、烟雾入口、全量 dry-run），总表：[repro/PREP_STATUS.md](repro/PREP_STATUS.md)。当前主线仍是 SGPC 步骤 7 收尾；不要并行开第五篇训练。IGNN / ScaDyG / GCTD 收尾见 [repro/CLOSEOUT_PLAN.md](repro/CLOSEOUT_PLAN.md)。
+队列里尚未全量训练的论文已经**按篇做完预处理**（独立克隆、审计、烟雾入口、全量 dry-run），总表：[repro/PREP_STATUS.md](repro/PREP_STATUS.md)。四条收尾线（IGNN / ScaDyG / GCTD / SGPC）＋ GBN 均已收口；按队列下一篇新训练是 **10 Stable-ChebNet**，仍是单卡串行、不要并行开两篇。收尾细节见 [repro/CLOSEOUT_PLAN.md](repro/CLOSEOUT_PLAN.md)。
 
 ## 计划与论文库
 

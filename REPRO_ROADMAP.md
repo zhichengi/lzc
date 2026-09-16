@@ -167,7 +167,11 @@ GCTD 是反例：从 09-10 到现在在 Cora 上做了约 15 轮实验仍未到 
 
 预处理（克隆、审计、烟雾入口、全量 dry-run）已按篇独立落地，总表 [`repro/PREP_STATUS.md`](repro/PREP_STATUS.md)。之后想复现哪篇，打开该篇 README，用 `FULL=1 bash repro/run_<name>_full.sh`，不要再从零搭环境。
 
-1. **SGPC 步骤 7 收尾**（当前主线训练）：Squirrel / Actor 10 划分。入口 [`repro/run_sgpc_full.sh`](repro/run_sgpc_full.sh)（默认不跑）。
-2. 继续 `LEARNING_PLAN.md` 的 M0 / M1。
-3. GPU 空闲：IGNN custom（`bash repro/run_ignn_full.sh`）；ScaDyG / GCTD 用各自 `run_*_full.sh`。
-4. 下一篇新训练按队列是 **09 GBN**，但必须等 SGPC 冻结后再 `FULL=1`。GraphRP（23）源码未发布，跳过。
+至 2026-09-16，四条收尾线（11 IGNN / 29 SGPC / 40 GCTD / 43 ScaDyG）与 09 GBN 均已收口。接下来：
+
+1. **下一篇新训练按队列是 10 Stable-ChebNet**（LRGB Peptides-func / struct）。前置阻塞：Dropbox 数据不通，需先解决数据获取并核实 LRGB 数据集可用性。
+2. 继续 `LEARNING_PLAN.md` 的 M1 剩余项与 M5（LRGB 部分），与 Stable-ChebNet 同步推进。
+3. 可选扩展（非必须）：IGNN 的 r-IGNN / a-IGNN 与 roman-empire custom；ScaDyG 的 UCI 数据集、TGB `Evaluator` 重评；后续 31 PUMA / 15 ScaleGNN / 44 Labeling Trick 按队列顺序。
+4. 归档：每篇冻结后保证 `*_REPRO_LOG.md` 冻结条目、补丁与 `results/SUMMARY.md` 同步。
+
+GraphRP（23）源码未发布，跳过。
