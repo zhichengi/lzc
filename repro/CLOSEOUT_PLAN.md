@@ -15,7 +15,7 @@
 | R-IGNN-6 / R-IGNN-7 | **完成**（2026-09-13）。custom 48/32/20 首轮三数据集 10-run：actor **38.41±1.26**（官 38.51±0.94）、chameleon **48.09±5.04**（官 50.79±4.92；3090 示例 47.53±3.36）、squirrel **44.65±1.32**（官 45.71±2.13），三者均 < 1σ。划分指纹未变；均加载官方固定划分 |
 | R-SCADYG-1 … R-SCADYG-3 | **完成**（2026-09-16）。三个组件→代码位置→开关对照；消融 4 变体 × seeds 0–4（`topo` 塌成随机）；BitcoinAlpha 第二数据集 5 seed **0.719470 ± 0.006932**（SNAP 原始数据，723000 秒切片，226 快照） |
 | R-SCADYG-4 | **完成**：`repro/SCADYG_REPORT.md` 已含消融（第 9 节）与 BitcoinAlpha；完整源码补丁 `repro/scadyg-current.patch` 已生成并在干净 worktree 验证（基线 `28ca94a`，SHA-256 `1c219b33…ba6750`） |
-| R-SCADYG-5 | **草稿完成、未发出**：`repro/scadyg_issue_draft.md` |
+| R-SCADYG-5 | **收口：决定不发出**（2026-09-16）。草稿保留 `repro/scadyg_issue_draft.md` 作证据 |
 | R-GCTD-1 | **完成**（2026-09-13）：Citeseer 0.9% **64.92 ± 7.72**（`lr_rec=0.01`，10 seed）与 Pubmed 0.08% **77.90 ± 1.45**（10 seed）；另有 Citeseer `lr_rec=0.001` 对照 **66.45 ± 5.09**（否证"塌缩降 lr"假设）。论文 76.8±0.4 / 79.9±0.2。汇总 `results/gctd/table2_summary.csv` |
 | R-GCTD-3 | **完成**（2026-09-13）：用 GCond 官方自带压缩图（`repro/gcond/saved_ours/`，论文 Table 2 原始产物）走同一 GCTD 评测链路，Cora 1.3% **79.34 ± 0.69**（论文 GCond 79.8±1.3）、Citeseer 1.8% **69.64 ± 0.59**（70.5±1.2），均在 1σ 内 → 评测链路正确，差距在压缩/学习侧 |
 | R-GCTD-4 | **收口：决定不发出**（2026-09-13）。草稿保留 `repro/gctd_issue_draft.md`；目标仓库 `nicolasrsantos/gctd` 已核实（`has_issues: true`，维护者即一作） |
@@ -98,7 +98,7 @@
 | R-SCADYG-2 ✅ | 三个消融 × seeds 0–4 | `--eval_protocol both --selection_metric mrr`，同时输出 official 与 filtered MRR；用 `repro/run_scadyg_multiseed.sh` 的方式起独立进程 | 消融表：每行 official 均值±std、filtered 均值±std；与论文消融表对照 |
 | R-SCADYG-3 ✅ | 第二个数据集 | 仓库有 `process_raw_data/process_bitcoin.py` 但没有原始数据。先从镜像取 BitcoinAlpha 原始文件，重建快照并记录哈希；然后官方原样 + checkpoint-fix 各跑 seeds 0–4。注意 Bitcoin 不是二部图，`mooc_full_item` 协议不适用，只比较 official 协议 | **完成 2026-09-16**：SNAP CSV（SHA-256 `3a178611…57cd76`）→ 226 快照 → seeds 0–4 official MRR **0.719470 ± 0.006932**；入口 `repro/download_scadyg_bitcoinalpha.sh`，预处理 `repro/scadyg-extra/process_bitcoin.py` |
 | R-SCADYG-4 ✅ | 复现报告 | 新建 `repro/SCADYG_REPORT.md`，结构：目标 / 环境 / 数据核验 / 官方原样结果 / 根因 1（checkpoint 只存预测层） / 根因 2（AP 选模 vs MRR 主指标） / 根因 3（排名协议：每源取最佳正边、全节点负采样、共享 RNG） / 双协议结果 / 训练负采样对照 / 未解决因素 / 结论分层 | 一份可以直接给导师看的 4–6 页报告 |
-| R-SCADYG-5（可选） | 向上游反馈 | 把 `repro/scadyg-checkpoint-fix.patch` 与最小复现步骤整理成 issue 文本（先不提评测协议争议，只报确定的 bug） | issue 文本存 `repro/scadyg_issue_draft.md` |
+| R-SCADYG-5（可选） ✅ | 向上游反馈 | 把 `repro/scadyg-checkpoint-fix.patch` 与最小复现步骤整理成 issue 文本（先不提评测协议争议，只报确定的 bug） | **完成 2026-09-16：决定不发出**。草稿存 `repro/scadyg_issue_draft.md` |
 
 **冻结条件**：消融表与第二个数据集结果入日志，报告初稿完成。→ **已满足（2026-09-16）**；可冻结。
 

@@ -475,7 +475,7 @@ AP 0.9857572059、AUC 0.9906082116、accuracy 0.9830360181 也逐位一致。该
 ## 2026-09-12 报告初稿与 checkpoint issue 草稿（不训练）
 
 - 复现报告：`repro/SCADYG_REPORT.md`。结构按 `CLOSEOUT_PLAN.md` R-SCADYG-4：官方原样 0.025 → checkpoint-fix → AP vs MRR 选模 → 排名协议 → 双协议 0.922 vs 0.204 → 训练负采样对照。消融与 BitcoinAlpha 标明未做。
-- 上游 issue 草稿：`repro/scadyg_issue_draft.md`。只报 Transformer 未写入 / 未恢复的 checkpoint bug，附 seed 2023 的 0.025 → 0.928。**未发出**；评测协议争议不写进 issue。
+- 上游 issue 草稿：`repro/scadyg_issue_draft.md`。只报 Transformer 未写入 / 未恢复的 checkpoint bug，附 seed 2023 的 0.025 → 0.928。**2026-09-16 决定不发出**（保留作证据）；评测协议争议不写进 issue。
 - `model/eval_protocols.py` 已复制到 `repro/scadyg-extra/eval_protocols.py`，SHA-256 均为 `fc7bd1550ed359f1f7a085ea75e2eb9e8eb4e0535181279e4499e6fe8f865624`（与日志步骤记录一致）。官方克隆仍 gitignore。
 
 ---

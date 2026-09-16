@@ -1,11 +1,15 @@
-# GBN 上游问题草稿（未发出）
+# GBN 上游问题草稿（**决定不发出**）
+
+> 2026-09-16：**决定不发出**。保留本文作为 Table 3/4 差距与失配的证据记录。
+> 若日后要发，目标仓库为 `ZhenhHuang/GBN`（作者仓库）；提交前需先用 GitHub API
+> 复核默认分支 SHA。
 
 仓库：https://github.com/ZhenhHuang/GBN
 提交：`72ad3692916ecc60f2c78d5bd01a55d7c6297a4f`
 论文：*Deeper with Riemannian Geometry: Overcoming Oversmoothing and Oversquashing for Graph Foundation Models*（NeurIPS 2025）
 
 本文件只整理**有确定依据**的问题，供后续决定是否发出。复现细节见
-[GBN_REPRO_LOG.md](GBN_REPRO_LOG.md)。
+[GBN_REPRO_LOG.md](GBN_REPRO_LOG.md)。**已决定不发出**（见文首标注）。
 
 ---
 

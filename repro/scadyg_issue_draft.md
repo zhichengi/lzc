@@ -1,4 +1,7 @@
-# ScaDyG issue 草稿（先不提交）
+# ScaDyG issue 草稿（**决定不发出**）
+
+> 2026-09-16：**决定不发出**。保留本文作为 checkpoint bug 的证据记录。
+> 若日后要发，目标仓库为 `BITNEO/ScaDyG`；提交前需先用 GitHub API 复核默认分支 SHA。
 
 仓库：https://github.com/BITNEO/ScaDyG  
 对照提交：`28ca94a06771c46073b650de3daa95e0939342ba`  

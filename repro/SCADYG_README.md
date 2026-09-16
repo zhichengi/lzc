@@ -9,7 +9,7 @@
 - 复现报告（初稿）：[SCADYG_REPORT.md](SCADYG_REPORT.md)
 - 组件消融汇总：[`results/scadyg/ablation_summary.csv`](../results/scadyg/ablation_summary.csv)（逐 run：[`ablation_runs.csv`](../results/scadyg/ablation_runs.csv)）
 - 消融入口：`bash repro/run_scadyg_ablation.sh`（4 组件 × seeds 0–4）
-- checkpoint issue 草稿（未发出）：[scadyg_issue_draft.md](scadyg_issue_draft.md)
+- checkpoint issue 草稿（2026-09-16 决定不发出）：[scadyg_issue_draft.md](scadyg_issue_draft.md)
 - 实验日志：`results/scadyg/runs/`
 - 读书笔记：`paper/notes/43_scadyg.md`
 - 本地论文：`papers/gnn-frontier-2025-2026/11-journals-tnnls-jmlr/43_ScaDyG_TNNLS2026.pdf`

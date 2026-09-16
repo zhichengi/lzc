@@ -101,6 +101,7 @@ P1 计划：29 SGPC 收尾 → 09 GBN → 10 Stable-ChebNet。SGPC 与 GBN 均�
 
 ## 五、本阶段遗留
 
-- 两个 upstream issue 待决策：GBN（`gbn_issue_draft.md`）、ScaDyG（`scadyg_issue_draft.md`），均为"有确定依据但未发出"。
+- upstream issue：GBN（`gbn_issue_draft.md`）与 ScaDyG（`scadyg_issue_draft.md`）均于
+  **2026-09-16 决定不发出**，草稿保留作证据（与 GCTD 同样处理）。
 - 队列笔记（01/04/08/10/12/13/15/22/23/31/41/44）尚未定稿。
 - R-WS-6：`dtgb` 的 wandb/protobuf 与 tensorboard 冲突未修（GCTD 已默认 `--no_wandb`）。

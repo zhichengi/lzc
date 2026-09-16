@@ -36,7 +36,7 @@ Deeper with Riemannian Geometry: Overcoming Oversmoothing and Oversquashing for 
 - 最值得记的一条：**CS 在三个不同设定下都贴合论文**，说明"管线是通的"；而其它数据集
   一致偏低，指向硬件与未公开细节，而不是实现错误。
 - 两个已定位的失配：`γ0,β0` 常数未公开；`βi=0` 的代码映射不完整。见
-  [`repro/gbn_issue_draft.md`](../../repro/gbn_issue_draft.md)（未发出）。
+  [`repro/gbn_issue_draft.md`](../../repro/gbn_issue_draft.md)（**2026-09-16 决定不发出**，保留作证据）。
 
 ## 可以延伸的点
 - 若换到 RTX 4090 重跑主表，可直接检验"硬件差异"这个假设（当前只是未验证的推测）。

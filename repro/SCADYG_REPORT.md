@@ -75,7 +75,7 @@ model.eval()
 
 同一 seed 2023、同一早停点（epoch 21）再跑：测试 **MRR 0.927811**（论文中心值 0.931，差 −0.003）。训练 / 验证轨迹与原样 run 一致，只改变测试前恢复的模块。0.025 → 0.928 支持上述判断。
 
-给作者的 issue 草稿：[scadyg_issue_draft.md](scadyg_issue_draft.md)（只报这一个确定 bug，不讨论评测协议）。
+给作者的 issue 草稿：[scadyg_issue_draft.md](scadyg_issue_draft.md)（只报这一个确定 bug，不讨论评测协议；**2026-09-16 决定不发出**，保留作证据）。
 
 ---
 

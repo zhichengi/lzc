@@ -376,7 +376,7 @@ EXECUTE=1 MODES="gamma0_beta0 gamma_all0 beta_all0 gamma_beta_all0" \
 3. Appendix E 的 Table 8 只给 7 个超参；`tau`、`add_self_loop`、`val_every`、`embed_dim`
    的取值？
 
-已整理成 [`gbn_issue_draft.md`](gbn_issue_draft.md)（**未发出**）。
+已整理成 [`gbn_issue_draft.md`](gbn_issue_draft.md)（**2026-09-16 决定不发出**，保留作证据）。
 
 ## 2026-09-14 步骤 10–11：分层结论与冻结
 
