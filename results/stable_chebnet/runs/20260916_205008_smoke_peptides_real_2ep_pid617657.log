@@ -1,0 +1,47 @@
+[repro] paper=stable_chebnet
+[repro] started_at=2026-09-16T20:50:08+08:00
+[repro] run_id=20260916_205008_smoke_peptides_real_2ep_pid617657
+[repro] repo_commit=7d7a7e2696119891d277fd3fa2b32fdda454b814
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/stable_chebnet
+[repro] command=bash -c cd Peptides/Stable && python ChebStable_peptide.py --epochs 2
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p617772-i604386.scope; invocation ID: ebbf9ddee02f4882b7b5865c9bdbb844
+/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+Number of trainable parameters: 659069
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Tracking run with wandb version 0.19.6
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+12.1
+Epoch: 000, Loss: 2.3660,Train Acc: 0.2638, Val_Loss: 2.5066,Val Acc: 0.3564
+12.1
+Epoch: 001, Loss: 2.1774,Train Acc: 0.3534, Val_Loss: 2.3882,Val Acc: 0.4144
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:      Epoch ▁█
+wandb:     Params ▁
+wandb:   Test Acc ▁
+wandb:  Train Acc ▁█
+wandb: Train Loss █▁
+wandb:    Val Acc ▁█
+wandb:   Val Loss █▁
+wandb: 
+wandb: Run summary:
+wandb:      Epoch 1
+wandb:     Params 659069
+wandb:   Test Acc 0.40043
+wandb:  Train Acc 0.3534
+wandb: Train Loss 2.17736
+wandb:    Val Acc 0.4144
+wandb:   Val Loss 2.38817
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/lab_user/project/lzc/repro/stable_chebnet/Peptides/Stable/wandb/offline-run-20260916_205014-66ufoh65
+wandb: Find logs at: ./wandb/offline-run-20260916_205014-66ufoh65/logs
+[repro] exit_code=0
+[repro] runtime_seconds=39
+[repro] finished_at=2026-09-16T20:50:49+08:00

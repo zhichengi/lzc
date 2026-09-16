@@ -11,18 +11,37 @@
 
 **本文件只服务这一篇。不要和其它论文共用命令、数据目录或 conda 环境改动。**
 
-## 预处理状态（2026-09-12）
+## 预处理状态（2026-09-16 更新）
 
 | 项 | 状态 |
 |----|------|
 | 源码固定 | 已克隆，SHA 见上 |
-| 环境 | 计划 `dtgb`；echo 'reuse dtgb; pip install ogb if missing' |
-| 数据 | Peptides 走 PyG LRGB；不要直连 GitHub，先镜像或本地下好再离线加载。 |
+| 环境 | `dtgb`（烟雾已跑通，未新建环境） |
+| 数据 | **Peptides-func 已就绪**：Dropbox 不通，改走 `hf-mirror`（见下）；train/val/test = 10,873 / 2,331 / 2,331 |
 | 代码审计 | 见日志步骤 4（只记录，未改官方代码） |
-| 烟雾 | 已跑官方脚本 2ep（占位图；测试段写死 cuda，CPU 退出 1） |
+| 烟雾 | **已用真实数据跑通**：官方脚本 2ep，退出 0，参数 659,069 |
 | 全量 | `FULL=1 bash repro/run_stable_chebnet_full.sh`（默认 dry-run） |
 
 对照目标：Peptides-func / Peptides-struct（LRGB）；Barbell 与 GraphProp 为合成/属性任务
+
+## 数据获取（不依赖 Dropbox）
+
+官方 `LRGBDataset` 从 Dropbox 拉 `peptidesfunc.zip`，本机不可达。改写后的入口走 HF 镜像：
+
+```bash
+bash repro/download_stable_chebnet.sh
+```
+
+它下载两份并对图顺序、划分完整性、分层性做校验，再由
+`repro/build_stable_chebnet_peptides.py` 还原成 PyG 需要的 `raw/{train,val,test}.pt`：
+
+| 来源 | 文件 | SHA-256 |
+|------|------|---------|
+| `LRGB/peptides-functional` | `geometric_data_processed.pt` | `0a5fe87d…2db1fd` |
+| `scikit-fingerprints/LRGB_Peptides-func` | `lrgb_splits_peptides_func.json` | `39ca1b14…f85b14` |
+
+**待确认**：划分取自 scikit-fingerprints 镜像，非官方 Dropbox 的
+`splits_random_stratified_peptide.pickle`；尺寸与分层性吻合，但未逐位比对。详见日志步骤 3。
 
 ## 烟雾（短）
 
@@ -31,7 +50,8 @@ export WANDB_MODE=offline
 bash repro/run_stable_chebnet.sh smoke_peptides_2ep -- bash -c 'cd Peptides/Stable && python ChebStable_peptide.py --epochs 2'
 ```
 
-官方脚本已有 `--epochs`。当前 `peptides-func/` 是占位图（Dropbox 不通）；换成真正 LRGB 后再对论文。Barbell 在 dtgb/PyG 2.8 下会因 `normalize=` 失败，不要当主表烟雾。
+官方脚本已有 `--epochs`（配置默认 200）。Barbell 在 dtgb/PyG 2.8 下会因 `normalize=` 失败，
+不要当主表烟雾。
 
 ## 全量（默认不跑）
 
