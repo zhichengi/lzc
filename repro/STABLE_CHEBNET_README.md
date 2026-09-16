@@ -20,9 +20,20 @@
 | 数据 | **Peptides-func 已就绪**：Dropbox 不通，改走 `hf-mirror`（见下）；train/val/test = 10,873 / 2,331 / 2,331 |
 | 代码审计 | 见日志步骤 4（只记录，未改官方代码） |
 | 烟雾 | **已用真实数据跑通**：官方脚本 2ep，退出 0，参数 659,069 |
-| 全量 | `FULL=1 bash repro/run_stable_chebnet_full.sh`（默认 dry-run） |
+| 全量 | **官方原样已跑**（2026-09-16）：200 epoch，退出 0，55.5 分钟；**Test AP 67.869 vs 论文 70.32 ± 0.26**（−2.45） |
 
 对照目标：Peptides-func / Peptides-struct（LRGB）；Barbell 与 GraphProp 为合成/属性任务
+
+## 当前结果（2026-09-16）
+
+| 设定 | AP | 备注 |
+|------|-----|------|
+| 官方原样（200 epoch，seed 99） | **67.869** | 单 run；论文 70.32 ± 0.26，差 −2.45 |
+| 最佳 val（epoch 77） | 70.35（Val） | 脚本**未**用最佳模型测 test |
+
+两个已定位的代码细节（待在步骤 7 验证）：官方脚本把 checkpoint 保存/加载**注释掉**了，
+测试用的是**最后一个 epoch** 的模型；且损失用 `CrossEntropyLoss` 作用在 `[B,10]` 上，
+而非 LRGB 惯用的 `BCEWithLogitsLoss`。详见日志步骤 6。
 
 ## 数据获取（不依赖 Dropbox）
 

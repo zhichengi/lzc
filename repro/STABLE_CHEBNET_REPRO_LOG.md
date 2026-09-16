@@ -156,3 +156,73 @@ bash repro/run_stable_chebnet.sh smoke_peptides_real_2ep -- \
 
 未开始。数据阻塞已解除，可以 `FULL=1 bash repro/run_stable_chebnet_full.sh` 启动官方原样
 （`epochs=200`）；完成后按 `_TEMPLATE_REPRO_LOG.md` 追加步骤 6。
+
+---
+
+## 2026-09-16 步骤 6：官方原样全量（Peptides-func，200 epoch）
+
+```bash
+export WANDB_MODE=offline
+bash repro/run_stable_chebnet.sh official_peptidesfunc_r1_200ep -- \
+  bash -c 'cd Peptides/Stable && python ChebStable_peptide.py'
+```
+
+- 日志：`results/stable_chebnet/runs/20260916_205200_official_peptidesfunc_r1_200ep_pid618299.log`
+- 提交 `7d7a7e2696119891d277fd3fa2b32fdda454b814`（未改官方代码）；环境 `dtgb`；RTX 3090
+- 退出码 **0**，用时 **3329 秒（55.5 分钟）**，200/200 epoch 全部完成
+- 可训练参数 659,069；配置取官方 `config_StableCheb.json`（`hidden=145, K=10,
+  num_layers=3, lr=1e-3, step_size=0.45, seed=99`）
+
+### 结果
+
+| 指标 | 我们（1 run） | 论文 Table 5 |
+|------|---------------|--------------|
+| peptides-func **AP** | **67.869** | **70.32 ± 0.26** |
+| 差值 | — | **−2.45** |
+| Train AP（末 epoch） | 95.15 | — |
+| Val AP（末 epoch） | 69.756 | — |
+| Val AP（最佳，epoch 77） | **70.35** | — |
+
+补充：Val AP 在前 30 epoch 快速升到 ~0.65，之后长期停在 0.69–0.70；Train AP 单调升到
+95%。即**已过拟合，val 早已饱和**。
+
+### 步骤 6 发现的两个实现细节（作为步骤 7 的线索）
+
+1. **测试用的是最后一个 epoch 的模型，不是最佳 val 模型。**
+   `ChebStable_peptide.py:195` 的 `torch.save(model.state_dict(), checkpoint_path)`
+   与 `:206-207` 的 `torch.load` / `load_state_dict` **全部被注释掉**。
+   脚本只维护 `temp`（最佳 val）与 `when`（对应 epoch）两个变量用于打印，不影响测试。
+   因此 Test AP 与 Val AP 不是同一模型：末 epoch Val AP 69.756 vs 最佳 70.35。
+2. **日志把 AP 印成 "Acc"。** `eval_ap()` 用 sklearn `average_precision_score`
+   对 10 个任务取平均，确实是论文口径的 AP；打印标签 `Test Acc:` 是命名错误。
+
+### 与论文的差距（−2.45 AP）的可能来源（未逐项验证）
+
+1. **单 run vs 多 seed**：本次 1 次（`seed=99`，官方配置），论文报 ±0.26，说明是多 seed；
+   我们的观测里 val AP 在 0.69–0.70 之间波动约 ±0.5，量级与差距相当。
+2. **末 epoch 评测**：若改用最佳 val（epoch 77）的模型，预期会略好（Val AP 70.35）。
+3. **损失函数**：脚本用 `nn.CrossEntropyLoss()` 作用于 `y`（形状 `[B,10]`），
+   即把多标签当作互斥分类的软标签；LRGB 的 Peptides-func 标准做法是 **BCEWithLogitsLoss**
+   （10 个独立二分类）。这会改变优化目标。
+4. **划分来源**：见步骤 3 的待确认项（取自镜像，未逐位比对官方 pickle）。
+5. **无 PE 的对照口径**：论文强调 Stable-ChebNet 不依赖位置编码；脚本 `pos_enc="None"`
+   确实没用 PE，这一点与论文一致。
+
+### 分层判定（步骤 6 阶段，先不定稿）
+
+- **L1 管线闭环：是**。真实 LRGB 数据（规模与论文 Table 1 逐项吻合）、200 epoch 跑完、
+  退出码 0、日志含 commit/环境/GPU、同命令可重跑。
+- **L2 数值量级：部分**。单 run 67.87 对 70.32 ± 0.26，差 −2.45，超出论文 σ；但差距
+  有两条已定位的候选原因（末 epoch 评测、损失函数口径），尚需步骤 7 的对照实验判定。
+- **L3 统计一致：未评估**。本次只有 1 个 seed，未做多种子。
+
+### 下一步（步骤 7）
+
+优先级从高到低：
+
+1. 做"最佳 val 模型 vs 末 epoch 模型"的对照（不改官方默认路径，用独立脚本/开关复现
+   checkpoint 逻辑），量化第 1 点的影响。
+2. 查官方是否有 BCE 版本的脚本或说明（第 2 条损失口径），确认论文实际用法。
+3. 若需多种子，用 `--seed` 跑 3–5 次，报告均值±std 再对 70.32 ± 0.26。
+
+**未做**：Peptides-struct（`ChebStable_Struc.py`）、Barbell、GraphProp；多种子。

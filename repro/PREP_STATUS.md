@@ -29,7 +29,7 @@
 | 序 | 编号 | 简称 | SHA（12 位） | conda 计划 | 烟雾 | 全量开关 | 阻塞 |
 |----|------|------|--------------|------------|------|----------|------|
 | — | 09 | [gbn](GBN_README.md) | `72ad3692916e` | dtgb | **已跑** 8/8 | `run_gbn_table.sh` / `run_gbn_ablation.sh` | **主表与消融均完成**（2026-09-14）；详见 [GBN_REPRO_LOG.md](GBN_REPRO_LOG.md)
-| 2 | 10 | [stable_chebnet](STABLE_CHEBNET_README.md) | `7d7a7e269611` | dtgb | **已跑** 真实 Peptides-func 2ep，退出 0 | `run_stable_chebnet_full.sh` | **数据已解决**（Dropbox 不通，改走 hf-mirror）；划分来源待逐位确认 |
+| 2 | 10 | [stable_chebnet](STABLE_CHEBNET_README.md) | `7d7a7e269611` | dtgb | **已跑** 真实 Peptides-func 2ep，退出 0 | `run_stable_chebnet_full.sh` | 官方原样已跑（200ep）：**Test AP 67.869 vs 论文 70.32 ± 0.26**；待步骤 7 定位 | |
 | 3 | 31 | [puma](PUMA_README.md) | `9e4e87f53db0` | dtgb 试跑 | **已跑** CoraFull bare 1ep，退出 0 | `run_puma_full.sh` | 官方钉 torch 1.13；`--repeat 1` 的 std 为 nan |
 | 4 | 15 | [scalegnn](SCALEGNN_README.md) | `4825c7ed2ccb` | dtgb | **已跑** Cora 2ep，退出 0 | `run_scalegnn_full.sh` | 官方 yaml 用 test 选模 |
 | 5 | 44 | [labeling_trick](LABELING_TRICK_README.md) | `17b71959c854` | dtgb | **已跑** load Cora，退出 0 | `run_labeling_trick_full.sh` | `--test`=10 seed，无短训 CLI |

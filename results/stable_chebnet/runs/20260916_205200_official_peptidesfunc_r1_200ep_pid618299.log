@@ -1,0 +1,443 @@
+[repro] paper=stable_chebnet
+[repro] started_at=2026-09-16T20:52:00+08:00
+[repro] run_id=20260916_205200_official_peptidesfunc_r1_200ep_pid618299
+[repro] repo_commit=7d7a7e2696119891d277fd3fa2b32fdda454b814
+[repro] env=dtgb cwd=/home/lab_user/project/lzc/repro/stable_chebnet
+[repro] command=bash -c cd Peptides/Stable && python ChebStable_peptide.py
+[repro] resource_cap_ratio=85 threads=17
+[repro] python=3.10.20 torch=2.2.1+cu121 cuda=True gpu=NVIDIA GeForce RTX 3090
+[cap] cores=17/20 CPUQuota=1700% MemoryMax=55139365888 cuda_fraction=0.85 mps=85 gpu_gov=1
+Running as unit: run-p618394-i639920.scope; invocation ID: 8684cc7ee497479d9172ccc4559124ed
+/home/lab_user/tools/miniconda3/envs/dtgb/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:28: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn("The verbose parameter is deprecated. Please use get_last_lr() "
+Number of trainable parameters: 659069
+wandb: Using wandb-core as the SDK backend.  Please refer to https://wandb.me/wandb-core for more information.
+wandb: Tracking run with wandb version 0.19.6
+wandb: W&B syncing is set to `offline` in this directory.  
+wandb: Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+12.1
+Epoch: 000, Loss: 2.5237,Train Acc: 0.2586, Val_Loss: 2.4686,Val Acc: 0.3625
+12.1
+Epoch: 001, Loss: 2.3068,Train Acc: 0.3496, Val_Loss: 2.4622,Val Acc: 0.4070
+12.1
+Epoch: 002, Loss: 3.2425,Train Acc: 0.3795, Val_Loss: 2.3398,Val Acc: 0.4270
+12.1
+Epoch: 003, Loss: 2.4800,Train Acc: 0.4065, Val_Loss: 2.4577,Val Acc: 0.4573
+12.1
+Epoch: 004, Loss: 2.1625,Train Acc: 0.4269, Val_Loss: 2.3764,Val Acc: 0.4627
+12.1
+Epoch: 005, Loss: 2.6554,Train Acc: 0.4455, Val_Loss: 2.4883,Val Acc: 0.4899
+12.1
+Epoch: 006, Loss: 2.7441,Train Acc: 0.4759, Val_Loss: 2.3373,Val Acc: 0.4986
+12.1
+Epoch: 007, Loss: 1.7656,Train Acc: 0.4879, Val_Loss: 2.2604,Val Acc: 0.5168
+12.1
+Epoch: 008, Loss: 1.8638,Train Acc: 0.5070, Val_Loss: 2.5223,Val Acc: 0.5290
+12.1
+Epoch: 009, Loss: 2.6868,Train Acc: 0.5308, Val_Loss: 2.2763,Val Acc: 0.5426
+12.1
+Epoch: 010, Loss: 2.2862,Train Acc: 0.5465, Val_Loss: 2.1358,Val Acc: 0.5614
+12.1
+Epoch: 011, Loss: 2.2959,Train Acc: 0.5646, Val_Loss: 2.1655,Val Acc: 0.5656
+12.1
+Epoch: 012, Loss: 2.1526,Train Acc: 0.5826, Val_Loss: 2.2190,Val Acc: 0.5858
+12.1
+Epoch: 013, Loss: 1.6638,Train Acc: 0.5993, Val_Loss: 2.0994,Val Acc: 0.5862
+12.1
+Epoch: 014, Loss: 2.0981,Train Acc: 0.6110, Val_Loss: 2.1675,Val Acc: 0.5973
+12.1
+Epoch: 015, Loss: 2.1250,Train Acc: 0.6257, Val_Loss: 2.1511,Val Acc: 0.6094
+12.1
+Epoch: 016, Loss: 1.4653,Train Acc: 0.6376, Val_Loss: 2.1730,Val Acc: 0.6035
+12.1
+Epoch: 017, Loss: 2.4059,Train Acc: 0.6579, Val_Loss: 2.0780,Val Acc: 0.6097
+12.1
+Epoch: 018, Loss: 1.2988,Train Acc: 0.6642, Val_Loss: 2.2782,Val Acc: 0.6039
+12.1
+Epoch: 019, Loss: 2.1238,Train Acc: 0.6740, Val_Loss: 2.0661,Val Acc: 0.6296
+12.1
+Epoch: 020, Loss: 2.1585,Train Acc: 0.6911, Val_Loss: 1.9989,Val Acc: 0.6253
+12.1
+Epoch: 021, Loss: 1.3523,Train Acc: 0.7003, Val_Loss: 2.1762,Val Acc: 0.6284
+12.1
+Epoch: 022, Loss: 1.7610,Train Acc: 0.7082, Val_Loss: 2.1075,Val Acc: 0.6286
+12.1
+Epoch: 023, Loss: 2.1310,Train Acc: 0.7227, Val_Loss: 1.9959,Val Acc: 0.6215
+12.1
+Epoch: 024, Loss: 2.4517,Train Acc: 0.7248, Val_Loss: 2.2459,Val Acc: 0.6356
+12.1
+Epoch: 025, Loss: 1.2664,Train Acc: 0.7337, Val_Loss: 2.3329,Val Acc: 0.6367
+12.1
+Epoch: 026, Loss: 2.1141,Train Acc: 0.7431, Val_Loss: 2.2653,Val Acc: 0.6406
+12.1
+Epoch: 027, Loss: 1.5575,Train Acc: 0.7640, Val_Loss: 2.1963,Val Acc: 0.6331
+12.1
+Epoch: 028, Loss: 1.7535,Train Acc: 0.7581, Val_Loss: 2.1276,Val Acc: 0.6433
+12.1
+Epoch: 029, Loss: 1.1999,Train Acc: 0.7674, Val_Loss: 2.1628,Val Acc: 0.6433
+12.1
+Epoch: 030, Loss: 1.7544,Train Acc: 0.7734, Val_Loss: 2.2901,Val Acc: 0.6546
+12.1
+Epoch: 031, Loss: 1.1912,Train Acc: 0.7724, Val_Loss: 2.2081,Val Acc: 0.6545
+12.1
+Epoch: 032, Loss: 2.7443,Train Acc: 0.7776, Val_Loss: 1.9042,Val Acc: 0.6590
+12.1
+Epoch: 033, Loss: 1.3634,Train Acc: 0.7947, Val_Loss: 2.3916,Val Acc: 0.6554
+12.1
+Epoch: 034, Loss: 1.6021,Train Acc: 0.8015, Val_Loss: 2.2531,Val Acc: 0.6732
+12.1
+Epoch: 035, Loss: 1.7401,Train Acc: 0.8025, Val_Loss: 2.1156,Val Acc: 0.6621
+12.1
+Epoch: 036, Loss: 2.3610,Train Acc: 0.8088, Val_Loss: 2.2141,Val Acc: 0.6708
+12.1
+Epoch: 037, Loss: 1.9913,Train Acc: 0.8124, Val_Loss: 2.5340,Val Acc: 0.6670
+12.1
+Epoch: 038, Loss: 1.3119,Train Acc: 0.8193, Val_Loss: 2.3117,Val Acc: 0.6636
+12.1
+Epoch: 039, Loss: 2.6893,Train Acc: 0.8192, Val_Loss: 2.2544,Val Acc: 0.6640
+12.1
+Epoch: 040, Loss: 1.3039,Train Acc: 0.8205, Val_Loss: 2.4324,Val Acc: 0.6678
+12.1
+Epoch: 041, Loss: 1.3144,Train Acc: 0.8294, Val_Loss: 2.4065,Val Acc: 0.6623
+12.1
+Epoch: 042, Loss: 1.8307,Train Acc: 0.8352, Val_Loss: 2.4582,Val Acc: 0.6636
+12.1
+Epoch: 043, Loss: 0.7689,Train Acc: 0.8283, Val_Loss: 2.1465,Val Acc: 0.6483
+12.1
+Epoch: 044, Loss: 1.2835,Train Acc: 0.8415, Val_Loss: 2.3265,Val Acc: 0.6693
+12.1
+Epoch: 045, Loss: 2.1127,Train Acc: 0.8374, Val_Loss: 2.1772,Val Acc: 0.6646
+12.1
+Epoch: 046, Loss: 1.2947,Train Acc: 0.8456, Val_Loss: 2.3071,Val Acc: 0.6814
+12.1
+Epoch: 047, Loss: 1.4947,Train Acc: 0.8435, Val_Loss: 1.9960,Val Acc: 0.6741
+12.1
+Epoch: 048, Loss: 1.3705,Train Acc: 0.8537, Val_Loss: 2.1849,Val Acc: 0.6707
+12.1
+Epoch: 049, Loss: 1.6290,Train Acc: 0.8576, Val_Loss: 2.3982,Val Acc: 0.6658
+12.1
+Epoch: 050, Loss: 1.3590,Train Acc: 0.8603, Val_Loss: 2.1823,Val Acc: 0.6583
+12.1
+Epoch: 051, Loss: 0.9720,Train Acc: 0.8545, Val_Loss: 2.2400,Val Acc: 0.6678
+12.1
+Epoch: 052, Loss: 1.4367,Train Acc: 0.8608, Val_Loss: 2.1285,Val Acc: 0.6710
+12.1
+Epoch: 053, Loss: 1.1591,Train Acc: 0.8572, Val_Loss: 2.3178,Val Acc: 0.6660
+12.1
+Epoch: 054, Loss: 1.7215,Train Acc: 0.8856, Val_Loss: 2.1759,Val Acc: 0.6929
+12.1
+Epoch: 055, Loss: 1.9726,Train Acc: 0.8940, Val_Loss: 2.1862,Val Acc: 0.6906
+12.1
+Epoch: 056, Loss: 1.2722,Train Acc: 0.8937, Val_Loss: 2.2604,Val Acc: 0.6965
+12.1
+Epoch: 057, Loss: 1.4305,Train Acc: 0.9009, Val_Loss: 2.2924,Val Acc: 0.6942
+12.1
+Epoch: 058, Loss: 1.8392,Train Acc: 0.9010, Val_Loss: 2.3431,Val Acc: 0.6874
+12.1
+Epoch: 059, Loss: 1.2775,Train Acc: 0.8968, Val_Loss: 2.4112,Val Acc: 0.6894
+12.1
+Epoch: 060, Loss: 0.9081,Train Acc: 0.9072, Val_Loss: 2.2439,Val Acc: 0.6917
+12.1
+Epoch: 061, Loss: 1.3644,Train Acc: 0.9036, Val_Loss: 2.1284,Val Acc: 0.6963
+12.1
+Epoch: 062, Loss: 1.4609,Train Acc: 0.9043, Val_Loss: 2.4607,Val Acc: 0.6869
+12.1
+Epoch: 063, Loss: 1.0300,Train Acc: 0.9004, Val_Loss: 2.5103,Val Acc: 0.6942
+12.1
+Epoch: 064, Loss: 1.4262,Train Acc: 0.9074, Val_Loss: 2.2359,Val Acc: 0.6917
+12.1
+Epoch: 065, Loss: 1.6937,Train Acc: 0.9099, Val_Loss: 2.3847,Val Acc: 0.6966
+12.1
+Epoch: 066, Loss: 1.0809,Train Acc: 0.9060, Val_Loss: 2.4014,Val Acc: 0.6878
+12.1
+Epoch: 067, Loss: 1.3958,Train Acc: 0.9060, Val_Loss: 2.3936,Val Acc: 0.6881
+12.1
+Epoch: 068, Loss: 0.9264,Train Acc: 0.9093, Val_Loss: 2.4252,Val Acc: 0.6894
+12.1
+Epoch: 069, Loss: 1.1510,Train Acc: 0.9100, Val_Loss: 2.7366,Val Acc: 0.6928
+12.1
+Epoch: 070, Loss: 1.8667,Train Acc: 0.9117, Val_Loss: 2.3657,Val Acc: 0.6861
+12.1
+Epoch: 071, Loss: 1.6906,Train Acc: 0.9094, Val_Loss: 2.2457,Val Acc: 0.6888
+12.1
+Epoch: 072, Loss: 1.0906,Train Acc: 0.9147, Val_Loss: 2.4570,Val Acc: 0.6915
+12.1
+Epoch: 073, Loss: 1.9272,Train Acc: 0.9123, Val_Loss: 2.6347,Val Acc: 0.6875
+12.1
+Epoch: 074, Loss: 1.2022,Train Acc: 0.9121, Val_Loss: 2.3413,Val Acc: 0.6915
+12.1
+Epoch: 075, Loss: 1.5867,Train Acc: 0.9183, Val_Loss: 2.3908,Val Acc: 0.6938
+12.1
+Epoch: 076, Loss: 1.6901,Train Acc: 0.9257, Val_Loss: 2.4479,Val Acc: 0.6939
+12.1
+Epoch: 077, Loss: 1.7463,Train Acc: 0.9286, Val_Loss: 2.4034,Val Acc: 0.7035
+12.1
+Epoch: 078, Loss: 1.0916,Train Acc: 0.9255, Val_Loss: 2.4545,Val Acc: 0.6972
+12.1
+Epoch: 079, Loss: 1.1181,Train Acc: 0.9310, Val_Loss: 2.3570,Val Acc: 0.6957
+12.1
+Epoch: 080, Loss: 0.9956,Train Acc: 0.9278, Val_Loss: 2.3462,Val Acc: 0.6958
+12.1
+Epoch: 081, Loss: 1.5962,Train Acc: 0.9279, Val_Loss: 2.3574,Val Acc: 0.7008
+12.1
+Epoch: 082, Loss: 1.3779,Train Acc: 0.9299, Val_Loss: 2.3643,Val Acc: 0.7023
+12.1
+Epoch: 083, Loss: 1.4066,Train Acc: 0.9355, Val_Loss: 2.4343,Val Acc: 0.6974
+12.1
+Epoch: 084, Loss: 1.3381,Train Acc: 0.9320, Val_Loss: 2.4427,Val Acc: 0.6948
+12.1
+Epoch: 085, Loss: 1.1553,Train Acc: 0.9279, Val_Loss: 2.2987,Val Acc: 0.6976
+12.1
+Epoch: 086, Loss: 1.1861,Train Acc: 0.9303, Val_Loss: 2.6767,Val Acc: 0.6960
+12.1
+Epoch: 087, Loss: 1.0876,Train Acc: 0.9357, Val_Loss: 2.5266,Val Acc: 0.6909
+12.1
+Epoch: 088, Loss: 1.2634,Train Acc: 0.9313, Val_Loss: 2.1910,Val Acc: 0.6929
+12.1
+Epoch: 089, Loss: 1.6624,Train Acc: 0.9336, Val_Loss: 2.6028,Val Acc: 0.6966
+12.1
+Epoch: 090, Loss: 0.7627,Train Acc: 0.9335, Val_Loss: 2.4728,Val Acc: 0.6920
+12.1
+Epoch: 091, Loss: 1.0015,Train Acc: 0.9345, Val_Loss: 2.4291,Val Acc: 0.6920
+12.1
+Epoch: 092, Loss: 1.2231,Train Acc: 0.9344, Val_Loss: 2.3638,Val Acc: 0.6979
+12.1
+Epoch: 093, Loss: 1.5615,Train Acc: 0.9392, Val_Loss: 2.4027,Val Acc: 0.6874
+12.1
+Epoch: 094, Loss: 1.0753,Train Acc: 0.9354, Val_Loss: 2.3066,Val Acc: 0.6918
+12.1
+Epoch: 095, Loss: 1.5596,Train Acc: 0.9384, Val_Loss: 2.4117,Val Acc: 0.6923
+12.1
+Epoch: 096, Loss: 1.6519,Train Acc: 0.9413, Val_Loss: 2.3675,Val Acc: 0.6999
+12.1
+Epoch: 097, Loss: 1.3809,Train Acc: 0.9364, Val_Loss: 2.2766,Val Acc: 0.6954
+12.1
+Epoch: 098, Loss: 1.1818,Train Acc: 0.9417, Val_Loss: 2.4337,Val Acc: 0.6949
+12.1
+Epoch: 099, Loss: 1.0144,Train Acc: 0.9404, Val_Loss: 2.3208,Val Acc: 0.6994
+12.1
+Epoch: 100, Loss: 1.1665,Train Acc: 0.9427, Val_Loss: 2.3741,Val Acc: 0.6957
+12.1
+Epoch: 101, Loss: 1.6553,Train Acc: 0.9404, Val_Loss: 2.4225,Val Acc: 0.6986
+12.1
+Epoch: 102, Loss: 1.2496,Train Acc: 0.9435, Val_Loss: 2.3571,Val Acc: 0.6996
+12.1
+Epoch: 103, Loss: 1.1439,Train Acc: 0.9418, Val_Loss: 2.3691,Val Acc: 0.7012
+12.1
+Epoch: 104, Loss: 2.2356,Train Acc: 0.9414, Val_Loss: 2.4037,Val Acc: 0.6954
+12.1
+Epoch: 105, Loss: 0.9137,Train Acc: 0.9421, Val_Loss: 2.4326,Val Acc: 0.6993
+12.1
+Epoch: 106, Loss: 1.2307,Train Acc: 0.9450, Val_Loss: 2.2821,Val Acc: 0.7004
+12.1
+Epoch: 107, Loss: 1.3083,Train Acc: 0.9437, Val_Loss: 2.4328,Val Acc: 0.7013
+12.1
+Epoch: 108, Loss: 1.2779,Train Acc: 0.9424, Val_Loss: 2.3705,Val Acc: 0.6994
+12.1
+Epoch: 109, Loss: 1.1931,Train Acc: 0.9396, Val_Loss: 2.4726,Val Acc: 0.7023
+12.1
+Epoch: 110, Loss: 1.0497,Train Acc: 0.9413, Val_Loss: 2.3966,Val Acc: 0.6985
+12.1
+Epoch: 111, Loss: 1.3372,Train Acc: 0.9404, Val_Loss: 2.2698,Val Acc: 0.6940
+12.1
+Epoch: 112, Loss: 1.3036,Train Acc: 0.9417, Val_Loss: 2.3018,Val Acc: 0.6971
+12.1
+Epoch: 113, Loss: 1.1759,Train Acc: 0.9416, Val_Loss: 2.4777,Val Acc: 0.7004
+12.1
+Epoch: 114, Loss: 1.2178,Train Acc: 0.9412, Val_Loss: 2.3896,Val Acc: 0.6937
+12.1
+Epoch: 115, Loss: 0.9121,Train Acc: 0.9432, Val_Loss: 2.4177,Val Acc: 0.6983
+12.1
+Epoch: 116, Loss: 1.2808,Train Acc: 0.9424, Val_Loss: 2.3807,Val Acc: 0.6918
+12.1
+Epoch: 117, Loss: 1.9599,Train Acc: 0.9443, Val_Loss: 2.4242,Val Acc: 0.6971
+12.1
+Epoch: 118, Loss: 1.3116,Train Acc: 0.9487, Val_Loss: 2.4122,Val Acc: 0.6993
+12.1
+Epoch: 119, Loss: 1.3696,Train Acc: 0.9472, Val_Loss: 2.4080,Val Acc: 0.6972
+12.1
+Epoch: 120, Loss: 0.9624,Train Acc: 0.9470, Val_Loss: 2.3617,Val Acc: 0.6985
+12.1
+Epoch: 121, Loss: 0.9609,Train Acc: 0.9458, Val_Loss: 2.3994,Val Acc: 0.6974
+12.1
+Epoch: 122, Loss: 2.2544,Train Acc: 0.9473, Val_Loss: 2.3921,Val Acc: 0.6985
+12.1
+Epoch: 123, Loss: 1.2332,Train Acc: 0.9464, Val_Loss: 2.2993,Val Acc: 0.6988
+12.1
+Epoch: 124, Loss: 1.1802,Train Acc: 0.9464, Val_Loss: 2.4219,Val Acc: 0.6953
+12.1
+Epoch: 125, Loss: 1.2934,Train Acc: 0.9458, Val_Loss: 2.4532,Val Acc: 0.6975
+12.1
+Epoch: 126, Loss: 1.4551,Train Acc: 0.9450, Val_Loss: 2.4676,Val Acc: 0.6972
+12.1
+Epoch: 127, Loss: 1.0365,Train Acc: 0.9488, Val_Loss: 2.3843,Val Acc: 0.6982
+12.1
+Epoch: 128, Loss: 1.4740,Train Acc: 0.9460, Val_Loss: 2.3859,Val Acc: 0.7006
+12.1
+Epoch: 129, Loss: 1.1761,Train Acc: 0.9469, Val_Loss: 2.3979,Val Acc: 0.7000
+12.1
+Epoch: 130, Loss: 1.0380,Train Acc: 0.9507, Val_Loss: 2.4827,Val Acc: 0.6970
+12.1
+Epoch: 131, Loss: 1.2741,Train Acc: 0.9443, Val_Loss: 2.4702,Val Acc: 0.7004
+12.1
+Epoch: 132, Loss: 1.0326,Train Acc: 0.9496, Val_Loss: 2.5310,Val Acc: 0.6973
+12.1
+Epoch: 133, Loss: 1.2946,Train Acc: 0.9480, Val_Loss: 2.4030,Val Acc: 0.6957
+12.1
+Epoch: 134, Loss: 1.0992,Train Acc: 0.9499, Val_Loss: 2.4653,Val Acc: 0.6991
+12.1
+Epoch: 135, Loss: 1.3929,Train Acc: 0.9461, Val_Loss: 2.3926,Val Acc: 0.6972
+12.1
+Epoch: 136, Loss: 1.3280,Train Acc: 0.9490, Val_Loss: 2.4556,Val Acc: 0.6967
+12.1
+Epoch: 137, Loss: 1.7305,Train Acc: 0.9481, Val_Loss: 2.3350,Val Acc: 0.6954
+12.1
+Epoch: 138, Loss: 1.9902,Train Acc: 0.9489, Val_Loss: 2.4185,Val Acc: 0.6968
+12.1
+Epoch: 139, Loss: 0.7813,Train Acc: 0.9485, Val_Loss: 2.3079,Val Acc: 0.6973
+12.1
+Epoch: 140, Loss: 0.7426,Train Acc: 0.9519, Val_Loss: 2.3855,Val Acc: 0.6954
+12.1
+Epoch: 141, Loss: 1.2407,Train Acc: 0.9494, Val_Loss: 2.3699,Val Acc: 0.6976
+12.1
+Epoch: 142, Loss: 1.3177,Train Acc: 0.9494, Val_Loss: 2.4611,Val Acc: 0.6985
+12.1
+Epoch: 143, Loss: 0.8858,Train Acc: 0.9509, Val_Loss: 2.4079,Val Acc: 0.6984
+12.1
+Epoch: 144, Loss: 1.4108,Train Acc: 0.9504, Val_Loss: 2.4842,Val Acc: 0.6969
+12.1
+Epoch: 145, Loss: 0.8387,Train Acc: 0.9497, Val_Loss: 2.4757,Val Acc: 0.6984
+12.1
+Epoch: 146, Loss: 1.3983,Train Acc: 0.9495, Val_Loss: 2.3794,Val Acc: 0.6968
+12.1
+Epoch: 147, Loss: 1.1330,Train Acc: 0.9530, Val_Loss: 2.3758,Val Acc: 0.6971
+12.1
+Epoch: 148, Loss: 1.1631,Train Acc: 0.9507, Val_Loss: 2.3695,Val Acc: 0.6966
+12.1
+Epoch: 149, Loss: 1.1277,Train Acc: 0.9519, Val_Loss: 2.4733,Val Acc: 0.6966
+12.1
+Epoch: 150, Loss: 1.3012,Train Acc: 0.9478, Val_Loss: 2.3913,Val Acc: 0.6984
+12.1
+Epoch: 151, Loss: 0.8327,Train Acc: 0.9530, Val_Loss: 2.4051,Val Acc: 0.6991
+12.1
+Epoch: 152, Loss: 0.7959,Train Acc: 0.9495, Val_Loss: 2.4923,Val Acc: 0.6995
+12.1
+Epoch: 153, Loss: 1.4521,Train Acc: 0.9504, Val_Loss: 2.4153,Val Acc: 0.6966
+12.1
+Epoch: 154, Loss: 1.4236,Train Acc: 0.9498, Val_Loss: 2.4908,Val Acc: 0.6974
+12.1
+Epoch: 155, Loss: 1.1117,Train Acc: 0.9504, Val_Loss: 2.4332,Val Acc: 0.6984
+12.1
+Epoch: 156, Loss: 1.4979,Train Acc: 0.9521, Val_Loss: 2.5055,Val Acc: 0.6981
+12.1
+Epoch: 157, Loss: 1.4364,Train Acc: 0.9497, Val_Loss: 2.6240,Val Acc: 0.6962
+12.1
+Epoch: 158, Loss: 1.9136,Train Acc: 0.9488, Val_Loss: 2.5683,Val Acc: 0.6965
+12.1
+Epoch: 159, Loss: 1.2820,Train Acc: 0.9506, Val_Loss: 2.4142,Val Acc: 0.6961
+12.1
+Epoch: 160, Loss: 1.0909,Train Acc: 0.9525, Val_Loss: 2.4968,Val Acc: 0.6957
+12.1
+Epoch: 161, Loss: 1.3879,Train Acc: 0.9454, Val_Loss: 2.5614,Val Acc: 0.6982
+12.1
+Epoch: 162, Loss: 1.4302,Train Acc: 0.9529, Val_Loss: 2.5155,Val Acc: 0.6963
+12.1
+Epoch: 163, Loss: 1.8725,Train Acc: 0.9487, Val_Loss: 2.5246,Val Acc: 0.6980
+12.1
+Epoch: 164, Loss: 1.7892,Train Acc: 0.9525, Val_Loss: 2.5208,Val Acc: 0.6986
+12.1
+Epoch: 165, Loss: 1.8558,Train Acc: 0.9506, Val_Loss: 2.4867,Val Acc: 0.6986
+12.1
+Epoch: 166, Loss: 1.2302,Train Acc: 0.9535, Val_Loss: 2.4133,Val Acc: 0.6962
+12.1
+Epoch: 167, Loss: 1.4853,Train Acc: 0.9518, Val_Loss: 2.5311,Val Acc: 0.6966
+12.1
+Epoch: 168, Loss: 1.4484,Train Acc: 0.9544, Val_Loss: 2.5418,Val Acc: 0.6966
+12.1
+Epoch: 169, Loss: 0.9027,Train Acc: 0.9511, Val_Loss: 2.4971,Val Acc: 0.6970
+12.1
+Epoch: 170, Loss: 1.4034,Train Acc: 0.9519, Val_Loss: 2.4836,Val Acc: 0.6956
+12.1
+Epoch: 171, Loss: 1.0353,Train Acc: 0.9497, Val_Loss: 2.4793,Val Acc: 0.6962
+12.1
+Epoch: 172, Loss: 1.7100,Train Acc: 0.9516, Val_Loss: 2.5325,Val Acc: 0.6981
+12.1
+Epoch: 173, Loss: 1.3895,Train Acc: 0.9489, Val_Loss: 2.4606,Val Acc: 0.6969
+12.1
+Epoch: 174, Loss: 1.1278,Train Acc: 0.9521, Val_Loss: 2.4691,Val Acc: 0.6969
+12.1
+Epoch: 175, Loss: 1.3705,Train Acc: 0.9493, Val_Loss: 2.4092,Val Acc: 0.6978
+12.1
+Epoch: 176, Loss: 0.5658,Train Acc: 0.9496, Val_Loss: 2.4130,Val Acc: 0.6959
+12.1
+Epoch: 177, Loss: 1.1347,Train Acc: 0.9527, Val_Loss: 2.5495,Val Acc: 0.6985
+12.1
+Epoch: 178, Loss: 0.8312,Train Acc: 0.9507, Val_Loss: 2.5096,Val Acc: 0.6963
+12.1
+Epoch: 179, Loss: 1.0211,Train Acc: 0.9510, Val_Loss: 2.4931,Val Acc: 0.6988
+12.1
+Epoch: 180, Loss: 1.1377,Train Acc: 0.9464, Val_Loss: 2.4732,Val Acc: 0.6967
+12.1
+Epoch: 181, Loss: 1.2306,Train Acc: 0.9531, Val_Loss: 2.4363,Val Acc: 0.6974
+12.1
+Epoch: 182, Loss: 1.7213,Train Acc: 0.9523, Val_Loss: 2.5015,Val Acc: 0.6976
+12.1
+Epoch: 183, Loss: 2.3870,Train Acc: 0.9527, Val_Loss: 2.4826,Val Acc: 0.6969
+12.1
+Epoch: 184, Loss: 1.1402,Train Acc: 0.9509, Val_Loss: 2.4426,Val Acc: 0.6965
+12.1
+Epoch: 185, Loss: 1.3884,Train Acc: 0.9514, Val_Loss: 2.4142,Val Acc: 0.6981
+12.1
+Epoch: 186, Loss: 1.1404,Train Acc: 0.9505, Val_Loss: 2.5296,Val Acc: 0.6984
+12.1
+Epoch: 187, Loss: 1.2092,Train Acc: 0.9519, Val_Loss: 2.4571,Val Acc: 0.6987
+12.1
+Epoch: 188, Loss: 0.8827,Train Acc: 0.9540, Val_Loss: 2.3905,Val Acc: 0.6956
+12.1
+Epoch: 189, Loss: 0.8894,Train Acc: 0.9520, Val_Loss: 2.4774,Val Acc: 0.6952
+12.1
+Epoch: 190, Loss: 1.6143,Train Acc: 0.9523, Val_Loss: 2.4542,Val Acc: 0.6995
+12.1
+Epoch: 191, Loss: 0.5972,Train Acc: 0.9472, Val_Loss: 2.3841,Val Acc: 0.6985
+12.1
+Epoch: 192, Loss: 1.1605,Train Acc: 0.9504, Val_Loss: 2.4077,Val Acc: 0.6969
+12.1
+Epoch: 193, Loss: 0.7105,Train Acc: 0.9514, Val_Loss: 2.4717,Val Acc: 0.6978
+12.1
+Epoch: 194, Loss: 1.3575,Train Acc: 0.9509, Val_Loss: 2.5221,Val Acc: 0.7004
+12.1
+Epoch: 195, Loss: 1.1420,Train Acc: 0.9514, Val_Loss: 2.4712,Val Acc: 0.6987
+12.1
+Epoch: 196, Loss: 1.0819,Train Acc: 0.9516, Val_Loss: 2.5504,Val Acc: 0.6985
+12.1
+Epoch: 197, Loss: 1.3090,Train Acc: 0.9542, Val_Loss: 2.3841,Val Acc: 0.6980
+12.1
+Epoch: 198, Loss: 0.6801,Train Acc: 0.9499, Val_Loss: 2.4403,Val Acc: 0.6987
+12.1
+Epoch: 199, Loss: 0.9676,Train Acc: 0.9515, Val_Loss: 2.5250,Val Acc: 0.6976
+wandb:                                                                                
+wandb: 
+wandb: Run history:
+wandb:      Epoch ▁▁▁▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▆▆▇▇▇▇▇██
+wandb:     Params ▁
+wandb:   Test Acc ▁
+wandb:  Train Acc ▁▂▃▅▅▅▅▆▆▆▆▇▇▇▇▇▇▇▇█████████████████████
+wandb: Train Loss █▇▇▅▇▄▃▃▅▄▄▄▄▄▄▄▃▃▃▃▃▅▄▃▃▂▃▄▆▃▄▄▃▄▅▁▂█▃▂
+wandb:    Val Acc ▁▁▂▃▄▄▄▅▅▆▆▆▆▆███▇▇████▇████████████████
+wandb:   Val Loss ▇█▄▄▃▄▃▅▁▅▄▆▄▄▄▇▇▆▆▇▇▅▆▆▇▆▆▇▇▆▇▇███▇█▆▇▇
+wandb: 
+wandb: Run summary:
+wandb:      Epoch 199
+wandb:     Params 659069
+wandb:   Test Acc 0.67869
+wandb:  Train Acc 0.9515
+wandb: Train Loss 0.96763
+wandb:    Val Acc 0.69756
+wandb:   Val Loss 2.52498
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/lab_user/project/lzc/repro/stable_chebnet/Peptides/Stable/wandb/offline-run-20260916_205209-ms3r7nzh
+wandb: Find logs at: ./wandb/offline-run-20260916_205209-ms3r7nzh/logs
+[repro] exit_code=0
+[repro] runtime_seconds=3329
+[repro] finished_at=2026-09-16T21:47:31+08:00
